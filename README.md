@@ -1,2 +1,2 @@
-# bears-project-8
+# Habit tracker
 Chingu Voyage Project
