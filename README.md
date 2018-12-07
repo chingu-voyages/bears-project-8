@@ -1,5 +1,7 @@
 # Habit tracker
 
+[![Build Status](https://travis-ci.org/chingu-voyages/bears-project-8.svg?branch=master)](https://travis-ci.org/chingu-voyages/bears-project-8)
+
 Chingu Voyage Project
 
 ### Prerequisites
