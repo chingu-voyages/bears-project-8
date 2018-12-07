@@ -28,6 +28,10 @@ yarn-error.log*
 dist/
 build/
 
+# Lock files
+*.lock
+*-lock.*
+
 
 ### SublimeText ###
 # cache files for sublime text
