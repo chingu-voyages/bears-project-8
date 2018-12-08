@@ -10,6 +10,11 @@ const habitSchema = new Schema({
 		ref: 'User',
 		required: true,
 	},
+	// The date the habit was created
+	dateCreated: {
+		type: Date,
+		default: Date.now,
+	},
 	// Name of the habit
 	name: {
 		type: String,
