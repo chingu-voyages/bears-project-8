@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Habit = require('./Habit');
 
 const { Schema } = mongoose;
 
@@ -24,7 +23,9 @@ const userSchema = new Schema({
 	},
 	// habits assigned to this user
 	habits: {
-		type: [Habit],
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Habit',
+		required: true,
 	},
 });
 
