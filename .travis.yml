@@ -16,5 +16,7 @@ script:
     - npm run test
 services:
     - mongodb
- notifications:
+
+notifications:
     slack: chingubetavoyage:3PhnaQaT7wzLK4TmBiOJycD0
+
