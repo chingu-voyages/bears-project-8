@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Habit = require('./Habit');
 
 const { Schema } = mongoose;
 
@@ -20,6 +21,10 @@ const userSchema = new Schema({
 	date: {
 		type: Date,
 		default: Date.now,
+	},
+	// habits assigned to this user
+	habits: {
+		type: [Habit],
 	},
 });
 
