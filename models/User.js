@@ -18,7 +18,7 @@ const userSchema = new Schema({
 		required: true,
 	},
 	// to record the date when the user registered
-	date: {
+	dateJoined: {
 		type: Date,
 		default: Date.now,
 	},
