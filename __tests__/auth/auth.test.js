@@ -4,9 +4,18 @@ const mongoose = require('mongoose');
 const app = require('../../server');
 
 describe('API - Auth', () => {
-	afterAll(() => {
-		console.log('Deleting test database');
-		mongoose.connection.db.dropDatabase();
+	afterAll(async () => {
+		try {
+			const { users } = mongoose.connection.collections;
+			// Collection is being dropped.
+			await users.drop();
+			// Connection to Mongo killed.
+			await mongoose.disconnect();
+			// Server connection closed.
+			await app.close();
+		} catch (err) {
+			throw err;
+		}
 	});
 
 	describe('Auth - Register', () => {

@@ -11,7 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 
 const PORT = process.env.PORT || 8080;
 const DB_URI =
-	process.env.NODE_ENV === 'test'
+	process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'ci'
 		? 'mongodb://test:test123@ds127624.mlab.com:27624/habit-app-test'
 		: process.env.MONGO_URI;
 
