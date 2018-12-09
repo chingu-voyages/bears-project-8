@@ -1,7 +1,7 @@
 {
 	"name": "bears-project-8",
 	"description": "Chingu Voyage Project",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"main": "server.js",
 	"repository": {
 		"type": "git",
@@ -14,13 +14,20 @@
 	},
 	"homepage": "https://github.com/chingu-voyages/bears-project-8#readme",
 	"dependencies": {
+		"bcrypt": "^3.0.2",
 		"body-parser": "^1.18.3",
 		"dotenv": "^6.2.0",
 		"eslint": "5.6.0",
 		"express": "^4.16.4",
+		"gravatar": "^1.8.0",
 		"jest": "^23.6.0",
+		"jsonwebtoken": "^8.4.0",
 		"mongoose": "^5.3.15",
-		"morgan": "^1.9.1"
+		"morgan": "^1.9.1",
+		"passport": "^0.4.0",
+		"passport-jwt": "^4.0.0",
+		"supertest": "^3.3.0",
+		"validator": "^10.9.0"
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.0",
@@ -34,7 +41,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "jest",
+		"test": "PORT=8081 jest",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",

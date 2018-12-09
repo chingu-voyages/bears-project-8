@@ -18,3 +18,4 @@ services:
     - mongodb
 notifications:
     slack: chingubetavoyage:3PhnaQaT7wzLK4TmBiOJycD0
+    email: false
