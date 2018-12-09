@@ -20,9 +20,7 @@ router.post('/register', (req, res) => {
 	const { errors, isValid } = validateRegisterInput(req.body);
 
 	// Validate request body
-	if (!isValid) {
-		return res.status(400).json(errors);
-	}
+	if (!isValid) return res.status(400).json(errors);
 
 	return User.findOne({
 		email: req.body.email,
@@ -30,7 +28,8 @@ router.post('/register', (req, res) => {
 		.then(user => {
 			if (user) {
 				// Already registered
-				return res.status(400).json({ message: 'Email is already in use' });
+				errors.email = 'Email is already in use';
+				return res.status(400).json(errors);
 			}
 
 			const { name, email, password } = req.body;
@@ -58,7 +57,7 @@ router.post('/register', (req, res) => {
 					newUser
 						.save()
 						.then(savedUser => res.json(savedUser))
-						.catch(e => console.error(e));
+						.catch(e => res.status(400).json(e));
 				});
 			});
 		})

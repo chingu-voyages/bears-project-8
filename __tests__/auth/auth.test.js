@@ -3,6 +3,13 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const { app, server } = require('../../server');
 
+const userData = {
+	name: 'Tester',
+	email: 'test@test.cc',
+	password: 'pass1234',
+	password2: 'pass1234',
+};
+
 describe('API - Auth', () => {
 	afterAll(done => {
 		try {
@@ -35,12 +42,7 @@ describe('API - Auth', () => {
 		test('User should be registered successfully', done =>
 			request(app)
 				.post('/api/auth/register')
-				.send({
-					name: 'Tester',
-					email: 'test@test.cc',
-					password: 'pass1234',
-					password2: 'pass1234',
-				})
+				.send(userData)
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
@@ -54,16 +56,10 @@ describe('API - Auth', () => {
 		test('User must be unique', done =>
 			request(app)
 				.post('/api/auth/register')
-				.send({
-					name: 'Tester',
-					email: 'test@test.cc',
-					password: 'pass1234',
-					password2: 'pass1234',
-				})
+				.send(userData)
 				.end((err, res) => {
 					if (err) throw err;
-
-					expect(res.body.message).toBe('Email is already in use');
+					expect(res.body.email).toBe('Email is already in use');
 					expect(res.status).toBe(400);
 					done();
 				}));

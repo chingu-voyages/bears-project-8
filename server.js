@@ -10,6 +10,7 @@ const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
 
 const PORT = process.env.PORT || 8080;
+const ENV = process.env.NODE_ENV || 'development';
 const DB_URI =
 	process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'ci'
 		? 'mongodb://test:test123@ds127624.mlab.com:27624/habit-app-test'
@@ -23,7 +24,7 @@ mongoose
 		DB_URI,
 		{ useNewUrlParser: true }
 	)
-	.then(() => console.log('Connected to MongoDB'))
+	.then(() => console.info('Connected to MongoDB'))
 	.catch(err => console.error('Connection to MongoDB failed:', err));
 
 // create Express app
@@ -48,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 const server = app.listen(PORT, () => {
-	console.info(`Listening on port ${PORT}, in ${process.env.NODE_ENV} environment.`);
+	console.info(`Listening on port ${PORT}, in ${ENV} environment.`);
 });
 
 module.exports = { app, server };
