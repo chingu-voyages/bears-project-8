@@ -1,20 +1,21 @@
 /* eslint-disable no-underscore-dangle */
 const request = require('supertest');
 const mongoose = require('mongoose');
-const app = require('../../server');
+const { app, server } = require('../../server');
 
 describe('API - Auth', () => {
-	afterAll(async () => {
+	afterAll(done => {
 		try {
 			const { users } = mongoose.connection.collections;
 			// Collection is being dropped.
-			await users.drop();
-			// Connection to Mongo killed.
-			await mongoose.disconnect();
-			// Server connection closed.
-			await app.close();
+			users
+				.drop()
+				// Connection to Mongo killed.
+				.then(() => mongoose.disconnect())
+				// Server connection closed.
+				.then(() => server.close(done));
 		} catch (err) {
-			throw err;
+			console.log(err);
 		}
 	});
 

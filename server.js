@@ -47,8 +47,8 @@ app.get('/', (req, res) => {
 	res.send('Hello World');
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.info(`Listening on port ${PORT}, in ${process.env.NODE_ENV} environment.`);
 });
 
-module.exports = app;
+module.exports = { app, server };
