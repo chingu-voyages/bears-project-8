@@ -30,11 +30,11 @@ router.post('/register', (req, res) => {
 		.then(user => {
 			if (user) {
 				// Already registered
-				errors.email = 'Email is not valid';
-				return res.status(400).json(errors);
+				return res.status(400).json({ message: 'Email is already in use' });
 			}
 
 			const { name, email, password } = req.body;
+			// NOTE: This will generate avatar URL without protocol
 			const avatar = gravatar.url(email, {
 				s: '200', // Size
 				r: 'pg', // Rating

@@ -26,6 +26,7 @@
 		"morgan": "^1.9.1",
 		"passport": "^0.4.0",
 		"passport-jwt": "^4.0.0",
+		"supertest": "^3.3.0",
 		"validator": "^10.9.0"
 	},
 	"devDependencies": {
@@ -40,7 +41,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "jest",
+		"test": "PORT=8081 jest",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",

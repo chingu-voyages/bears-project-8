@@ -13,6 +13,7 @@
 		"expect": true,
 		"describe": true,
 		"test": true,
-		"jest": true
+		"jest": true,
+		"afterAll": true
 	}
 }

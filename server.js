@@ -10,13 +10,17 @@ const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
 
 const PORT = process.env.PORT || 8080;
+const DB_URI =
+	process.env.NODE_ENV === 'test'
+		? 'mongodb://test:test123@ds127624.mlab.com:27624/habit-app-test'
+		: process.env.MONGO_URI;
 
 // Tell Mongoose to use native Promise instead of lib like bluebird
 mongoose.Promise = global.Promise;
 // And connect mongoose to Mlab instance of MongoDB
 mongoose
 	.connect(
-		process.env.MONGO_URI,
+		DB_URI,
 		{ useNewUrlParser: true }
 	)
 	.then(() => console.log('Connected to MongoDB'))
@@ -46,3 +50,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
 	console.info(`Listening on port ${PORT}, in ${process.env.NODE_ENV} environment.`);
 });
+
+module.exports = app;
