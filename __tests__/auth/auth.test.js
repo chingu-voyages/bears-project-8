@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const app = require('../../server');
 
 describe('API - Auth', () => {
-	afterAll(done => {
+	afterAll(() => {
 		console.log('Deleting test database');
-		mongoose.connection.db.dropDatabase(done);
+		mongoose.connection.db.dropDatabase();
 	});
 
 	describe('Auth - Register', () => {

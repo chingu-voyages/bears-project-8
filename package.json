@@ -41,7 +41,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "NODE_ENV=test PORT=8081 jest",
+		"test": "NODE_ENV=test PORT=8081 jest --detectOpenHandles",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
