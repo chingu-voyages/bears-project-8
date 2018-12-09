@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const passport = require('passport');
+
+const authRoutes = require('./routes/authRoutes');
 
 const PORT = process.env.PORT || 8080;
 
@@ -22,11 +25,19 @@ mongoose
 // create Express app
 const app = express();
 
+// Passport config
+app.use(passport.initialize());
+require('./services/passport')(passport);
+
 // Takes the raw requests and turns them into usable properties on req.body
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //  HTTP request logger middleware - will log all requests to STDOUT (command line)
 app.use(morgan('dev'));
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
 	res.send('Hello World');

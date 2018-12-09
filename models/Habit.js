@@ -11,27 +11,15 @@ const habitSchema = new Schema({
 		required: true,
 	},
 	// The date the habit was created
-	dateCreated: {
-		type: Date,
-		default: Date.now,
-	},
+	dateCreated: { type: Date, default: Date.now },
 	// Name of the habit
-	name: {
-		type: String,
-		required: true,
-	},
+	name: { type: String, required: true },
 	// Optional description of the habit
-	description: {
-		type: String,
-	},
-	// Category of the habit - chosen from defaults but stored as a string
-	category: {
-		type: String,
-	},
+	description: { type: String },
+	// Category of the habit - chosen from defaults but stored as an array of strings
+	category: { type: [String] },
 	// How often they would like to do this habit (daily, weekly, monthly...)
-	frequency: {
-		type: String,
-	},
+	frequency: { type: String },
 });
 
 module.exports = mongoose.model('Habit', habitSchema);
