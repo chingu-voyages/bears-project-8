@@ -12,7 +12,7 @@ const router = express.Router();
 const saltRounds = 10;
 
 /**
- * @route   POST api/users/register
+ * @route   POST api/auth/register
  * @desc    Registers User
  * @access  Public
  */
