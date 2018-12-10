@@ -41,7 +41,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "PORT=8081 jest",
+		"test": "SET PORT=8081 jest",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
