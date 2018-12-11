@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const passport = require('passport');
 
 const authRoutes = require('./routes/authRoutes');
+const habitRoutes = require('./routes/habitRoutes');
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
@@ -43,6 +44,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/habit', habitRoutes);
 
 app.get('/', (req, res) => {
 	res.send('Hello World');

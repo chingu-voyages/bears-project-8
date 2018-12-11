@@ -29,3 +29,5 @@ module.exports.register = ({ name, email, password, password2 }) => {
 
 	return { errors, isValid: isEmpty(errors) };
 };
+
+module.exports.createHabit = () => {};
