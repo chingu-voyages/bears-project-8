@@ -26,3 +26,5 @@ router.post('/create', async (req, res) => {
 
 	return newHabit;
 });
+
+module.exports = router;
