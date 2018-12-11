@@ -16,6 +16,7 @@
 	"dependencies": {
 		"bcrypt": "^3.0.2",
 		"body-parser": "^1.18.3",
+		"cross-env": "^5.2.0",
 		"dotenv": "^6.2.0",
 		"eslint": "5.6.0",
 		"express": "^4.16.4",
@@ -41,12 +42,12 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "PORT=8081 jest",
+		"test": "cross-env PORT=8081 jest",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
-		"build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+		"build": "cross-env NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"husky": {
 		"hooks": {
