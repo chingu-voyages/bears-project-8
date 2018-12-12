@@ -13,11 +13,13 @@ const router = express.Router();
  */
 router.post('/create', async (req, res) => {
 	// TODO: Authentication
-	const { name, description, category, frequency } = req.body;
+	const { name, description, type, difficulty, tags, frequency } = req.body;
 	const newHabit = await new Habit({
 		name,
+		type,
 		description,
-		category,
+		tags,
+		difficulty,
 		frequency,
 		createdBy: '37312', // user _id here
 	})

@@ -30,4 +30,14 @@ module.exports.register = ({ name, email, password, password2 }) => {
 	return { errors, isValid: isEmpty(errors) };
 };
 
-module.exports.createHabit = () => {};
+module.exports.createHabit = ({ name, description, type, difficulty, tags, frequency }) => {
+	const errors = {};
+	name = !isEmpty(name) ? name : '';
+	description = !isEmpty(description) ? description : '';
+	type = !isEmpty(type) ? type : '';
+	difficulty = !isEmpty(difficulty) ? difficulty : '';
+	tags = !isEmpty(tags) ? tags : '';
+	frequency = !isEmpty(frequency) ? frequency : '';
+
+	return { errors, isValid: isEmpty(errors) };
+};

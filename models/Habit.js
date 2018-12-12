@@ -17,9 +17,13 @@ const habitSchema = new Schema({
 	// Optional description of the habit
 	description: { type: String },
 	// Category of the habit - chosen from defaults but stored as an array of strings
-	category: { type: [String] },
+	tags: { type: [String] },
 	// How often they would like to do this habit (daily, weekly, monthly...)
-	frequency: { type: String },
+	frequency: { type: String, default: 'Daily' },
+	// Difficulty of the habit: Trivial, Easy, Medium, Hard, Epic
+	difficulty: { type: String, required: true, default: 'Medium' },
+	// Positive or negative  type of habit
+	type: { type: String, required: true, default: 'Negative' },
 });
 
 module.exports = mongoose.model('Habit', habitSchema);
