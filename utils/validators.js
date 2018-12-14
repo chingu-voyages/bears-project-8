@@ -39,5 +39,9 @@ module.exports.createHabit = ({ name, description, type, difficulty, tags, frequ
 	tags = !isEmpty(tags) ? tags : '';
 	frequency = !isEmpty(frequency) ? frequency : '';
 
+	if (!validator.isLength(name, { min: 2, max: 30 }))
+		errors.name = 'Habit name must be between 2 and 30 characters!';
+	if (validator.isEmpty(name)) errors.name = 'Habit name field is required';
+
 	return { errors, isValid: isEmpty(errors) };
 };
