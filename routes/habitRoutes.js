@@ -12,6 +12,10 @@ const router = express.Router();
  * @access  Private
  */
 router.post('/create', async (req, res) => {
+	const { errors, isValid } = validateHabitsInput(req.body);
+	// Validate request body
+	if (!isValid) return res.status(400).json(errors);
+
 	// TODO: Authentication
 	const { name, description, type, difficulty, tags, frequency, user } = req.body;
 
