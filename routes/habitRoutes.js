@@ -13,20 +13,20 @@ const router = express.Router();
  */
 router.post('/create', async (req, res) => {
 	// TODO: Authentication
-	const { name, description, type, difficulty, tags, frequency } = req.body;
-	const newHabit = await new Habit({
+	const { name, description, type, difficulty, tags, frequency, user } = req.body;
+
+	await new Habit({
+		user,
 		name,
 		type,
 		description,
 		tags,
 		difficulty,
 		frequency,
-		createdBy: '37312', // user _id here
 	})
 		.save()
+		.then(post => res.json(post))
 		.catch(err => res.status(401).json({ err }));
-
-	return newHabit;
 });
 
 module.exports = router;

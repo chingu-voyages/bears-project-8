@@ -21,9 +21,9 @@ const habitSchema = new Schema({
 	// How often they would like to do this habit (daily, weekly, monthly...)
 	frequency: { type: String, default: 'Daily' },
 	// Difficulty of the habit: Trivial, Easy, Medium, Hard, Epic
-	difficulty: { type: String, required: true, default: 'Medium' },
+	difficulty: { type: String, default: 'Medium' },
 	// Positive or negative  type of habit
-	type: { type: String, required: true, default: 'Negative' },
+	type: { type: String, default: 'Negative' },
 });
 
 module.exports = mongoose.model('Habit', habitSchema);
