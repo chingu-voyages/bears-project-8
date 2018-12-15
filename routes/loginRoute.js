@@ -1,11 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-//const passport = require('passport');
+const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 // Load input validation
-const validateRegisterInput = require('../utils/validators').register;
+const validateLoginInput = require('../utils/validators').login;
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ const router = express.Router();
  * @desc    Login User
  * @access  Public
  */
-router.post('/login', 'jwt', { session: false }, (req, res) => {
-	const { errors, isValid } = validateRegisterInput(req.body);
+router.post('/login', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const { errors, isValid } = validateLoginInput(req.body);
 
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
@@ -23,7 +23,7 @@ router.post('/login', 'jwt', { session: false }, (req, res) => {
 		email: req.body.email,
 	}).then(user => {
 		if (!user) {
-			return res.status(400).json({ message: 'Incorect user' });
+			return res.status(400).json({ message: 'User not found' });
 		} else {
 			bcrypt.compare(req.body.password, user.password, (err, res) => {
 				if (res === true) {
