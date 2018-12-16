@@ -20,13 +20,15 @@ const DB_URI =
 // Tell Mongoose to use native Promise instead of lib like bluebird
 mongoose.Promise = global.Promise;
 // And connect mongoose to Mlab instance of MongoDB
-mongoose
-	.connect(
-		DB_URI,
-		{ useNewUrlParser: true }
-	)
-	.then(() => console.info('Connected to MongoDB'))
-	.catch(err => console.error('Connection to MongoDB failed:', err));
+if (process.env.NODE_ENV !== 'test') {
+	mongoose
+		.connect(
+			DB_URI,
+			{ useNewUrlParser: true }
+		)
+		.then(() => console.info('Connected to MongoDB'))
+		.catch(err => console.error('Connection to MongoDB failed:', err));
+}
 
 // create Express app
 const app = express();
@@ -50,8 +52,10 @@ app.get('/', (req, res) => {
 	res.send('Hello World');
 });
 
-const server = app.listen(PORT, () => {
-	console.info(`Listening on port ${PORT}, in ${ENV} environment.`);
-});
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(PORT, () => {
+		console.info(`Listening on port ${PORT}, in ${ENV} environment.`);
+	});
+}
 
-module.exports = { app, server };
+module.exports = { app };

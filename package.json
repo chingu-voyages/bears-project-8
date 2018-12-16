@@ -42,7 +42,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "cross-env PORT=8081 jest",
+		"test": "cross-env PORT=8081 jest '.*test.js'",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
