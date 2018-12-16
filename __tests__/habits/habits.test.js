@@ -21,10 +21,9 @@ describe('API - Habit', () => {
 			habits
 				.drop()
 				// Connection to Mongo killed.
-				.then(() => mongoose.disconnect());
+				.then(() => mongoose.disconnect(done));
 			// Server connection closed.
 			// .then(() => server.close(done));
-			done();
 		} catch (err) {
 			console.error(err);
 		}

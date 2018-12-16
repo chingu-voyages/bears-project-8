@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 	res.send('Hello World');
 });
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'ci') {
 	app.listen(PORT, () => {
 		console.info(`Listening on port ${PORT}, in ${ENV} environment.`);
 	});
