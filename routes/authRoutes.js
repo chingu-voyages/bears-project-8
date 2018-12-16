@@ -2,7 +2,7 @@ const express = require('express');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
- const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
@@ -12,6 +12,12 @@ const validateLoginInput = require('../utils/validators').login;
 
 const router = express.Router();
 const saltRounds = 10;
+const payload = {
+	id: User.id,
+	name: User.name,
+	email: User.email,
+	avatar: User.avatar,
+};
 
 /**
  * @route   POST api/auth/register
@@ -72,39 +78,35 @@ router.post('/register', (req, res) => {
  * @access  Public
  */
 
- router.post('/login',(req,res) => {
+router.post('/login', (req, res) => {
 	const { errors, isValid } = validateLoginInput(req.body);
 
 	if (!isValid) return res.status(400).json(errors);
 
 	return User.findOne({
-		email:req.body.email,
-	}).then(user => {
-		if (!user) {
-			errors.email = 'User not found';
-			return res.status(404).json({ message: 'User not found', errors });
-		} else {
-			bcrypt.compare(req.body.password, user.password, (err, password) => {
-				if(err){
-					return res.status(401).json({ message: 'Unauthorized. Access denied to invalid credentials'});
-				} else if (password === true){
-					const payload = {
-						id:user.id,
-						name:user.name,
-						email:user.email,
-						avatar:user.avatar
+		email: req.body.email,
+	})
+		.then(user => {
+			if (!user) {
+				errors.email = 'User not found';
+				return res.status(404).json({ message: 'User not found', errors });
+			} else {
+				bcrypt.compare(req.body.password, user.password, (err, password) => {
+					if (err) {
+						return res
+							.status(401)
+							.json({
+								message: 'Unauthorized. Access denied to invalid credentials',
+							});
+					} else if (password === true) {
+						return payload;
 					}
-				return payload
-				}
-			});
-		}
-		const token = () => {
-			jwt.sign({ payload }, (process.env.JWT_SECRET), { expiresIn: 3600 })
-		}
-		return token
-	}) 
-		
-	.catch(err => res.status(400).json(err));
- });
+				});
+			}
+			const createToken = (user, secret, expiresIn) =>
+				jwt.sign({ token: createToken(payload, process.env.JWT_SECRET, '2h') });
+		})
+		.catch(err => res.status(400).json(err));
+});
 
 module.exports = router;
