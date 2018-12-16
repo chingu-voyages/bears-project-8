@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle, import/order */
 const mongoose = require('mongoose');
 const { app } = require('../../server');
-const request = require('supertest').agent(app.listen());
+const request = require('supertest').agent(app);
 
 const habit = {
 	name: 'Test habit',
