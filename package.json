@@ -28,7 +28,8 @@
 		"passport": "^0.4.0",
 		"passport-jwt": "^4.0.0",
 		"supertest": "^3.3.0",
-		"validator": "^10.9.0"
+		"validator": "^10.9.0",
+		"yarn": "^1.12.3"
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.0",
