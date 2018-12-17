@@ -29,7 +29,7 @@ router.post('/create', async (req, res) => {
 		frequency,
 	})
 		.save()
-		.then(post => res.json(post))
+		.then(habit => res.json(habit))
 		.catch(err => res.status(401).json({ err }));
 });
 
