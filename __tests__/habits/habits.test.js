@@ -9,6 +9,10 @@ const habit = {
 	description: 'This is a habit',
 	tags: ['office', 'work', 'omg'],
 	type: 'Positive',
+	frequency: {
+		times: 2,
+		period: 'Daily',
+	},
 	difficulty: 'Epic',
 };
 
@@ -39,6 +43,8 @@ describe('API - Habit', () => {
 					expect(res.body.name).toBe('Test habit');
 					expect(res.body.description).toBe('This is a habit');
 					expect(res.body.type).toBe('Positive');
+					expect(res.body.frequency.times).toBe(2);
+					expect(res.body.frequency.period).toBe('Daily');
 					expect(res.body._id).toBeTruthy();
 					done();
 				}));
