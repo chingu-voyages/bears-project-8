@@ -42,7 +42,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test": "cross-env PORT=8081 jest",
+		"test": "cross-env PORT=8081 jest '.*test.js' --detectOpenHandles",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
@@ -64,11 +64,7 @@
 		"verbose": true,
 		"testEnvironment": "node",
 		"testURL": "http://localhost/",
-		"testPathIgnorePatterns": [
-			"/node_modules/",
-			"testSetup.js",
-			"client/"
-		],
-		"setupTestFrameworkScriptFile": "./__tests__/testSetup.js"
+		"setupTestFrameworkScriptFile": "./__tests__/testSetup.js",
+		"testPathIgnorePatterns": ["client/"]
 	}
 }

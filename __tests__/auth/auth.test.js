@@ -1,7 +1,7 @@
-/* eslint-disable no-underscore-dangle */
-const request = require('supertest');
+/* eslint-disable no-underscore-dangle, import/order */
 const mongoose = require('mongoose');
-const { app, server } = require('../../server');
+const { app } = require('../../server');
+const request = require('supertest').agent(app);
 
 const userData = {
 	name: 'Tester',
@@ -18,29 +18,27 @@ describe('API - Auth', () => {
 			users
 				.drop()
 				// Connection to Mongo killed.
-				.then(() => mongoose.disconnect())
-				// Server connection closed.
-				.then(() => server.close(done));
+				.then(() => mongoose.disconnect(done));
+			// Server connection closed.
+			// .then(() => server.close(done));
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	});
 
 	describe('Auth - Register', () => {
 		test('Register route should expect fullName, username. email, password and password2,', done =>
-			request(app)
-				.post('/api/auth/register')
-				.end((err, res) => {
-					if (err) throw err;
-					expect(res.body.name).toBe('Name field is required');
-					expect(res.body.email).toBe('Email field is required');
-					expect(res.body.password).toBe('Password field is required');
-					expect(res.body.password2).toBe('Confirm password field is required');
-					done();
-				}));
+			request.post('/api/auth/register').end((err, res) => {
+				if (err) throw err;
+				expect(res.body.name).toBe('Name field is required');
+				expect(res.body.email).toBe('Email field is required');
+				expect(res.body.password).toBe('Password field is required');
+				expect(res.body.password2).toBe('Confirm password field is required');
+				done();
+			}));
 
 		test('User should be registered successfully', done =>
-			request(app)
+			request
 				.post('/api/auth/register')
 				.send(userData)
 				.end((err, res) => {
@@ -54,7 +52,7 @@ describe('API - Auth', () => {
 				}));
 
 		test('User must be unique', done =>
-			request(app)
+			request
 				.post('/api/auth/register')
 				.send(userData)
 				.end((err, res) => {

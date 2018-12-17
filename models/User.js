@@ -8,17 +8,11 @@ const userSchema = new Schema({
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	avatar: { type: String, required: true },
-	// to record the date when the user registered
-	dateJoined: {
-		type: Date,
-		required: true,
-		default: Date.now,
-	},
+	dateJoined: { type: Date, default: Date.now },
 	// habits assigned to this user
 	habits: {
 		type: [mongoose.Schema.Types.ObjectId],
 		ref: 'Habit',
-		required: true,
 	},
 });
 

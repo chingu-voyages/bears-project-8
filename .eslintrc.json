@@ -9,11 +9,15 @@
 		"ecmaVersion": 2017,
 		"sourceType": "module"
 	},
+	"rules": {
+		"no-underscore-dangle": 0
+	},
 	"globals": {
 		"expect": true,
 		"describe": true,
 		"test": true,
 		"jest": true,
-		"afterAll": true
+		"afterAll": true,
+		"beforeAll": true
 	}
 }
