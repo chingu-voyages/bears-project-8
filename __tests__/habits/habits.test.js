@@ -44,6 +44,21 @@ describe('API - Habit', () => {
 					done();
 				}));
 
+		test('If only a habit name is passed a new habit should be created with defaults', done =>
+			request
+				.post('/api/habit/create')
+				.send({ user: '5c0cee8d8c452f13fbfe2281', name: 'Habit' })
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.name).toBe('Habit');
+					expect(res.body.difficulty).toBe('Medium');
+					expect(res.body.type).toBe('Negative');
+					expect(res.body.frequency.times).toBe(1);
+					expect(res.body.frequency.period).toBe('Daily');
+					done();
+				}));
+
 		test('If correct data is passed new habit should be created', done =>
 			request
 				.post('/api/habit/create')
