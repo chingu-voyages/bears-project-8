@@ -18,12 +18,20 @@ const habitSchema = new Schema({
 	description: { type: String },
 	// Category of the habit - chosen from defaults but stored as an array of strings
 	tags: { type: [String] },
-	// How often they would like to do this habit (daily, weekly, monthly...)
-	frequency: { type: String, default: 'Daily' },
 	// Difficulty of the habit: Trivial, Easy, Medium, Hard, Epic
 	difficulty: { type: String, default: 'Medium' },
 	// Positive or negative  type of habit
 	type: { type: String, default: 'Negative' },
+
+	// How often they would like to do this habit (1 time, 2 times... daily, weekly, monthly...)
+	frequency: {
+		times: { type: Number, default: 1 },
+		period: { type: String, default: 'daily' },
+	},
+	// When the habit is to start, the habit is forecast from this date according to frequency
+	startDate: { type: Date, default: Date.now },
+	// An array of when the habit has been logged (marked as completed) through time
+	log: { type: [Date] },
 });
 
 module.exports = mongoose.model('Habit', habitSchema);
