@@ -9,7 +9,6 @@ const habit = {
 	description: 'This is a habit',
 	tags: ['office', 'work', 'omg'],
 	type: 'Positive',
-	frequency: 'Daily',
 	difficulty: 'Epic',
 };
 

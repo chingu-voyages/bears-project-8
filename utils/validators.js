@@ -34,26 +34,28 @@ module.exports.createHabit = ({ name, description, type, difficulty, tags, frequ
 	const errors = {};
 	const types = ['Positive', 'Negative'];
 	const diffs = ['Trivial', 'Easy', 'Medium', 'Hard', 'Epic'];
-	const freqs = ['Daily', 'Weekly', 'Monthly'];
+	const periods = ['Daily', 'Weekly', 'Monthly'];
 
 	name = !isEmpty(name) ? name : '';
 	description = !isEmpty(description) ? description : '';
 	type = !isEmpty(type) ? type : '';
 	difficulty = !isEmpty(difficulty) ? difficulty : '';
-	tags = Array.isArray(tags) ? tags : [];
-	frequency = !isEmpty(frequency) ? frequency : '';
+	// tags = Array.isArray(tags) ? tags : [];
+	// frequency = Object.isObject(frequency) ? frequency : {};
 
 	if (!validator.isMongoId(user)) errors.user = 'Invalid user ID';
 	if (!validator.isLength(name, { min: 2, max: 30 }))
 		errors.name = 'Habit name must be between 2 and 30 characters!';
 	if (validator.isEmpty(name)) errors.name = 'Habit name field is required';
-	if (tags.length > 4) errors.tags = "Habit can't have more than 4 tags";
-	if (!validator.isIn(type, types)) errors.type = 'Habit must be Positive or Negative';
-	if (!validator.isLength(description, { min: 5, max: 120 }))
-		errors.description = 'Habit name must be between 5 and 120 characters!';
-	if (!validator.isIn(frequency, freqs))
-		errors.frequency = 'Frequency of habit must be one of accepted values';
-	if (!validator.isIn(difficulty, diffs))
+	if (tags && tags.length > 4) errors.tags = "Habit can't have more than 4 tags";
+	if (type && !validator.isIn(type, types)) errors.type = 'Habit must be Positive or Negative';
+	if (description && !validator.isLength(description, { min: 5, max: 120 }))
+		errors.description = 'Habit description must be between 5 and 120 characters!';
+	if (frequency && !validator.isIn(frequency.period, periods))
+		errors.frequency = 'Frequency period of habit must be one of accepted values';
+	if (frequency && (frequency.times < 1 || frequency.times > 100))
+		errors.frequency = 'Frequency times must be between 1 and 100';
+	if (difficulty && !validator.isIn(difficulty, diffs))
 		errors.difficulty = 'Type of habit must be one of accepted values';
 
 	return { errors, isValid: isEmpty(errors) };
