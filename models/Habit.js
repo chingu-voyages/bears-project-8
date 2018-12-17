@@ -26,7 +26,7 @@ const habitSchema = new Schema({
 	// How often they would like to do this habit (1 time, 2 times... daily, weekly, monthly...)
 	frequency: {
 		times: { type: Number, default: 1 },
-		period: { type: String, default: 'daily' },
+		period: { type: String, default: 'Daily' },
 	},
 	// When the habit is to start, the habit is forecast from this date according to frequency
 	startDate: { type: Date, default: Date.now },
