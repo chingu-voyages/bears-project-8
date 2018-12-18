@@ -84,5 +84,38 @@ describe('API - Habit', () => {
 				expect(res.body.message).toBe('Habit not found');
 				done();
 			}));
+
+		test('If a valid habit ID is passed, and it belongs to authenticated user, that habit should be deleted', done => {
+			const deleteHabitFirst = habitId => {
+				// Delete the habit
+				request.delete(`/api/habit/${habitId}`).end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.success).toBeTruthy();
+				});
+			};
+
+			const deleteHabitSecond = habitId => {
+				// Delete the habit
+				request.delete(`/api/habit/${habitId}`).end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+				});
+			};
+
+			request
+				.post('/api/habit/create')
+				.send({ user: '5c0cee8d8c452f13fbfe2281', name: 'Habit' })
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body._id.toBeTruthy);
+					const habitId = res.body._id;
+					deleteHabitFirst(habitId);
+					deleteHabitSecond(habitId);
+					done();
+				});
+		});
 	});
 });
