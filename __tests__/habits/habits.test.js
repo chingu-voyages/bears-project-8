@@ -91,7 +91,7 @@ describe('API - Habit', () => {
 				done();
 			}));
 
-		test('If a valid habit ID is passed, and it belongs to authenticated user, that habit should be deleted', done => {
+		test('If a valid habit ID is passed, that habit should be deleted', done => {
 			request.delete(`/api/habit/${habitId}`).end((err, res) => {
 				if (err) throw err;
 				expect(res.status).toBe(200);
