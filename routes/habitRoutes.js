@@ -47,7 +47,7 @@ router.delete('/:id', (req, res) => {
 			// TODO: Check whether habit belongs to current authenticated user
 
 			// Delete the habit
-			habit.remove().then(() => res.json({ success: true }));
+			habit.remove().then(() => res.json({ success: true, habit }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
