@@ -13,7 +13,7 @@ const router = express.Router();
  * @desc    Creates habit
  * @access  Private
  */
-router.post('/create', async (req, res) => {
+router.post('/create', (req, res) => {
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
 	// TODO: Authentication
 	const { name, description, type, difficulty, tags, frequency, user } = req.body;
 
-	await new Habit({
+	return new Habit({
 		user,
 		name,
 		type,
