@@ -75,4 +75,14 @@ describe('API - Habit', () => {
 					done();
 				}));
 	});
+
+	describe('Habit - Delete', () => {
+		test('If an invalid habit ID is passed a 404 error should be returned', done =>
+			request.delete('/api/habit/nothing').end((err, res) => {
+				if (err) throw err;
+				expect(res.status).toBe(404);
+				expect(res.body.message).toBe('Habit not found');
+				done();
+			}));
+	});
 });
