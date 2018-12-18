@@ -1,6 +1,8 @@
 const express = require('express');
 
+// Habit model
 const Habit = require('../models/Habit');
+
 // Load input validation
 const validateHabitsInput = require('../utils/validators').createHabit;
 
@@ -31,6 +33,23 @@ router.post('/create', async (req, res) => {
 		.save()
 		.then(habit => res.json(habit))
 		.catch(err => res.status(401).json({ err }));
+});
+
+/**
+ * @route   DELETE api/habit/:id
+ * @desc    Deletes habit
+ * @access  Private
+ */
+router.delete('/:id', (req, res) => {
+	// TODO: Authentication
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// TODO: Check whether habit belongs to current authenticated user
+
+			// Delete the habit
+			habit.remove().then(() => res.json({ success: true }));
+		})
+		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
 module.exports = router;
