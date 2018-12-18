@@ -1,0 +1,16 @@
+{
+	"presets": [
+		["@babel/preset-env", {
+			"useBuiltIns": "usage"
+		}], "@babel/preset-react"
+	],
+	"plugins": [
+		["react-hot-loader/babel"],
+		["@babel/plugin-proposal-class-properties"],
+		["@babel/plugin-syntax-dynamic-import"],
+		["@babel/plugin-proposal-function-bind"],
+		["@babel/plugin-proposal-object-rest-spread"],
+		["babel-plugin-loop-optimizer"],
+		["babel-plugin-styled-components"]
+	]
+}
