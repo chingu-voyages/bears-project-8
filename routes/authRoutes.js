@@ -96,21 +96,25 @@ router.post('/login', (req, res) => {
 					return res.status(401).json({
 						message: 'Unauthorized. Access denied to invalid credentials',
 					});
-				} else if (result) {
-					const token = jwt.sign(
-						{
-							payload,
-						},
-						process.env.JWT_SECRET,
-						{
-							expiresIn: '2h',
-						}
-					);
-					return res.status(200).json({
-						message: 'Auth successful',
-						token: token,
+				}
+				if (!result) {
+					return res.status(401).json({
+						message: 'Unauthorized. Access denied to invalid credentials',
 					});
 				}
+				const token = jwt.sign(
+					{
+						payload,
+					},
+					process.env.JWT_SECRET,
+					{
+						expiresIn: '2h',
+					}
+				);
+				return res.status(200).json({
+					message: 'Auth successful',
+					token,
+				});
 			});
 		})
 		.catch(err => res.status(400).json(err));
