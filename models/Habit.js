@@ -31,7 +31,7 @@ const habitSchema = new Schema({
 	// When the habit is to start, the habit is forecast from this date according to frequency
 	startDate: { type: Date, default: Date.now },
 	// An array of when the habit has been logged (marked as completed) through time
-	log: { type: [Date] },
+	log: { type: [Date], default: [] },
 });
 
 module.exports = mongoose.model('Habit', habitSchema);
