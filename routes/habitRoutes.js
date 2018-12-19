@@ -68,14 +68,10 @@ router.post('/habit/:id/log', (req, res) => {
 			// TODO: Check whether habit belongs to current authenticated user
 
 			// Add logtime to top of habit log array
-			if (habit.log) {
-				habit.log.unshift(logTime);
-			} else {
-				habit.log = [logTime];
-			}
+			habit.log.unshift(logTime);
 
 			// Save the habit with new log time
-			habit.save().then(habit => res.json(habit));
+			habit.save().then(() => res.json(habit));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
