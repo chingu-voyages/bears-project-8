@@ -65,6 +65,8 @@
 		"testEnvironment": "node",
 		"testURL": "http://localhost/",
 		"setupTestFrameworkScriptFile": "./__tests__/testSetup.js",
-		"testPathIgnorePatterns": ["client/"]
+		"testPathIgnorePatterns": [
+			"client/"
+		]
 	}
 }

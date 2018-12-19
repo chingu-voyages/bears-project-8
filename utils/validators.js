@@ -60,3 +60,20 @@ module.exports.createHabit = ({ name, description, type, difficulty, tags, frequ
 
 	return { errors, isValid: isEmpty(errors) };
 };
+
+module.exports.login = ({ email, password }) => {
+	const errors = {};
+	email = !isEmpty(email) ? email : '';
+	password = !isEmpty(password) ? password : '';
+
+	if (!validator.isEmail(email)) errors.email = 'Email is invalid';
+
+	if (validator.isEmpty(email)) errors.email = 'Email field is required';
+
+	if (!validator.isLength(password, { min: 8, max: 32 }))
+		errors.password = 'Password must be between 8 and 32 characters!';
+
+	if (validator.isEmpty(password)) errors.password = 'Password field is required';
+
+	return { errors, isValid: isEmpty(errors) };
+};

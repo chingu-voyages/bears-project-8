@@ -1,12 +1,14 @@
 const express = require('express');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
-// const passport = require('passport');
-// const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
+
 // Load input validation
 const validateRegisterInput = require('../utils/validators').register;
+const validateLoginInput = require('../utils/validators').login;
 
 const router = express.Router();
 const saltRounds = 10;
@@ -58,6 +60,60 @@ router.post('/register', (req, res) => {
 						.save()
 						.then(savedUser => res.json(savedUser))
 						.catch(e => res.status(400).json(e));
+				});
+			});
+		})
+		.catch(err => res.status(400).json(err));
+});
+
+/**
+ * @route   POST api/auth/login
+ * @desc    Login  User
+ * @access  Public
+ */
+
+router.post('/login', (req, res) => {
+	const { errors, isValid } = validateLoginInput(req.body);
+
+	if (!isValid) return res.status(400).json(errors);
+
+	return User.findOne({
+		email: req.body.email,
+	})
+		.then(user => {
+			if (!user) {
+				errors.email = 'User not found';
+				return res.status(404).json({ message: 'User not found', errors });
+			}
+			const payload = {
+				id: user._id,
+				name: user.name,
+				email: user.email,
+				avatar: user.avatar,
+			};
+			bcrypt.compare(req.body.password, user.password, (err, result) => {
+				if (err) {
+					return res.status(401).json({
+						message: 'Unauthorized. Access denied to invalid credentials',
+					});
+				}
+				if (!result) {
+					return res.status(401).json({
+						message: 'Unauthorized. Access denied to invalid credentials',
+					});
+				}
+				const token = jwt.sign(
+					{
+						payload,
+					},
+					process.env.JWT_SECRET,
+					{
+						expiresIn: '1h',
+					}
+				);
+				return res.status(200).json({
+					message: 'Auth successful',
+					token,
 				});
 			});
 		})
