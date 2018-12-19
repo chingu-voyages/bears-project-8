@@ -12,12 +12,6 @@ const validateLoginInput = require('../utils/validators').login;
 
 const router = express.Router();
 const saltRounds = 10;
-const payload = {
-	id: User._id,
-	name: User.name,
-	email: User.email,
-	avatar: User.avatar,
-};
 
 /**
  * @route   POST api/auth/register
@@ -91,6 +85,12 @@ router.post('/login', (req, res) => {
 				errors.email = 'User not found';
 				return res.status(404).json({ message: 'User not found', errors });
 			}
+			const payload = {
+				id: user._id,
+				name: user.name,
+				email: user.email,
+				avatar: user.avatar,
+			};
 			bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
@@ -108,7 +108,7 @@ router.post('/login', (req, res) => {
 					},
 					process.env.JWT_SECRET,
 					{
-						expiresIn: '2h',
+						expiresIn: '1h',
 					}
 				);
 				return res.status(200).json({
