@@ -71,6 +71,7 @@ describe('API - Auth', () => {
 				expect(res.body.password).toBe('Password field is required');
 				done();
 			}));
+
 		test('User should be logged in successfuly', done =>
 			request
 				.post('/api/auth/login')
@@ -85,6 +86,7 @@ describe('API - Auth', () => {
 					expect(res.body.token).toBeTruthy();
 					done();
 				}));
+
 		test('Email must be unique', done =>
 			request
 				.post('/api/auth/login')
@@ -96,6 +98,7 @@ describe('API - Auth', () => {
 					expect(res.status).toBe(400);
 					done();
 				}));
+
 		test('Passwords must match', done =>
 			request
 				.post('/api/auth/login')
