@@ -86,7 +86,7 @@ describe('API - Habit', () => {
 		// TODO: Add authentication tests
 
 		test('If a habit is logged with an invalid id, a 404 should be returned', done =>
-			request.post('/api/habit/bogus/log').end((err, res) => {
+			request.patch('/api/habit/bogus/log').end((err, res) => {
 				if (err) throw err;
 				expect(res.status).toBe(404);
 				expect(res.body.message).toBe('Habit not found');
@@ -94,7 +94,7 @@ describe('API - Habit', () => {
 			}));
 
 		test('If a habit is logged without a time, the current time should be logged', done =>
-			request.post(`/api/habit/${habitId}/log`).end((err, res) => {
+			request.patch(`/api/habit/${habitId}/log`).end((err, res) => {
 				if (err) throw err;
 				expect(res.status).toBe(200);
 				expect(res.body.log.length).toBe(1);
@@ -107,7 +107,7 @@ describe('API - Habit', () => {
 
 		test('If a habit is logged with a specified time, that time should be logged', done =>
 			request
-				.post(`/api/habit/${habitId}/log`)
+				.patch(`/api/habit/${habitId}/log`)
 				.send({ logTime: 640821600000 })
 				.end((err, res) => {
 					if (err) throw err;
