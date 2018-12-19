@@ -32,6 +32,9 @@ describe('API - Habit', () => {
 		}
 	});
 
+	// Store generated habit ID to later delete
+	let habitId;
+
 	describe('Habit - Create', () => {
 		test('If no data is passed a 400 status should be returned with error', done =>
 			request
@@ -56,6 +59,9 @@ describe('API - Habit', () => {
 					expect(res.body.type).toBe('Negative');
 					expect(res.body.frequency.times).toBe(1);
 					expect(res.body.frequency.period).toBe('Daily');
+					// Store habit ID for later deletion
+					expect(res.body._id).toBeTruthy();
+					habitId = res.body._id;
 					done();
 				}));
 
@@ -74,5 +80,33 @@ describe('API - Habit', () => {
 					expect(res.body._id).toBeTruthy();
 					done();
 				}));
+	});
+
+	describe('Habit - Delete', () => {
+		test('If an invalid habit ID is passed a 404 error should be returned', done =>
+			request.delete('/api/habit/nothing').end((err, res) => {
+				if (err) throw err;
+				expect(res.status).toBe(404);
+				expect(res.body.message).toBe('Habit not found');
+				done();
+			}));
+
+		test('If a valid habit ID is passed, that habit should be deleted', done => {
+			request.delete(`/api/habit/${habitId}`).end((err, res) => {
+				if (err) throw err;
+				expect(res.status).toBe(200);
+				expect(res.body.success).toBeTruthy();
+				done();
+			});
+		});
+
+		test('If the same habit ID is passed, it should no longer exist', done => {
+			request.delete(`/api/habit/${habitId}`).end((err, res) => {
+				if (err) throw err;
+				expect(res.status).toBe(404);
+				expect(res.body.message).toBe('Habit not found');
+				done();
+			});
+		});
 	});
 });
