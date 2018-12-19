@@ -71,18 +71,42 @@ describe('API - Auth', () => {
 				expect(res.body.password).toBe('Password field is required');
 				done();
 			}));
-
-		// test('User should be logged in successfuly', done =>
-		// 	request
-		// 		.post('/api/auth/login')
-		// 		.send({
-		// 			email: 'test@test.cc',
-		// 			password: '12345678',
-		// 		})
-		// 		.end((err,res) => {
-		// 			if (err) throw err;
-		// 			expect(res.status).toBe(200);
-		// 			done();
-		// 	}));
+		test('User should be logged in successfuly', done =>
+			request
+				.post('/api/auth/login')
+				.send({
+					email: 'test@test.cc',
+					password: 'pass1234',
+				})
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.message).toBe('Auth successful');
+					expect(res.body.token).toBeTruthy();
+					done();
+				}));
+		test('Email must be unique', done =>
+			request
+				.post('/api/auth/login')
+				.send({
+					email: '',
+				})
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(400);
+					done();
+				}));
+		test('Passwords must match', done =>
+			request
+				.post('/api/auth/login')
+				.send({
+					email: 'test@test.cc',
+					password: '12345678',
+				})
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(401);
+					done();
+				}));
 	});
 });
