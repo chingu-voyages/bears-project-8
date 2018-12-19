@@ -85,6 +85,14 @@ describe('API - Habit', () => {
 	describe('Habit - Log', () => {
 		// TODO: Add authentication tests
 
+		test('If a habit is logged with an invalid id, a 404 should be returned', done =>
+			request.post('/api/habit/bogus/log').end((err, res) => {
+				if (err) throw err;
+				expect(res.status).toBe(404);
+				expect(res.body.message).toBe('Habit not found');
+				done();
+			}));
+
 		test('If a habit is logged without a time, the current time should be logged', done =>
 			request.post(`/api/habit/${habitId}/log`).end((err, res) => {
 				if (err) throw err;
@@ -96,6 +104,19 @@ describe('API - Habit', () => {
 				);
 				done();
 			}));
+
+		test('If a habit is logged with a specified time, that time should be logged', done =>
+			request
+				.post(`/api/habit/${habitId}/log`)
+				.send({ logTime: 640821600000 })
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.log.length).toBe(2);
+					// Expect the latest logged time to be the specified time
+					expect(Date.parse(res.body.log[0])).toBe(640821600000);
+					done();
+				}));
 	});
 
 	describe('Habit - Delete', () => {
