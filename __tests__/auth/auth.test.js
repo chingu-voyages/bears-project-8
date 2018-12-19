@@ -63,5 +63,26 @@ describe('API - Auth', () => {
 				}));
 	});
 
-	describe('Auth - Login', () => {});
+	describe('Auth - Login', () => {
+		test('Login route should expect email and password', done =>
+			request.post('/api/auth/login').end((err, res) => {
+				if (err) throw err;
+				expect(res.body.email).toBe('Email field is required');
+				expect(res.body.password).toBe('Password field is required');
+				done();
+			}));
+
+		// test('User should be logged in successfuly', done =>
+		// 	request
+		// 		.post('/api/auth/login')
+		// 		.send({
+		// 			email: 'test@test.cc',
+		// 			password: '12345678',
+		// 		})
+		// 		.end((err,res) => {
+		// 			if (err) throw err;
+		// 			expect(res.status).toBe(200);
+		// 			done();
+		// 	}));
+	});
 });
