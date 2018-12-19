@@ -52,4 +52,32 @@ router.delete('/:id', (req, res) => {
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
+/**
+ * @route   POST api/habit/:id/log
+ * @desc    Logs a habit as completed at a certain time
+ * @access  Private
+ */
+router.post('/habit/:id/log', (req, res) => {
+	// TODO: Authentication
+
+	// Logtime is sent with request, or defaults to now
+	const logTime = req.body.logTime ? req.body.logTime : Date.now();
+
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// TODO: Check whether habit belongs to current authenticated user
+
+			// Add logtime to top of habit log array
+			if (habit.log) {
+				habit.log.unshift(logTime);
+			} else {
+				habit.log = [logTime];
+			}
+
+			// Save the habit with new log time
+			habit.save().then(habit => res.json(habit));
+		})
+		.catch(() => res.status(404).json({ message: 'Habit not found' }));
+});
+
 module.exports = router;
