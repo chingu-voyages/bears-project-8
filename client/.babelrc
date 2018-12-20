@@ -1,3 +1,4 @@
+// TODO: Investigate this - custom babel config doesn't work without ejecting :/
 {
 	"presets": [
 		["@babel/preset-env", {
