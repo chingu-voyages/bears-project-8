@@ -5,6 +5,13 @@ const request = require('supertest').agent(app);
 
 const createToken = require('../../utils/createToken');
 
+const userData = {
+	name: 'Tester',
+	email: 'test1@test.cc',
+	password: 'pass1234',
+	password2: 'pass1234',
+};
+
 const habit = {
 	name: 'Test habit',
 	user: '5c1bffbe6f455d6c270d8193',
@@ -16,13 +23,6 @@ const habit = {
 		period: 'Daily',
 	},
 	difficulty: 'Epic',
-};
-
-const userData = {
-	name: 'Tester',
-	email: 'test1@test.cc',
-	password: 'pass1234',
-	password2: 'pass1234',
 };
 
 describe('API - Habit', () => {
@@ -39,6 +39,7 @@ describe('API - Habit', () => {
 				body.id = body._id; // JWT decode expects id not _id
 				token = createToken(body, process.env.JWT_SECRET, '1h'); // create test token
 				user = body;
+				habit.user = user.id;
 				done();
 			});
 	});
@@ -92,8 +93,8 @@ describe('API - Habit', () => {
 					expect(res.body.type).toBe('Negative');
 					expect(res.body.frequency.times).toBe(1);
 					expect(res.body.frequency.period).toBe('Daily');
-					// Store habit ID for later use
 					expect(res.body._id).toBeTruthy();
+					// Store habit ID for later use
 					habitId = res.body._id;
 					done();
 				}));

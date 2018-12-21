@@ -64,12 +64,13 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 	Habit.findById(req.params.id)
 		.then(habit => {
 			// Check whether habit belongs to current authenticated user
-			if (!habit.user !== req.user.id) {
+			// toHexString - 24 byte hex string representation of MongoDB ObjectID
+			if (habit.user.toHexString() !== req.user.id) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
 
 			// Delete the habit
-			habit.remove().then(() => res.json({ success: true, habit }));
+			return habit.remove().then(() => res.json({ success: true, habit }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
