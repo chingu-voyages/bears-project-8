@@ -7,7 +7,6 @@ const createToken = require('../../utils/createToken');
 
 const habit = {
 	name: 'Test habit',
-	user: '5c1bffbe6f455d6c270d8193',
 	description: 'This is a habit',
 	tags: ['office', 'work', 'omg'],
 	type: 'Positive',
@@ -28,6 +27,7 @@ const userData = {
 describe('API - Habit', () => {
 	let token;
 	let user;
+	let habitId;
 
 	beforeAll(done => {
 		request
@@ -59,9 +59,6 @@ describe('API - Habit', () => {
 			console.error(err);
 		}
 	});
-
-	// Store generated habit ID for later use
-	let habitId;
 
 	describe('Habit - Create', () => {
 		test('It should require authorization', () =>
