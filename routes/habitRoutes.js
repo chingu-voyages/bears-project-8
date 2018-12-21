@@ -63,7 +63,10 @@ router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req,
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Habit.findById(req.params.id)
 		.then(habit => {
-			// TODO: Check whether habit belongs to current authenticated user
+			// Check whether habit belongs to current authenticated user
+			if (!habit.user !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
 
 			// Delete the habit
 			habit.remove().then(() => res.json({ success: true, habit }));
