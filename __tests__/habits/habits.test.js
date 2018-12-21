@@ -1,11 +1,13 @@
-/* eslint-disable no-underscore-dangle, import/order */
+/* eslint-disable no-underscore-dangle, import/order, no-param-reassign */
 const mongoose = require('mongoose');
 const { app } = require('../../server');
 const request = require('supertest').agent(app);
 
+const createToken = require('../../utils/createToken');
+
 const habit = {
 	name: 'Test habit',
-	user: '5c0cee8d8c452f13fbfe2281',
+	user: '5c1bffbe6f455d6c270d8193',
 	description: 'This is a habit',
 	tags: ['office', 'work', 'omg'],
 	type: 'Positive',
@@ -16,15 +18,41 @@ const habit = {
 	difficulty: 'Epic',
 };
 
+const userData = {
+	name: 'Tester',
+	email: 'test1@test.cc',
+	password: 'pass1234',
+	password2: 'pass1234',
+};
+
 describe('API - Habit', () => {
+	let token;
+	let user;
+
+	beforeAll(done => {
+		request
+			.post('/api/auth/register')
+			.send(userData)
+			.end((err, { body }) => {
+				// Some prop juggling to avoid calling two endpoints here - ugly but necessary
+				body.id = body._id; // JWT decode expects id not _id
+				token = createToken(body, process.env.JWT_SECRET, '1h'); // create test token
+				user = body;
+				done();
+			});
+	});
+
 	afterAll(done => {
 		try {
-			const { habits } = mongoose.connection.collections;
+			const { habits, users } = mongoose.connection.collections;
 			// Collection is being dropped.
-			habits
-				.drop()
-				// Connection to Mongo killed.
-				.then(() => mongoose.disconnect(done));
+			habits.drop().then(() =>
+				users
+					.drop()
+					// Connection to Mongo killed.
+					.then(() => mongoose.disconnect(done))
+			);
+
 			// Server connection closed.
 			// .then(() => server.close(done));
 		} catch (err) {
@@ -36,10 +64,16 @@ describe('API - Habit', () => {
 	let habitId;
 
 	describe('Habit - Create', () => {
+		test('It should require authorization', () =>
+			request.post('/api/habit/create').then(response => {
+				expect(response.statusCode).toBe(401);
+			}));
+
 		test('If no data is passed a 400 status should be returned with error', done =>
 			request
 				.post('/api/habit/create')
-				.send({ user: '5c0cee8d8c452f13fbfe2281' })
+				.set('Authorization', token)
+				.send({ user: user.id })
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(400);
@@ -50,7 +84,8 @@ describe('API - Habit', () => {
 		test('If only a habit name is passed a new habit should be created with defaults', done =>
 			request
 				.post('/api/habit/create')
-				.send({ user: '5c0cee8d8c452f13fbfe2281', name: 'Habit' })
+				.set('Authorization', token)
+				.send({ user: user.id, name: 'Habit' })
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
@@ -68,6 +103,7 @@ describe('API - Habit', () => {
 		test('If correct data is passed new habit should be created', done =>
 			request
 				.post('/api/habit/create')
+				.set('Authorization', token)
 				.send(habit)
 				.end((err, res) => {
 					if (err) throw err;
@@ -83,31 +119,41 @@ describe('API - Habit', () => {
 	});
 
 	describe('Habit - Log', () => {
-		// TODO: Add authentication tests
+		test('It should require authorization', () =>
+			request.patch('/api/habit/bogus/log').then(response => {
+				expect(response.statusCode).toBe(401);
+			}));
 
 		test('If a habit is logged with an invalid id, a 404 should be returned', done =>
-			request.patch('/api/habit/bogus/log').end((err, res) => {
-				if (err) throw err;
-				expect(res.status).toBe(404);
-				expect(res.body.message).toBe('Habit not found');
-				done();
-			}));
+			request
+				.patch('/api/habit/bogus/log')
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+					done();
+				}));
 
 		test('If a habit is logged without a time, the current time should be logged', done =>
-			request.patch(`/api/habit/${habitId}/log`).end((err, res) => {
-				if (err) throw err;
-				expect(res.status).toBe(200);
-				expect(res.body.log.length).toBe(1);
-				// Expect the latest logged time to be within 10 seconds of the current time
-				expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
-					Math.round(Date.now() / 10000)
-				);
-				done();
-			}));
+			request
+				.patch(`/api/habit/${habitId}/log`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.log.length).toBe(1);
+					// Expect the latest logged time to be within 10 seconds of the current time
+					expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
+						Math.round(Date.now() / 10000)
+					);
+					done();
+				}));
 
 		test('If a habit is logged with a specified time, that time should be logged', done =>
 			request
 				.patch(`/api/habit/${habitId}/log`)
+				.set('Authorization', token)
 				.send({ logTime: 640821600000 })
 				.end((err, res) => {
 					if (err) throw err;
@@ -120,30 +166,44 @@ describe('API - Habit', () => {
 	});
 
 	describe('Habit - Delete', () => {
-		test('If an invalid habit ID is passed a 404 error should be returned', done =>
-			request.delete('/api/habit/nothing').end((err, res) => {
-				if (err) throw err;
-				expect(res.status).toBe(404);
-				expect(res.body.message).toBe('Habit not found');
-				done();
+		test('It should require authorization', () =>
+			request.delete('/api/habit/123').then(response => {
+				expect(response.statusCode).toBe(401);
 			}));
 
+		test('If an invalid habit ID is passed a 404 error should be returned', done =>
+			request
+				.delete('/api/habit/nothing')
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+					done();
+				}));
+
 		test('If a valid habit ID is passed, that habit should be deleted', done => {
-			request.delete(`/api/habit/${habitId}`).end((err, res) => {
-				if (err) throw err;
-				expect(res.status).toBe(200);
-				expect(res.body.success).toBeTruthy();
-				done();
-			});
+			request
+				.delete(`/api/habit/${habitId}`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.success).toBeTruthy();
+					done();
+				});
 		});
 
 		test('If the same habit ID is passed, it should no longer exist', done => {
-			request.delete(`/api/habit/${habitId}`).end((err, res) => {
-				if (err) throw err;
-				expect(res.status).toBe(404);
-				expect(res.body.message).toBe('Habit not found');
-				done();
-			});
+			request
+				.delete(`/api/habit/${habitId}`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+					done();
+				});
 		});
 	});
 });

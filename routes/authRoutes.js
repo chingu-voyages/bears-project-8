@@ -1,7 +1,6 @@
 const express = require('express');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
@@ -9,6 +8,7 @@ const User = require('../models/User');
 // Load input validation
 const validateRegisterInput = require('../utils/validators').register;
 const validateLoginInput = require('../utils/validators').login;
+const createToken = require('../utils/createToken');
 
 const router = express.Router();
 const saltRounds = 10;
@@ -102,15 +102,8 @@ router.post('/login', (req, res) => {
 						message: 'Unauthorized. Access denied to invalid credentials',
 					});
 				}
-				const token = jwt.sign(
-					{
-						payload,
-					},
-					process.env.JWT_SECRET,
-					{
-						expiresIn: '1h',
-					}
-				);
+				const token = createToken(payload, process.env.JWT_SECRET, '1h');
+
 				return res.status(200).json({
 					message: 'Auth successful',
 					token,

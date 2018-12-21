@@ -42,7 +42,7 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test:server": "cross-env PORT=8081 jest '.*test.js' --detectOpenHandles",
+		"test:server": "cross-env PORT=8081 jest '.*test.js' --detectOpenHandles --runInBand",
 		"test:client": "npm run test --prefix client",
 		"test": "concurrently \"npm run test:server\" \"npm run test:client\" --scripts-prepend-node-path",
 		"start": "node server.js",

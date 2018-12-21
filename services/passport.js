@@ -13,14 +13,13 @@ options.secretOrKey = process.env.JWT_SECRET;
 module.exports = passport => {
 	passport.use(
 		// Authenticate endpoints using a JSON web token
-		new JwtStrategy(options, (jwtPayload, done) => {
+		new JwtStrategy(options, (jwtPayload, done) =>
 			User.findById(jwtPayload.id)
 				.then(user => {
 					if (!user) return done(null, false);
-
 					return done(null, user);
 				})
-				.catch(err => console.log(err));
-		})
+				.catch(err => console.log(err))
+		)
 	);
 };
