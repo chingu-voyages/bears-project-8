@@ -42,18 +42,18 @@
 		"prettier": "^1.15.3"
 	},
 	"scripts": {
-		"test:server": "cross-env PORT=8081 jest '.*test.js' --detectOpenHandles",
+		"test:server": "jest --detectOpenHandles --runInBand",
 		"test:client": "npm run test --prefix client",
-		"test": "concurrently \"npm run test:server\" \"npm run test:client\" --scripts-prepend-node-path",
+		"test": "concurrently \"npm:test:server\" \"npm:test:client\" --scripts-prepend-node-path",
 		"start": "node server.js",
 		"server": "nodemon server.js --ignore __tests__",
 		"client": "npm run start --prefix client",
-		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"dev": "concurrently \"npm:server\" \"npm:client\" --kill-others",
 		"build": "cross-env NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm test && lint-staged"
+			"pre-commit": "npm run test && lint-staged"
 		}
 	},
 	"lint-staged": {
@@ -66,7 +66,7 @@
 		"verbose": true,
 		"testEnvironment": "node",
 		"testURL": "http://localhost/",
-		"setupTestFrameworkScriptFile": "./__tests__/testSetup.js",
+		"setupTestFrameworkScriptFile": "./testSetup.js",
 		"testPathIgnorePatterns": [
 			"client/"
 		]

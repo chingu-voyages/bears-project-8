@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 // Habit model
 const Habit = require('../models/Habit');
@@ -13,12 +14,11 @@ const router = express.Router();
  * @desc    Creates habit
  * @access  Private
  */
-router.post('/create', (req, res) => {
+router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	// TODO: Authentication
 	const { name, description, type, difficulty, tags, frequency, user } = req.body;
 
 	return new Habit({
@@ -40,9 +40,7 @@ router.post('/create', (req, res) => {
  * @desc    Logs a habit as completed at a certain time
  * @access  Private
  */
-router.patch('/:id/log', (req, res) => {
-	// TODO: Authentication
-
+router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req, res) => {
 	// Logtime is sent with request, or defaults to now
 	const logTime = req.body.logTime ? req.body.logTime : Date.now();
 
@@ -62,14 +60,17 @@ router.patch('/:id/log', (req, res) => {
  * @desc    Deletes habit
  * @access  Private
  */
-router.delete('/:id', (req, res) => {
-	// TODO: Authentication
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Habit.findById(req.params.id)
 		.then(habit => {
-			// TODO: Check whether habit belongs to current authenticated user
+			// Check whether habit belongs to current authenticated user
+			// toHexString - 24 byte hex string representation of MongoDB ObjectID
+			if (habit.user.toHexString() !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
 
 			// Delete the habit
-			habit.remove().then(() => res.json({ success: true, habit }));
+			return habit.remove().then(() => res.json({ success: true, habit }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
