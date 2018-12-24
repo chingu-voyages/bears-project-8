@@ -75,4 +75,22 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
+/**
+ * @route   PUT api/habit/:id
+ * @desc    Updates habit
+ * @access  Private
+ */
+router.put('/:id', (req, res) => {
+	// TODO: Authentication
+	const { name, description, type, difficulty, tags, frequency, user } = req.body;
+
+	Habit.findByIdAndUpdate(
+		{ _id: req.params.id },
+		{ $set: { name, description, type, difficulty, tags, frequency, user } },
+		{ new: true }
+	)
+		.then(habit => res.status(200).json({ success: true, habit }))
+		.catch(() => res.status(404).json({ message: 'Habit not found' }));
+});
+
 module.exports = router;
