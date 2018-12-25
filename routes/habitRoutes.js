@@ -80,10 +80,10 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
  * @desc    Updates habit
  * @access  Private
  */
-router.put('/:id', (req, res) => {
-	// TODO: Authentication
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const { name, description, type, difficulty, tags, frequency, user } = req.body;
 
+	// Check whether habit belongs to current authenticated user
 	Habit.findByIdAndUpdate(
 		{ _id: req.params.id },
 		{ $set: { name, description, type, difficulty, tags, frequency, user } },
