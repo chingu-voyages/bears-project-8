@@ -205,4 +205,34 @@ describe('API - Habit', () => {
 				});
 		});
 	});
+
+	describe('Habit - Update', () => {
+		test('It should require authorization', () =>
+			request.put('/api/habit/52').then(response => {
+				expect(response.statusCode).toBe(401);
+			}));
+
+		test('If an invalid habit ID is passed a 404 error should be returned', done =>
+			request
+				.put('/api/habit/something')
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+					done();
+				}));
+
+		test('If a valid habit ID is passed, that habit should be updated', done => {
+			request
+				.put(`/api/habit/${habitId}`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.success).toBeTruthy();
+					done();
+				});
+		});
+	});
 });
