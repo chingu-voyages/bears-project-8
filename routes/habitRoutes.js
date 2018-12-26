@@ -87,8 +87,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 
 	const { name, description, type, difficulty, tags, frequency } = req.body;
 
-	// Check whether habit belongs to current authenticated user
-	return Habit.findById(req.params.id)
+	Habit.findById(req.params.id)
 		.then(habit => {
 			// Check whether habit belongs to current authenticated user
 			// toHexString - 24 byte hex string representation of MongoDB ObjectID
