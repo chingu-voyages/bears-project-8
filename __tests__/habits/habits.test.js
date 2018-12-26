@@ -25,9 +25,6 @@ const habit = {
 	difficulty: 'Epic',
 };
 
-const habitUpdate = {
-	name: 'New habit updated',
-};
 
 describe('API - Habit', () => {
 	let token;
@@ -44,7 +41,6 @@ describe('API - Habit', () => {
 				token = createToken(body, process.env.JWT_SECRET, '1h'); // create test token
 				user = body;
 				habit.user = user.id;
-				habitUpdate.user = user.id;
 				done();
 			});
 	});
@@ -200,14 +196,16 @@ describe('API - Habit', () => {
 				}));
 
 		test('If a valid habit ID is passed, that habit should be updated', done => {
+			habit.name = 'New habit updated';
 			request
 				.put(`/api/habit/${habitId}`)
 				.set('Authorization', token)
-				.send(habitUpdate)
+				.send(habit)
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.habit.name).toBe('New habit updated');
+					expect(res.body.updated.name).toBe('New habit updated');
+					expect(res.body.updated.description).toBe(habit.description);
 					expect(res.body.success).toBeTruthy();
 					done();
 				});
