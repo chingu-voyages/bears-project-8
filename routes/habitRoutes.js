@@ -103,7 +103,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			habit.frequency = frequency;
 
 			/* eslint-enable */
-			return habit.save().then(() => res.status(200).json({ success: true, habit }));
+			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
