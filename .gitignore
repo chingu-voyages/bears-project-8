@@ -89,6 +89,7 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+bash.exe.stackdump
 
 # Numerous always-ignore extensions
 *.diff
