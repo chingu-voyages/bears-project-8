@@ -91,7 +91,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (habit.user.toHexString() !== req.user.id) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
-			
+			/* eslint-disable no-param-reassign */
+			habit.name = name;
+
+
+			/* eslint-enable */
 			return habit.save().then(() => res.status(200).json({ success: true, habit }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
