@@ -93,7 +93,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			}
 			/* eslint-disable no-param-reassign */
 			habit.name = name;
-
+			habit.description = description;
+			habit.type = type;
+			habit.difficulty = difficulty;
+			habit.tags = tags;
+			habit.frequency = frequency;
 
 			/* eslint-enable */
 			return habit.save().then(() => res.status(200).json({ success: true, habit }));
