@@ -81,15 +81,19 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
  * @access  Private
  */
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-	const { name, description, type, difficulty, tags, frequency, user } = req.body;
+	const { name, description, type, difficulty, tags, frequency } = req.body;
 
 	// Check whether habit belongs to current authenticated user
-	Habit.findByIdAndUpdate(
-		{ _id: req.params.id },
-		{ $set: { name, description, type, difficulty, tags, frequency, user } },
-		{ new: true }
-	)
-		.then(habit => res.status(200).json({ success: true, habit }))
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// Check whether habit belongs to current authenticated user
+			// toHexString - 24 byte hex string representation of MongoDB ObjectID
+			if (habit.user.toHexString() !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
+			
+			return habit.save().then(() => res.status(200).json({ success: true, habit }));
+		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
