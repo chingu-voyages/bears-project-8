@@ -164,6 +164,53 @@ describe('API - Habit', () => {
 				}));
 	});
 
+	describe('Habit - Update', () => {
+		test('It should require authorization', () =>
+			request.put('/api/habit/52').then(response => {
+				expect(response.statusCode).toBe(401);
+			}));
+
+		test('If no data is passed a 400 status should be returned with error', done =>
+			request
+				.put(`/api/habit/${habitId}`)
+				.set('Authorization', token)
+				.send({ user: user.id })
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(400);
+					expect(res.body.name).toBe('Habit name field is required');
+					done();
+				}));
+
+		test('If an invalid habit ID is passed a 404 error should be returned', done =>
+			request
+				.put('/api/habit/something')
+				.set('Authorization', token)
+				.send(habit)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(404);
+					expect(res.body.message).toBe('Habit not found');
+					done();
+				}));
+
+		test('If a valid habit ID is passed, that habit should be updated', done => {
+			habit.name = 'New habit updated';
+			request
+				.put(`/api/habit/${habitId}`)
+				.set('Authorization', token)
+				.send(habit)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.updated.name).toBe('New habit updated');
+					expect(res.body.updated.description).toBe(habit.description);
+					expect(res.body.success).toBeTruthy();
+					done();
+				});
+		});
+	});
+
 	describe('Habit - Delete', () => {
 		test('It should require authorization', () =>
 			request.delete('/api/habit/123').then(response => {

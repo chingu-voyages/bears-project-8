@@ -75,4 +75,37 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
+/**
+ * @route   PUT api/habit/:id
+ * @desc    Updates habit
+ * @access  Private
+ */
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const { errors, isValid } = validateHabitsInput(req.body);
+	// Validate request body
+	if (!isValid) return res.status(400).json(errors);
+
+	const { name, description, type, difficulty, tags, frequency } = req.body;
+
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// Check whether habit belongs to current authenticated user
+			// toHexString - 24 byte hex string representation of MongoDB ObjectID
+			if (habit.user.toHexString() !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
+			/* eslint-disable no-param-reassign */
+			habit.name = name;
+			habit.description = description;
+			habit.type = type;
+			habit.difficulty = difficulty;
+			habit.tags = tags;
+			habit.frequency = frequency;
+
+			/* eslint-enable */
+			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+		})
+		.catch(() => res.status(404).json({ message: 'Habit not found' }));
+});
+
 module.exports = router;
