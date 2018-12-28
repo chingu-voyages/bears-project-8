@@ -67,12 +67,13 @@ router.delete('/:id/log/:index', passport.authenticate('jwt', { session: false }
 			if (habit.user.toHexString() !== req.user.id) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
+			const logIndex = parseInt(req.params.index, 10);
 			// Sanity check on index parameter
-			if (req.params.id < 0 || req.params.id > habit.log.length - 1) {
+			if (logIndex < 0 || logIndex > habit.log.length - 1) {
 				return res.status(400).json({ message: 'Log index is invalid' });
 			}
 			// Remove log entry at specified index
-			habit.log.splice(req.params.id, 1);
+			habit.log.splice(logIndex, 1);
 			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }))

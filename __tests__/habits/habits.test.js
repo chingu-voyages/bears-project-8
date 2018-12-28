@@ -25,7 +25,6 @@ const habit = {
 	difficulty: 'Epic',
 };
 
-
 describe('API - Habit', () => {
 	let token;
 	let user;
@@ -161,6 +160,30 @@ describe('API - Habit', () => {
 					expect(res.body.log.length).toBe(2);
 					// Expect the latest logged time to be the specified time
 					expect(Date.parse(res.body.log[0])).toBe(640821600000);
+					done();
+				}));
+
+		test('If a habit log entry is deleted but the log id is invalid, 400 status should be returned', done =>
+			request
+				.delete(`/api/habit/${habitId}/log/999`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(400);
+					expect(res.body.message).toBe('Log index is invalid');
+					done();
+				}));
+
+		test('If a habit log entry is deleted and the log id is valid, that log entry should be deleted', done =>
+			request
+				.delete(`/api/habit/${habitId}/log/1`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					// only remaining log entry should be a specified time
+					expect(res.body.updated.log.length).toBe(1);
+					expect(Date.parse(res.body.updated.log[0])).toBe(640821600000);
 					done();
 				}));
 	});
