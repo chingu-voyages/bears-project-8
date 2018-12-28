@@ -56,6 +56,29 @@ router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req,
 });
 
 /**
+ * @route   DELETE api/habit/:id/log/:index
+ * @desc    Logs a habit as completed at a certain time
+ * @access  Private
+ */
+router.delete('/:id/log/:index', passport.authenticate('jwt', { session: false }), (req, res) =>
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// Check whether habit belongs to current authenticated user
+			if (habit.user.toHexString() !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
+			// Sanity check on index parameter
+			if (req.params.id < 0 || req.params.id > habit.log.length - 1) {
+				return res.status(400).json({ message: 'Log index is invalid' });
+			}
+			// Remove log entry at specified index
+			habit.log.splice(req.params.id, 1);
+			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+		})
+		.catch(() => res.status(404).json({ message: 'Habit not found' }))
+);
+
+/**
  * @route   DELETE api/habit/:id
  * @desc    Deletes habit
  * @access  Private
