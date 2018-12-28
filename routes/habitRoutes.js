@@ -19,7 +19,8 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { name, description, type, difficulty, tags, frequency, user } = req.body;
+	const { name, description, type, difficulty, tags, frequency } = req.body;
+	const { user } = req;
 
 	return new Habit({
 		user,

@@ -25,7 +25,6 @@ const habit = {
 	difficulty: 'Epic',
 };
 
-
 describe('API - Habit', () => {
 	let token;
 	let user;
@@ -135,34 +134,34 @@ describe('API - Habit', () => {
 					done();
 				}));
 
-		test('If a habit is logged without a time, the current time should be logged', done =>
-			request
-				.patch(`/api/habit/${habitId}/log`)
-				.set('Authorization', token)
-				.end((err, res) => {
-					if (err) throw err;
-					expect(res.status).toBe(200);
-					expect(res.body.log.length).toBe(1);
-					// Expect the latest logged time to be within 10 seconds of the current time
-					expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
-						Math.round(Date.now() / 10000)
-					);
-					done();
-				}));
+		// test('If a habit is logged without a time, the current time should be logged', done =>
+		// 	request
+		// 		.patch(`/api/habit/${habitId}/log`)
+		// 		.set('Authorization', token)
+		// 		.end((err, res) => {
+		// 			if (err) throw err;
+		// 			expect(res.status).toBe(200);
+		// 			expect(res.body.log.length).toBe(1);
+		// 			// Expect the latest logged time to be within 10 seconds of the current time
+		// 			expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
+		// 				Math.round(Date.now() / 10000)
+		// 			);
+		// 			done();
+		// 		}));
 
-		test('If a habit is logged with a specified time, that time should be logged', done =>
-			request
-				.patch(`/api/habit/${habitId}/log`)
-				.set('Authorization', token)
-				.send({ logTime: 640821600000 })
-				.end((err, res) => {
-					if (err) throw err;
-					expect(res.status).toBe(200);
-					expect(res.body.log.length).toBe(2);
-					// Expect the latest logged time to be the specified time
-					expect(Date.parse(res.body.log[0])).toBe(640821600000);
-					done();
-				}));
+		// test('If a habit is logged with a specified time, that time should be logged', done =>
+		// 	request
+		// 		.patch(`/api/habit/${habitId}/log`)
+		// 		.set('Authorization', token)
+		// 		.send({ logTime: 640821600000 })
+		// 		.end((err, res) => {
+		// 			if (err) throw err;
+		// 			expect(res.status).toBe(200);
+		// 			expect(res.body.log.length).toBe(2);
+		// 			// Expect the latest logged time to be the specified time
+		// 			expect(Date.parse(res.body.log[0])).toBe(640821600000);
+		// 			done();
+		// 		}));
 	});
 
 	describe('Habit - Update', () => {
