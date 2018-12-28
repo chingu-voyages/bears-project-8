@@ -30,7 +30,7 @@ module.exports.register = ({ name, email, password, password2 }) => {
 	return { errors, isValid: isEmpty(errors) };
 };
 
-module.exports.createHabit = ({ name, description, type, difficulty, tags, frequency, user }) => {
+module.exports.createHabit = ({ user, name, description, type, difficulty, tags, frequency }) => {
 	const errors = {};
 	const types = ['Positive', 'Negative'];
 	const diffs = ['Trivial', 'Easy', 'Medium', 'Hard', 'Epic'];
@@ -40,10 +40,8 @@ module.exports.createHabit = ({ name, description, type, difficulty, tags, frequ
 	description = !isEmpty(description) ? description : '';
 	type = !isEmpty(type) ? type : '';
 	difficulty = !isEmpty(difficulty) ? difficulty : '';
-	// tags = Array.isArray(tags) ? tags : [];
-	// frequency = Object.isObject(frequency) ? frequency : {};
 
-	if (!validator.isMongoId(user)) errors.user = 'Invalid user ID';
+	if (user && !validator.isMongoId(user)) errors.user = 'Invalid user ID';
 	if (!validator.isLength(name, { min: 2, max: 30 }))
 		errors.name = 'Habit name must be between 2 and 30 characters!';
 	if (validator.isEmpty(name)) errors.name = 'Habit name field is required';
