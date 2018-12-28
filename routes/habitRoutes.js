@@ -44,14 +44,16 @@ router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req,
 	// Logtime is sent with request, or defaults to now
 	const logTime = req.body.logTime ? req.body.logTime : Date.now();
 
-	// TODO: Check whether habit belongs to current authenticated user
-	Habit.findByIdAndUpdate(
-		req.params.id,
-		// Add logtime to top of habit log array
-		{ $push: { log: { $each: [logTime], $position: 0 } } },
-		{ new: true }
-	)
-		.then(habit => res.json(habit))
+	Habit.findById(req.params.id)
+		.then(habit => {
+			// Check whether habit belongs to current authenticated user
+			if (habit.user.toHexString() !== req.user.id) {
+				return res.status(401).json({ message: 'Unauthorized' });
+			}
+			// Add logTime to top of habit log
+			habit.log.unshift(logTime);
+			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
 
