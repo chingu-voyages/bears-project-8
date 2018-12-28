@@ -134,34 +134,57 @@ describe('API - Habit', () => {
 					done();
 				}));
 
-		// test('If a habit is logged without a time, the current time should be logged', done =>
-		// 	request
-		// 		.patch(`/api/habit/${habitId}/log`)
-		// 		.set('Authorization', token)
-		// 		.end((err, res) => {
-		// 			if (err) throw err;
-		// 			expect(res.status).toBe(200);
-		// 			expect(res.body.log.length).toBe(1);
-		// 			// Expect the latest logged time to be within 10 seconds of the current time
-		// 			expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
-		// 				Math.round(Date.now() / 10000)
-		// 			);
-		// 			done();
-		// 		}));
+		test('Logging the habit of another user should be unauthorized', done => {
+			// Create another user
+			userData.email = 'test2@test.cc';
+			let token2;
+			request
+				.post('/api/auth/register')
+				.send(userData)
+				.end((err, { body }) => {
+					body.id = body._id;
+					token2 = createToken(body, process.env.JWT_SECRET, '1h');
+					// Log habit
+					request
+						.patch(`/api/habit/${habitId}/log`)
+						.set('Authorization', token2)
+						.end((error, res) => {
+							if (error) throw err;
+							expect(res.status).toBe(401);
+							expect(res.body.message).toBe('Unauthorized');
+							done();
+						});
+				});
+		});
 
-		// test('If a habit is logged with a specified time, that time should be logged', done =>
-		// 	request
-		// 		.patch(`/api/habit/${habitId}/log`)
-		// 		.set('Authorization', token)
-		// 		.send({ logTime: 640821600000 })
-		// 		.end((err, res) => {
-		// 			if (err) throw err;
-		// 			expect(res.status).toBe(200);
-		// 			expect(res.body.log.length).toBe(2);
-		// 			// Expect the latest logged time to be the specified time
-		// 			expect(Date.parse(res.body.log[0])).toBe(640821600000);
-		// 			done();
-		// 		}));
+		test('If a habit is logged without a time, the current time should be logged', done =>
+			request
+				.patch(`/api/habit/${habitId}/log`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.updated.log.length).toBe(1);
+					// Expect the latest logged time to be within 10 seconds of the current time
+					expect(Math.round(Date.parse(res.body.updated.log[0]) / 10000)).toBe(
+						Math.round(Date.now() / 10000)
+					);
+					done();
+				}));
+
+		test('If a habit is logged with a specified time, that time should be logged', done =>
+			request
+				.patch(`/api/habit/${habitId}/log`)
+				.set('Authorization', token)
+				.send({ logTime: 640821600000 })
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.updated.log.length).toBe(2);
+					// Expect the latest logged time to be the specified time
+					expect(Date.parse(res.body.updated.log[0])).toBe(640821600000);
+					done();
+				}));
 	});
 
 	describe('Habit - Update', () => {
@@ -174,7 +197,6 @@ describe('API - Habit', () => {
 			request
 				.put(`/api/habit/${habitId}`)
 				.set('Authorization', token)
-				.send({ user: user.id })
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(400);
