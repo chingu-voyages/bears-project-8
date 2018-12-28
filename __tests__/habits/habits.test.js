@@ -88,14 +88,14 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.name).toBe('Habit');
-					expect(res.body.difficulty).toBe('Medium');
-					expect(res.body.type).toBe('Negative');
-					expect(res.body.frequency.times).toBe(1);
-					expect(res.body.frequency.period).toBe('Daily');
-					expect(res.body._id).toBeTruthy();
+					expect(res.body.habit.name).toBe('Habit');
+					expect(res.body.habit.difficulty).toBe('Medium');
+					expect(res.body.habit.type).toBe('Negative');
+					expect(res.body.habit.frequency.times).toBe(1);
+					expect(res.body.habit.frequency.period).toBe('Daily');
+					expect(res.body.habit._id).toBeTruthy();
 					// Store habit ID for later use
-					habitId = res.body._id;
+					habitId = res.body.habit._id;
 					done();
 				}));
 
@@ -107,12 +107,12 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.name).toBe('Test habit');
-					expect(res.body.description).toBe('This is a habit');
-					expect(res.body.type).toBe('Positive');
-					expect(res.body.frequency.times).toBe(2);
-					expect(res.body.frequency.period).toBe('Daily');
-					expect(res.body._id).toBeTruthy();
+					expect(res.body.habit.name).toBe('Test habit');
+					expect(res.body.habit.description).toBe('This is a habit');
+					expect(res.body.habit.type).toBe('Positive');
+					expect(res.body.habit.frequency.times).toBe(2);
+					expect(res.body.habit.frequency.period).toBe('Daily');
+					expect(res.body.habit._id).toBeTruthy();
 					done();
 				}));
 	});
@@ -164,9 +164,9 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.updated.log.length).toBe(1);
+					expect(res.body.habit.log.length).toBe(1);
 					// Expect the latest logged time to be within 10 seconds of the current time
-					expect(Math.round(Date.parse(res.body.updated.log[0]) / 10000)).toBe(
+					expect(Math.round(Date.parse(res.body.habit.log[0]) / 10000)).toBe(
 						Math.round(Date.now() / 10000)
 					);
 					done();
@@ -180,9 +180,9 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.updated.log.length).toBe(2);
+					expect(res.body.habit.log.length).toBe(2);
 					// Expect the latest logged time to be the specified time
-					expect(Date.parse(res.body.updated.log[0])).toBe(640821600000);
+					expect(Date.parse(res.body.habit.log[0])).toBe(640821600000);
 					done();
 				}));
 
@@ -205,8 +205,8 @@ describe('API - Habit', () => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
 					// only remaining log entry should be a specified time
-					expect(res.body.updated.log.length).toBe(1);
-					expect(Date.parse(res.body.updated.log[0])).toBe(640821600000);
+					expect(res.body.habit.log.length).toBe(1);
+					expect(Date.parse(res.body.habit.log[0])).toBe(640821600000);
 					done();
 				}));
 	});
@@ -249,8 +249,8 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.updated.name).toBe('New habit updated');
-					expect(res.body.updated.description).toBe(habit.description);
+					expect(res.body.habit.name).toBe('New habit updated');
+					expect(res.body.habit.description).toBe(habit.description);
 					expect(res.body.success).toBeTruthy();
 					done();
 				});

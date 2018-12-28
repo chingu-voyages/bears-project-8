@@ -32,7 +32,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 		frequency,
 	})
 		.save()
-		.then(habit => res.json(habit))
+		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
 });
 
@@ -53,7 +53,9 @@ router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req,
 			}
 			// Add logTime to top of habit log
 			habit.log.unshift(logTime);
-			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+			return habit
+				.save()
+				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
@@ -77,7 +79,9 @@ router.delete('/:id/log/:index', passport.authenticate('jwt', { session: false }
 			}
 			// Remove log entry at specified index
 			habit.log.splice(logIndex, 1);
-			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+			return habit
+				.save()
+				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }))
 );
@@ -130,7 +134,9 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			habit.frequency = frequency;
 
 			/* eslint-enable */
-			return habit.save().then(updated => res.status(200).json({ success: true, updated }));
+			return habit
+				.save()
+				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
 		.catch(() => res.status(404).json({ message: 'Habit not found' }));
 });
