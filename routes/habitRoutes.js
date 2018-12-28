@@ -15,12 +15,12 @@ const router = express.Router();
  * @access  Private
  */
 router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
+	req.body.user = req.user._id.toString();
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { name, description, type, difficulty, tags, frequency } = req.body;
-	const { user } = req;
+	const { user, name, description, type, difficulty, tags, frequency } = req.body;
 
 	return new Habit({
 		user,
