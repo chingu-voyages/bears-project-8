@@ -31,6 +31,7 @@
 		}]
 	},
 	"globals": {
-		"expect": true
+		"expect": true,
+		"test": true
 	}
 }
