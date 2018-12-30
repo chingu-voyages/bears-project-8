@@ -88,14 +88,14 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.name).toBe('Habit');
-					expect(res.body.difficulty).toBe('Medium');
-					expect(res.body.type).toBe('Negative');
-					expect(res.body.frequency.times).toBe(1);
-					expect(res.body.frequency.period).toBe('Daily');
-					expect(res.body._id).toBeTruthy();
+					expect(res.body.habit.name).toBe('Habit');
+					expect(res.body.habit.difficulty).toBe('Medium');
+					expect(res.body.habit.type).toBe('Negative');
+					expect(res.body.habit.frequency.times).toBe(1);
+					expect(res.body.habit.frequency.period).toBe('Daily');
+					expect(res.body.habit._id).toBeTruthy();
 					// Store habit ID for later use
-					habitId = res.body._id;
+					habitId = res.body.habit._id;
 					done();
 				}));
 
@@ -107,12 +107,12 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.name).toBe('Test habit');
-					expect(res.body.description).toBe('This is a habit');
-					expect(res.body.type).toBe('Positive');
-					expect(res.body.frequency.times).toBe(2);
-					expect(res.body.frequency.period).toBe('Daily');
-					expect(res.body._id).toBeTruthy();
+					expect(res.body.habit.name).toBe('Test habit');
+					expect(res.body.habit.description).toBe('This is a habit');
+					expect(res.body.habit.type).toBe('Positive');
+					expect(res.body.habit.frequency.times).toBe(2);
+					expect(res.body.habit.frequency.period).toBe('Daily');
+					expect(res.body.habit._id).toBeTruthy();
 					done();
 				}));
 	});
@@ -134,6 +134,29 @@ describe('API - Habit', () => {
 					done();
 				}));
 
+		test('Logging the habit of another user should be unauthorized', done => {
+			// Create another user
+			userData.email = 'test2@test.cc';
+			let token2;
+			request
+				.post('/api/auth/register')
+				.send(userData)
+				.end((err, { body }) => {
+					body.id = body._id;
+					token2 = createToken(body, process.env.JWT_SECRET, '1h');
+					// Log habit
+					request
+						.patch(`/api/habit/${habitId}/log`)
+						.set('Authorization', token2)
+						.end((error, res) => {
+							if (error) throw err;
+							expect(res.status).toBe(401);
+							expect(res.body.message).toBe('Unauthorized');
+							done();
+						});
+				});
+		});
+
 		test('If a habit is logged without a time, the current time should be logged', done =>
 			request
 				.patch(`/api/habit/${habitId}/log`)
@@ -141,9 +164,9 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.log.length).toBe(1);
+					expect(res.body.habit.log.length).toBe(1);
 					// Expect the latest logged time to be within 10 seconds of the current time
-					expect(Math.round(Date.parse(res.body.log[0]) / 10000)).toBe(
+					expect(Math.round(Date.parse(res.body.habit.log[0]) / 10000)).toBe(
 						Math.round(Date.now() / 10000)
 					);
 					done();
@@ -157,9 +180,33 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.log.length).toBe(2);
+					expect(res.body.habit.log.length).toBe(2);
 					// Expect the latest logged time to be the specified time
-					expect(Date.parse(res.body.log[0])).toBe(640821600000);
+					expect(Date.parse(res.body.habit.log[0])).toBe(640821600000);
+					done();
+				}));
+
+		test('If a habit log entry is deleted but the log id is invalid, 400 status should be returned', done =>
+			request
+				.delete(`/api/habit/${habitId}/log/999`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(400);
+					expect(res.body.message).toBe('Log index is invalid');
+					done();
+				}));
+
+		test('If a habit log entry is deleted and the log id is valid, that log entry should be deleted', done =>
+			request
+				.delete(`/api/habit/${habitId}/log/1`)
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					// only remaining log entry should be a specified time
+					expect(res.body.habit.log.length).toBe(1);
+					expect(Date.parse(res.body.habit.log[0])).toBe(640821600000);
 					done();
 				}));
 	});
@@ -174,7 +221,6 @@ describe('API - Habit', () => {
 			request
 				.put(`/api/habit/${habitId}`)
 				.set('Authorization', token)
-				.send({ user: user.id })
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(400);
@@ -203,8 +249,8 @@ describe('API - Habit', () => {
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.body.updated.name).toBe('New habit updated');
-					expect(res.body.updated.description).toBe(habit.description);
+					expect(res.body.habit.name).toBe('New habit updated');
+					expect(res.body.habit.description).toBe(habit.description);
 					expect(res.body.success).toBeTruthy();
 					done();
 				});
