@@ -13,6 +13,7 @@ class AppContainer extends Component {
 	};
 
 	state = {
+		// TBD - Auth client side
 		isAuthenticated: null,
 	};
 
