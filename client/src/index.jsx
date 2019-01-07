@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import GlobalStyle from './globalStyle.styled';
-import App from './components/App';
+import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
 	<div>
 		<GlobalStyle />
-		<App />
+		<Routes />
 	</div>
 );
 

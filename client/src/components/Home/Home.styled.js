@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const AppContainer = styled.div`
+export const Container = styled.div`
 	text-align: center;
 `;
 
-export const AppHeader = styled.header`
+export const Header = styled.header`
 	background-color: #282c34;
 	min-height: 100vh;
 	display: flex;
