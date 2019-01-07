@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Header, Footer } from './HabitForm.styled';
 
+import { Container, Header, Footer } from './HabitForm.styled';
+import { LeftButtons, RightButtons } from './Buttons';
 import Content from './Content';
 
 export default class NavBar extends Component {
@@ -9,6 +10,7 @@ export default class NavBar extends Component {
 
 		name: '',
 		tags: [],
+		description: '',
 		value: '',
 		times: '',
 		period: '',
@@ -32,11 +34,21 @@ export default class NavBar extends Component {
 	};
 
 	render() {
+		const { step } = this.state;
 		return (
 			<Container>
 				<Header>Add a New Habit</Header>
 				<Content {...this.state} onChange={this.handleChange} />
-				<Footer>Buttons go down here...</Footer>
+				<Footer>
+					<LeftButtons step={step} setStep={this.setStep} />
+					<div>Progress</div>
+					<RightButtons
+						step={step}
+						totalSteps={3}
+						setStep={this.setStep}
+						onSubmit={this.handleSubmit}
+					/>
+				</Footer>
 			</Container>
 		);
 	}

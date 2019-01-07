@@ -1,9 +1,10 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
+import HabitForm from './components/HabitForm/HabitForm';
 
 const Profile = lazy(() =>
 	import(/* webpackChunkName: "profile" */ /* webpackPrefetch: true */ './components/Profile/Profile')
@@ -30,17 +31,17 @@ const withContainer = (Component, isLazy, hasNav = true) =>
 
 const Routes = () => (
 	<HashRouter>
-		<Fragment>
-			<Switch>
-				<Route exact path="/" render={() => withContainer(Home, false, false)} />
+		<Switch>
+			<Route exact path="/" render={() => withContainer(Home, false, false)} />
 
-				<Route exact path="/dashboard" render={() => withContainer(Dashboard, true)} />
+			<Route exact path="/dashboard" render={() => withContainer(Dashboard, true)} />
 
-				<Route exact path="/profile" render={() => withContainer(Profile, true)} />
+			<Route exact path="/profile" render={() => withContainer(Profile, true)} />
 
-				<Route exact path="/auth" render={() => withContainer(Login, true, false)} />
-			</Switch>
-		</Fragment>
+			<Route exact path="/habitform" render={() => withContainer(HabitForm, true)} />
+
+			<Route exact path="/auth" render={() => withContainer(Login, true, false)} />
+		</Switch>
 	</HashRouter>
 );
 
