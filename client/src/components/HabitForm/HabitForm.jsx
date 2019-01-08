@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Container, Header, Footer } from './HabitForm.styled';
 import { LeftButtons, RightButtons } from './Buttons';
 import Content from './Content';
+import ProgressCircles from './ProgressCircles';
 
 export default class NavBar extends Component {
 	state = {
@@ -41,7 +42,7 @@ export default class NavBar extends Component {
 				<Content {...this.state} onChange={this.handleChange} />
 				<Footer>
 					<LeftButtons step={step} setStep={this.setStep} />
-					<div>Progress</div>
+					<ProgressCircles step={step} totalSteps={3} setStep={this.setStep} />
 					<RightButtons
 						step={step}
 						totalSteps={3}

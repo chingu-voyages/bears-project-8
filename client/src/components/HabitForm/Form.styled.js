@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const ButtonGroup = styled.div`
+	width: 270px;
+	display: flex;
+	${props =>
+		props.children.length > 1
+			? 'justify-content: space-between;'
+			: 'justify-content: flex-end;'}
+	align-items: center;
+`;
+
 export const StyledFormGroup = styled.div`
 	width: ${props => props.width};
 `;

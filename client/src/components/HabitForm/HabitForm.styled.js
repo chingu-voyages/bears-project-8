@@ -2,6 +2,7 @@ import styled from 'styled-components';
 // TODO: incorporate into global styles
 
 export const Container = styled.div`
+	position: relative;
 	width: 1000px;
 	background: #fff;
 	border-radius: 6px;
@@ -39,10 +40,4 @@ export const Footer = styled(ContentArea)`
 	justify-content: space-between;
 	align-items: center;
 	height: auto;
-
-	div {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
 `;

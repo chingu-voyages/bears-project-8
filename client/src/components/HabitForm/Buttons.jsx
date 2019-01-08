@@ -1,30 +1,42 @@
 import React from 'react';
-import { Button } from './Form.styled';
+import PropTypes from 'prop-types';
+import { Button, ButtonGroup } from './Form.styled';
 
 export const LeftButtons = props => {
 	const { step, setStep } = props;
 	if (step > 0) return <Button onClick={() => setStep(step - 1)}>Back</Button>;
-	return null;
+	// empty div to push over right buttons
+	return <div />;
+};
+LeftButtons.propTypes = {
+	step: PropTypes.number.isRequired,
+	setStep: PropTypes.func.isRequired,
 };
 
 export const RightButtons = props => {
 	const { step, totalSteps, setStep, onSubmit } = props;
 	if (step < totalSteps - 1) {
 		return (
-			<div style={{ width: '270px' }}>
+			<ButtonGroup>
 				<Button secondary onClick={onSubmit}>
 					Skip
 				</Button>
 				<Button onClick={() => setStep(step + 1)}>Next</Button>
-			</div>
+			</ButtonGroup>
 		);
 	}
 	if (step === totalSteps - 1) {
 		return (
-			<div style={{ width: '270px', justifyContent: 'flex-end' }}>
+			<ButtonGroup>
 				<Button onClick={onSubmit}>Done</Button>
-			</div>
+			</ButtonGroup>
 		);
 	}
 	return null;
+};
+RightButtons.propTypes = {
+	step: PropTypes.number.isRequired,
+	totalSteps: PropTypes.number.isRequired,
+	setStep: PropTypes.func.isRequired,
+	onSubmit: PropTypes.func.isRequired,
 };
