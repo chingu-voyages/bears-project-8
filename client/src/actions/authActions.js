@@ -53,3 +53,5 @@ export const logoutUser = () => dispatch => {
 	// Set current user to {} - this set isAuthenticated to false
 	dispatch(setCurrentUser({}));
 };
+
+// TODO: Add edit user
