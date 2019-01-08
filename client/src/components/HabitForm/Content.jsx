@@ -16,6 +16,7 @@ const Content = props => {
 		reminderTypes,
 		difficulty,
 		habitType,
+		habitStart,
 		onChange,
 	} = props;
 
@@ -66,7 +67,7 @@ const Content = props => {
 							size={2}
 						/>
 						<FormGroup
-							title="every"
+							title="&nbsp;"
 							name="period"
 							value={period}
 							onChange={onChange}
@@ -115,6 +116,15 @@ const Content = props => {
 							size={2}
 						/>
 					</Row>
+					<FormGroup
+						title="When would you like to start this habit?"
+						name="habitStart"
+						value={habitStart}
+						onChange={onChange}
+						type="date"
+						placeholder="Choose the date you would like to start this habit, or leave it blank to start today"
+						size={2}
+					/>
 				</ContentArea>
 			);
 		default:

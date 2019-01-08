@@ -19,6 +19,7 @@ export default class NavBar extends Component {
 		reminderTypes: [],
 		difficulty: '',
 		habitType: '',
+		habitStart: '',
 	};
 
 	handleChange = ({ target }) => {
