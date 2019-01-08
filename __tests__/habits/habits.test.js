@@ -123,16 +123,17 @@ describe('API - Habit', () => {
 				expect(response.statusCode).toBe(401);
 			}));
 
-		test('It should return an array of the users habits', () =>
+		test('It should return an array of the users habits', done =>
 			request
 				.get('/api/habit/habits')
-				.send('Authorization', token)
+				.set('Authorization', token)
 				.end((err, res) => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
-					expect(res.habits.length).toBe(2);
-					expect(res.habits[0].name).toBe('Habit');
-					expect(res.habits[1].name).toBe('Test habit');
+					expect(res.body.habits.length).toBe(2);
+					expect(res.body.habits[0].name).toBe('Habit');
+					expect(res.body.habits[1].name).toBe('Test habit');
+					done();
 				}));
 	});
 
