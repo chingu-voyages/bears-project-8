@@ -17,8 +17,8 @@ export const StyledFormGroup = styled.div`
 export const Button = styled.button`
 	${props =>
 		props.secondary
-			? 'background: #fff; color: #c4c4c4; border: 1px solid #c4c4c4;'
-			: 'background: #e8e8e8; color: #757575; border: none;'}
+			? 'background: #fff; color: #c4c4c4; border: 1px solid #c4c4c4; &:hover { background: #e8e8e8; border: 1px solid #e8e8e8; }'
+			: 'background: #e8e8e8; color: #757575; border: none; &:hover { background: #c4c4c4; }'}
 	min-width: 125px;
 	border-radius: 3px;
 	font-size: 1rem;

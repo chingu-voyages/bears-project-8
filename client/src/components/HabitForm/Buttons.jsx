@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonGroup } from './Form.styled';
+import { Button, ButtonGroup } from '../Shared/Forms/Form.styled';
 
 export const LeftButtons = props => {
 	const { step, setStep } = props;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ContentArea, Row } from './HabitForm.styled';
-import FormGroup from './FormGroup';
+import FormGroup from '../Shared/Forms/FormGroup';
 
 const Content = props => {
 	const {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Container, Header, Footer } from './HabitForm.styled';
 import { LeftButtons, RightButtons } from './Buttons';
 import Content from './Content';
-import ProgressCircles from './ProgressCircles';
+import ProgressCircles from '../Shared/Forms/ProgressCircles';
 
 export default class NavBar extends Component {
 	state = {
