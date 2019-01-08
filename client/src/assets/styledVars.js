@@ -12,6 +12,18 @@ export const $white = '#fff';
 export const $black = '#000';
 export const $item = '#45304e';
 
+// Lightest to darkest grey colors
+export const $greyLightest = '#f0f0f0';
+export const $greyLighter = '#e8e8e8';
+export const $greyLight = '#c4c4c4';
+export const $greyDark = '#757575';
+export const $greyDarker = '#2b2f30';
+export const $greyDarkest = '#111';
+
+// Hightlights
+export const $mint = '#5cbc9a';
+export const $tomato = '#df5146';
+
 // Screen sizes
 export const $desktopWidth = '1280px';
 

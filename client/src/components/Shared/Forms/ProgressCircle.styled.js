@@ -1,16 +1,18 @@
 import styled from 'styled-components';
+import { $animDuration, $greyLighter, $greyLight, $greyDark } from '../../../assets/styledVars';
 
 const ProgressCircle = styled.div`
-	${props => (props.current ? 'background: #757575;' : 'background: #e8e8e8;')}
+	${props => (props.current ? `background: ${$greyDark};` : `background: ${$greyLighter};`)}
 	display: inline-block;
 	border-radius: 50%;
 	width: 25px;
 	height: 25px;
 	margin: 0 0.6rem;
+	transition: ${$animDuration};
 
 	&:hover {
 		cursor: pointer;
-		background: #c4c4c4;
+		background: ${$greyLight};
 	}
 `;
 

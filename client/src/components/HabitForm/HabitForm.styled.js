@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// TODO: incorporate into global styles
+import { $greyLighter } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	position: relative;
@@ -7,16 +7,14 @@ export const Container = styled.div`
 	background: #fff;
 	border-radius: 6px;
 	margin: 6rem auto;
-	color: #757575;
 `;
 
 export const Header = styled.h2`
 	text-align: center;
 	width: 100%;
 	font-weight: 400;
-	border-bottom: 2px solid #e5e5e5;
+	border-bottom: 2px solid ${$greyLighter};
 	padding: 2rem;
-	color: #2b2f30;
 `;
 
 export const ContentArea = styled.div`
@@ -29,7 +27,7 @@ export const Row = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 1.5rem;
+	margin-bottom: 2.5rem;
 	&:last-child {
 		margin: 0;
 	}

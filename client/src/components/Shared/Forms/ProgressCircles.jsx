@@ -7,9 +7,9 @@ const ProgressCircles = props => {
 	const circles = [];
 	for (let i = 0; i < totalSteps; i += 1) {
 		if (step === i) {
-			circles.push(<ProgressCircle onClick={() => setStep(i)} current />);
+			circles.push(<ProgressCircle key={i} onClick={() => setStep(i)} current />);
 		} else {
-			circles.push(<ProgressCircle onClick={() => setStep(i)} />);
+			circles.push(<ProgressCircle key={i} onClick={() => setStep(i)} />);
 		}
 	}
 	return <Container>{circles}</Container>;

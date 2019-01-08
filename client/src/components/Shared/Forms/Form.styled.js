@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import {
+	$animDuration,
+	$greyLightest,
+	$greyLighter,
+	$greyLight,
+	$greyDark,
+} from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
 	width: 270px;
@@ -17,12 +24,13 @@ export const StyledFormGroup = styled.div`
 export const Button = styled.button`
 	${props =>
 		props.secondary
-			? 'background: #fff; color: #c4c4c4; border: 1px solid #c4c4c4; &:hover { background: #e8e8e8; border: 1px solid #e8e8e8; }'
-			: 'background: #e8e8e8; color: #757575; border: none; &:hover { background: #c4c4c4; }'}
+			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight}; &:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
+			: `background: ${$greyLighter}; color: ${$greyDark}; border: none; &:hover { background: ${$greyLight}; }`}
 	min-width: 125px;
 	border-radius: 3px;
 	font-size: 1rem;
 	padding: 0.7rem;
+	transition: ${$animDuration};
 
 	&:hover {
 		cursor: pointer;
@@ -30,33 +38,33 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-	background: #f0f0f0;
+	background: ${$greyLightest};
 	border: none;
 	border-radius: 3px;
 	font-size: 1rem;
 	padding: 0.6rem 1rem;
-	color: #757575;
+	color: ${$greyDark};
 	display: inline-block;
 	width: 100%;
 
 	&::placeholder {
-		color: #c4c4c4;
+		color: ${$greyLight};
 	}
 `;
 
 export const Textarea = styled.textarea`
-	background: #f0f0f0;
+	background: ${$greyLightest};
 	border: none;
 	border-radius: 3px;
 	font-size: 1rem;
 	padding: 0.6rem 1rem;
-	color: #757575;
+	color: ${$greyDark};
 	display: inline-block;
 	width: 100%;
 	height: 6rem;
 
 	&::placeholder {
-		color: #c4c4c4;
+		color: ${$greyLight};
 	}
 `;
 
