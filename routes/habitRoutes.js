@@ -16,6 +16,7 @@ const router = express.Router();
  */
 router.get('/habits', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Habit.find({ user: req.user._id })
+		.sort({ dateCreated: -1 })
 		.then(habits => res.json({ succcess: true, habits }))
 		.catch(err => res.status(400).json(err));
 });

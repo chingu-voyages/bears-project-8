@@ -131,8 +131,9 @@ describe('API - Habit', () => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
 					expect(res.body.habits.length).toBe(2);
-					expect(res.body.habits[0].name).toBe('Habit');
-					expect(res.body.habits[1].name).toBe('Test habit');
+					// New habits should be first in the returned awway
+					expect(res.body.habits[0].name).toBe('Test habit');
+					expect(res.body.habits[1].name).toBe('Habit');
 					done();
 				}));
 	});
