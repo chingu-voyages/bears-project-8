@@ -7,6 +7,10 @@ export const Container = styled.div`
 	background: #fff;
 	border-radius: 6px;
 	margin: 6rem auto;
+
+	@media only screen and (max-width: 1100px) {
+		width: 90%;
+	}
 `;
 
 export const Header = styled.h2`
@@ -21,6 +25,10 @@ export const ContentArea = styled.div`
 	width: 100%;
 	height: 310px;
 	padding: 2rem 4rem;
+
+	@media only screen and (max-width: 650px) {
+		height: auto;
+	}
 `;
 
 export const Row = styled.div`
@@ -31,6 +39,10 @@ export const Row = styled.div`
 	&:last-child {
 		margin: 0;
 	}
+
+	@media only screen and (max-width: 650px) {
+		display: block;
+	}
 `;
 
 export const Footer = styled(ContentArea)`
@@ -38,4 +50,8 @@ export const Footer = styled(ContentArea)`
 	justify-content: space-between;
 	align-items: center;
 	height: auto;
+
+	@media only screen and (max-width: 960px) {
+		padding: 1rem 4rem 6rem;
+	}
 `;

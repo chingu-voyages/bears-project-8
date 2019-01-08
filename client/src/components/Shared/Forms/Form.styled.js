@@ -19,13 +19,24 @@ export const ButtonGroup = styled.div`
 
 export const StyledFormGroup = styled.div`
 	width: ${props => props.width};
+
+	@media only screen and (max-width: 650px) {
+		width: 100%;
+		margin-bottom: 2rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 `;
 
 export const Button = styled.button`
 	${props =>
 		props.secondary
-			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight}; &:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
-			: `background: ${$greyLighter}; color: ${$greyDark}; border: none; &:hover { background: ${$greyLight}; }`}
+			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight};
+				&:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
+			: `background: ${$greyLighter}; color: ${$greyDark}; border: none;
+				&:hover { background: ${$greyLight}; }`}
 	min-width: 125px;
 	border-radius: 3px;
 	font-size: 1rem;
@@ -34,6 +45,11 @@ export const Button = styled.button`
 
 	&:hover {
 		cursor: pointer;
+	}
+
+	@media only screen and (max-width: 960px) {
+		position: relative;
+		top: 4rem;
 	}
 `;
 
