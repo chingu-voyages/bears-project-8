@@ -1,4 +1,5 @@
 import axios from 'axios';
+// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER, GET_ERRORS } from './types';
 import setAuthToken from '../utils/setAuthToken';
@@ -14,6 +15,12 @@ export const registerUser = (userData, history) => dispatch =>
 				payload: err.response.data,
 			})
 		);
+
+// Set logged in user
+export const setCurrentUser = decoded => ({
+	type: SET_CURRENT_USER,
+	payload: decoded,
+});
 
 // Login - get user token
 export const loginUser = userData => dispatch =>
@@ -36,14 +43,6 @@ export const loginUser = userData => dispatch =>
 				payload: err.response.data,
 			})
 		);
-
-// Set logged in user
-export const setCurrentUser = decoded => {
-	return {
-		type: SET_CURRENT_USER,
-		payload: decoded,
-	};
-};
 
 // Log the user out
 export const logoutUser = () => dispatch => {
