@@ -2,6 +2,7 @@ import axios from 'axios';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER, GET_ERRORS } from './types';
+import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
 
 // Register user
@@ -36,6 +37,8 @@ export const loginUser = userData => dispatch =>
 			const decoded = jwt_decode(token);
 			// Set current user
 			dispatch(setCurrentUser(decoded));
+			// Get user's habits
+			dispatch(getHabits());
 		})
 		.catch(err =>
 			dispatch({

@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
 import GlobalStyle from './globalStyle.styled';
 import Routes from './Routes';
-import store from './store/store';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
-	<Provider store={store}>
+	<Fragment>
 		<GlobalStyle />
 		<Routes />
-	</Provider>
+	</Fragment>
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));
