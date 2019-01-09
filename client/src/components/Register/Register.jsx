@@ -2,18 +2,21 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/authActions';
+import { registerUser } from '../../actions/authActions';
 
-class Login extends Component {
+class Register extends Component {
 	state = {
+		name: '',
 		email: '',
 		password: '',
+		password2: '',
 	};
 
 	static propTypes = {
-		loginUser: PropTypes.func.isRequired,
+		registerUser: PropTypes.func.isRequired,
 		errors: PropTypes.object.isRequired,
 		auth: PropTypes.object.isRequired,
 	};
@@ -25,6 +28,7 @@ class Login extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		const { history } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -32,13 +36,14 @@ class Login extends Component {
 			password,
 			password2,
 		};
-		this.props.loginUser(newUser);
+		this.props.registerUser(newUser, history);
 	};
 
 	render() {
-		const { email, password } = this.state;
+		const { name, email, password, password2 } = this.state;
 		return (
 			<form onSubmit={this.handleSubmit}>
+				<input name="name" placeholder="Name" value={name} onChange={this.handleChange} />
 				<input
 					name="email"
 					placeholder="Email"
@@ -49,6 +54,12 @@ class Login extends Component {
 					name="password"
 					placeholder="Password"
 					value={password}
+					onChange={this.handleChange}
+				/>
+				<input
+					name="password2"
+					placeholder="Confirm Password"
+					value={password2}
 					onChange={this.handleChange}
 				/>
 				<button type="submit">Submit</button>
@@ -64,5 +75,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ loginUser }
-)(Login);
+	{ registerUser }
+)(withRouter(Register));
