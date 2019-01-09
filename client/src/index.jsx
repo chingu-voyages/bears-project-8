@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import GlobalStyle from './globalStyle.styled';
 import Routes from './Routes';
+import store from './store/store';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
-	<div>
+	<Provider store={store}>
 		<GlobalStyle />
 		<Routes />
-	</div>
+	</Provider>
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));
