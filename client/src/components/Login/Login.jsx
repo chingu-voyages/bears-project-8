@@ -10,6 +10,7 @@ class Login extends Component {
 	state = {
 		email: '',
 		password: '',
+		errors: {},
 	};
 
 	static propTypes = {
@@ -17,6 +18,12 @@ class Login extends Component {
 		errors: PropTypes.object.isRequired,
 		auth: PropTypes.object.isRequired,
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({ errors: nextProps.errors });
+		}
+	}
 
 	handleChange = e => {
 		const { name, value } = e.target;
@@ -36,7 +43,7 @@ class Login extends Component {
 	};
 
 	render() {
-		const { email, password } = this.state;
+		const { email, password, errors } = this.state;
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<input
@@ -45,12 +52,14 @@ class Login extends Component {
 					value={email}
 					onChange={this.handleChange}
 				/>
+				{errors.email && <div>errors.email</div>}
 				<input
 					name="password"
 					placeholder="Password"
 					value={password}
 					onChange={this.handleChange}
 				/>
+				{errors.password && <div>errors.password</div>}
 				<button type="submit">Submit</button>
 			</form>
 		);

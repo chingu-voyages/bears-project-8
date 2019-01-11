@@ -13,6 +13,7 @@ class Register extends Component {
 		email: '',
 		password: '',
 		password2: '',
+		errors: {},
 	};
 
 	static propTypes = {
@@ -20,6 +21,12 @@ class Register extends Component {
 		errors: PropTypes.object.isRequired,
 		auth: PropTypes.object.isRequired,
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({ errors: nextProps.errors });
+		}
+	}
 
 	handleChange = e => {
 		const { name, value } = e.target;
@@ -40,7 +47,7 @@ class Register extends Component {
 	};
 
 	render() {
-		const { name, email, password, password2 } = this.state;
+		const { name, email, password, password2, errors } = this.state;
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<input name="name" placeholder="Name" value={name} onChange={this.handleChange} />
@@ -50,18 +57,21 @@ class Register extends Component {
 					value={email}
 					onChange={this.handleChange}
 				/>
+				{errors.name && <div>{errors.name}</div>}
 				<input
 					name="password"
 					placeholder="Password"
 					value={password}
 					onChange={this.handleChange}
 				/>
+				{errors.password && <div>{errors.password}</div>}
 				<input
 					name="password2"
 					placeholder="Confirm Password"
 					value={password2}
 					onChange={this.handleChange}
 				/>
+				{errors.password2 && <div>{errors.password2}</div>}
 				<button type="submit">Submit</button>
 			</form>
 		);
