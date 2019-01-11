@@ -1,9 +1,11 @@
 import axios from 'axios';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
-import { SET_CURRENT_USER, GET_ERRORS } from './types';
+import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
+
+const { SET_CURRENT_USER, GET_ERRORS } = Types;
 
 // Register user
 export const registerUser = (userData, history) => dispatch =>

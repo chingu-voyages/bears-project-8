@@ -92,6 +92,5 @@
 		"prop-types": "^15.6.2",
 		"react-hot-loader": "^4.6.2"
 	},
-
 	"proxy": "http://localhost:8080"
 }

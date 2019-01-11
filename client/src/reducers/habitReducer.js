@@ -1,4 +1,6 @@
-import { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT } from '../actions/types';
+import Types from '../actions/types';
+
+const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
 
 const initialState = {
 	habits: [],

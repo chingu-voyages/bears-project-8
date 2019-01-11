@@ -1,6 +1,10 @@
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const GET_ERRORS = 'GET_ERRORS';
-export const UPDATE_HABIT_LIST = 'UPDATE_HABIT_LIST';
-export const ADD_HABIT = 'ADD_HABIT';
-export const DELETE_HABIT = 'DELETE_HABIT';
-export const UPDATE_HABIT = 'UPDATE_HABIT';
+import keyMirror from 'keymirror';
+
+export default keyMirror({
+	SET_CURRENT_USER: null,
+	GET_ERRORS: null,
+	UPDATE_HABIT_LIST: null,
+	ADD_HABIT: null,
+	DELETE_HABIT: null,
+	UPDATE_HABIT: null,
+});

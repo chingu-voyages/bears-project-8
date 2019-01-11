@@ -1,5 +1,7 @@
-import { SET_CURRENT_USER } from '../actions/types';
+import Types from '../actions/types';
 import isEmpty from '../utils/isEmpty';
+
+const { SET_CURRENT_USER } = Types;
 
 const initialState = {
 	isAuthenticated: false,

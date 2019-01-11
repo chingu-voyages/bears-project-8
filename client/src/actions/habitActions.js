@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } from './types';
+import Types from './types';
+
+const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } = Types;
 
 // Get the user's habits
 export const getHabits = () => dispatch =>
