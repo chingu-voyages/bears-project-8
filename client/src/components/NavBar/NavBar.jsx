@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
 
-const NavBar = props => (
+const NavBar = ({ isAuthenticated }) => (
 	<Container>
 		<NavItem>
 			<Logo>H</Logo> Habit Tracker
 		</NavItem>
 		<NavMenu>
-			<NavItem>Login</NavItem>
-			<NavItem>Register</NavItem>
+			{isAuthenticated ? (
+				<Fragment>
+					<NavItem>Profile</NavItem>
+					<NavItem> (dropdown here) </NavItem>
+				</Fragment>
+			) : (
+				<Fragment>
+					<NavItem>Login</NavItem>
+					<NavItem>Register</NavItem>
+				</Fragment>
+			)}
 		</NavMenu>
 	</Container>
 );
