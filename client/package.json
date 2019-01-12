@@ -70,7 +70,7 @@
 		"babel-core": "7.0.0-bridge.0",
 		"babel-eslint": "9.0.0",
 		"babel-jest": "^23.6.0",
-		"babel-loader": "^8.0.4",
+		"babel-loader": "8.0.4",
 		"babel-plugin-loop-optimizer": "^1.4.1",
 		"babel-plugin-styled-components": "^1.9.2",
 		"babel-plugin-transform-react-jsx-source": "^6.22.0",

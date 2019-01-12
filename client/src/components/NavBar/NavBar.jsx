@@ -1,6 +1,8 @@
 import React from 'react';
 
-const NavBar = () => (
+import { Container, Header } from './NavBar.styled';
+
+const NavBar = props => (
 	<div>
 		<h1>NavBar</h1>
 	</div>

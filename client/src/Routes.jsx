@@ -5,6 +5,8 @@ import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
 
+import withAuthHOC from './utils/withAuth';
+
 const Profile = lazy(() =>
 	import(/* webpackChunkName: "profile" */ /* webpackPrefetch: true */ './components/Profile/Profile')
 );
@@ -18,16 +20,16 @@ const Login = lazy(() =>
 	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Login/Login')
 );
 
-const withContainer = (Component, isLazy, hasNav = true) =>
+const withContainer = (Component, isLazy, hasNav = true, withAuth = false) =>
 	isLazy ? (
 		<AppContainer hasNav={hasNav}>
 			<Suspense fallback={<Loader centerAll />}>
-				<Component />
+				{withAuth ? withAuthHOC(Component, false) : <Component />}
 			</Suspense>
 		</AppContainer>
 	) : (
 		<AppContainer hasNav={hasNav}>
-			<Component />
+			{withAuth ? withAuthHOC(Component, true) : <Component />}
 		</AppContainer>
 	);
 
@@ -36,13 +38,21 @@ const Routes = () => (
 		<Switch>
 			<Route exact path="/" render={() => withContainer(Home, false, false)} />
 
-			<Route exact path="/dashboard" render={() => withContainer(Dashboard, true)} />
+			<Route
+				exact
+				path="/dashboard"
+				render={() => withContainer(Dashboard, true, true, true)}
+			/>
 
-			<Route exact path="/profile" render={() => withContainer(Profile, true)} />
+			<Route exact path="/profile" render={() => withContainer(Profile, true, true, true)} />
 
-			<Route exact path="/register" render={() => withContainer(Register, true, false)} />
+			<Route
+				exact
+				path="/auth/register"
+				render={() => withContainer(Register, true, false)}
+			/>
 
-			<Route exact path="/login" render={() => withContainer(Login, true, false)} />
+			<Route exact path="/auth/login" render={() => withContainer(Login, true, false)} />
 		</Switch>
 	</HashRouter>
 );
