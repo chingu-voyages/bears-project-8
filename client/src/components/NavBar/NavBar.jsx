@@ -7,16 +7,19 @@ import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
 
 import { logoutUser } from '../../actions/authActions';
 
+import Dropdown from '../Shared/Dropdown/Dropdown';
+
 const NavBar = ({ isAuthenticated, logoutUser, history }) => (
 	<Container>
 		<NavItem onClick={() => history.push('/dashboard')}>
 			<Logo>H</Logo> Habit Tracker
 		</NavItem>
 		<NavMenu>
-			{isAuthenticated ? (
+			{!isAuthenticated ? (
 				<Fragment>
-					<NavItem>Profile (with dropdown - logout action in dropdown?)</NavItem>
-					<NavItem />
+					<NavItem>
+						<Dropdown />
+					</NavItem>
 				</Fragment>
 			) : (
 				<Fragment>
