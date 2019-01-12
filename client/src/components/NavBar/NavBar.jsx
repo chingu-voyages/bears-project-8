@@ -1,31 +1,45 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
 
-const NavBar = ({ isAuthenticated }) => (
+import { logoutUser } from '../../actions/authActions';
+
+const NavBar = ({ isAuthenticated, logoutUser, history }) => (
 	<Container>
-		<NavItem>
+		<NavItem onClick={() => history.push('/dashboard')}>
 			<Logo>H</Logo> Habit Tracker
 		</NavItem>
 		<NavMenu>
 			{isAuthenticated ? (
 				<Fragment>
-					<NavItem>Profile</NavItem>
-					<NavItem> (dropdown here) </NavItem>
+					<NavItem>Profile (with dropdown - logout action in dropdown?)</NavItem>
+					<NavItem />
 				</Fragment>
 			) : (
 				<Fragment>
-					<NavItem>Login</NavItem>
-					<NavItem>Register</NavItem>
+					<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
+					<NavItem onClick={() => history.push('/auth/register')}>Register</NavItem>
 				</Fragment>
 			)}
 		</NavMenu>
 	</Container>
 );
 
+NavBar.propTypes = {
+	isAuthenticated: PropTypes.bool.isRequired,
+	logoutUser: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = ({ auth }) => ({
 	isAuthenticated: auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(
+	connect(
+		mapStateToProps,
+		{ logoutUser }
+	)(NavBar)
+);
