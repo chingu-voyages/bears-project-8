@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import AppContainer from './components/AppContainer';
@@ -10,6 +10,9 @@ const Profile = lazy(() =>
 );
 const Dashboard = lazy(() =>
 	import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */ './components/Dashboard/Dashboard')
+);
+const Register = lazy(() =>
+	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Register/Register')
 );
 const Login = lazy(() =>
 	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Login/Login')
@@ -30,17 +33,17 @@ const withContainer = (Component, isLazy, hasNav = true) =>
 
 const Routes = () => (
 	<HashRouter>
-		<Fragment>
-			<Switch>
-				<Route exact path="/" render={() => withContainer(Home, false, false)} />
+		<Switch>
+			<Route exact path="/" render={() => withContainer(Home, false, false)} />
 
-				<Route exact path="/dashboard" render={() => withContainer(Dashboard, true)} />
+			<Route exact path="/dashboard" render={() => withContainer(Dashboard, true)} />
 
-				<Route exact path="/profile" render={() => withContainer(Profile, true)} />
+			<Route exact path="/profile" render={() => withContainer(Profile, true)} />
 
-				<Route exact path="/auth" render={() => withContainer(Login, true, false)} />
-			</Switch>
-		</Fragment>
+			<Route exact path="/register" render={() => withContainer(Register, true, false)} />
+
+			<Route exact path="/login" render={() => withContainer(Login, true, false)} />
+		</Switch>
 	</HashRouter>
 );
 
