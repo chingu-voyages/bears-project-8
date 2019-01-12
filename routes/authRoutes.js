@@ -1,7 +1,6 @@
 const express = require('express');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
@@ -91,7 +90,7 @@ router.post('/login', (req, res) => {
 				email: user.email,
 				avatar: user.avatar,
 			};
-			bcrypt.compare(req.body.password, user.password, (err, result) => {
+			return bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
 						message: 'Unauthorized. Access denied to invalid credentials',
