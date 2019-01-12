@@ -7,7 +7,6 @@ import NavBar from './NavBar/NavBar';
 class AppContainer extends Component {
 	static propTypes = {
 		hasNav: PropTypes.bool,
-		isAuthenticated: PropTypes.bool.isRequired,
 	};
 
 	static defaultProps = {
@@ -15,12 +14,12 @@ class AppContainer extends Component {
 	};
 
 	render() {
-		const { hasNav, children, isAuthenticated } = this.props;
+		const { hasNav, children } = this.props;
 		const classNames = ['App'];
 
 		return (
 			<Fragment>
-				{hasNav && <NavBar isAuthenticated={isAuthenticated} />}
+				{hasNav && <NavBar />}
 				<main className={classNames.join(' ')}>{children}</main>
 			</Fragment>
 		);

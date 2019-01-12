@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
 import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
 
@@ -23,4 +24,8 @@ const NavBar = ({ isAuthenticated }) => (
 	</Container>
 );
 
-export default NavBar;
+const mapStateToProps = ({ auth }) => ({
+	isAuthenticated: auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(NavBar);
