@@ -47,8 +47,8 @@
 			"src"
 		],
 		"moduleNameMapper": {
-			"assets/styledVars": "<rootDir>/assets/styledVars.js",
-			"assets/styledHelpers": "<rootDir>/assets/styledHelpers.js",
+			"assets/styledVars": "<rootDir>/src/assets/styledVars.js",
+			"assets/styledHelpers": "<rootDir>/src/assets/styledHelpers.js",
 			"\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
 		}
 	},

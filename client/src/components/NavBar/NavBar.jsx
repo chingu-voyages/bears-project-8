@@ -9,7 +9,7 @@ import { logoutUser } from '../../actions/authActions';
 
 import Dropdown from '../Shared/Dropdown/Dropdown';
 
-const NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) => {
+export const _NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) => {
 	const userDropdownOpts = [
 		{
 			id: 0,
@@ -29,12 +29,10 @@ const NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) => {
 				<Logo>H</Logo> Habit Tracker
 			</NavItem>
 			<NavMenu>
-				{!isAuthenticated ? (
-					<Fragment>
-						<NavItem>
-							<Dropdown options={userDropdownOpts} />
-						</NavItem>
-					</Fragment>
+				{isAuthenticated ? (
+					<NavItem>
+						<Dropdown options={userDropdownOpts} />
+					</NavItem>
 				) : (
 					<Fragment>
 						<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
@@ -46,7 +44,7 @@ const NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) => {
 	);
 };
 
-NavBar.propTypes = {
+_NavBar.propTypes = {
 	isAuthenticated: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
 	user: PropTypes.shape({
@@ -63,5 +61,5 @@ export default withRouter(
 	connect(
 		mapStateToProps,
 		{ logoutUser }
-	)(NavBar)
+	)(_NavBar)
 );
