@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { $midGray, $gray } from '../../../assets/styledVars';
+
 export const Wrapper = styled.div`
 	user-select: none;
 	position: relative;
@@ -9,11 +11,12 @@ export const Wrapper = styled.div`
 
 export const Header = styled.div`
 	display: flex;
+	color: inherit;
 	align-items: center;
 	justify-content: flex-end;
 	cursor: default;
 	position: relative;
-	background-color: #e5e5e5;
+	background-color: ${$midGray};
 	/* border: 1px solid black; */
 
 	& span {
@@ -22,7 +25,6 @@ export const Header = styled.div`
 `;
 
 export const HeaderTitle = styled.div`
-	font-weight: 300;
 	margin: 2px 20px;
 	margin-right: 30px;
 `;
@@ -31,11 +33,12 @@ export const List = styled.ul`
 	z-index: 10;
 	position: absolute;
 	width: 100%;
-	border: 1px solid #c4c4c4;
+	/* margin: 0; */
+	border: 1px solid ${$gray};
 	border-top: none;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	background-color: #e5e5e5;
+	background-color: ${$midGray};
 	padding: 15px 0;
 	max-height: 215px;
 	overflow-y: scroll;
@@ -53,11 +56,11 @@ export const ListItem = styled.li`
 
 	&.selected {
 		color: #fff;
-		background-color: #c4c4c4;
+		background-color: ${$gray};
 	}
 
 	&:hover {
 		color: #fff;
-		background-color: #c4c4c4;
+		background-color: ${$gray};
 	}
 `;

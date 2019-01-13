@@ -3,23 +3,16 @@ import PropTypes from 'prop-types';
 
 import { Wrapper, Header, HeaderTitle, List, ListItem } from './Dropdown.styled';
 
-const list = [
-	{
-		id: 0,
-		title: 'Profile',
-		selected: false,
-		key: 'location',
-	},
-	{
-		id: 1,
-		title: 'Logout',
-		selected: false,
-		key: 'location',
-	},
-];
-
-export class Dropdown extends Component {
-	static propTypes = {};
+export class _Dropdown extends Component {
+	static propTypes = {
+		options: PropTypes.arrayOf(
+			PropTypes.shape({
+				id: PropTypes.number.isRequired,
+				title: PropTypes.string.isRequired,
+				onClick: PropTypes.func.isRequired,
+			})
+		).isRequired,
+	};
 
 	state = {
 		isOpen: false,
@@ -33,16 +26,20 @@ export class Dropdown extends Component {
 
 	render() {
 		const { isOpen } = this.state;
+		const { options } = this.props;
 		return (
 			<Wrapper>
 				<Header onClick={this.toggleList}>
 					<HeaderTitle>Profile</HeaderTitle>
+					{/* We can change those to some sort of icons later */}
 					{isOpen ? <span>&uarr;</span> : <span>&darr;</span>}
 				</Header>
 				{isOpen && (
 					<List>
-						{list.map(item => (
-							<ListItem key={item.id}>{item.title}</ListItem>
+						{options.map(item => (
+							<ListItem onClick={item.onClick} key={item.id}>
+								{item.title}
+							</ListItem>
 						))}
 					</List>
 				)}
@@ -51,4 +48,4 @@ export class Dropdown extends Component {
 	}
 }
 
-export default Dropdown;
+export default _Dropdown;
