@@ -41,6 +41,9 @@ const Routes = () => (
 
 			<Route exact path="/profile" render={() => withContainer(Profile, true)} />
 
+			{/* Rendering component here to develop */}
+			<Route exact path="/habitform" render={() => withContainer(HabitForm, true)} />
+
 			<Route exact path="/register" render={() => withContainer(Register, true, false)} />
 
 			<Route exact path="/login" render={() => withContainer(Login, true, false)} />

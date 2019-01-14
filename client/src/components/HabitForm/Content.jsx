@@ -4,22 +4,20 @@ import PropTypes from 'prop-types';
 import { ContentArea, Row } from './HabitForm.styled';
 import FormGroup from '../Shared/Forms/FormGroup';
 
-const Content = props => {
-	const {
-		step,
-		name,
-		tags,
-		description,
-		times,
-		period,
-		reminderEvery,
-		reminderTypes,
-		difficulty,
-		habitType,
-		habitStart,
-		onChange,
-	} = props;
-
+const Content = ({
+	step,
+	name,
+	tags,
+	description,
+	times,
+	period,
+	reminderEvery,
+	reminderTypes,
+	difficulty,
+	habitType,
+	habitStart,
+	onChange,
+}) => {
 	switch (step) {
 		case 0:
 			return (
@@ -58,6 +56,7 @@ const Content = props => {
 			return (
 				<ContentArea>
 					<Row>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="How often do you want to complete this habit?"
 							name="times"
@@ -66,6 +65,7 @@ const Content = props => {
 							placeholder="Once, Twice..."
 							size={2}
 						/>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="&nbsp;"
 							name="period"
@@ -76,6 +76,7 @@ const Content = props => {
 						/>
 					</Row>
 					<Row>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="How often would you like to be reminded?"
 							name="reminderEvery"
@@ -84,6 +85,7 @@ const Content = props => {
 							placeholder="Daily, Weekly, Monthly..."
 							size={2}
 						/>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="How would you like to be reminded?"
 							name="reminderTypes"
@@ -99,6 +101,7 @@ const Content = props => {
 			return (
 				<ContentArea>
 					<Row>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="Difficulty"
 							name="difficulty"
@@ -107,6 +110,7 @@ const Content = props => {
 							placeholder="Trivial, Easy, Medium, Hard, Epic..."
 							size={2}
 						/>
+						{/* TODO: make this a dropdown */}
 						<FormGroup
 							title="Habit Type"
 							name="habitType"
@@ -132,15 +136,14 @@ const Content = props => {
 	}
 };
 
+// TODO: make dropdown elements a oneOf PropType
 Content.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	step: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 	description: PropTypes.string.isRequired,
-	// TODO: always coerce this to a number?
 	times: PropTypes.string.isRequired,
-	// TODO: make these oneOf types?
 	period: PropTypes.string.isRequired,
 	reminderEvery: PropTypes.string.isRequired,
 	reminderTypes: PropTypes.arrayOf(PropTypes.string).isRequired,

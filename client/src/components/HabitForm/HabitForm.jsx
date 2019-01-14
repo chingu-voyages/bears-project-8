@@ -5,7 +5,7 @@ import { LeftButtons, RightButtons } from './Buttons';
 import Content from './Content';
 import ProgressCircles from '../Shared/Forms/ProgressCircles';
 
-export default class NavBar extends Component {
+export default class HabitForm extends Component {
 	state = {
 		step: 0,
 
