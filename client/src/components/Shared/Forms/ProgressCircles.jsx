@@ -2,15 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressCircle, { Container } from './ProgressCircle.styled';
 
-const ProgressCircles = props => {
-	const { step, totalSteps, setStep } = props;
+const ProgressCircles = ({ step, totalSteps, setStep }) => {
 	const circles = [];
 	for (let i = 0; i < totalSteps; i += 1) {
-		if (step === i) {
-			circles.push(<ProgressCircle key={i} onClick={() => setStep(i)} current />);
-		} else {
-			circles.push(<ProgressCircle key={i} onClick={() => setStep(i)} />);
-		}
+		circles.push(<ProgressCircle key={i} onClick={() => setStep(i)} current={step === i} />);
 	}
 	return <Container>{circles}</Container>;
 };
