@@ -2,19 +2,22 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/authActions';
+import { registerUser } from '../../actions/authActions';
 
-class Login extends Component {
+class Register extends Component {
 	state = {
+		name: '',
 		email: '',
 		password: '',
+		password2: '',
 		errors: {},
 	};
 
 	static propTypes = {
-		loginUser: PropTypes.func.isRequired,
+		registerUser: PropTypes.func.isRequired,
 		errors: PropTypes.object.isRequired,
 		auth: PropTypes.object.isRequired,
 	};
@@ -32,6 +35,7 @@ class Login extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		const { history } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -39,27 +43,35 @@ class Login extends Component {
 			password,
 			password2,
 		};
-		this.props.loginUser(newUser);
+		this.props.registerUser(newUser, history);
 	};
 
 	render() {
-		const { email, password, errors } = this.state;
+		const { name, email, password, password2, errors } = this.state;
 		return (
 			<form onSubmit={this.handleSubmit}>
+				<input name="name" placeholder="Name" value={name} onChange={this.handleChange} />
 				<input
 					name="email"
 					placeholder="Email"
 					value={email}
 					onChange={this.handleChange}
 				/>
-				{errors.email && <div>errors.email</div>}
+				{errors.name && <div>{errors.name}</div>}
 				<input
 					name="password"
 					placeholder="Password"
 					value={password}
 					onChange={this.handleChange}
 				/>
-				{errors.password && <div>errors.password</div>}
+				{errors.password && <div>{errors.password}</div>}
+				<input
+					name="password2"
+					placeholder="Confirm Password"
+					value={password2}
+					onChange={this.handleChange}
+				/>
+				{errors.password2 && <div>{errors.password2}</div>}
 				<button type="submit">Submit</button>
 			</form>
 		);
@@ -73,5 +85,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ loginUser }
-)(Login);
+	{ registerUser }
+)(withRouter(Register));

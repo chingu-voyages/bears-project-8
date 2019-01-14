@@ -12,6 +12,9 @@ const Profile = lazy(() =>
 const Dashboard = lazy(() =>
 	import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */ './components/Dashboard/Dashboard')
 );
+const Register = lazy(() =>
+	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Register/Register')
+);
 const Login = lazy(() =>
 	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Login/Login')
 );
@@ -38,9 +41,9 @@ const Routes = () => (
 
 			<Route exact path="/profile" render={() => withContainer(Profile, true)} />
 
-			<Route exact path="/habitform" render={() => withContainer(HabitForm, true)} />
+			<Route exact path="/register" render={() => withContainer(Register, true, false)} />
 
-			<Route exact path="/auth" render={() => withContainer(Login, true, false)} />
+			<Route exact path="/login" render={() => withContainer(Login, true, false)} />
 		</Switch>
 	</HashRouter>
 );

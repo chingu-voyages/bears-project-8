@@ -10,6 +10,18 @@ const validateHabitsInput = require('../utils/validators').createHabit;
 const router = express.Router();
 
 /**
+ * @route   GET api/habit/habits
+ * @desc    Gets user's habits
+ * @access  Private
+ */
+router.get('/habits', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Habit.find({ user: req.user._id })
+		.sort({ dateCreated: -1 })
+		.then(habits => res.json({ succcess: true, habits }))
+		.catch(err => res.status(400).json(err));
+});
+
+/**
  * @route   POST api/habit/create
  * @desc    Creates habit
  * @access  Private
@@ -62,7 +74,7 @@ router.patch('/:id/log', passport.authenticate('jwt', { session: false }), (req,
 
 /**
  * @route   DELETE api/habit/:id/log/:index
- * @desc    Logs a habit as completed at a certain time
+ * @desc    Deletes a habit's log at a particular index
  * @access  Private
  */
 router.delete('/:id/log/:index', passport.authenticate('jwt', { session: false }), (req, res) =>

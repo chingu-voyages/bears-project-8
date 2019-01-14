@@ -117,6 +117,27 @@ describe('API - Habit', () => {
 				}));
 	});
 
+	describe('Habit - Get habits', () => {
+		test('It should require authorization', () =>
+			request.get('/api/habit/habits').then(response => {
+				expect(response.statusCode).toBe(401);
+			}));
+
+		test('It should return an array of the users habits', done =>
+			request
+				.get('/api/habit/habits')
+				.set('Authorization', token)
+				.end((err, res) => {
+					if (err) throw err;
+					expect(res.status).toBe(200);
+					expect(res.body.habits.length).toBe(2);
+					// New habits should be first in the returned awway
+					expect(res.body.habits[0].name).toBe('Test habit');
+					expect(res.body.habits[1].name).toBe('Habit');
+					done();
+				}));
+	});
+
 	describe('Habit - Log', () => {
 		test('It should require authorization', () =>
 			request.patch('/api/habit/bogus/log').then(response => {
