@@ -8,6 +8,7 @@ describe('Dropdown', () => {
 	const setup = mount => {
 		const props = {
 			options: [{ id: 0, title: 'Test', onClick: () => jest.fn() }],
+			title: 'Dropdown',
 		};
 		let component;
 		if (mount) {
