@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
@@ -10,11 +11,6 @@ class AppContainer extends Component {
 
 	static defaultProps = {
 		hasNav: true,
-	};
-
-	state = {
-		// TBD - Auth client side
-		isAuthenticated: null,
 	};
 
 	render() {

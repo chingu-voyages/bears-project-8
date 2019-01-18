@@ -46,6 +46,7 @@ class Login extends Component {
 		const { email, password, errors } = this.state;
 		return (
 			<form onSubmit={this.handleSubmit}>
+				<h1>Login</h1>
 				<input
 					name="email"
 					placeholder="Email"
