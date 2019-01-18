@@ -9,12 +9,12 @@ import { logoutUser } from '../../actions/authActions';
 
 import Dropdown from '../Shared/Dropdown/Dropdown';
 
-export const _NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) => {
+export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 	const userDropdownOpts = [
 		{
 			id: 0,
 			title: 'Profile',
-			onClick: () => history.push(`/profile/${user._id}`),
+			onClick: () => history.push(`/profile`),
 		},
 		{
 			id: 1,
@@ -31,7 +31,7 @@ export const _NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) 
 			<NavMenu>
 				{isAuthenticated ? (
 					<NavItem>
-						<Dropdown options={userDropdownOpts} />
+						<Dropdown title="Profile" options={userDropdownOpts} />
 					</NavItem>
 				) : (
 					<Fragment>
@@ -47,14 +47,10 @@ export const _NavBar = ({ user, isAuthenticated, logoutUser: logout, history }) 
 _NavBar.propTypes = {
 	isAuthenticated: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
-	user: PropTypes.shape({
-		_id: PropTypes.string,
-	}).isRequired,
 };
 
 const mapStateToProps = ({ auth }) => ({
 	isAuthenticated: auth.isAuthenticated,
-	user: auth.user,
 });
 
 export default withRouter(

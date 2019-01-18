@@ -12,6 +12,7 @@ export class _Dropdown extends Component {
 				onClick: PropTypes.func.isRequired,
 			})
 		).isRequired,
+		title: PropTypes.string.isRequired,
 	};
 
 	state = {
@@ -26,11 +27,11 @@ export class _Dropdown extends Component {
 
 	render() {
 		const { isOpen } = this.state;
-		const { options } = this.props;
+		const { options, title } = this.props;
 		return (
 			<Wrapper>
 				<Header onClick={this.toggleList}>
-					<HeaderTitle>Profile</HeaderTitle>
+					<HeaderTitle>{title}</HeaderTitle>
 					{/* We can change those to some sort of icons later */}
 					{isOpen ? <span>&uarr;</span> : <span>&darr;</span>}
 				</Header>
