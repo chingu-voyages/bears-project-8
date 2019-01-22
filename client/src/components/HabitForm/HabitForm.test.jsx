@@ -1,16 +1,16 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-
 import HabitForm from './HabitForm';
 import Content from './Content/Content';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
-import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
-import { Button, ButtonGroup } from '../Shared/Forms/Form.styled';
+import { Button } from '../Shared/Forms/Form.styled';
 
 describe('HabitForm', () => {
+	const onSubmit = jest.fn();
+
 	const setup = mount => {
 		const props = {
-			onSubmit: jest.fn(),
+			onSubmit,
 		};
 		let component;
 		if (mount) {
@@ -31,7 +31,7 @@ describe('HabitForm', () => {
 	});
 
 	describe('User is on the first page', () => {
-		it('Should show skip and next buttons', () => {
+		it('Should have skip and next buttons', () => {
 			// Left button area should be empty
 			const { component } = setup(mount);
 			const leftButtons = component.find(LeftButtons);
@@ -41,36 +41,53 @@ describe('HabitForm', () => {
 			const rightButtons = component.find(RightButtons);
 			expect(rightButtons.find(Button)).toHaveLength(2);
 
-			// // Skip button
-			// const skipButton = rightButtons.find('[secondary=true]');
-			// expect(skipButton).toHaveLength(1);
-			// skipButton.simulate('click');
-			// expect(component.props.onSubmit).toHaveBeenCalled(1);
+			// Skip button
+			const skipButton = rightButtons.find('[secondary]').first();
+			skipButton.simulate('click');
+			expect(onSubmit).toHaveBeenCalledTimes(1);
 
-			// Next button
-			// const nextButton = rightButtons.find('[secondary]')
+			// Done button
+			const doneButton = rightButtons
+				.find(Button)
+				.not('[secondary]')
+				.first();
+			doneButton.simulate('click');
+			expect(component.state('step')).toBe(1);
 		});
 	});
 
 	describe('User is on a middle page', () => {
-		it('Should show back, skip and next buttons', () => {
+		it('Should have back, skip and next buttons', () => {
 			const { component } = setup(mount);
 			component.setState({ step: 1 });
 			const leftButtons = component.find(LeftButtons);
 			expect(leftButtons.find(Button)).toHaveLength(1);
 			const rightButtons = component.find(RightButtons);
 			expect(rightButtons.find(Button)).toHaveLength(2);
+
+			// Back button
+			const backButton = leftButtons.find(Button);
+			backButton.simulate('click');
+			expect(component.state('step')).toBe(0);
 		});
 	});
 
 	describe('User is on the last page', () => {
-		it('Should show back and submit buttons', () => {
+		it('Should have back and submit buttons', () => {
 			const { component } = setup(mount);
 			component.setState({ step: 2 });
 			const leftButtons = component.find(LeftButtons);
 			expect(leftButtons.find(Button)).toHaveLength(1);
 			const rightButtons = component.find(RightButtons);
 			expect(rightButtons.find(Button)).toHaveLength(1);
+
+			// Submit button
+			const submitButton = rightButtons.find(Button);
+			expect(submitButton).toHaveLength(1);
+			submitButton.simulate('click');
+			expect(onSubmit).toHaveBeenCalledTimes(2);
 		});
 	});
 });
+
+// TODO: test progress circles? Form content?
