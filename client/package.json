@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"axios": "^0.18.0",
+		"cross-env": "^5.2.0",
 		"jwt-decode": "^2.2.0",
 		"keymirror": "^0.1.1",
 		"polished": "^2.3.1",
@@ -19,7 +20,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "jest",
+		"test": "cross-env jest",
 		"eject": "react-scripts eject"
 	},
 	"husky": {
@@ -70,7 +71,7 @@
 		"babel-core": "7.0.0-bridge.0",
 		"babel-eslint": "9.0.0",
 		"babel-jest": "^23.6.0",
-		"babel-loader": "^8.0.4",
+		"babel-loader": "8.0.4",
 		"babel-plugin-loop-optimizer": "^1.4.1",
 		"babel-plugin-styled-components": "^1.9.2",
 		"babel-plugin-transform-react-jsx-source": "^6.22.0",
