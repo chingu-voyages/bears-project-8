@@ -32,6 +32,7 @@
 	},
 	"globals": {
 		"expect": true,
-		"test": true
+		"test": true,
+		"it": true
 	}
 }

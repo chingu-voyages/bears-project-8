@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import { Container, Header, Footer } from './HabitForm.styled';
-import { LeftButtons, RightButtons } from './Buttons';
-import Content from './Content';
-import ProgressCircles from '../Shared/Forms/ProgressCircles';
+import { LeftButtons, RightButtons } from './Buttons/Buttons';
+import Content from './Content/Content';
+import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
 
 export default class HabitForm extends Component {
 	state = {

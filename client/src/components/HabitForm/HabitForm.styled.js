@@ -31,6 +31,7 @@ export const ContentArea = styled.div`
 	}
 `;
 
+// TODO: this should not be necessary, implement this in CSS grid instead
 export const Row = styled.div`
 	display: flex;
 	justify-content: space-between;
