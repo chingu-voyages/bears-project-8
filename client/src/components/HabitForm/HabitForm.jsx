@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Header, Footer } from './HabitForm.styled';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
@@ -22,6 +23,10 @@ export default class HabitForm extends Component {
 		habitStart: '',
 	};
 
+	static propTypes = {
+		onSubmit: PropTypes.func.isRequired,
+	};
+
 	handleChange = ({ target }) => {
 		const { name, value } = target;
 		this.setState({ [name]: value });
@@ -31,12 +36,9 @@ export default class HabitForm extends Component {
 		this.setState({ step });
 	};
 
-	handleSubmit = () => {
-		// TODO: validate form input and handle submit
-	};
-
 	render() {
 		const { step } = this.state;
+		const { onSubmit } = this.props;
 		return (
 			<Container>
 				<Header>Add a New Habit</Header>
@@ -48,7 +50,7 @@ export default class HabitForm extends Component {
 						step={step}
 						totalSteps={3}
 						setStep={this.setStep}
-						onSubmit={this.handleSubmit}
+						onSubmit={onSubmit}
 					/>
 				</Footer>
 			</Container>

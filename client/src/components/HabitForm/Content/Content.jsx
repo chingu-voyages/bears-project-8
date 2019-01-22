@@ -56,7 +56,7 @@ const Content = ({
 			return (
 				<ContentArea>
 					<Row>
-						{/* TODO: make this a dropdown */}
+						{/* TODO: make this a dropdown -- use an external library for now? */}
 						<FormGroup
 							title="How often do you want to complete this habit?"
 							name="times"

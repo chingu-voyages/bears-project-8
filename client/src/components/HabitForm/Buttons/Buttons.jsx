@@ -34,7 +34,10 @@ export const RightButtons = ({ step, totalSteps, setStep, onSubmit }) => {
 };
 RightButtons.propTypes = {
 	step: PropTypes.number.isRequired,
-	totalSteps: PropTypes.number.isRequired,
+	totalSteps: PropTypes.number,
 	setStep: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
+};
+RightButtons.defaultProps = {
+	totalSteps: 3,
 };
