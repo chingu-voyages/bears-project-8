@@ -8,12 +8,12 @@ import { Button } from '../Shared/Forms/Form.styled';
 describe('HabitForm', () => {
 	const onSubmit = jest.fn();
 
-	const setup = mount => {
+	const setup = fullMount => {
 		const props = {
 			onSubmit,
 		};
 		let component;
-		if (mount) {
+		if (fullMount) {
 			component = mount(<HabitForm {...props} />);
 		} else {
 			component = shallow(<HabitForm {...props} />);
@@ -24,7 +24,7 @@ describe('HabitForm', () => {
 		};
 	};
 
-	it('Should load without problems', () => {
+	it('Should load with content', () => {
 		const { component } = setup();
 		const formContent = component.find(Content);
 		expect(formContent).toHaveLength(1);
@@ -89,5 +89,3 @@ describe('HabitForm', () => {
 		});
 	});
 });
-
-// TODO: test progress circles? Form content?
