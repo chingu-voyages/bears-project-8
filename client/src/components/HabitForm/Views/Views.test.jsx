@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Views from './Views';
-import Zero from './Step/Zero';
-import One from './Step/One';
-import Two from './Step/Two';
+import Step0 from './Steps/Step0';
+import Step1 from './Steps/Step1';
+import Step2 from './Steps/Step2';
 
 describe('HabitForm', () => {
 	const onChange = jest.fn();
@@ -40,7 +40,7 @@ describe('HabitForm', () => {
 		const { component } = setup(mount);
 
 		it('Should show the first view', () => {
-			const stepView = component.find(Zero);
+			const stepView = component.find(Step0);
 			expect(stepView).toHaveLength(1);
 		});
 	});
@@ -50,7 +50,7 @@ describe('HabitForm', () => {
 		component.setProps({ step: 1 });
 
 		it('Should show the first view, index2', () => {
-			const stepView = component.find(One);
+			const stepView = component.find(Step1);
 			expect(stepView).toHaveLength(1);
 		});
 	});
@@ -60,7 +60,7 @@ describe('HabitForm', () => {
 		component.setProps({ step: 2 });
 
 		it('Should show the first view', () => {
-			const stepView = component.find(Two);
+			const stepView = component.find(Step2);
 			expect(stepView).toHaveLength(1);
 		});
 	});

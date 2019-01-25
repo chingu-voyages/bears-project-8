@@ -1,23 +1,23 @@
 import React from 'react';
 import { ContentArea } from '../HabitForm.styled';
-import Zero from './Step/Zero';
-import One from './Step/One';
-import Two from './Step/Two';
+import Step0 from './Steps/Step0';
+import Step1 from './Steps/Step1';
+import Step2 from './Steps/Step2';
 
 const Views = props => {
 	const { step } = props;
 	let view;
 	switch (step) {
 		case 0: {
-			view = <Zero {...props} />;
+			view = <Step0 {...props} />;
 			break;
 		}
 		case 1: {
-			view = <One {...props} />;
+			view = <Step1 {...props} />;
 			break;
 		}
 		case 2: {
-			view = <Two {...props} />;
+			view = <Step2 {...props} />;
 			break;
 		}
 		default:
