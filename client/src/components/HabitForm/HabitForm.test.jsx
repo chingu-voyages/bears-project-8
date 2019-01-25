@@ -31,9 +31,10 @@ describe('HabitForm', () => {
 	});
 
 	describe('User is on the first page', () => {
+		const { component } = setup(mount);
+
 		it('Should have skip and next buttons', () => {
 			// Left button area should be empty
-			const { component } = setup(mount);
 			const leftButtons = component.find(LeftButtons);
 			expect(leftButtons.find(Button)).toHaveLength(0);
 
