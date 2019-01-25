@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Container, Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
