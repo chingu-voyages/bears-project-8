@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
+import HabitForm from './components/HabitForm/HabitForm';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -83,6 +84,13 @@ const Routes = ({ isAuthenticated }) => (
 						isAuthenticated,
 					})
 				}
+			/>
+
+			{/* Rendering component here to develop */}
+			<Route
+				exact
+				path="/habitform"
+				render={() => withContainer({ component: HabitForm, isLazy: true, hasNav: true })}
 			/>
 
 			<Route
