@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Container, Header, Footer } from './HabitForm.styled';
+import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
-import Content from './Content/Content';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
 
 export default class HabitForm extends Component {
@@ -42,7 +42,7 @@ export default class HabitForm extends Component {
 		return (
 			<Container>
 				<Header>Add a New Habit</Header>
-				<Content {...this.state} onChange={this.handleChange} />
+				<Views {...this.state} onChange={this.handleChange} />
 				<Footer>
 					<LeftButtons step={step} setStep={this.setStep} />
 					<ProgressCircles step={step} totalSteps={3} setStep={this.setStep} />

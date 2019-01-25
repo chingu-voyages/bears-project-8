@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import HabitForm from './HabitForm';
-import Content from './Content/Content';
+import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import { Button } from '../Shared/Forms/Form.styled';
 
@@ -26,8 +26,8 @@ describe('HabitForm', () => {
 
 	it('Should load with content', () => {
 		const { component } = setup();
-		const formContent = component.find(Content);
-		expect(formContent).toHaveLength(1);
+		const formView = component.find(Views);
+		expect(formView).toHaveLength(1);
 	});
 
 	describe('User is on the first page', () => {
