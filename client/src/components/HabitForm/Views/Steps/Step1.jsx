@@ -6,43 +6,47 @@ import FormGroup from '../../../Shared/Forms/FormGroup';
 const One = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 	<Fragment>
 		<Row>
-			{/* TODO: make this a dropdown -- use an external library for now? */}
 			<FormGroup
 				title="How often do you want to complete this habit?"
 				name="times"
 				value={times}
 				onChange={onChange}
-				placeholder="Once, Twice..."
+				placeholder="Choose a frequency..."
 				size={2}
+				type="dropdown"
+				options={['Once', 'Twice', '3 times', '4 times']}
 			/>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="&nbsp;"
 				name="period"
 				value={period}
 				onChange={onChange}
-				placeholder="Daily, Weekly, Monthly, Yearly..."
+				placeholder="Choose a time period..."
 				size={2}
+				type="dropdown"
+				options={['Daily', 'Weekly', 'Monthly', 'Biannually', 'Yearly']}
 			/>
 		</Row>
 		<Row>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="How often would you like to be reminded?"
 				name="reminderEvery"
 				value={reminderEvery}
 				onChange={onChange}
-				placeholder="Daily, Weekly, Monthly..."
+				placeholder="Choose a time period..."
 				size={2}
+				type="dropdown"
+				options={['Daily', 'Weekly', 'Monthly', 'Biannually', 'Yearly']}
 			/>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="How would you like to be reminded?"
 				name="reminderTypes"
 				value={reminderTypes}
 				onChange={onChange}
-				placeholder="Email, Push, In-App..."
+				placeholder="Select how you would like to be reminded..."
 				size={2}
+				type="dropdown"
+				options={['Email', 'In-App', 'Push']}
 			/>
 		</Row>
 	</Fragment>

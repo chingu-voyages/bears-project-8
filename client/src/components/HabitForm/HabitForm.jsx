@@ -16,7 +16,7 @@ export default class HabitForm extends Component {
 		times: '',
 		period: '',
 		reminderEvery: '',
-		reminderTypes: [],
+		reminderTypes: '',
 		difficulty: '',
 		habitType: '',
 		habitStart: '',

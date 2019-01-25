@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Dropdown from 'react-dropdown';
 import {
 	$animDuration,
 	$greyLightest,
@@ -53,7 +54,7 @@ export const Button = styled.button`
 	}
 `;
 
-export const Input = styled.input`
+const generalInputStyles = `
 	background: ${$greyLightest};
 	border: none;
 	border-radius: 3px;
@@ -68,19 +69,49 @@ export const Input = styled.input`
 	}
 `;
 
-export const Textarea = styled.textarea`
-	background: ${$greyLightest};
-	border: none;
-	border-radius: 3px;
-	font-size: 1rem;
-	padding: 0.6rem 1rem;
-	color: ${$greyDark};
-	display: inline-block;
-	width: 100%;
-	height: 6rem;
+export const Input = styled.input`
+	${generalInputStyles}
+`;
 
-	&::placeholder {
-		color: ${$greyLight};
+export const Textarea = styled.textarea`
+	${generalInputStyles}
+`;
+
+export const StyledDropdown = styled(Dropdown)`
+	${generalInputStyles}
+	position: relative;
+
+	.Dropdown-control {
+		// control options
+	}
+
+	.Dropdown-placeholder {
+		${({ value }) => (value === '' ? `color: ${$greyLight};` : `color: ${$greyDark}`)}
+	}
+
+	.Dropdown-menu {
+		position: absolute;
+		z-index: 99;
+		left: 0;
+		${generalInputStyles}
+	}
+
+	.Dropdown-option {
+		padding: 0.5rem 1rem;
+		border-radius: 3px;
+
+		&:hover {
+			cursor: pointer;
+			background: ${$greyLight};
+		}
+	}
+
+	.Dropdown-arrow {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		height: 50px;
+		width: 50px;
 	}
 `;
 

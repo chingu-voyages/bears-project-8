@@ -6,16 +6,16 @@ import FormGroup from '../../../Shared/Forms/FormGroup';
 const Two = ({ difficulty, habitType, habitStart, onChange }) => (
 	<Fragment>
 		<Row>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="Difficulty"
 				name="difficulty"
 				value={difficulty}
 				onChange={onChange}
-				placeholder="Trivial, Easy, Medium, Hard, Epic..."
+				placeholder="Choose a difficulty..."
 				size={2}
+				type="dropdown"
+				options={['Trivial', 'Easy', 'Medium', 'Hard', 'Epic']}
 			/>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="Habit Type"
 				name="habitType"
@@ -23,6 +23,8 @@ const Two = ({ difficulty, habitType, habitStart, onChange }) => (
 				onChange={onChange}
 				placeholder="Active, Passive..."
 				size={2}
+				type="dropdown"
+				options={['Active', 'Passive']}
 			/>
 		</Row>
 		<FormGroup
