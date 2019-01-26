@@ -10,6 +10,7 @@ import {
 	StyledTagInput,
 } from './Form.styled';
 import { $dangerRed } from '../../../assets/styledVars';
+import defaultTags from '../../../assets/defaultTags';
 
 const FormGroup = props => {
 	const {
@@ -21,7 +22,6 @@ const FormGroup = props => {
 		type,
 		onChange,
 		tags,
-		tagSuggestions,
 		onTagDelete,
 		onTagAdd,
 		onTagDrag,
@@ -44,6 +44,11 @@ const FormGroup = props => {
 			break;
 		}
 		case 'tagInput': {
+			const tagSuggestions = defaultTags.map(tag => ({
+				id: tag,
+				text: tag,
+			}));
+			// TODO: Further populate tag suggestions with the current user's custom tags
 			component = (
 				<StyledTagInput>
 					<ReactTags
@@ -55,6 +60,7 @@ const FormGroup = props => {
 						// what separates tags -- keycodes for enter, comma and tab
 						delimiters={[188, 13, 9]}
 						autofocus={false}
+						minQueryLength={1}
 						placeholder={placeholder}
 					/>
 				</StyledTagInput>
