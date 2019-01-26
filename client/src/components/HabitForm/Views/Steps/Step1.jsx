@@ -44,8 +44,8 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 				placeholder="Select how you would like to be reminded..."
 				size={2}
 				type="checkboxes"
-				setReminderType={setReminderType}
-				reminderTypes={reminderTypes}
+				onCheck={setReminderType}
+				optionState={reminderTypes}
 				options={['Email', 'In-App', 'Push']}
 			/>
 		</Row>
