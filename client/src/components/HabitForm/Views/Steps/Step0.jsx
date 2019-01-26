@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { WithContext as ReactTags } from 'react-tag-input';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
@@ -25,22 +24,19 @@ const Step0 = ({
 				size={2}
 				required
 			/>
-			{/* <FormGroup
+			<FormGroup
 				title="Tags"
 				name="tags"
 				value={tags}
 				onChange={onChange}
+				type="tagInput"
 				placeholder="E.g. Work, Exercise, Diet..."
 				size={2}
-			/> */}
-			<ReactTags
 				tags={tags}
 				suggestions={tagSuggestions}
-				handleDelete={onTagDelete}
-				handleAddition={onTagAdd}
-				handleDrag={onTagDrag}
-				// what separates tags -- space, comma, and tab keys
-				delimiters={[188, 13, 9]}
+				onTagDelete={onTagDelete}
+				onTagAdd={onTagAdd}
+				onTagDrag={onTagDrag}
 			/>
 		</Row>
 		<FormGroup

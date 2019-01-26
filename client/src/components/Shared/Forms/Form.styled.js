@@ -119,3 +119,24 @@ export const Label = styled.label`
 	display: inline-block;
 	margin: 0.5rem 0;
 `;
+
+export const StyledTagInput = styled.div`
+	${generalInputStyles};
+
+	.ReactTags__tags {
+	}
+	.ReactTags__tagInput {
+	}
+	.ReactTags__tagInputField {
+	}
+	.ReactTags__selected {
+		.ReactTags__tag {
+		}
+		.ReactTags__remove {
+		}
+	}
+	.ReactTags__suggestions {
+	}
+	ReactTags__activeSuggestion {
+	}
+`;
