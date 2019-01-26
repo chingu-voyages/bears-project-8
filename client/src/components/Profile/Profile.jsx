@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import { Container, Breadcrumbs, ProfileSection, Sidebar, Dashboard } from './Profile.styled';
 
+import CircleImg from '../Shared/CircleImg/CircleImg';
+
 const Profile = ({ history }) => (
 	<Container>
 		<Breadcrumbs>
@@ -13,12 +15,22 @@ const Profile = ({ history }) => (
 				onClick={() => history.push('/dashboard')}
 				onKeyDown={() => history.push('/dashboard')}
 			>
-				Dashboard
-			</span>
-			&gt; Profile
+				Dashboard &gt;
+			</span>{' '}
+			Profile
 		</Breadcrumbs>
 		<ProfileSection>
-			<Sidebar>Sidebar</Sidebar>
+			<Sidebar>
+				<CircleImg
+					clickHandler={() => {}}
+					size="large"
+					type="avatar"
+					title="User name"
+					subtitle="A short bio here that the user could edit, otherwise it has some dummy text"
+				/>
+				{/* User info */}
+				{/* User actions */}
+			</Sidebar>
 			<Dashboard>Dashboard content</Dashboard>
 		</ProfileSection>
 	</Container>
