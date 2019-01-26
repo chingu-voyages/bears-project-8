@@ -6,8 +6,7 @@ import {
 	$greyLighter,
 	$greyLight,
 	$greyDark,
-	$greyDarker,
-	$greyDarkest,
+	$dangerRed,
 } from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
@@ -158,14 +157,28 @@ export const StyledTagInput = styled.div`
 		}
 		.ReactTags__remove {
 			padding-left: 0.5rem;
+			transition: ${$animDuration};
 
-			cursor: pointer;
+			&:hover {
+				cursor: pointer;
+				color: ${$dangerRed};
+			}
 		}
 	}
 	.ReactTags__suggestions {
 		position: absolute;
-		background: ${$greyDark};
+		background: ${$greyLighter};
+		border-radius: 0 0 3px 3px;
+		border: 1px solid ${$greyLight};
+
+		ul,
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0.5rem;
+		}
 	}
 	ReactTags__activeSuggestion {
+		background: red;
 	}
 `;

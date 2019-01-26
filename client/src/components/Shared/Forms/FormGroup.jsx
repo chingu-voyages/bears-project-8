@@ -9,6 +9,7 @@ import {
 	StyledDropdown,
 	StyledTagInput,
 } from './Form.styled';
+import { $dangerRed } from '../../../assets/styledVars';
 
 const FormGroup = props => {
 	const {
@@ -67,7 +68,7 @@ const FormGroup = props => {
 	return (
 		<StyledFormGroup width={width}>
 			<Label htmlFor={name}>
-				{title} {required && <span style={{ color: '#d20f0f' }}>*</span>}
+				{title} {required && <span style={{ color: $dangerRed }}>*</span>}
 			</Label>
 			{component}
 		</StyledFormGroup>

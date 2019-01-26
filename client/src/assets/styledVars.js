@@ -27,6 +27,7 @@ export const $greyDarkest = '#111';
 // Hightlights
 export const $mint = '#5cbc9a';
 export const $tomato = '#df5146';
+export const $dangerRed = '#d20f0f';
 
 // Screen sizes
 export const $desktopWidth = '1280px';

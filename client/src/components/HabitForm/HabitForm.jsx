@@ -13,6 +13,7 @@ export default class HabitForm extends Component {
 		tags: [{ id: 'Health', text: 'Health' }],
 		tagSuggestions: [
 			{ id: 'Fitness', text: 'Fitness' },
+			{ id: 'Finesse', text: 'Finesse' },
 			{ id: 'Work', text: 'Work' },
 			{ id: 'Music', text: 'Music' },
 		],
