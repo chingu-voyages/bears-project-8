@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Two = ({ difficulty, habitType, habitStart, onChange }) => (
+const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -39,11 +39,11 @@ const Two = ({ difficulty, habitType, habitStart, onChange }) => (
 	</Fragment>
 );
 
-Two.propTypes = {
+Step2.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	difficulty: PropTypes.string.isRequired,
 	habitType: PropTypes.string.isRequired,
 	habitStart: PropTypes.string.isRequired,
 };
 
-export default Two;
+export default Step2;

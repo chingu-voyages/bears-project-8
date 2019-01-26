@@ -14,6 +14,7 @@ describe('HabitForm', () => {
 
 			name: '',
 			tags: [],
+			tagSuggestions: [],
 			description: '',
 			value: '',
 			times: '',
@@ -23,6 +24,10 @@ describe('HabitForm', () => {
 			difficulty: '',
 			habitType: '',
 			habitStart: '',
+
+			onTagDelete: () => null,
+			onTagAdd: () => null,
+			onTagDrag: () => null,
 		};
 		let component;
 		if (fullMount) {

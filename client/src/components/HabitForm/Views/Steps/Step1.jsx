@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const One = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
+const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -52,7 +52,7 @@ const One = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 	</Fragment>
 );
 
-One.propTypes = {
+Step1.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	times: PropTypes.string.isRequired,
 	period: PropTypes.string.isRequired,
@@ -60,4 +60,4 @@ One.propTypes = {
 	reminderTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default One;
+export default Step1;

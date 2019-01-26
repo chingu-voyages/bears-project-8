@@ -1,9 +1,19 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { WithContext as ReactTags } from 'react-tag-input';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Zero = ({ name, tags, description, onChange }) => (
+const Step0 = ({
+	name,
+	tags,
+	tagSuggestions,
+	description,
+	onChange,
+	onTagDelete,
+	onTagAdd,
+	onTagDrag,
+}) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -15,13 +25,22 @@ const Zero = ({ name, tags, description, onChange }) => (
 				size={2}
 				required
 			/>
-			<FormGroup
+			{/* <FormGroup
 				title="Tags"
 				name="tags"
 				value={tags}
 				onChange={onChange}
 				placeholder="E.g. Work, Exercise, Diet..."
 				size={2}
+			/> */}
+			<ReactTags
+				tags={tags}
+				suggestions={tagSuggestions}
+				handleDelete={onTagDelete}
+				handleAddition={onTagAdd}
+				handleDrag={onTagDrag}
+				// what separates tags -- space, comma, and tab keys
+				delimiters={[188, 13, 9]}
 			/>
 		</Row>
 		<FormGroup
@@ -36,11 +55,25 @@ const Zero = ({ name, tags, description, onChange }) => (
 	</Fragment>
 );
 
-Zero.propTypes = {
+Step0.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
-	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+	tags: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			text: PropTypes.string.isRequired,
+		})
+	).isRequired,
+	tagSuggestions: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			text: PropTypes.string.isRequired,
+		})
+	).isRequired,
 	description: PropTypes.string.isRequired,
+	onTagDelete: PropTypes.func.isRequired,
+	onTagAdd: PropTypes.func.isRequired,
+	onTagDrag: PropTypes.func.isRequired,
 };
 
-export default Zero;
+export default Step0;
