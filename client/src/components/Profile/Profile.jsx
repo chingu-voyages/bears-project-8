@@ -1,9 +1,27 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Profile = () => (
-	<div>
-		<h1>Profile</h1>
-	</div>
+import { Container, Breadcrumbs, ProfileSection, Sidebar, Dashboard } from './Profile.styled';
+
+const Profile = ({ history }) => (
+	<Container>
+		<Breadcrumbs>
+			{' '}
+			<span
+				role="link"
+				tabIndex="-1"
+				onClick={() => history.push('/dashboard')}
+				onKeyDown={() => history.push('/dashboard')}
+			>
+				Dashboard
+			</span>
+			&gt; Profile
+		</Breadcrumbs>
+		<ProfileSection>
+			<Sidebar>Sidebar</Sidebar>
+			<Dashboard>Dashboard content</Dashboard>
+		</ProfileSection>
+	</Container>
 );
 
-export default Profile;
+export default withRouter(Profile);

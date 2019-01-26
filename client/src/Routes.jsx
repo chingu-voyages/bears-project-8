@@ -79,7 +79,7 @@ const Routes = ({ isAuthenticated }) => (
 						component: Profile,
 						isLazy: true,
 						hasNav: true,
-						withAuth: true,
+						withAuth: false,
 						isAuthenticated,
 					})
 				}
