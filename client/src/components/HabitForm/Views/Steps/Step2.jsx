@@ -28,7 +28,7 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 			/>
 		</Row>
 		<FormGroup
-			title="When would you like to start this habit?"
+			title="When will you start this habit?"
 			name="habitStart"
 			value={habitStart}
 			onChange={onChange}

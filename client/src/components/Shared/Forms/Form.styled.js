@@ -6,7 +6,9 @@ import {
 	$greyLighter,
 	$greyLight,
 	$greyDark,
+	$greyDarker,
 	$dangerRed,
+	$mint,
 } from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
@@ -167,18 +169,31 @@ export const StyledTagInput = styled.div`
 	}
 	.ReactTags__suggestions {
 		position: absolute;
+		width: 100%;
 		background: ${$greyLighter};
 		border-radius: 0 0 3px 3px;
 		border: 1px solid ${$greyLight};
 
-		ul,
-		li {
+		ul {
 			list-style: none;
 			margin: 0;
-			padding: 0.5rem;
+			padding: 0;
 		}
-	}
-	ReactTags__activeSuggestion {
-		background: red;
+
+		li {
+			padding: 0.5rem;
+			margin: 0;
+
+			mark {
+				font-weight: 600;
+				background: ${$mint};
+			}
+		}
+
+		li.ReactTags__activeSuggestion {
+			background: ${$greyLight};
+			color: ${$greyDarker};
+			border-radius: 0 0 3px 3px;
+		}
 	}
 `;
