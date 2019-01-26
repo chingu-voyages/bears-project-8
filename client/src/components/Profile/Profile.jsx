@@ -14,6 +14,7 @@ import {
 } from './Profile.styled';
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
+import Button from '../Shared/Button/Button';
 
 const Profile = ({ history }) => (
 	<Container>
@@ -50,10 +51,14 @@ const Profile = ({ history }) => (
 					</div>
 					<div className="user__info">
 						<em>Member since December 2018</em>
-						<p>Samuel has logged a habit N times</p>
+						<p>User has logged a habit N times</p>
 					</div>
 				</UserInfo>
 				{/* User actions */}
+				<UserActions>
+					<Button>Edit Profile</Button>
+					<Button>Delete Profile</Button>
+				</UserActions>
 			</Sidebar>
 			<Dashboard>Dashboard content</Dashboard>
 		</ProfileSection>

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { $gray, $white } from '../../assets/styledVars';
 
+import { ButtonWrapper } from '../Shared/Button/Button.styled';
+
 export const Container = styled.section`
 	height: 80vh;
 	padding: 0 2.5rem;
@@ -45,7 +47,7 @@ export const UserInfo = styled.div`
 	padding-top: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	flex: 1 1 auto;
 
 	& .user__tags {
@@ -55,6 +57,7 @@ export const UserInfo = styled.div`
 
 	& .user__info {
 		text-align: center;
+		font-size: 14px;
 
 		& em {
 			font-weight: 300;
@@ -77,7 +80,17 @@ export const Label = styled.span`
 	line-height: 0;
 `;
 
-export const UserActions = styled.div``;
+export const UserActions = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1.5rem;
+	padding-top: 0;
+
+	${ButtonWrapper} {
+		margin-bottom: 0.5rem;
+	}
+`;
 
 export const Dashboard = styled.div`
 	border: 3px solid magenta;
