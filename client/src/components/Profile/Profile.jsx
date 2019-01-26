@@ -1,7 +1,17 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Container, Breadcrumbs, ProfileSection, Sidebar, Dashboard } from './Profile.styled';
+import {
+	Container,
+	Breadcrumbs,
+	ProfileSection,
+	Sidebar,
+	Dashboard,
+	UserInfo,
+	SectionTitle,
+	UserActions,
+	Label,
+} from './Profile.styled';
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
 
@@ -22,13 +32,27 @@ const Profile = ({ history }) => (
 		<ProfileSection>
 			<Sidebar>
 				<CircleImg
-					clickHandler={() => {}}
+					clickHandler={() => null}
 					size="large"
 					type="avatar"
 					title="User name"
 					subtitle="A short bio here that the user could edit, otherwise it has some dummy text"
 				/>
-				{/* User info */}
+				<UserInfo>
+					<div>
+						<SectionTitle>Top Tags</SectionTitle>
+						<div className="user__tags">
+							{/* Map through actual user tags here */}
+							<Label>Health</Label>
+							<Label>Web Development</Label>
+							<Label>Meditation</Label>
+						</div>
+					</div>
+					<div className="user__info">
+						<em>Member since December 2018</em>
+						<p>Samuel has logged a habit N times</p>
+					</div>
+				</UserInfo>
 				{/* User actions */}
 			</Sidebar>
 			<Dashboard>Dashboard content</Dashboard>

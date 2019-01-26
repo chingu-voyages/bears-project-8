@@ -7,7 +7,6 @@ export const Wrapper = styled.figure`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid black;
 	padding: 1.5rem;
 	margin: 0;
 `;
