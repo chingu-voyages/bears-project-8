@@ -29,7 +29,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 		</Row>
 		<Row>
 			<FormGroup
-				title="How often would you like to be reminded?"
+				title="How often do you want to be reminded?"
 				name="reminderEvery"
 				value={reminderEvery}
 				onChange={onChange}
@@ -39,7 +39,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 				options={['Daily', 'Weekly', 'Monthly', 'Biannually', 'Yearly']}
 			/>
 			<FormGroup
-				title="How would you like to be reminded?"
+				title="How do you want to be reminded?"
 				name="reminderTypes"
 				value={reminderTypes}
 				onChange={onChange}

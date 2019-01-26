@@ -39,7 +39,7 @@ export const Button = styled.button`
 		props.secondary
 			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight};
 				&:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
-			: `background: ${$greyLighter}; color: ${$greyDark}; border: none;
+			: `background: ${$greyLighter}; color: ${$greyDark}; border: 1px solid ${$greyLighter};
 				&:hover { background: ${$greyLight}; }`}
 	min-width: 125px;
 	border-radius: 3px;
@@ -101,8 +101,6 @@ export const StyledDropdown = styled(Dropdown)`
 
 	.Dropdown-option {
 		padding: 0.5rem 1rem;
-		border-radius: 3px;
-
 		&:hover {
 			cursor: pointer;
 			background: ${$greyLight};
@@ -132,25 +130,27 @@ export const StyledTagInput = styled.div`
 	.ReactTags__tagInput {
 		display: inline-block;
 		position: relative;
+		width: 100%;
 	}
 	.ReactTags__tagInputField {
 		width: 100%;
 		background: ${$greyLightest};
 		border: none;
-		border-bottom: 2px solid ${$greyLight};
 		inner-shadow: none;
 		font-size: 1rem;
-		padding: 0.3rem 0.5rem;
 		color: ${$greyDark};
-
 		&::placeholder {
 			color: ${$greyLight};
+		}
+
+		&:focus {
+			outline: none;
 		}
 	}
 	.ReactTags__selected {
 		.ReactTags__tag {
-			margin: 0 0.2rem 4rem 0;
-			margin-bottom: 1rem;
+			display: inline-block;
+			margin: 0 0.2rem 0.2rem 0;
 			padding: 0.1rem 0.5rem;
 			border-radius: 3px;
 			border: 1px solid ${$greyLight};

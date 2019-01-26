@@ -20,6 +20,7 @@ export default class HabitForm extends Component {
 			{ id: 'Family', text: 'Family' },
 			{ id: 'Fitness', text: 'Fitness' },
 			{ id: 'Health', text: 'Health' },
+			{ id: 'Home', text: 'Home' },
 			{ id: 'Learning', text: 'Learning' },
 			{ id: 'Money', text: 'Money' },
 			{ id: 'Nutrition', text: 'Nutrition' },
@@ -72,7 +73,8 @@ export default class HabitForm extends Component {
 	};
 
 	handleTagDrag = (tag, currPos, newPos) => {
-		const [tags] = this.state;
+		// eslint-disable-next-line react/destructuring-assignment
+		const tags = [...this.state.tags];
 		const newTags = tags.slice();
 
 		newTags.splice(currPos, 1);
