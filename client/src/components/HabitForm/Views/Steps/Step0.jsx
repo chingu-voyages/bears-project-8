@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step0 = ({
-	name,
-	tags,
-	tagSuggestions,
-	description,
-	onChange,
-	onTagDelete,
-	onTagAdd,
-	onTagDrag,
-}) => (
+const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTagDrag }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -33,7 +24,6 @@ const Step0 = ({
 				placeholder="E.g. Work, Exercise, Diet..."
 				size={2}
 				tags={tags}
-				tagSuggestions={tagSuggestions}
 				onTagDelete={onTagDelete}
 				onTagAdd={onTagAdd}
 				onTagDrag={onTagDrag}
@@ -55,12 +45,6 @@ Step0.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
 	tags: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string.isRequired,
-			text: PropTypes.string.isRequired,
-		})
-	).isRequired,
-	tagSuggestions: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			text: PropTypes.string.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
+const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setReminderType }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -41,11 +41,11 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange }) => (
 			<FormGroup
 				title="How do you want to be reminded?"
 				name="reminderTypes"
-				value={reminderTypes}
-				onChange={onChange}
 				placeholder="Select how you would like to be reminded..."
 				size={2}
-				type="dropdown"
+				type="checkboxes"
+				setReminderType={setReminderType}
+				reminderTypes={reminderTypes}
 				options={['Email', 'In-App', 'Push']}
 			/>
 		</Row>
@@ -57,7 +57,12 @@ Step1.propTypes = {
 	times: PropTypes.string.isRequired,
 	period: PropTypes.string.isRequired,
 	reminderEvery: PropTypes.string.isRequired,
-	reminderTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
+	reminderTypes: PropTypes.shape({
+		email: PropTypes.bool.isRequired,
+		inApp: PropTypes.bool.isRequired,
+		push: PropTypes.bool.isRequired,
+	}).isRequired,
+	setReminderType: PropTypes.func.isRequired,
 };
 
 export default Step1;

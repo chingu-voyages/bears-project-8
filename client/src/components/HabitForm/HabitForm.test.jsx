@@ -11,6 +11,7 @@ describe('HabitForm', () => {
 	const setup = fullMount => {
 		const props = {
 			onSubmit,
+			onChange: () => null,
 		};
 		let component;
 		if (fullMount) {

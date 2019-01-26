@@ -57,7 +57,7 @@ export const Button = styled.button`
 	}
 `;
 
-const generalInputStyles = `
+export const generalInputStyles = `
 	background: ${$greyLightest};
 	border: none;
 	border-radius: 3px;

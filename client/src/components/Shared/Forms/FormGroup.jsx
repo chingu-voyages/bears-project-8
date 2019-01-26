@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { WithContext as ReactTags } from 'react-tag-input';
+import Checkbox from './Checkbox/Checkbox';
 import {
 	StyledFormGroup,
 	Input,
@@ -67,6 +68,10 @@ const FormGroup = props => {
 			);
 			break;
 		}
+		case 'checkboxes': {
+			component = <Checkbox {...props} />;
+			break;
+		}
 		default: {
 			component = <Input type={type} {...props} />;
 		}
@@ -84,8 +89,8 @@ const FormGroup = props => {
 FormGroup.propTypes = {
 	title: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
-	onChange: PropTypes.func.isRequired,
+	value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+	onChange: PropTypes.func,
 	placeholder: PropTypes.string.isRequired,
 	type: PropTypes.string,
 	size: PropTypes.oneOf([1, 2, 4]),
@@ -94,9 +99,11 @@ FormGroup.propTypes = {
 
 FormGroup.defaultProps = {
 	type: 'text',
+	value: '',
 	// size of element defaults to fill the screen, i.e. four 'quarters'
 	size: 4,
 	required: false,
+	onChange: () => null,
 };
 
 export default FormGroup;
