@@ -47,7 +47,7 @@ const FormGroup = props => {
 				<StyledTagInput>
 					<ReactTags
 						tags={tags}
-						tagSuggestions={tagSuggestions}
+						suggestions={tagSuggestions}
 						handleDelete={onTagDelete}
 						handleAddition={onTagAdd}
 						handleDrag={onTagDrag}
