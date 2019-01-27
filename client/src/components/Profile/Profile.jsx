@@ -102,7 +102,7 @@ const Profile = ({ history, user }) => (
 							<Goal />
 						) : (
 							<p>
-								Think about what you want. Add some goals{' '}
+								Think about what you want. Then add some goals{' '}
 								<span aria-label="slightly smiling emoji" role="img">
 									🙂
 								</span>
