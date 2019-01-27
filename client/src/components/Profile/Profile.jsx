@@ -21,7 +21,6 @@ import Button from '../Shared/Button/Button';
 const Profile = ({ history }) => (
 	<Container>
 		<Breadcrumbs>
-			{' '}
 			<span
 				role="link"
 				tabIndex="-1"
@@ -86,13 +85,12 @@ const Profile = ({ history }) => (
 						why we want to stick to our habits
 					</p>
 					<div className="dashboard__goals">
-						{/* Spread user's goals here, if no goals show some default message */}
 						<p>
 							Think about what you want. Add some goals{' '}
 							<span aria-label="slightly smiling emoji" role="img">
 								🙂
 							</span>
-							{/* Spread user's goals here, if no goals show some default message */}
+							{/* Spread user's goals here, if no goals show some default message. Add some goals should be a link to a new goal form */}
 						</p>
 					</div>
 				</Goals>
