@@ -57,9 +57,8 @@ export default class HabitForm extends Component {
 	};
 
 	handleTagDrag = (tag, currPos, newPos) => {
-		// eslint-disable-next-line react/destructuring-assignment
-		const tags = [...this.state.tags];
-		const newTags = tags.slice();
+		const { tags } = this.state;
+		const newTags = [...tags];
 
 		newTags.splice(currPos, 1);
 		newTags.splice(newPos, 0, tag);
