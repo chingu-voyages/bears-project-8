@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Title, Subtitle, Image } from './CircleImg.styled';
+import { Wrapper, Title, Subtitle, Image, PlusCircle } from './CircleImg.styled';
 
 const CircleImg = ({ type, size, imgUrl, title, subtitle, clickHandler }) => (
 	<Wrapper>
 		{title && <Title>{title}</Title>}
-		<Image type={type} size={size} onClick={clickHandler} />
+		{type !== 'wPlus' ? (
+			<Image type={type} size={size} onClick={clickHandler} />
+		) : (
+			<PlusCircle size={size}>+</PlusCircle>
+		)}
+
 		{subtitle && <Subtitle>{subtitle}</Subtitle>}
 	</Wrapper>
 );

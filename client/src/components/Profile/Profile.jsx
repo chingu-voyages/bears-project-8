@@ -11,6 +11,8 @@ import {
 	SectionTitle,
 	UserActions,
 	Label,
+	Connections,
+	Goals,
 } from './Profile.styled';
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
@@ -60,7 +62,41 @@ const Profile = ({ history }) => (
 					<Button>Delete Profile</Button>
 				</UserActions>
 			</Sidebar>
-			<Dashboard>Dashboard content</Dashboard>
+			<Dashboard>
+				<Connections>
+					<SectionTitle>Friend Connections</SectionTitle>
+					<p>
+						Friends help keep each other on track with their goals by holding the other
+						accountable
+					</p>
+					<div className="dashboard__friends">
+						{/* Spread user's friends here as CircleImg's */}
+						<CircleImg
+							clickHandler={() => null}
+							size="small"
+							type="wPlus"
+							subtitle="Invite Friends"
+						/>
+					</div>
+				</Connections>
+				<Goals>
+					<SectionTitle>Goals</SectionTitle>
+					<p>
+						Goals can help keep our habits in perspective. They are a great reminder of
+						why we want to stick to our habits
+					</p>
+					<div className="dashboard__goals">
+						{/* Spread user's goals here, if no goals show some default message */}
+						<p>
+							Think about what you want. Add some goals{' '}
+							<span aria-label="slightly smiling emoji" role="img">
+								🙂
+							</span>
+							{/* Spread user's goals here, if no goals show some default message */}
+						</p>
+					</div>
+				</Goals>
+			</Dashboard>
 		</ProfileSection>
 	</Container>
 );

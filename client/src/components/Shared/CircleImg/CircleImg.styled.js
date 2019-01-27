@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { $gray, $greyDark } from '../../../assets/styledVars';
+import { $gray, $greyDark, $white } from '../../../assets/styledVars';
 
 export const Wrapper = styled.figure`
 	display: flex;
@@ -27,6 +27,29 @@ export const Image = styled.img`
 	background-color: ${$gray};
 	border: 1px solid ${$gray};
 	border-radius: 50%;
+	cursor: pointer;
+
+	${({ size }) =>
+		size === 'small'
+			? `
+			height: 75px;
+			width: 75px;`
+			: `
+			height: 150px;
+			width: 150px;
+		`}
+`;
+
+export const PlusCircle = styled.div`
+	background-color: ${$white};
+	border: 5px solid #b9eddb;
+	border-radius: 50%;
+	font-size: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #5cbc9a;
+	cursor: pointer;
 
 	${({ size }) =>
 		size === 'small'

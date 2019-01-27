@@ -9,6 +9,12 @@ export const ButtonWrapper = styled.button`
 	width: 200px;
 	height: 40px;
 	color: ${({ color }) => `${color}`};
+	cursor: pointer;
+	transition: transform 200ms;
+
+	&:hover {
+		transform: scale(1.05);
+	}
 `;
 
 export const member = 'value';

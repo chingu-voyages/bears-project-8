@@ -7,6 +7,12 @@ import { ButtonWrapper } from '../Shared/Button/Button.styled';
 export const Container = styled.section`
 	height: 80vh;
 	padding: 0 2.5rem;
+	width: 100%;
+
+	@media (min-width: 1000px) {
+		width: 80%;
+		margin: 0 auto;
+	}
 `;
 
 export const Breadcrumbs = styled.h1`
@@ -93,5 +99,44 @@ export const UserActions = styled.div`
 `;
 
 export const Dashboard = styled.div`
-	border: 3px solid magenta;
+	display: grid;
+	grid-template-rows: min-content 1fr;
+	background-color: ${$white};
+
+	& .dashboard__friends {
+		display: flex;
+		justify-content: flex-start;
+		padding: 2rem;
+		padding-bottom: 0;
+	}
+
+	& .dashboard__goals {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+		height: 80%;
+		font-weight: 300;
+	}
 `;
+
+export const Connections = styled.div`
+	padding: 4rem;
+	padding-bottom: 0;
+
+	& p:first-of-type {
+		margin-top: 1rem;
+		font-size: 14px;
+	}
+`;
+
+export const Goals = styled.div`
+	padding: 4rem;
+
+	& p:first-of-type {
+		margin-top: 1rem;
+		font-size: 14px;
+	}
+`;
+
+export const Goal = styled.div``;
