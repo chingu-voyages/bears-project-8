@@ -4,14 +4,14 @@ import { shallow } from 'enzyme';
 import Profile from './Profile';
 
 describe('Profile', () => {
-	const setup = mount => {
+	const setup = fullMount => {
 		const props = {
 			options: [{ id: 0, title: 'Test', onClick: () => jest.fn() }],
 			title: 'Dropdown',
 		};
 		let component;
-		if (mount) {
-			component = mount(<Profile {...props} />);
+		if (fullMount) {
+			component = fullMount(<Profile {...props} />);
 		} else {
 			component = shallow(<Profile {...props} />);
 		}
