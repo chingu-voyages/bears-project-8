@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import ProgressCircles from './ProgressCircles';
 import ProgressCircle from './ProgressCircle.styled';
@@ -15,7 +15,7 @@ describe('ProgressCircle', () => {
 		};
 		let component;
 		if (fullMount) {
-			component = mount(<ProgressCircles {...props} />);
+			component = fullMount(<ProgressCircles {...props} />);
 		} else {
 			component = shallow(<ProgressCircles {...props} />);
 		}
