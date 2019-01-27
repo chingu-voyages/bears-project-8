@@ -17,7 +17,7 @@ describe('HabitForm', () => {
 		};
 		let component;
 		if (fullMount) {
-			component = mount(<Checkbox {...props} />);
+			component = fullMount(<Checkbox {...props} />);
 		} else {
 			component = shallow(<Checkbox {...props} />);
 		}

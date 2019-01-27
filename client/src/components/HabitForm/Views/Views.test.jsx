@@ -8,6 +8,7 @@ import Step2 from './Steps/Step2';
 describe('HabitForm', () => {
 	const onChange = jest.fn();
 
+	// eslint-disable-next-line no-shadow
 	const setup = fullMount => {
 		const props = {
 			step: 0,
@@ -36,7 +37,7 @@ describe('HabitForm', () => {
 		};
 		let component;
 		if (fullMount) {
-			component = mount(<Views {...props} onChange={onChange} />);
+			component = fullMount(<Views {...props} onChange={onChange} />);
 		} else {
 			component = shallow(<Views {...props} onChange={onChange} />);
 		}

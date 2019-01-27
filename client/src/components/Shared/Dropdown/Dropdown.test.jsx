@@ -5,14 +5,14 @@ import { List, ListItem } from './Dropdown.styled';
 import { _Dropdown as Dropdown } from './Dropdown';
 
 describe('Dropdown', () => {
-	const setup = mount => {
+	const setup = fullMount => {
 		const props = {
 			options: [{ id: 0, title: 'Test', onClick: () => jest.fn() }],
 			title: 'Dropdown',
 		};
 		let component;
-		if (mount) {
-			component = mount(<Dropdown {...props} />);
+		if (fullMount) {
+			component = fullMount(<Dropdown {...props} />);
 		} else {
 			component = shallow(<Dropdown {...props} />);
 		}
