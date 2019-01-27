@@ -73,7 +73,7 @@ const FormGroup = props => {
 			break;
 		}
 		default: {
-			component = <Input type={type} {...props} />;
+			component = <Input type={type} {...props} noValidate />;
 		}
 	}
 	return (

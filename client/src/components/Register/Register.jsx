@@ -1,11 +1,12 @@
-// THIS IS JUST HERE FOR NOW TO TEST REDUX - STILL A LOT TO BE DONE WITH THIS
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerUser } from '../../actions/authActions';
+import { Container, Header, ContentArea, Footer } from './Register.styled';
+import FormGroup from '../Shared/Forms/FormGroup';
+import { Button } from '../Shared/Forms/Form.styled';
 
 class Register extends Component {
 	state = {
@@ -18,8 +19,16 @@ class Register extends Component {
 
 	static propTypes = {
 		registerUser: PropTypes.func.isRequired,
-		errors: PropTypes.object.isRequired,
-		auth: PropTypes.object.isRequired,
+		errors: PropTypes.shape({
+			name: PropTypes.string,
+			email: PropTypes.string,
+			password: PropTypes.string,
+			password2: PropTypes.string,
+		}).isRequired,
+		auth: PropTypes.shape({
+			isAuthenticated: PropTypes.bool.isRequired,
+			user: PropTypes.object.isRequired,
+		}).isRequired,
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -35,7 +44,8 @@ class Register extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		const { history } = this.props;
+		// eslint-disable-next-line no-shadow
+		const { history, registerUser } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -43,37 +53,66 @@ class Register extends Component {
 			password,
 			password2,
 		};
-		this.props.registerUser(newUser, history);
+		registerUser(newUser, history);
 	};
 
 	render() {
 		const { name, email, password, password2, errors } = this.state;
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<input name="name" placeholder="Name" value={name} onChange={this.handleChange} />
-				<input
-					name="email"
-					placeholder="Email"
-					value={email}
-					onChange={this.handleChange}
-				/>
-				{errors.name && <div>{errors.name}</div>}
-				<input
-					name="password"
-					placeholder="Password"
-					value={password}
-					onChange={this.handleChange}
-				/>
-				{errors.password && <div>{errors.password}</div>}
-				<input
-					name="password2"
-					placeholder="Confirm Password"
-					value={password2}
-					onChange={this.handleChange}
-				/>
-				{errors.password2 && <div>{errors.password2}</div>}
-				<button type="submit">Submit</button>
-			</form>
+			<Container>
+				<Header>Register</Header>
+				<ContentArea>
+					<form onSubmit={this.handleSubmit}>
+						<FormGroup
+							title="Name"
+							name="name"
+							value={name}
+							onChange={this.handleChange}
+							placeholder="John Smith"
+							type="text"
+							size={4}
+							required
+						/>
+						{errors.name && <div>{errors.name}</div>}
+						<FormGroup
+							title="Email"
+							name="email"
+							value={email}
+							onChange={this.handleChange}
+							placeholder="john@email.com"
+							type="email"
+							size={4}
+							required
+						/>
+						{errors.email && <div>{errors.email}</div>}
+						<FormGroup
+							title="Password"
+							name="password"
+							value={password}
+							onChange={this.handleChange}
+							placeholder="Enter a password..."
+							type="password"
+							size={4}
+							required
+						/>
+						{errors.password && <div>{errors.password}</div>}
+						<FormGroup
+							title="Confirm Password"
+							name="password2"
+							value={password2}
+							onChange={this.handleChange}
+							placeholder="Enter it again (to be sure)..."
+							type="password"
+							size={4}
+							required
+						/>
+						{errors.password2 && <div>{errors.password2}</div>}
+						<Footer>
+							<Button type="submit">Submit</Button>
+						</Footer>
+					</form>
+				</ContentArea>
+			</Container>
 		);
 	}
 }

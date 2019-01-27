@@ -96,13 +96,13 @@ const Routes = ({ isAuthenticated }) => (
 			<Route
 				exact
 				path="/auth/register"
-				render={() => withContainer({ component: Register, isLazy: true, hasNav: false })}
+				render={() => withContainer({ component: Register, isLazy: true, hasNav: true })}
 			/>
 
 			<Route
 				exact
 				path="/auth/login"
-				render={() => withContainer({ component: Login, isLazy: true, hasNav: false })}
+				render={() => withContainer({ component: Login, isLazy: true, hasNav: true })}
 			/>
 		</Switch>
 	</HashRouter>
