@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
 	Container,
@@ -13,12 +15,13 @@ import {
 	Label,
 	Connections,
 	Goals,
+	Goal,
 } from './Profile.styled';
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
 import Button from '../Shared/Button/Button';
 
-const Profile = ({ history }) => (
+const Profile = ({ history, user }) => (
 	<Container>
 		<Breadcrumbs>
 			<span
@@ -35,9 +38,10 @@ const Profile = ({ history }) => (
 			<Sidebar>
 				<CircleImg
 					clickHandler={() => null}
+					imgUrl={user.avatar}
 					size="large"
 					type="avatar"
-					title="User name"
+					title={user.name}
 					subtitle="A short bio here that the user could edit, otherwise it has some dummy text"
 				/>
 				<UserInfo>
@@ -52,7 +56,7 @@ const Profile = ({ history }) => (
 					</div>
 					<div className="user__info">
 						<em>Member since December 2018</em>
-						<p>User has logged a habit N times</p>
+						<p>User has logged a habit 0 times</p>
 					</div>
 				</UserInfo>
 				{/* User actions */}
@@ -69,7 +73,16 @@ const Profile = ({ history }) => (
 						accountable
 					</p>
 					<div className="dashboard__friends">
-						{/* Spread user's friends here as CircleImg's */}
+						{user.friends &&
+							user.friends.length > 0 &&
+							user.friends.map(fr => (
+								<CircleImg
+									imgUrl={fr.avatar}
+									subtitle={fr.name}
+									clickHandler={() => null}
+									size="small"
+								/>
+							))()}
 						<CircleImg
 							clickHandler={() => null}
 							size="small"
@@ -85,13 +98,17 @@ const Profile = ({ history }) => (
 						why we want to stick to our habits
 					</p>
 					<div className="dashboard__goals">
-						<p>
-							Think about what you want. Add some goals{' '}
-							<span aria-label="slightly smiling emoji" role="img">
-								🙂
-							</span>
-							{/* Spread user's goals here, if no goals show some default message. Add some goals should be a link to a new goal form */}
-						</p>
+						{user.goals && user.goals.length > 0 ? (
+							<Goal />
+						) : (
+							<p>
+								Think about what you want. Add some goals{' '}
+								<span aria-label="slightly smiling emoji" role="img">
+									🙂
+								</span>
+								{/* Add some goals should be a link to a new goal form */}
+							</p>
+						)}
 					</div>
 				</Goals>
 			</Dashboard>
@@ -99,4 +116,19 @@ const Profile = ({ history }) => (
 	</Container>
 );
 
-export default withRouter(Profile);
+const mapStateToProps = ({ auth }) => ({
+	user: auth.user,
+});
+
+Profile.propTypes = {
+	user: PropTypes.shape({
+		name: PropTypes.string,
+		avatar: PropTypes.string,
+		goals: PropTypes.arrayOf(PropTypes.shape({})),
+		friends: PropTypes.arrayOf(PropTypes.shape({})),
+		dateCreated: PropTypes.string,
+	}).isRequired,
+	// habitsLogged: PropTypes.number,
+};
+
+export default withRouter(connect(mapStateToProps)(Profile));
