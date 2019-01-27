@@ -51,7 +51,6 @@ describe('HabitForm', () => {
 			const checkboxes = component.find(StyledCheckbox);
 			expect(checkboxes).toHaveLength(2);
 			const active = component.find('[active=true]');
-			console.log(active.debug());
 			expect(active).toHaveLength(1);
 			expect(checkboxes.first).not.toEqual(active);
 		});
