@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Two = ({ difficulty, habitType, habitStart, onChange }) => (
+const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 	<Fragment>
 		<Row>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="Difficulty"
 				name="difficulty"
 				value={difficulty}
 				onChange={onChange}
-				placeholder="Trivial, Easy, Medium, Hard, Epic..."
+				placeholder="Choose a difficulty..."
 				size={2}
+				type="dropdown"
+				options={['Trivial', 'Easy', 'Medium', 'Hard', 'Epic']}
 			/>
-			{/* TODO: make this a dropdown */}
 			<FormGroup
 				title="Habit Type"
 				name="habitType"
@@ -23,10 +23,12 @@ const Two = ({ difficulty, habitType, habitStart, onChange }) => (
 				onChange={onChange}
 				placeholder="Active, Passive..."
 				size={2}
+				type="dropdown"
+				options={['Active', 'Passive']}
 			/>
 		</Row>
 		<FormGroup
-			title="When would you like to start this habit?"
+			title="When will you start this habit?"
 			name="habitStart"
 			value={habitStart}
 			onChange={onChange}
@@ -37,11 +39,11 @@ const Two = ({ difficulty, habitType, habitStart, onChange }) => (
 	</Fragment>
 );
 
-Two.propTypes = {
+Step2.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	difficulty: PropTypes.string.isRequired,
 	habitType: PropTypes.string.isRequired,
 	habitStart: PropTypes.string.isRequired,
 };
 
-export default Two;
+export default Step2;

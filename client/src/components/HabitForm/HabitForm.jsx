@@ -12,11 +12,14 @@ export default class HabitForm extends Component {
 		name: '',
 		tags: [],
 		description: '',
-		value: '',
 		times: '',
 		period: '',
 		reminderEvery: '',
-		reminderTypes: [],
+		reminderTypes: {
+			email: false,
+			inApp: false,
+			push: false,
+		},
 		difficulty: '',
 		habitType: '',
 		habitStart: '',
@@ -35,13 +38,48 @@ export default class HabitForm extends Component {
 		this.setState({ step });
 	};
 
+	setReminderType = type => {
+		this.setState(prevState => ({
+			reminderTypes: { ...prevState.reminderTypes, [type]: !prevState.reminderTypes[type] },
+		}));
+	};
+
+	// Tag input functions
+
+	handleTagDelete = i => {
+		this.setState(prevState => ({
+			tags: prevState.tags.filter((tag, index) => index !== i),
+		}));
+	};
+
+	handleTagAdd = tag => {
+		this.setState(prevState => ({ tags: [...prevState.tags, tag] }));
+	};
+
+	handleTagDrag = (tag, currPos, newPos) => {
+		const { tags } = this.state;
+		const newTags = [...tags];
+
+		newTags.splice(currPos, 1);
+		newTags.splice(newPos, 0, tag);
+
+		this.setState({ tags: newTags });
+	};
+
 	render() {
 		const { step } = this.state;
 		const { onSubmit } = this.props;
 		return (
 			<Container>
 				<Header>Add a New Habit</Header>
-				<Views {...this.state} onChange={this.handleChange} />
+				<Views
+					{...this.state}
+					onChange={this.handleChange}
+					setReminderType={this.setReminderType}
+					onTagDelete={this.handleTagDelete}
+					onTagAdd={this.handleTagAdd}
+					onTagDrag={this.handleTagDrag}
+				/>
 				<Footer>
 					<LeftButtons step={step} setStep={this.setStep} />
 					<ProgressCircles step={step} totalSteps={3} setStep={this.setStep} />
