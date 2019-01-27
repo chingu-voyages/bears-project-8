@@ -82,7 +82,7 @@ const Profile = ({ history, user }) => (
 									clickHandler={() => null}
 									size="small"
 								/>
-							))()}
+							))}
 						<CircleImg
 							clickHandler={() => null}
 							size="small"
