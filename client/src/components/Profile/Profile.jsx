@@ -38,7 +38,7 @@ const Profile = ({ history, user }) => (
 			<Sidebar>
 				<CircleImg
 					clickHandler={() => null}
-					imgUrl={user.avatar}
+					imgUrl={`https:${user.avatar}`}
 					size="large"
 					type="avatar"
 					title={user.name}
