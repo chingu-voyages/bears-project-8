@@ -7,7 +7,7 @@ const CircleImg = ({ type, size, imgUrl, title, subtitle, clickHandler }) => (
 	<Wrapper>
 		{title && <Title>{title}</Title>}
 		{type !== 'wPlus' ? (
-			<Image type={type} size={size} onClick={clickHandler} />
+			<Image type={type} size={size} onClick={clickHandler} src={imgUrl} />
 		) : (
 			<PlusCircle size={size}>+</PlusCircle>
 		)}

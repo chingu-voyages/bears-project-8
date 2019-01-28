@@ -16,10 +16,10 @@ const Dashboard = lazy(() =>
 	import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */ './components/Dashboard/Dashboard')
 );
 const Register = lazy(() =>
-	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Register/Register')
+	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Auth/Register/Register')
 );
 const Login = lazy(() =>
-	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Login/Login')
+	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Auth/Login/Login')
 );
 
 const withContainer = ({ component: Component, isLazy, hasNav, withAuth, isAuthenticated }) =>
@@ -96,13 +96,13 @@ const Routes = ({ isAuthenticated }) => (
 			<Route
 				exact
 				path="/auth/register"
-				render={() => withContainer({ component: Register, isLazy: true, hasNav: false })}
+				render={() => withContainer({ component: Register, isLazy: true, hasNav: true })}
 			/>
 
 			<Route
 				exact
 				path="/auth/login"
-				render={() => withContainer({ component: Login, isLazy: true, hasNav: false })}
+				render={() => withContainer({ component: Login, isLazy: true, hasNav: true })}
 			/>
 		</Switch>
 	</HashRouter>
