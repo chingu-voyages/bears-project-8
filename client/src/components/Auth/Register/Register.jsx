@@ -31,15 +31,14 @@ class Register extends Component {
 		}).isRequired,
 	};
 
+	static getDerivedStateFromProps(nextProps) {
+		if (nextProps.errors) return { errors: nextProps.errors };
+		return null;
+	}
+
 	componentWillMount() {
 		const { auth, history } = this.props;
 		if (auth.isAuthenticated) history.replace('/dashboard');
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.errors) {
-			this.setState({ errors: nextProps.errors });
-		}
 	}
 
 	handleChange = e => {
