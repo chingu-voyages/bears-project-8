@@ -38,12 +38,13 @@ export const StyledFormGroup = styled.div`
 `;
 
 export const Button = styled.button`
-	${props =>
-		props.secondary
+	${({ secondary }) =>
+		secondary
 			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight};
 				&:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
 			: `background: ${$greyLighter}; color: ${$greyDark}; border: 1px solid ${$greyLighter};
 				&:hover { background: ${$greyLight}; }`}
+	${({ width }) => width && `width: ${width};`}
 	min-width: 125px;
 	border-radius: 3px;
 	font-size: 1rem;
@@ -52,11 +53,6 @@ export const Button = styled.button`
 
 	&:hover {
 		cursor: pointer;
-	}
-
-	@media only screen and (max-width: 960px) {
-		position: relative;
-		top: 4rem;
 	}
 `;
 
@@ -205,5 +201,5 @@ export const ErrorText = styled.div`
 	color: ${$tomato};
 	font-size: 0.7rem;
 	position: absolute;
-	bottom: -1.5rem;
+	bottom: -1.3rem;
 `;

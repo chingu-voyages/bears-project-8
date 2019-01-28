@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { $greyLighter } from '../../assets/styledVars';
+import { Button } from '../Shared/Forms/Form.styled';
 
 export const Container = styled.div`
 	position: relative;
@@ -31,6 +32,13 @@ export const ContentArea = styled.div`
 `;
 
 export const Footer = styled(ContentArea)`
-	padding: 2rem;
+	padding: 3rem 0 2rem 0;
 	text-align: center;
+
+	@media (max-width: 550px) {
+		${Button} {
+			width: 100%;
+		}
+		padding: 3rem 0 2rem 0;
+	}
 `;

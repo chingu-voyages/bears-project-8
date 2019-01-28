@@ -62,7 +62,7 @@ class Register extends Component {
 			<Container>
 				<Header>Register</Header>
 				<ContentArea>
-					<form onSubmit={this.handleSubmit}>
+					<form onSubmit={this.handleSubmit} noValidate>
 						<FormGroup
 							title="Name"
 							name="name"
@@ -98,13 +98,15 @@ class Register extends Component {
 							name="password2"
 							value={password2}
 							onChange={this.handleChange}
-							placeholder="Enter it again (to be sure)..."
+							placeholder="Enter it again (just to be sure)..."
 							type="password"
 							size={4}
 							errors={errors.password2}
 						/>
 						<Footer>
-							<Button type="submit">Submit</Button>
+							<Button type="submit" width="40%">
+								Submit
+							</Button>
 						</Footer>
 					</form>
 				</ContentArea>

@@ -14,6 +14,11 @@ const ProgressCircle = styled.div`
 		cursor: pointer;
 		background: ${$greyLight};
 	}
+
+	@media only screen and (max-width: 960px) {
+		position: relative;
+		top: 4rem;
+	}
 `;
 
 ProgressCircle.defaultProps = {
