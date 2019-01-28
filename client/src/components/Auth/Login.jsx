@@ -27,6 +27,11 @@ class Login extends Component {
 		}).isRequired,
 	};
 
+	componentWillMount() {
+		const { auth, history } = this.props;
+		if (auth.isAuthenticated) history.push('/dashboard');
+	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.errors) {
 			this.setState({ errors: nextProps.errors });
