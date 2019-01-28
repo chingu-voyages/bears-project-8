@@ -3,23 +3,27 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/authActions';
-import { Container, Header, ContentArea, Footer } from './Login.styled';
+import { registerUser } from '../../actions/authActions';
+import { Container, Header, ContentArea, Footer } from './Auth.styled';
 import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 
-class Login extends Component {
+class Register extends Component {
 	state = {
+		name: '',
 		email: '',
 		password: '',
+		password2: '',
 		errors: {},
 	};
 
 	static propTypes = {
-		loginUser: PropTypes.func.isRequired,
+		registerUser: PropTypes.func.isRequired,
 		errors: PropTypes.shape({
+			name: PropTypes.string,
 			email: PropTypes.string,
 			password: PropTypes.string,
+			password2: PropTypes.string,
 		}).isRequired,
 		auth: PropTypes.shape({
 			isAuthenticated: PropTypes.bool.isRequired,
@@ -41,7 +45,7 @@ class Login extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
-		const { loginUser, history } = this.props;
+		const { registerUser, history } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -49,16 +53,26 @@ class Login extends Component {
 			password,
 			password2,
 		};
-		loginUser(newUser, history);
+		registerUser(newUser, history);
 	};
 
 	render() {
-		const { email, password, errors } = this.state;
+		const { name, email, password, password2, errors } = this.state;
 		return (
 			<Container>
-				<Header>Login</Header>
+				<Header>Register</Header>
 				<ContentArea>
 					<form onSubmit={this.handleSubmit} noValidate>
+						<FormGroup
+							title="Name"
+							name="name"
+							value={name}
+							onChange={this.handleChange}
+							placeholder="John Smith"
+							type="text"
+							size={4}
+							errors={errors.name}
+						/>
 						<FormGroup
 							title="Email"
 							name="email"
@@ -79,8 +93,20 @@ class Login extends Component {
 							size={4}
 							errors={errors.password}
 						/>
+						<FormGroup
+							title="Confirm Password"
+							name="password2"
+							value={password2}
+							onChange={this.handleChange}
+							placeholder="Enter it again (just to be sure)..."
+							type="password"
+							size={4}
+							errors={errors.password2}
+						/>
 						<Footer>
-							<Button type="submit">Submit</Button>
+							<Button type="submit" width="40%">
+								Submit
+							</Button>
 						</Footer>
 					</form>
 				</ContentArea>
@@ -96,5 +122,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ loginUser }
-)(withRouter(Login));
+	{ registerUser }
+)(withRouter(Register));
