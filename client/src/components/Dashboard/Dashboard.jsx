@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Dashboard = () => (
-	<div>
-		<h1>Dashboard</h1>
-	</div>
-);
+export class _Dashboard extends Component {
+	static propTypes = {};
 
-export default Dashboard;
+	state = {};
+
+	render() {
+		return <div />;
+	}
+}
+
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(_Dashboard);
