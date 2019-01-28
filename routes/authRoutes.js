@@ -81,8 +81,8 @@ router.post('/login', (req, res) => {
 	})
 		.then(user => {
 			if (!user) {
-				errors.email = 'User not found';
-				return res.status(404).json({ message: 'User not found', errors });
+				errors.email = 'A user with that email does not exist';
+				return res.status(404).json(errors);
 			}
 			const payload = {
 				id: user._id,
@@ -91,14 +91,9 @@ router.post('/login', (req, res) => {
 				avatar: user.avatar,
 			};
 			return bcrypt.compare(req.body.password, user.password, (err, result) => {
-				if (err) {
+				if (err || !result) {
 					return res.status(401).json({
-						message: 'Unauthorized. Access denied to invalid credentials',
-					});
-				}
-				if (!result) {
-					return res.status(401).json({
-						message: 'Unauthorized. Access denied to invalid credentials',
+						password: 'Incorrect password',
 					});
 				}
 				const token = createToken(payload, process.env.JWT_SECRET, '1h');
