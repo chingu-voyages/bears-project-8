@@ -50,13 +50,7 @@ class Register extends Component {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { registerUser, history } = this.props;
-		const { name, email, password, password2 } = this.state;
-		const newUser = {
-			name,
-			email,
-			password,
-			password2,
-		};
+		const { errors, ...newUser } = this.state;
 		registerUser(newUser, history);
 	};
 

@@ -46,13 +46,7 @@ class Login extends Component {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { loginUser, history } = this.props;
-		const { name, email, password, password2 } = this.state;
-		const newUser = {
-			name,
-			email,
-			password,
-			password2,
-		};
+		const { errors, ...newUser } = this.state;
 		loginUser(newUser, history);
 	};
 
