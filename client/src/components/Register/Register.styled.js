@@ -8,7 +8,7 @@ export const Container = styled.div`
 	border-radius: 6px;
 	margin: 6rem auto;
 
-	@media only screen and (max-width: 1100px) {
+	@media only screen and (max-width: 650px) {
 		width: 90%;
 	}
 `;
@@ -24,6 +24,10 @@ export const Header = styled.h2`
 export const ContentArea = styled.div`
 	width: 100%;
 	padding: 2rem 4rem;
+
+	@media (max-width: 550px) {
+		padding: 2rem 2rem;
+	}
 `;
 
 export const Footer = styled(ContentArea)`

@@ -9,6 +9,7 @@ import {
 	$greyDarker,
 	$dangerRed,
 	$mint,
+	$tomato,
 } from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
@@ -22,7 +23,9 @@ export const ButtonGroup = styled.div`
 `;
 
 export const StyledFormGroup = styled.div`
-	width: ${props => props.width};
+	width: ${({ width }) => width};
+	${({ width }) => width === '100%' && 'margin-bottom: 2rem;'}
+	position: relative;
 
 	@media only screen and (max-width: 650px) {
 		width: 100%;
@@ -196,4 +199,11 @@ export const StyledTagInput = styled.div`
 			border-radius: 0 0 3px 3px;
 		}
 	}
+`;
+
+export const ErrorText = styled.div`
+	color: ${$tomato};
+	font-size: 0.7rem;
+	position: absolute;
+	bottom: -1.5rem;
 `;

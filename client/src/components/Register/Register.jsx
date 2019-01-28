@@ -71,9 +71,8 @@ class Register extends Component {
 							placeholder="John Smith"
 							type="text"
 							size={4}
-							required
+							errors={errors.name}
 						/>
-						{errors.name && <div>{errors.name}</div>}
 						<FormGroup
 							title="Email"
 							name="email"
@@ -82,9 +81,8 @@ class Register extends Component {
 							placeholder="john@email.com"
 							type="email"
 							size={4}
-							required
+							errors={errors.email}
 						/>
-						{errors.email && <div>{errors.email}</div>}
 						<FormGroup
 							title="Password"
 							name="password"
@@ -93,9 +91,8 @@ class Register extends Component {
 							placeholder="Enter a password..."
 							type="password"
 							size={4}
-							required
+							errors={errors.password}
 						/>
-						{errors.password && <div>{errors.password}</div>}
 						<FormGroup
 							title="Confirm Password"
 							name="password2"
@@ -104,9 +101,8 @@ class Register extends Component {
 							placeholder="Enter it again (to be sure)..."
 							type="password"
 							size={4}
-							required
+							errors={errors.password2}
 						/>
-						{errors.password2 && <div>{errors.password2}</div>}
 						<Footer>
 							<Button type="submit">Submit</Button>
 						</Footer>
