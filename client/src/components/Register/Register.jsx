@@ -45,7 +45,7 @@ class Register extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
-		const { history, registerUser } = this.props;
+		const { registerUser, history } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions/authActions';
@@ -40,7 +41,7 @@ class Login extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
-		const { loginUser } = this.props;
+		const { loginUser, history } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -48,7 +49,7 @@ class Login extends Component {
 			password,
 			password2,
 		};
-		loginUser(newUser);
+		loginUser(newUser, history);
 	};
 
 	render() {
@@ -96,4 +97,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ loginUser }
-)(Login);
+)(withRouter(Login));
