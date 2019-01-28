@@ -29,7 +29,7 @@ class Login extends Component {
 
 	componentWillMount() {
 		const { auth, history } = this.props;
-		if (auth.isAuthenticated) history.push('/dashboard');
+		if (auth.isAuthenticated) history.replace('/dashboard');
 	}
 
 	componentWillReceiveProps(nextProps) {
