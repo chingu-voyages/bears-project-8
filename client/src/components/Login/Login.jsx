@@ -1,10 +1,11 @@
-// THIS IS JUST HERE FOR NOW TO TEST REDUX - STILL A LOT TO BE DONE WITH THIS
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions/authActions';
+import { Container, Header, ContentArea, Footer } from './Login.styled';
+import FormGroup from '../Shared/Forms/FormGroup';
+import { Button } from '../Shared/Forms/Form.styled';
 
 class Login extends Component {
 	state = {
@@ -15,8 +16,14 @@ class Login extends Component {
 
 	static propTypes = {
 		loginUser: PropTypes.func.isRequired,
-		errors: PropTypes.object.isRequired,
-		auth: PropTypes.object.isRequired,
+		errors: PropTypes.shape({
+			email: PropTypes.string,
+			password: PropTypes.string,
+		}).isRequired,
+		auth: PropTypes.shape({
+			isAuthenticated: PropTypes.bool.isRequired,
+			user: PropTypes.object.isRequired,
+		}).isRequired,
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -32,6 +39,8 @@ class Login extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		// eslint-disable-next-line no-shadow
+		const { loginUser } = this.props;
 		const { name, email, password, password2 } = this.state;
 		const newUser = {
 			name,
@@ -39,30 +48,42 @@ class Login extends Component {
 			password,
 			password2,
 		};
-		this.props.loginUser(newUser);
+		loginUser(newUser);
 	};
 
 	render() {
 		const { email, password, errors } = this.state;
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<h1>Login</h1>
-				<input
-					name="email"
-					placeholder="Email"
-					value={email}
-					onChange={this.handleChange}
-				/>
-				{errors.email && <div>errors.email</div>}
-				<input
-					name="password"
-					placeholder="Password"
-					value={password}
-					onChange={this.handleChange}
-				/>
-				{errors.password && <div>errors.password</div>}
-				<button type="submit">Submit</button>
-			</form>
+			<Container>
+				<Header>Login</Header>
+				<ContentArea>
+					<form onSubmit={this.handleSubmit} noValidate>
+						<FormGroup
+							title="Email"
+							name="email"
+							value={email}
+							onChange={this.handleChange}
+							placeholder="john@email.com"
+							type="email"
+							size={4}
+							errors={errors.email}
+						/>
+						<FormGroup
+							title="Password"
+							name="password"
+							value={password}
+							onChange={this.handleChange}
+							placeholder="Enter a password..."
+							type="password"
+							size={4}
+							errors={errors.password}
+						/>
+						<Footer>
+							<Button type="submit">Submit</Button>
+						</Footer>
+					</form>
+				</ContentArea>
+			</Container>
 		);
 	}
 }
