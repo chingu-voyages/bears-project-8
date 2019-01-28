@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/authActions';
-import { Container, Header, TopText, ContentArea, Footer } from './Auth.styled';
-import FormGroup from '../Shared/Forms/FormGroup';
-import { Button } from '../Shared/Forms/Form.styled';
+import { loginUser } from '../../../actions/authActions';
+import { Container, Header, TopText, ContentArea, Footer } from '../Auth.styled';
+import FormGroup from '../../Shared/Forms/FormGroup';
+import { Button } from '../../Shared/Forms/Form.styled';
 
 class Login extends Component {
 	state = {

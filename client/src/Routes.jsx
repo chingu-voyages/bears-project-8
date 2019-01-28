@@ -16,10 +16,10 @@ const Dashboard = lazy(() =>
 	import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */ './components/Dashboard/Dashboard')
 );
 const Register = lazy(() =>
-	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Auth/Register')
+	import(/* webpackChunkName: "register" */ /* webpackPrefetch: true */ './components/Auth/Register/Register')
 );
 const Login = lazy(() =>
-	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Auth/Login')
+	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Auth/Login/Login')
 );
 
 const withContainer = ({ component: Component, isLazy, hasNav, withAuth, isAuthenticated }) =>
