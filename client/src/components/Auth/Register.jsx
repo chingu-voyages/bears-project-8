@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerUser } from '../../actions/authActions';
-import { Container, Header, ContentArea, Footer } from './Auth.styled';
+import { Container, Header, TopText, ContentArea, Footer } from './Auth.styled';
 import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 
@@ -62,6 +62,13 @@ class Register extends Component {
 			<Container>
 				<Header>Register</Header>
 				<ContentArea>
+					<TopText>
+						All fields are required.
+						<small>
+							Already registered? Head to the <Link to="/auth/login">login page</Link>
+							.
+						</small>
+					</TopText>
 					<form onSubmit={this.handleSubmit} noValidate>
 						<FormGroup
 							title="Name"

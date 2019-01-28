@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { $greyLighter } from '../../assets/styledVars';
+import { $greyLight, $greyLighter } from '../../assets/styledVars';
 import { Button } from '../Shared/Forms/Form.styled';
 
 export const Container = styled.div`
@@ -20,6 +20,22 @@ export const Header = styled.h2`
 	font-weight: 400;
 	border-bottom: 2px solid ${$greyLighter};
 	padding: 2rem;
+`;
+
+export const TopText = styled.div`
+	font-size: 1rem;
+
+	small {
+		font-size: 0.8rem;
+		color: ${$greyLight};
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 2rem;
+
+		a {
+			color: ${$greyLight};
+		}
+	}
 `;
 
 export const ContentArea = styled.div`
