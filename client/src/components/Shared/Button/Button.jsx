@@ -11,7 +11,7 @@ const Button = ({ color, children, clickHandler, type }) => (
 
 Button.propTypes = {
 	color: PropTypes.string,
-	type: PropTypes.string.isRequired, // simple | filled
+	type: PropTypes.oneOf(['simple', 'filled']).isRequired,
 	clickHandler: PropTypes.func.isRequired,
 };
 
