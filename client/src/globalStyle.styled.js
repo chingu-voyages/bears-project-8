@@ -2,6 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import { $titleFont, $bodyFont, $greyLighter, $greyDark, $greyDarker } from './assets/styledVars';
 
 const GlobalStyle = createGlobalStyle`
+
+html, body {
+	height: 100%;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -24,6 +29,11 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin: 0;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
 }
 `;
 
