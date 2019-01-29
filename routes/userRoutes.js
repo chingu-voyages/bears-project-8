@@ -7,11 +7,11 @@ const router = express.Router();
 const User = require('../models/User');
 
 /**
- * @route   PUT user/:id/update
+ * @route   PUT user/:id
  * @desc    update  User (name+avatar)
  * @access  Private
  */
-router.put('/:id/edit', passport.authenticate('jwt', { session: false }), (req, res) =>
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) =>
 	User.findById(req.params.id)
 		.then(user => {
 			if (!user) {
@@ -26,17 +26,18 @@ router.put('/:id/edit', passport.authenticate('jwt', { session: false }), (req, 
 				user.name = req.body.name;
 			}
 			// image URL validation
-			if (
-				req.body.imgUrl ===
-				validator.isURL(url, {
-					protocols: ['http', 'https'],
-					require_protocol: true,
-					require_tld: true,
-				})
-			) {
-				user.avatar = req.body.imgUrl;
+			if (req.body.imgUrl){
+				const validUrl= validator.isURL(url,{
+					protocols:['http', 'https'],
+					require_protocol:true,
+					require_tld:true,	
+				});
+				if (validUrl) {
+					user.avatar = req.body.imgUrl;
+				} else {
+					return res.status(400).json({ message: 'Bad image URL' });
+				}
 			}
-
 			return user
 				.save()
 				.then(savedUser =>
@@ -52,7 +53,7 @@ router.put('/:id/edit', passport.authenticate('jwt', { session: false }), (req, 
   user should be able to delete his profile 
    @route   DELETE user/:id 
  * @desc    delete User
- * @access  Public  
+ * @access  Private
 */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	User.findById(req.params.id)
