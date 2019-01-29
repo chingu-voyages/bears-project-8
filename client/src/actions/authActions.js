@@ -26,7 +26,7 @@ export const setCurrentUser = decoded => ({
 });
 
 // Login - get user token
-export const loginUser = userData => dispatch =>
+export const loginUser = (userData, history) => dispatch =>
 	axios
 		.post('api/auth/login', userData)
 		.then(res => {
@@ -42,6 +42,7 @@ export const loginUser = userData => dispatch =>
 			// Get user's habits
 			dispatch(getHabits());
 		})
+		.then(() => history.push('/dashboard'))
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,

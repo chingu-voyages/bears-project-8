@@ -9,6 +9,7 @@ import {
 	$greyDarker,
 	$dangerRed,
 	$mint,
+	$tomato,
 } from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
@@ -22,7 +23,9 @@ export const ButtonGroup = styled.div`
 `;
 
 export const StyledFormGroup = styled.div`
-	width: ${props => props.width};
+	width: ${({ width }) => width};
+	${({ width }) => width === '100%' && 'margin-bottom: 2rem;'}
+	position: relative;
 
 	@media only screen and (max-width: 650px) {
 		width: 100%;
@@ -35,12 +38,13 @@ export const StyledFormGroup = styled.div`
 `;
 
 export const Button = styled.button`
-	${props =>
-		props.secondary
+	${({ secondary }) =>
+		secondary
 			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight};
 				&:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
 			: `background: ${$greyLighter}; color: ${$greyDark}; border: 1px solid ${$greyLighter};
 				&:hover { background: ${$greyLight}; }`}
+	${({ width }) => width && `width: ${width};`}
 	min-width: 125px;
 	border-radius: 3px;
 	font-size: 1rem;
@@ -49,11 +53,6 @@ export const Button = styled.button`
 
 	&:hover {
 		cursor: pointer;
-	}
-
-	@media only screen and (max-width: 960px) {
-		position: relative;
-		top: 4rem;
 	}
 `;
 
@@ -196,4 +195,11 @@ export const StyledTagInput = styled.div`
 			border-radius: 0 0 3px 3px;
 		}
 	}
+`;
+
+export const ErrorText = styled.div`
+	color: ${$tomato};
+	font-size: 0.7rem;
+	position: absolute;
+	bottom: -1.3rem;
 `;
