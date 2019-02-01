@@ -17,6 +17,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (!user) {
 				return res.status(404).json({ message: 'User not found' });
 			}
+		
 			if (user._id.toHexString() !== req.user._id.toHexString()) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
