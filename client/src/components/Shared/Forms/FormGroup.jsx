@@ -9,6 +9,7 @@ import {
 	Textarea,
 	StyledDropdown,
 	StyledTagInput,
+	ErrorText,
 } from './Form.styled';
 import { $dangerRed } from '../../../assets/styledVars';
 import defaultTags from '../../../assets/defaultTags';
@@ -26,8 +27,9 @@ const FormGroup = props => {
 		onTagDelete,
 		onTagAdd,
 		onTagDrag,
+		errors,
 	} = props;
-	const width = size < 4 ? `${size * 25 - 2}%` : `${size * 25}%`;
+	const width = size < 4 ? `${size * 25 - 2}%` : `100%`;
 	let component;
 	switch (type) {
 		case 'textarea': {
@@ -73,7 +75,7 @@ const FormGroup = props => {
 			break;
 		}
 		default: {
-			component = <Input type={type} {...props} />;
+			component = <Input type={type} {...props} noValidate />;
 		}
 	}
 	return (
@@ -82,6 +84,7 @@ const FormGroup = props => {
 				{title} {required && <span style={{ color: $dangerRed }}>*</span>}
 			</Label>
 			{component}
+			<ErrorText>{errors}</ErrorText>
 		</StyledFormGroup>
 	);
 };
