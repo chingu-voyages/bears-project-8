@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
+import createHistory from 'history/createHashHistory';
 
 import GlobalStyle from './globalStyle.styled';
 import Routes from './Routes';
@@ -13,6 +14,10 @@ import { logoutUser, setCurrentUser } from './actions/authActions';
 import { getHabits } from './actions/habitActions';
 
 let isAuthenticated = false;
+
+const history = createHistory({
+	hashType: 'noslash',
+});
 
 // Check for auth token
 if (localStorage.jwtToken) {
@@ -27,7 +32,7 @@ if (localStorage.jwtToken) {
 		// Log user out
 		store.dispatch(logoutUser());
 		// Redirect to login
-		window.location.href = '/login';
+		history.push('/login');
 	} else {
 		isAuthenticated = true;
 		// Set user and isAuthenticated

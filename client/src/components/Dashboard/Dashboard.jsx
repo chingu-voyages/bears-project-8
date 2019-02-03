@@ -13,6 +13,9 @@ import {
 	FilterByDifficulty,
 	FilterByType,
 	Label,
+	SidebarSection,
+	SidebarOption,
+	Habits,
 } from './Dashboard.styled';
 
 export class _Dashboard extends Component {
@@ -36,7 +39,32 @@ export class _Dashboard extends Component {
 					</span>
 				</Breadcrumbs>
 				<Section>
-					<Sidebar />
+					<Sidebar>
+						<SidebarSection>
+							<SidebarOption>
+								All Habits
+								<span>4</span>
+							</SidebarOption>
+							<SidebarOption>
+								Due Habits
+								<span>4</span>
+							</SidebarOption>
+							<SidebarOption>
+								Upcoming Habits
+								<span>4</span>
+							</SidebarOption>
+						</SidebarSection>
+						<SidebarSection>
+							<SidebarOption>
+								Logbook
+								<span>324</span>
+							</SidebarOption>
+							<SidebarOption>
+								Insights
+								<span />
+							</SidebarOption>
+						</SidebarSection>
+					</Sidebar>
 					<Dashboard>
 						<FilterByTags>
 							<span>Tags:</span> {/* Map through actual user tags here */}
@@ -63,6 +91,7 @@ export class _Dashboard extends Component {
 							<Label>Active</Label>
 							<Label>Passive</Label>
 						</FilterByType>
+						<Habits>Habits</Habits>
 					</Dashboard>
 				</Section>
 			</Container>
