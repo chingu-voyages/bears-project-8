@@ -54,6 +54,7 @@ export const SidebarOption = styled.div`
 	padding: 1rem;
 	cursor: pointer;
 	border-radius: 6px;
+	transition: all 200ms;
 
 	&:hover {
 		background-color: ${$greyLighter};

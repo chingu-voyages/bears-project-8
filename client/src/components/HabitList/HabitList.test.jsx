@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { _Dashboard as Dashboard } from './Dashboard';
+import HabitList from './HabitList';
 
-describe('Dashboard', () => {
+describe('HabitList', () => {
 	const setup = fullMount => {
 		const props = {
 			options: [{ id: 0, title: 'Test', onClick: () => jest.fn() }],
@@ -11,9 +11,9 @@ describe('Dashboard', () => {
 		};
 		let component;
 		if (fullMount) {
-			component = fullMount(<Dashboard {...props} />);
+			component = fullMount(<HabitList {...props} />);
 		} else {
-			component = shallow(<Dashboard {...props} />);
+			component = shallow(<HabitList {...props} />);
 		}
 
 		return {

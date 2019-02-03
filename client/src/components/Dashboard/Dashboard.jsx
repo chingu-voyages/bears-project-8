@@ -18,13 +18,15 @@ import {
 	Habits,
 } from './Dashboard.styled';
 
+import HabitList from '../HabitList/HabitList';
+
 export class _Dashboard extends Component {
 	static propTypes = {};
 
 	state = {};
 
 	render() {
-		const { history } = this.props;
+		const { history, habits } = this.props;
 
 		return (
 			<Container>
@@ -91,7 +93,8 @@ export class _Dashboard extends Component {
 							<Label>Active</Label>
 							<Label>Passive</Label>
 						</FilterByType>
-						<Habits>Habits</Habits>
+
+						<HabitList habits={habits} />
 					</Dashboard>
 				</Section>
 			</Container>

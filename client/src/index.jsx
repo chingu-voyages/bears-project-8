@@ -32,7 +32,7 @@ if (localStorage.jwtToken) {
 		// Log user out
 		store.dispatch(logoutUser());
 		// Redirect to login
-		history.push('/login');
+		history.push('/auth/login');
 	} else {
 		isAuthenticated = true;
 		// Set user and isAuthenticated
