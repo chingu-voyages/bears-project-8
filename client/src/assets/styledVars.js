@@ -36,4 +36,4 @@ export const $animDuration = '0.2s';
 
 // fonts
 export const $bodyFont = 'Open Sans, sans-serif';
-export const $titleFont = 'Montserrat, sans-serif';
+export const $titleFont = 'Open Sans,Montserrat, sans-serif';
