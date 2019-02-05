@@ -1,11 +1,26 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+// Layered content can get tricky, here are some z-indices to keep in mind
+// background divs: 0
+// background elements: 1 - 10
+// baseline: 20 +
+
 export const Container = styled.div`
 	text-align: center;
+	overflow-x: hidden;
 `;
 
+/* =============================================
+									First Page
+============================================= */
+
 export const FirstPage = styled.div`
+	z-index: 0;
+	* {
+		z-index: 20;
+	}
+	position: relative;
 	width: 100%;
 	min-height: 100vh;
 	background: linear-gradient(15deg, #e8e8e8, #ffffff 80%);
@@ -18,6 +33,7 @@ export const FirstPage = styled.div`
 `;
 
 export const HomeNav = styled.div`
+	z-index: 20;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -63,6 +79,9 @@ export const NavLink = styled(Link)`
 	color: #5e5e5e;
 	font-size: 1.125rem;
 	margin-left: 2rem;
+	&:hover {
+		color: #477d6a;
+	}
 `;
 
 export const LargeTitle = styled.h1`
@@ -77,9 +96,11 @@ export const LargeSubtitle = styled.div`
 	line-height: 1.5;
 `;
 
-export const RegisterButton = styled.button`
+export const RegisterButton = styled.a`
 	display: block;
-	padding: 1rem 4rem;
+	text-decoration: none;
+	width: 200px;
+	padding: 1rem;
 	font-size: 1.125rem;
 	color: #fff;
 	background: #5cbc9a;
@@ -90,7 +111,7 @@ export const RegisterButton = styled.button`
 	transition: 0.3s;
 	&:hover {
 		background: #bbead9;
-		color: #323232;
+		color: #477d6a;
 	}
 `;
 
@@ -100,7 +121,16 @@ export const SmallLink = styled.a`
 	font-size: 0.8rem;
 `;
 
+/* =============================================
+									Middle Section
+============================================= */
+
 export const MiddleSection = styled.div`
+	z-index: 0;
+	& * {
+		z-index: 20;
+	}
+	position: relative;
 	width: 100%;
 	min-height: 100vh;
 	background: #f8f8f8;
@@ -119,6 +149,25 @@ export const MiddleSection = styled.div`
 		display: inline-block;
 		margin: 1rem 0;
 		color: #c4c4c4;
+	}
+
+	#circle__one {
+		z-index: -10;
+		position: absolute;
+		left: 88%;
+		top: -100px;
+	}
+	#circle__two {
+		z-index: -9;
+		position: absolute;
+		left: 94%;
+		top: 135px;
+	}
+	#circle__three {
+		z-index: -10;
+		position: absolute;
+		right: 94%;
+		top: 335px;
 	}
 `;
 
@@ -162,8 +211,18 @@ export const HabitStage = styled.div`
 	}
 `;
 
+/* =============================================
+									Last Page
+============================================= */
+
 export const LastPage = styled.div`
+	z-index: 0;
+	& * {
+		z-index: 20;
+	}
+	position: relative;
 	min-height: 200vh;
+	overflow: hidden;
 	background: linear-gradient(#e8e8e8, #ffffff 43%);
 	padding: 0 2rem;
 
@@ -175,19 +234,49 @@ export const LastPage = styled.div`
 		font-size: 2.125rem;
 		color: #5e5e5e;
 		max-width: 800px;
-		margin: 16rem auto 12rem;
+		margin: 16rem auto 10rem;
 		z-index: 1;
 		position: relative;
 		svg {
 			position: absolute;
 			top: -188px;
 			left: -110px;
-			z-index: 0;
+			z-index: -1;
 		}
 	}
 	${RegisterButton} {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		font-size: 1.5rem;
-		padding: 1rem 9rem;
+		padding: 1rem;
+		height: 80px;
+		min-width: 500px;
+	}
+
+	#circle__four {
+		z-index: -10;
+		position: absolute;
+		right: 94%;
+		top: 335px;
+	}
+	#circle__five {
+		z-index: -10;
+		position: absolute;
+		right: 88%;
+		bottom: 50px;
+	}
+	#circle__six {
+		z-index: -10;
+		position: absolute;
+		right: 83%;
+		bottom: -40px;
+	}
+	#circle__seven {
+		z-index: -10;
+		position: absolute;
+		left: 88%;
+		bottom: 120px;
 	}
 `;
 
@@ -226,6 +315,8 @@ export const AppFeature = styled.div`
 `;
 
 export const StyledScreenshot = styled.img`
+	display: block;
+	margin: 0 auto;
 	width: 100%;
 	max-width: 873px;
 `;
@@ -234,4 +325,7 @@ export const FooterSmall = styled.p`
 	font-size: 0.75rem;
 	color: #7c7c7c;
 	padding: 3rem 0;
+	a {
+		color: #7c7c7c;
+	}
 `;

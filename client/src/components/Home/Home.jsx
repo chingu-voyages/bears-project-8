@@ -43,7 +43,7 @@ const Home = () => (
 			<LargeTitle>Habit Tracker helps you build and maintain your habits.</LargeTitle>
 			<Icon name="logo" />
 			<LargeSubtitle>Sign up to quickly and easily define your first habit.</LargeSubtitle>
-			<RegisterButton>Get Started</RegisterButton>
+			<RegisterButton href="/auth/register">Get Started</RegisterButton>
 		</FirstPage>
 		<MiddleSection>
 			<LargeTitle>Forty percent of what we do every day is an unthinking habit.*</LargeTitle>
@@ -75,6 +75,9 @@ const Home = () => (
 					<p>Celebrate your successes and learn from your missteps.</p>
 				</HabitStage>
 			</HabitStages>
+			<Icon name="circle" width={288} height={288} color="#E7D8EF" id="circle__one" />
+			<Icon name="circle" width={169} height={169} color="#D5F1E7" id="circle__two" />
+			<Icon name="circle" width={260} height={260} color="#D5F1E7" id="circle__three" />
 		</MiddleSection>
 		<LastPage>
 			<LargeTitle>Focus on staying on top of your habits.</LargeTitle>
@@ -100,8 +103,32 @@ const Home = () => (
 				<Icon name="rocket" color="#e5e5e5" />
 				The first step to staying on top of your habits is to define your first habit.
 			</LargeSubtitle>
-			<RegisterButton>Get Started</RegisterButton>
-			<FooterSmall>Icon attribution can go down here</FooterSmall>
+			<RegisterButton href="/auth/register">Get Started</RegisterButton>
+			<FooterSmall>
+				<div>
+					Icons made by{' '}
+					<a href="https://www.freepik.com/" title="Freepik">
+						Freepik
+					</a>{' '}
+					from{' '}
+					<a href="https://www.flaticon.com/" title="Flaticon">
+						www.flaticon.com
+					</a>{' '}
+					is licensed by{' '}
+					<a
+						href="http://creativecommons.org/licenses/by/3.0/"
+						title="Creative Commons BY 3.0"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						CC 3.0 BY
+					</a>
+				</div>
+			</FooterSmall>
+			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__four" />
+			<Icon name="circle" width={280} height={280} color="#D5F1E7" id="circle__five" />
+			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__six" />
+			<Icon name="circle" width={290} height={290} color="#D5F1E7" id="circle__seven" />
 		</LastPage>
 	</Container>
 );

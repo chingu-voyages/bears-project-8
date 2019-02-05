@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Icon = ({ name, color }) => {
+const Icon = ({ name, color, width, height, id }) => {
 	switch (name) {
 		case 'logo':
 			return (
-				<svg viewBox="26 70 274 226" className={`icon__${name}`}>
+				<svg viewBox="26 70 274 226" className="icon__logo">
 					<path
 						d="M278.9 112.382L263.104 85.1174L180.445 227.498L129.812 140.079H97.7868L180.445 283.108L278.9 112.382Z"
 						fill="#BBEAD9"
@@ -117,6 +117,18 @@ const Icon = ({ name, color }) => {
 					/>
 				</svg>
 			);
+		case 'circle':
+			return (
+				<svg
+					width={width}
+					height={height}
+					viewBox="0 0 100 100"
+					className="icon__circle"
+					id={id}
+				>
+					<circle cx="50" cy="50" r="50" fill={color} />
+				</svg>
+			);
 		default:
 			return <div>No icon provided</div>;
 	}
@@ -125,10 +137,16 @@ const Icon = ({ name, color }) => {
 Icon.propTypes = {
 	name: PropTypes.string.isRequired,
 	color: PropTypes.string,
+	width: PropTypes.number,
+	height: PropTypes.number,
+	id: PropTypes.string,
 };
 
 Icon.defaultProps = {
 	color: 'black',
+	width: 100,
+	height: 100,
+	id: '',
 };
 
 export default Icon;
