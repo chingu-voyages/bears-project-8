@@ -107,7 +107,7 @@ export const LargeSubtitle = styled.div`
 	line-height: 1.5;
 `;
 
-export const RegisterButton = styled.a`
+export const RegisterButton = styled(Link)`
 	display: block;
 	text-decoration: none;
 	width: 200px;

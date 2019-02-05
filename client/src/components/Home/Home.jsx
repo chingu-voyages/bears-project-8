@@ -50,7 +50,7 @@ const Home = () => (
 			<LargeTitle>Habit Tracker helps you build and maintain your habits.</LargeTitle>
 			<Icon name="logo" />
 			<LargeSubtitle>Sign up to quickly and easily define your first habit.</LargeSubtitle>
-			<RegisterButton href="/auth/register">Get Started</RegisterButton>
+			<RegisterButton to="/auth/register">Get Started</RegisterButton>
 		</FirstPage>
 		<MiddleSection>
 			<LargeTitle>Forty percent of what we do every day is an unthinking habit.*</LargeTitle>
@@ -110,7 +110,7 @@ const Home = () => (
 				<Icon name="rocket" color={$greyLighter} />
 				The first step to staying on top of your habits is to define your first habit.
 			</LargeSubtitle>
-			<RegisterButton href="/auth/register">Get Started</RegisterButton>
+			<RegisterButton to="/auth/register">Get Started</RegisterButton>
 			<FooterSmall>
 				<div>
 					Icons made by{' '}
