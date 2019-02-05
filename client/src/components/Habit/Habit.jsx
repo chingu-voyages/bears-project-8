@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Title } from './Habit.styled';
+import { Container, Title, FullHabit, FlexContainer, Description } from './Habit.styled';
 
 import Button from '../Shared/Button/Button';
+import Label from '../Shared/Label/Label';
 
 class Habit extends Component {
 	static propTypes = {
@@ -14,29 +15,57 @@ class Habit extends Component {
 	};
 
 	state = {
-		isCollapsed: false,
+		isCollapsed: true,
+	};
+
+	toggleCollapse = () => this.setState(state => ({ isCollapsed: !state.isCollapsed }));
+
+	handleLogHabit = e => {
+		e.stopPropagation();
 	};
 
 	render() {
 		const { habit } = this.props;
 		const { isCollapsed } = this.state;
 
-		const dueDate = 'Due Tomorrow';
-
 		return (
-			<Container>
+			<Container onClick={this.toggleCollapse}>
 				{isCollapsed ? (
-					<p>{habit.title}</p>
-				) : (
 					<Fragment>
-						<div>
-							<Title>{habit.title}</Title>
-							<p>{habit.frequency}</p>
-						</div>
-						<div>
-							<Button>{dueDate}</Button>
-						</div>
+						<p>
+							<strong>{habit.title}</strong> <br /> <em>{habit.frequency}</em>{' '}
+						</p>
+						<Button size="small">{habit.status}</Button>
 					</Fragment>
+				) : (
+					<FullHabit>
+						<strong>{habit.title}</strong>
+						<FlexContainer>
+							{habit.tags &&
+								habit.tags.length > 0 &&
+								habit.tags.map(tag => (
+									<Label onClick={() => null} key={tag}>
+										{tag}
+									</Label>
+								))}
+						</FlexContainer>
+						<Button size="small">{habit.status}</Button>
+						<Description>{habit.description}</Description>
+						<small>{habit.frequency}</small>
+						<FlexContainer>
+							<Label>{habit.difficulty}</Label>
+							<Label>{habit.type}</Label>
+						</FlexContainer>
+						<Button
+							clickHandler={this.handleLogHabit}
+							type="filled"
+							size="small"
+							bgColor="#5cbc9a"
+							color="#fff"
+						>
+							Log Habit
+						</Button>
+					</FullHabit>
 				)}
 			</Container>
 		);

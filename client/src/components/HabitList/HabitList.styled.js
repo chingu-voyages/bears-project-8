@@ -6,9 +6,8 @@ export const Container = styled.section`
 	grid-column: 1/3;
 	padding: 2rem 3rem;
 	overflow-y: auto;
+	max-height: 500px;
 `;
-
-export const Habit = styled.div``;
 
 export const NoHabits = styled.div`
 	height: 100%;
