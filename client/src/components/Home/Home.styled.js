@@ -10,6 +10,11 @@ export const FirstPage = styled.div`
 	min-height: 100vh;
 	background: linear-gradient(15deg, #e8e8e8, #ffffff 80%);
 	padding: 160px 2rem 4rem;
+
+	.icon__logo {
+		height: 322px;
+		padding: 3rem 0;
+	}
 `;
 
 export const HomeNav = styled.div`
@@ -38,11 +43,11 @@ export const Logo = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-`;
 
-export const SmallLogo = styled.svg`
-	height: 60px;
-	padding-right: 1rem;
+	.icon__logo {
+		height: 60px;
+		padding-right: 1rem;
+	}
 `;
 
 export const NavLinks = styled.div``;
@@ -64,11 +69,6 @@ export const LargeTitle = styled.h1`
 	color: #5e5e5e;
 	font-size: 2.25rem;
 	font-weight: 600;
-`;
-
-export const LargeLogo = styled.svg`
-	width: 274px;
-	padding: 3rem 0;
 `;
 
 export const LargeSubtitle = styled.div`
@@ -131,11 +131,6 @@ export const FlexRow = styled.div`
 	margin: 0 auto;
 `;
 
-export const StyledIcon = styled.svg`
-	width: 99px;
-	height: 99px;
-`;
-
 export const HabitStage = styled.div`
 	width: 170px;
 	h3 {
@@ -148,6 +143,9 @@ export const HabitStage = styled.div`
 		font-size: 0.9rem;
 		color: #878787;
 		line-height: 1.75;
+	}
+	svg {
+		height: 99px;
 	}
 `;
 
