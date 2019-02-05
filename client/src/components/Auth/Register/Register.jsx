@@ -36,10 +36,10 @@ class Register extends Component {
 		return null;
 	}
 
-	componentDidMount = () => {
+	componentDidMount() {
 		const { auth, history } = this.props;
 		if (auth.isAuthenticated) history.replace('/dashboard');
-	};
+	}
 
 	handleChange = e => {
 		const { name, value } = e.target;
