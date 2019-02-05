@@ -33,6 +33,7 @@ export const $mint = '#5cbc9a';
 export const $mintDark = '#477d6a';
 export const $tomato = '#df5146';
 export const $dangerRed = '#d20f0f';
+export const $purpleLight = '#e7d8ef';
 
 // Screen sizes
 export const $desktopWidth = '1280px';

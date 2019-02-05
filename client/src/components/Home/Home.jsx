@@ -22,7 +22,13 @@ import {
 } from './Home.styled';
 import AppScreenshot from '../../assets/images/appScreenshot.png';
 import Icon from '../Shared/Icon/Icon';
-import { $mintLight } from '../../assets/styledVars';
+import {
+	$mintLight,
+	$purpleLight,
+	$elfGreen,
+	$greyDark,
+	$greyLighter,
+} from '../../assets/styledVars';
 
 const Home = () => (
 	<Container>
@@ -56,27 +62,27 @@ const Home = () => (
 			</LargeSubtitle>
 			<HabitStages>
 				<HabitStage>
-					<Icon name="write" color="#5CBC9A" />
+					<Icon name="write" color={$elfGreen} />
 					<h3>Define</h3>
 					<p>Choose which habits you want in your life. Start small.</p>
 				</HabitStage>
 				<HabitStage>
-					<Icon name="bell" color="#878787" />
+					<Icon name="bell" color={$greyDark} />
 					<h3>Remind</h3>
 					<p>It’s easy to forget — receive an alert when it’s time to start.</p>
 				</HabitStage>
 				<HabitStage>
-					<Icon name="log" color="#878787" />
+					<Icon name="log" color={$greyDark} />
 					<h3>Log</h3>
 					<p>Keep track of your habits to get insights based on solid data.</p>
 				</HabitStage>
 				<HabitStage>
-					<Icon name="computerGraph" color="#878787" />
+					<Icon name="computerGraph" color={$greyDark} />
 					<h3>Review</h3>
 					<p>Celebrate your successes and learn from your missteps.</p>
 				</HabitStage>
 			</HabitStages>
-			<Icon name="circle" width={288} height={288} color="#E7D8EF" id="circle__one" />
+			<Icon name="circle" width={288} height={288} color={$purpleLight} id="circle__one" />
 			<Icon name="circle" width={169} height={169} color={$mintLight} id="circle__two" />
 			<Icon name="circle" width={260} height={260} color={$mintLight} id="circle__three" />
 		</MiddleSection>
@@ -84,24 +90,24 @@ const Home = () => (
 			<LargeTitle>Focus on staying on top of your habits.</LargeTitle>
 			<AppFeatures>
 				<AppFeature>
-					<Icon name="tick" color="#5CBC9A" />
+					<Icon name="tick" color={$elfGreen} />
 					<h3>View Habits</h3>
 					<p>Easily filter through your habits at a glance</p>
 				</AppFeature>
 				<AppFeature>
-					<Icon name="tick" color="#5CBC9A" />
+					<Icon name="tick" color={$elfGreen} />
 					<h3>Log Habits</h3>
 					<p>Keep track of when you complete your habits</p>
 				</AppFeature>
 				<AppFeature>
-					<Icon name="tick" color="#5CBC9A" />
+					<Icon name="tick" color={$elfGreen} />
 					<h3>Review Habits</h3>
 					<p>See insights about your habits over time</p>
 				</AppFeature>
 			</AppFeatures>
 			<StyledScreenshot src={AppScreenshot} alt="Screenshot of the app" />
 			<LargeSubtitle>
-				<Icon name="rocket" color="#e5e5e5" />
+				<Icon name="rocket" color={$greyLighter} />
 				The first step to staying on top of your habits is to define your first habit.
 			</LargeSubtitle>
 			<RegisterButton href="/auth/register">Get Started</RegisterButton>
@@ -126,9 +132,9 @@ const Home = () => (
 					</a>
 				</div>
 			</FooterSmall>
-			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__four" />
+			<Icon name="circle" width={180} height={180} color={$purpleLight} id="circle__four" />
 			<Icon name="circle" width={280} height={280} color={$mintLight} id="circle__five" />
-			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__six" />
+			<Icon name="circle" width={180} height={180} color={$purpleLight} id="circle__six" />
 			<Icon name="circle" width={290} height={290} color={$mintLight} id="circle__seven" />
 		</LastPage>
 	</Container>
