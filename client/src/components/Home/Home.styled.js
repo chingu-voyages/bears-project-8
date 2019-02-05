@@ -68,7 +68,7 @@ export const NavLink = styled(Link)`
 export const LargeTitle = styled.h1`
 	color: #5e5e5e;
 	font-size: 2.25rem;
-	font-weight: 600;
+	font-weight: 500;
 `;
 
 export const LargeSubtitle = styled.div`
@@ -129,6 +129,14 @@ export const FlexRow = styled.div`
 	max-width: 860px;
 	padding: 4rem 0;
 	margin: 0 auto;
+
+	@media (max-width: 700px) {
+		display: block;
+	}
+`;
+
+export const HabitStages = styled(FlexRow)`
+	padding: 5rem 0 5.5rem;
 `;
 
 export const HabitStage = styled.div`
@@ -147,11 +155,17 @@ export const HabitStage = styled.div`
 	svg {
 		height: 99px;
 	}
+
+	@media (max-width: 700px) {
+		margin: 0 auto 3rem;
+		width: 50%;
+	}
 `;
 
 export const LastPage = styled.div`
 	min-height: 200vh;
 	background: linear-gradient(#e8e8e8, #ffffff 43%);
+	padding: 0 2rem;
 
 	${LargeTitle} {
 		margin-top: 6rem;
@@ -161,13 +175,13 @@ export const LastPage = styled.div`
 		font-size: 2.125rem;
 		color: #5e5e5e;
 		max-width: 800px;
-		margin: 14rem auto 12rem;
+		margin: 16rem auto 12rem;
 		z-index: 1;
 		position: relative;
 		svg {
 			position: absolute;
-			top: -137px;
-			left: -163px;
+			top: -188px;
+			left: -110px;
 			z-index: 0;
 		}
 	}
@@ -177,14 +191,19 @@ export const LastPage = styled.div`
 	}
 `;
 
-export const AppFeatures = styled.div`
+export const AppFeatures = styled(FlexRow)`
+	max-width: 770px;
+`;
+
+export const AppFeature = styled.div`
 	position: relative;
-	width: 200px;
+	width: 210px;
 	text-align: left;
 	svg {
 		position: absolute;
 		top: -4px;
 		left: -21px;
+		width: 36px;
 	}
 	h3 {
 		display: inline-block;
@@ -197,7 +216,18 @@ export const AppFeatures = styled.div`
 		margin-top: 2rem;
 		color: #7c7c7c;
 		font-size: 1.125rem;
+		line-height: 1.5;
 	}
+
+	@media (max-width: 700px) {
+		margin: 0 auto 4rem;
+		width: 66%;
+	}
+`;
+
+export const StyledScreenshot = styled.img`
+	width: 100%;
+	max-width: 873px;
 `;
 
 export const FooterSmall = styled.p`

@@ -12,11 +12,13 @@ import {
 	RegisterButton,
 	MiddleSection,
 	SmallLink,
-	FlexRow,
+	HabitStages,
 	HabitStage,
 	LastPage,
 	AppFeatures,
+	AppFeature,
 	FooterSmall,
+	StyledScreenshot,
 } from './Home.styled';
 import AppScreenshot from '../../assets/images/appScreenshot.png';
 import Icon from '../Shared/Icon/Icon';
@@ -51,7 +53,7 @@ const Home = () => (
 			<SmallLink href="https://dornsife.usc.edu/assets/sites/545/docs/Wendy_Wood_Research_Articles/Habits/Neal.Wood.Quinn.2006_Habits_a_repeat_performance.pdf">
 				* Duke University (2006) - Current Trends in Psychological Science
 			</SmallLink>
-			<FlexRow>
+			<HabitStages>
 				<HabitStage>
 					<Icon name="write" color="#5CBC9A" />
 					<h3>Define</h3>
@@ -72,28 +74,28 @@ const Home = () => (
 					<h3>Review</h3>
 					<p>Celebrate your successes and learn from your missteps.</p>
 				</HabitStage>
-			</FlexRow>
+			</HabitStages>
 		</MiddleSection>
 		<LastPage>
 			<LargeTitle>Focus on staying on top of your habits.</LargeTitle>
-			<FlexRow>
-				<AppFeatures>
+			<AppFeatures>
+				<AppFeature>
 					<Icon name="tick" color="#5CBC9A" />
 					<h3>View Habits</h3>
-					<p>Easily see all your habits at a glance</p>
-				</AppFeatures>
-				<AppFeatures>
+					<p>Easily filter through your habits at a glance</p>
+				</AppFeature>
+				<AppFeature>
 					<Icon name="tick" color="#5CBC9A" />
-					<h3>Logs Habits</h3>
+					<h3>Log Habits</h3>
 					<p>Keep track of when you complete your habits</p>
-				</AppFeatures>
-				<AppFeatures>
+				</AppFeature>
+				<AppFeature>
 					<Icon name="tick" color="#5CBC9A" />
 					<h3>Review Habits</h3>
-					<p>See insights about yours habits over time</p>
-				</AppFeatures>
-			</FlexRow>
-			<img src={AppScreenshot} alt="Screenshot of the app" width="873" />
+					<p>See insights about your habits over time</p>
+				</AppFeature>
+			</AppFeatures>
+			<StyledScreenshot src={AppScreenshot} alt="Screenshot of the app" />
 			<LargeSubtitle>
 				<Icon name="rocket" color="#e5e5e5" />
 				The first step to staying on top of your habits is to define your first habit.
