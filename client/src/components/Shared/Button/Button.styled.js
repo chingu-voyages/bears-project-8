@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { $white } from '../../../assets/styledVars';
 
@@ -14,6 +14,13 @@ const sizeFunc = size => {
 			width: 240px; 
 			height: 60px;
 		`;
+		case 'icon':
+			return `
+			width: 28px; 
+			height: 28px;
+			font-size: 120%;
+			line-height: 0;
+		`;
 		default:
 			return `
 			width: 120px;
@@ -27,6 +34,9 @@ export const ButtonWrapper = styled.button`
 	border-radius: 3px;
 	background-color: ${({ bgColor }) => bgColor || $white};
 	color: ${({ color }) => `${color}`};
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	${({ size }) => sizeFunc(size)}
 

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Title, FullHabit, FlexContainer, Description } from './Habit.styled';
+import { Container, FullHabit, FlexContainer, Description } from './Habit.styled';
 
 import Button from '../Shared/Button/Button';
 import Label from '../Shared/Label/Label';
@@ -24,12 +24,20 @@ class Habit extends Component {
 		e.stopPropagation();
 	};
 
+	handleEditHabit = e => {
+		e.stopPropagation();
+	};
+
+	handleDeleteHabit = e => {
+		e.stopPropagation();
+	};
+
 	render() {
 		const { habit } = this.props;
 		const { isCollapsed } = this.state;
 
 		return (
-			<Container onClick={this.toggleCollapse}>
+			<Container isCollapsed={isCollapsed} onClick={this.toggleCollapse}>
 				{isCollapsed ? (
 					<Fragment>
 						<p>
@@ -56,15 +64,33 @@ class Habit extends Component {
 							<Label>{habit.difficulty}</Label>
 							<Label>{habit.type}</Label>
 						</FlexContainer>
-						<Button
-							clickHandler={this.handleLogHabit}
-							type="filled"
-							size="small"
-							bgColor="#5cbc9a"
-							color="#fff"
-						>
-							Log Habit
-						</Button>
+						<FlexContainer alignCenter>
+							<Button
+								clickHandler={this.handleLogHabit}
+								type="filled"
+								size="small"
+								bgColor="#5cbc9a"
+								color="#fff"
+							>
+								Log Habit
+							</Button>
+							<Button
+								bgColor="#baafbe"
+								color="#fff"
+								clickHandler={this.handleEditHabit}
+								size="icon"
+							>
+								✎
+							</Button>
+							<Button
+								bgColor="#df5146"
+								color="#fff"
+								clickHandler={this.handleDeleteHabit}
+								size="icon"
+							>
+								&times;
+							</Button>
+						</FlexContainer>
 					</FullHabit>
 				)}
 			</Container>
