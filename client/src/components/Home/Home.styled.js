@@ -101,7 +101,7 @@ export const SmallLink = styled.a`
 export const MiddleSection = styled.div`
 	width: 100%;
 	min-height: 100vh;
-	background: #f8f8f8;
+	background: #fff;
 	padding: 5rem 2rem 0;
 
 	${LargeTitle} {
