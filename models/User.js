@@ -9,6 +9,13 @@ const userSchema = new Schema({
 	password: { type: String, required: true },
 	avatar: { type: String, required: true },
 	dateJoined: { type: Date, default: Date.now },
+	// about: { type: String, required: true },
+	goals: [
+		{
+			title: { type: String, required: true },
+			description: { type: String, required: true },
+		},
+	],
 	// habits assigned to this user
 	habits: {
 		type: [mongoose.Schema.Types.ObjectId],
