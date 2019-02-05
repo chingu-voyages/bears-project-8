@@ -74,14 +74,16 @@ export const LargeLogo = styled.svg`
 export const LargeSubtitle = styled.div`
 	font-size: 1.5rem;
 	color: #878787;
+	line-height: 1.5;
 `;
 
-export const TopRegisterButton = styled.button`
+export const RegisterButton = styled.button`
+	display: block;
 	padding: 1rem 4rem;
 	font-size: 1.125rem;
 	color: #fff;
 	background: #5cbc9a;
-	margin-top: 3.5rem;
+	margin: 3.5rem auto 0;
 	border-radius: 6px;
 	cursor: pointer;
 	border: none;
@@ -101,7 +103,7 @@ export const SmallLink = styled.a`
 export const MiddleSection = styled.div`
 	width: 100%;
 	min-height: 100vh;
-	background: #fff;
+	background: #f8f8f8;
 	padding: 5rem 2rem 0;
 
 	${LargeTitle} {
@@ -120,7 +122,7 @@ export const MiddleSection = styled.div`
 	}
 `;
 
-export const HabitStages = styled.div`
+export const FlexRow = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
@@ -147,4 +149,61 @@ export const HabitStage = styled.div`
 		color: #878787;
 		line-height: 1.75;
 	}
+`;
+
+export const LastPage = styled.div`
+	min-height: 200vh;
+	background: linear-gradient(#e8e8e8, #ffffff 43%);
+
+	${LargeTitle} {
+		margin-top: 6rem;
+	}
+	${LargeSubtitle} {
+		display: inline-block;
+		font-size: 2.125rem;
+		color: #5e5e5e;
+		max-width: 800px;
+		margin: 14rem auto 12rem;
+		z-index: 1;
+		position: relative;
+		svg {
+			position: absolute;
+			top: -137px;
+			left: -163px;
+			z-index: 0;
+		}
+	}
+	${RegisterButton} {
+		font-size: 1.5rem;
+		padding: 1rem 9rem;
+	}
+`;
+
+export const AppFeatures = styled.div`
+	position: relative;
+	width: 200px;
+	text-align: left;
+	svg {
+		position: absolute;
+		top: -4px;
+		left: -21px;
+	}
+	h3 {
+		display: inline-block;
+		color: #5e5e5e;
+		font-size: 1.5rem;
+		font-weight: 400;
+		padding-left: 2rem;
+	}
+	p {
+		margin-top: 2rem;
+		color: #7c7c7c;
+		font-size: 1.125rem;
+	}
+`;
+
+export const FooterSmall = styled.p`
+	font-size: 0.75rem;
+	color: #7c7c7c;
+	padding: 3rem 0;
 `;
