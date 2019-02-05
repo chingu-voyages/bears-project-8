@@ -48,6 +48,10 @@ export const HomeNav = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 0 2rem;
+
+	@media (max-width: 680px) {
+		font-size: 12px;
+	}
 `;
 
 export const NavContent = styled.div`
@@ -193,6 +197,10 @@ export const FlexRow = styled.div`
 
 export const HabitStages = styled(FlexRow)`
 	padding: 5rem 0 5.5rem;
+
+	@media (max-width: 700px) {
+		padding: 6.5rem 0 5.5rem;
+	}
 `;
 
 export const HabitStage = styled.div`
@@ -234,7 +242,7 @@ export const LastPage = styled.div`
 	padding: 0 2rem;
 
 	${LargeTitle} {
-		margin-top: 6rem;
+		margin: 6rem auto 1rem;
 	}
 	${LargeSubtitle} {
 		display: inline-block;
@@ -259,6 +267,11 @@ export const LastPage = styled.div`
 		padding: 1rem;
 		height: 80px;
 		min-width: 500px;
+
+		@media (max-width: 650px) {
+			min-width: 90%;
+			width: 80%;
+		}
 	}
 
 	#circle__four {
