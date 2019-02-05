@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-// Layered content can get tricky, here are some z-indices to keep in mind
-// background divs: 0
-// background elements: 1 - 10
-// baseline: 20 +
+import {
+	$greyLightest,
+	$greyLighter,
+	$greyLight,
+	$greyDark,
+	$greyDarker,
+	$mintLight,
+	$elfGreen,
+	$mintDark,
+	$ash,
+} from '../../assets/styledVars';
 
 export const Container = styled.div`
 	text-align: center;
@@ -23,7 +29,7 @@ export const FirstPage = styled.div`
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
-	background: linear-gradient(15deg, #e8e8e8, #ffffff 80%);
+	background: linear-gradient(15deg, ${$greyLighter}, #fff 80%);
 	padding: 160px 2rem 4rem;
 
 	.icon__logo {
@@ -54,7 +60,7 @@ export const NavContent = styled.div`
 
 export const Logo = styled.div`
 	font-size: 24;
-	color: #323232;
+	color: ${$greyDarker};
 	font-size: 1.5rem;
 	display: flex;
 	justify-content: center;
@@ -75,24 +81,25 @@ export const NavLink = styled(Link)`
 	padding: 0.5rem 2rem;
 	text-decoration: none;
 	background: transparent;
-	${({ highlight }) => highlight && 'border: 2px solid #D5F1E7; &:hover{ background: #d5f1e7 }'};
-	color: #5e5e5e;
+	${({ focused }) =>
+		focused && `border: 2px solid ${$mintLight}; &:hover{ background: ${$mintLight} }`};
+	color: ${$greyDark};
 	font-size: 1.125rem;
 	margin-left: 2rem;
 	&:hover {
-		color: #477d6a;
+		color: ${$mintDark};
 	}
 `;
 
 export const LargeTitle = styled.h1`
-	color: #5e5e5e;
+	color: ${$ash};
 	font-size: 2.25rem;
 	font-weight: 500;
 `;
 
 export const LargeSubtitle = styled.div`
 	font-size: 1.5rem;
-	color: #878787;
+	color: ${$greyDark};
 	line-height: 1.5;
 `;
 
@@ -103,21 +110,21 @@ export const RegisterButton = styled.a`
 	padding: 1rem;
 	font-size: 1.125rem;
 	color: #fff;
-	background: #5cbc9a;
+	background: ${$elfGreen};
 	margin: 3.5rem auto 0;
 	border-radius: 6px;
 	cursor: pointer;
 	border: none;
 	transition: 0.3s;
 	&:hover {
-		background: #bbead9;
-		color: #477d6a;
+		background: ${$mintLight};
+		color: ${$mintDark};
 	}
 `;
 
 export const SmallLink = styled.a`
 	text-decoration: none;
-	color: #5e5e5e;
+	color: $
 	font-size: 0.8rem;
 `;
 
@@ -133,7 +140,7 @@ export const MiddleSection = styled.div`
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
-	background: #f8f8f8;
+	background: ${$greyLightest};
 	padding: 5rem 2rem 0;
 
 	${LargeTitle} {
@@ -148,7 +155,7 @@ export const MiddleSection = styled.div`
 	${SmallLink} {
 		display: inline-block;
 		margin: 1rem 0;
-		color: #c4c4c4;
+		color: ${$greyLight};
 	}
 
 	#circle__one {
@@ -191,14 +198,14 @@ export const HabitStages = styled(FlexRow)`
 export const HabitStage = styled.div`
 	width: 170px;
 	h3 {
-		color: #5e5e5e;
+		color: ${$ash};
 		font-weight: 400;
 		text-align: center;
 		padding: 1.5rem 0;
 	}
 	p {
 		font-size: 0.9rem;
-		color: #878787;
+		color: ${$greyDark};
 		line-height: 1.75;
 	}
 	svg {
@@ -223,7 +230,7 @@ export const LastPage = styled.div`
 	position: relative;
 	min-height: 200vh;
 	overflow: hidden;
-	background: linear-gradient(#e8e8e8, #ffffff 43%);
+	background: linear-gradient(${$greyLighter}, #fff 43%);
 	padding: 0 2rem;
 
 	${LargeTitle} {
@@ -232,7 +239,7 @@ export const LastPage = styled.div`
 	${LargeSubtitle} {
 		display: inline-block;
 		font-size: 2.125rem;
-		color: #5e5e5e;
+		color: ${$ash};
 		max-width: 800px;
 		margin: 16rem auto 10rem;
 		z-index: 1;
@@ -296,14 +303,14 @@ export const AppFeature = styled.div`
 	}
 	h3 {
 		display: inline-block;
-		color: #5e5e5e;
+		color: ${$ash};
 		font-size: 1.5rem;
 		font-weight: 400;
 		padding-left: 2rem;
 	}
 	p {
 		margin-top: 2rem;
-		color: #7c7c7c;
+		color: ${$greyDark};
 		font-size: 1.125rem;
 		line-height: 1.5;
 	}
@@ -323,9 +330,9 @@ export const StyledScreenshot = styled.img`
 
 export const FooterSmall = styled.p`
 	font-size: 0.75rem;
-	color: #7c7c7c;
+	color: ${$greyDark};
 	padding: 3rem 0;
 	a {
-		color: #7c7c7c;
+		color: ${$greyDark};
 	}
 `;

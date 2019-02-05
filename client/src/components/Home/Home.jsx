@@ -22,6 +22,7 @@ import {
 } from './Home.styled';
 import AppScreenshot from '../../assets/images/appScreenshot.png';
 import Icon from '../Shared/Icon/Icon';
+import { $mintLight } from '../../assets/styledVars';
 
 const Home = () => (
 	<Container>
@@ -32,7 +33,7 @@ const Home = () => (
 					Habit Tracker
 				</Logo>
 				<NavLinks>
-					<NavLink to="/auth/register" highlight>
+					<NavLink to="/auth/register" focused>
 						Register
 					</NavLink>
 					<NavLink to="/auth/login">Login</NavLink>
@@ -76,8 +77,8 @@ const Home = () => (
 				</HabitStage>
 			</HabitStages>
 			<Icon name="circle" width={288} height={288} color="#E7D8EF" id="circle__one" />
-			<Icon name="circle" width={169} height={169} color="#D5F1E7" id="circle__two" />
-			<Icon name="circle" width={260} height={260} color="#D5F1E7" id="circle__three" />
+			<Icon name="circle" width={169} height={169} color={$mintLight} id="circle__two" />
+			<Icon name="circle" width={260} height={260} color={$mintLight} id="circle__three" />
 		</MiddleSection>
 		<LastPage>
 			<LargeTitle>Focus on staying on top of your habits.</LargeTitle>
@@ -126,9 +127,9 @@ const Home = () => (
 				</div>
 			</FooterSmall>
 			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__four" />
-			<Icon name="circle" width={280} height={280} color="#D5F1E7" id="circle__five" />
+			<Icon name="circle" width={280} height={280} color={$mintLight} id="circle__five" />
 			<Icon name="circle" width={180} height={180} color="#E7D8EF" id="circle__six" />
-			<Icon name="circle" width={290} height={290} color="#D5F1E7" id="circle__seven" />
+			<Icon name="circle" width={290} height={290} color={$mintLight} id="circle__seven" />
 		</LastPage>
 	</Container>
 );
