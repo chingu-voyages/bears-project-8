@@ -15,7 +15,6 @@ import {
 	Label,
 	SidebarSection,
 	SidebarOption,
-	Habits,
 } from './Dashboard.styled';
 
 import HabitList from '../HabitList/HabitList';
@@ -43,25 +42,25 @@ export class _Dashboard extends Component {
 				<Section>
 					<Sidebar>
 						<SidebarSection>
-							<SidebarOption>
+							<SidebarOption onClick={() => null}>
 								All Habits
 								<span>4</span>
 							</SidebarOption>
-							<SidebarOption>
+							<SidebarOption onClick={() => null}>
 								Due Habits
 								<span>4</span>
 							</SidebarOption>
-							<SidebarOption>
+							<SidebarOption onClick={() => null}>
 								Upcoming Habits
 								<span>4</span>
 							</SidebarOption>
 						</SidebarSection>
 						<SidebarSection>
-							<SidebarOption>
+							<SidebarOption onClick={() => null}>
 								Logbook
 								<span>324</span>
 							</SidebarOption>
-							<SidebarOption>
+							<SidebarOption onClick={() => null}>
 								Insights
 								<span />
 							</SidebarOption>

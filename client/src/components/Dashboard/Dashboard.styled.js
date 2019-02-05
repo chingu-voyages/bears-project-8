@@ -130,9 +130,3 @@ export const FilterByType = styled.div`
 		margin-right: 0.5rem;
 	}
 `;
-
-export const Habits = styled.div`
-	grid-column: 1/3;
-	padding: 2rem 3rem;
-	overflow-y: auto;
-`;
