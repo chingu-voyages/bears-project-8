@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Breadcrumb from './Breadcrumbs.styled';
+
 const Breadcrumbs = ({ children, onClick }) => (
-	<button type="button" onClick={onClick}>
+	<Breadcrumb type="button" onClick={onClick}>
 		{children}
-	</button>
+	</Breadcrumb>
 );
 
 Breadcrumbs.propTypes = {

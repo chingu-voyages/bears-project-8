@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Label = ({ children, onClick }) => (
-	<button type="button" onKeyDown={onClick} onClick={onClick}>
+import LabelBtn from './Label.styled';
+
+const Label = ({ children, onClick, ...rest }) => (
+	<LabelBtn type="button" onKeyDown={onClick} onClick={onClick} {...rest}>
 		{children}
-	</button>
+	</LabelBtn>
 );
 
 Label.propTypes = {
