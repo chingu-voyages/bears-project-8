@@ -35,5 +35,5 @@ export const $desktopWidth = '1280px';
 export const $animDuration = '0.2s';
 
 // fonts
-export const $bodyFont = 'Open Sans, sans-serif';
-export const $titleFont = 'Open Sans, Montserrat, sans-serif';
+export const $bodyFont = 'Roboto, sans-serif';
+export const $titleFont = 'Roboto, Montserrat, sans-serif';
