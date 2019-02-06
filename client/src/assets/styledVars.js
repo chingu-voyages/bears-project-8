@@ -14,7 +14,6 @@ export const $dark = '#2f1e36';
 export const $white = '#fff';
 export const $black = '#000';
 export const $item = '#45304e';
-export const $elfGreen = '#5cbc9a';
 
 // Lightest to darkest grey colors
 export const $greyLightest = '#f0f0f0';
@@ -25,7 +24,7 @@ export const $greyDarker = '#2b2f30';
 export const $greyDarkest = '#111';
 
 // Hightlights
-export const $mint = '#5cbc9a';
+export const $elfGreen = '#5cbc9a';
 export const $tomato = '#df5146';
 export const $dangerRed = '#d20f0f';
 

@@ -8,7 +8,7 @@ import {
 	$greyDark,
 	$greyDarker,
 	$dangerRed,
-	$mint,
+	$elfGreen,
 	$tomato,
 } from '../../../assets/styledVars';
 
@@ -185,7 +185,7 @@ export const StyledTagInput = styled.div`
 
 			mark {
 				font-weight: 600;
-				background: ${$mint};
+				background: ${$elfGreen};
 			}
 		}
 
