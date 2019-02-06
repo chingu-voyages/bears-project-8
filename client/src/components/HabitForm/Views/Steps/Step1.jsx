@@ -31,7 +31,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 		</Row>
 		<Row>
 			<FormGroup
-				title="How would you like to be reminded?"
+				title="How often do you want to be reminded?"
 				description="Keep your habits fresh with a cue"
 				name="reminderEvery"
 				value={reminderEvery}
