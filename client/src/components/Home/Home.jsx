@@ -1,9 +1,16 @@
 import React from 'react';
-import { Container, Header } from './Home.styled';
+import { Container } from './Home.styled';
+import HomeNav from './HomeNav/HomeNav';
+import FirstScreen from './Screens/FirstScreen';
+import MiddleScreen from './Screens/MiddleScreen';
+import LastScreen from './Screens/LastScreen';
 
 const Home = () => (
 	<Container>
-		<Header className="App-header">Habit Tracker (Coming soon)</Header>
+		<HomeNav />
+		<FirstScreen />
+		<MiddleScreen />
+		<LastScreen />
 	</Container>
 );
 
