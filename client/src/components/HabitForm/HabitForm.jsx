@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Header, Footer } from './HabitForm.styled';
+import PageContainer from '../Shared/PageContainer/PageContainer';
+import { Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
@@ -70,7 +71,7 @@ export default class HabitForm extends Component {
 		const { step } = this.state;
 		const { onSubmit } = this.props;
 		return (
-			<Container>
+			<PageContainer>
 				<Header>Add a New Habit</Header>
 				<Views
 					{...this.state}
@@ -90,7 +91,7 @@ export default class HabitForm extends Component {
 						onSubmit={onSubmit}
 					/>
 				</Footer>
-			</Container>
+			</PageContainer>
 		);
 	}
 }
