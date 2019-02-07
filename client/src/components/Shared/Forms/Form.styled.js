@@ -54,7 +54,7 @@ export const Button = styled.button`
 `;
 
 export const generalInputStyles = `
-	background: ${lighten(0.6, $grey)};
+	background: ${lighten(0.5, $grey)};
 	border: none;
 	border-radius: 3px;
 	font-size: 1rem;
@@ -131,7 +131,7 @@ export const StyledTagInput = styled.div`
 	}
 	.ReactTags__tagInputField {
 		width: 100%;
-		background: ${lighten(0.6, $grey)};
+		background: transparent;
 		border: none;
 		inner-shadow: none;
 		font-size: 1rem;

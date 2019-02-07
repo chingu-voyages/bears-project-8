@@ -13,7 +13,7 @@ export const CheckboxContainer = styled.div`
 export const StyledCheckbox = styled.div`
   ${generalInputStyles}
   transition: ${$animDuration};
-	${({ active }) => active && `background: ${darken(0.2, $grey)}; color: ${lighten(0.6, $grey)};`}
+	${({ active }) => active && `background: ${darken(0.2, $grey)}; color: ${lighten(0.5, $grey)};`}
 	text-align: center;
 	cursor: pointer;
 `;

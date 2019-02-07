@@ -11,7 +11,7 @@ export const StyledMiddleScreen = styled.div`
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
-	background: ${lighten(0.6, $grey)};
+	background: ${lighten(0.5, $grey)};
 	padding: 5rem 2rem 0;
 
 	${LargeTitle} {
