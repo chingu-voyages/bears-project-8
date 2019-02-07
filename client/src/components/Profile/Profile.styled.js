@@ -5,17 +5,6 @@ import { $grey, $white } from '../../assets/styledVars';
 
 import { ButtonWrapper } from '../Shared/Button/Button.styled';
 
-export const Container = styled.section`
-	height: 80vh;
-	padding: 0 2.5rem;
-	width: 100%;
-
-	@media (min-width: 1000px) {
-		width: 80%;
-		margin: 0 auto;
-	}
-`;
-
 export const SectionTitle = styled.h2`
 	font-weight: normal;
 	line-height: normal;
@@ -33,9 +22,8 @@ export const ProfileSection = styled.section`
 export const Sidebar = styled.aside`
 	display: flex;
 	flex-direction: column;
-	background-color: #f8f8f8;
-	/* justify-content: center; */
-	/* align-items: center; */
+	background-color: ${lighten(0.5, $grey)};
+	border-radius: 6px 0 0 6px;
 `;
 
 export const UserInfo = styled.div`
@@ -92,6 +80,7 @@ export const Dashboard = styled.div`
 	display: grid;
 	grid-template-rows: min-content 1fr;
 	background-color: ${$white};
+	border-radius: 0 6px 6px 0;
 
 	& .dashboard__friends {
 		display: flex;

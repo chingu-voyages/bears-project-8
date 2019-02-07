@@ -12,7 +12,7 @@ const Breadcrumbs = ({ crumbHistory, current, history }) => {
 			onKeyDown={() => history.push(crumb.link)}
 			key={crumb.name}
 		>
-			{crumb.name} »
+			{crumb.name}
 		</CrumbLink>
 	));
 	return (
