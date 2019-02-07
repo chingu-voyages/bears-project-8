@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { registerUser } from '../../../actions/authActions';
 import PageContainer from '../../Shared/PageContainer/PageContainer';
-import { Header, TopText, ContentArea, Footer } from '../Auth.styled';
+import { TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
@@ -67,7 +67,6 @@ class Register extends Component {
 				}}
 				history={history}
 			>
-				<Header>Register</Header>
 				<ContentArea>
 					<TopText>
 						All fields are required.

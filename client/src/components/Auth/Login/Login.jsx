@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { loginUser } from '../../../actions/authActions';
 import PageContainer from '../../Shared/PageContainer/PageContainer';
-import { Header, TopText, ContentArea, Footer } from '../Auth.styled';
+import { TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
@@ -63,7 +63,6 @@ class Login extends Component {
 				}}
 				history={history}
 			>
-				<Header>Login</Header>
 				<ContentArea>
 					<TopText>
 						All fields are required.

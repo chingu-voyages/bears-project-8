@@ -3,16 +3,9 @@ import { lighten } from 'polished';
 import { $grey } from '../../assets/styledVars';
 import { Button } from '../Shared/Forms/Form.styled';
 
-export const Header = styled.h2`
-	text-align: center;
-	width: 100%;
-	font-weight: 400;
-	border-bottom: 2px solid ${lighten(0.4, $grey)};
-	padding: 2rem;
-`;
-
 export const TopText = styled.div`
 	font-size: 1rem;
+	margin: 2rem 0 1rem;
 
 	small {
 		font-size: 0.8rem;
