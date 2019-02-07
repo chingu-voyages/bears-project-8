@@ -16,17 +16,6 @@ export const Container = styled.section`
 	}
 `;
 
-export const Breadcrumbs = styled.h1`
-	padding: 1.5rem;
-	font-weight: 400;
-	font-size: 18px;
-
-	& span {
-		cursor: pointer;
-		color: ${lighten(0.2, $grey)};
-	}
-`;
-
 export const SectionTitle = styled.h2`
 	font-weight: normal;
 	line-height: normal;

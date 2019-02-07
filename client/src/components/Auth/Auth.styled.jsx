@@ -3,18 +3,6 @@ import { lighten } from 'polished';
 import { $grey } from '../../assets/styledVars';
 import { Button } from '../Shared/Forms/Form.styled';
 
-export const Container = styled.div`
-	position: relative;
-	width: 600px;
-	background: #fff;
-	border-radius: 6px;
-	margin: 6rem auto;
-
-	@media only screen and (max-width: 650px) {
-		width: 90%;
-	}
-`;
-
 export const Header = styled.h2`
 	text-align: center;
 	width: 100%;

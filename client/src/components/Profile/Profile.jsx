@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import PageContainer from '../Shared/PageContainer/PageContainer';
 import {
-	Container,
-	Breadcrumbs,
 	ProfileSection,
 	Sidebar,
 	Dashboard,
@@ -21,19 +20,14 @@ import {
 import CircleImg from '../Shared/CircleImg/CircleImg';
 import Button from '../Shared/Button/Button';
 
-const Profile = ({ history, user }) => (
-	<Container>
-		<Breadcrumbs>
-			<span
-				role="link"
-				tabIndex="-1"
-				onClick={() => history.push('/dashboard')}
-				onKeyDown={() => history.push('/dashboard')}
-			>
-				Dashboard &gt;
-			</span>{' '}
-			Profile
-		</Breadcrumbs>
+const Profile = ({ user, history }) => (
+	<PageContainer
+		breadCrumbs={{
+			crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
+			current: 'Profile',
+		}}
+		history={history}
+	>
 		<ProfileSection>
 			<Sidebar>
 				<CircleImg
@@ -113,7 +107,7 @@ const Profile = ({ history, user }) => (
 				</Goals>
 			</Dashboard>
 		</ProfileSection>
-	</Container>
+	</PageContainer>
 );
 
 const mapStateToProps = ({ auth }) => ({

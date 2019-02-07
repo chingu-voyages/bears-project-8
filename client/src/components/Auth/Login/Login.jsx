@@ -4,7 +4,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../../actions/authActions';
-import { Container, Header, TopText, ContentArea, Footer } from '../Auth.styled';
+import PageContainer from '../../Shared/PageContainer/PageContainer';
+import { Header, TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
@@ -32,7 +33,7 @@ class Login extends Component {
 		return null;
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		const { auth, history } = this.props;
 		if (auth.isAuthenticated) history.replace('/dashboard');
 	}
@@ -52,8 +53,16 @@ class Login extends Component {
 
 	render() {
 		const { email, password, errors } = this.state;
+		const { history } = this.props;
 		return (
-			<Container>
+			<PageContainer
+				size="small"
+				breadCrumbs={{
+					crumbHistory: [{ name: 'Home', link: '/' }],
+					current: 'Login',
+				}}
+				history={history}
+			>
 				<Header>Login</Header>
 				<ContentArea>
 					<TopText>
@@ -89,7 +98,7 @@ class Login extends Component {
 						</Footer>
 					</form>
 				</ContentArea>
-			</Container>
+			</PageContainer>
 		);
 	}
 }
