@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import HabitForm from './HabitForm';
+import { _HabitForm as HabitForm } from './HabitForm';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import { Button } from '../Shared/Forms/Form.styled';
