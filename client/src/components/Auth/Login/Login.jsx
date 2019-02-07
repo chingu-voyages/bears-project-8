@@ -74,6 +74,7 @@ class Login extends Component {
 					<form onSubmit={this.handleSubmit} noValidate>
 						<FormGroup
 							title="Email"
+							description="The email you used to sign up"
 							name="email"
 							value={email}
 							onChange={this.handleChange}
@@ -84,6 +85,7 @@ class Login extends Component {
 						/>
 						<FormGroup
 							title="Password"
+							description="Don't let anybody see!"
 							name="password"
 							value={password}
 							onChange={this.handleChange}

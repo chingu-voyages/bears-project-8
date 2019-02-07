@@ -8,6 +8,7 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 		<Row>
 			<FormGroup
 				title="Habit Name"
+				description="A title used to identify the habit"
 				name="name"
 				value={name}
 				onChange={onChange}
@@ -17,6 +18,7 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 			/>
 			<FormGroup
 				title="Tags"
+				description="Ways to group and easily find your habit"
 				name="tags"
 				value={tags}
 				onChange={onChange}
@@ -31,11 +33,12 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 		</Row>
 		<FormGroup
 			title="Description"
+			description="Outline the details of your habit; this is where you can get specific"
 			name="description"
 			value={description}
 			onChange={onChange}
 			type="textarea"
-			placeholder="Add any details about the habit here..."
+			placeholder="E.g. Waking up at 7.15 to run for half an hour..."
 			size={4}
 		/>
 	</Fragment>

@@ -7,7 +7,6 @@ import { Button } from '../Shared/Forms/Form.styled';
 
 describe('HabitForm', () => {
 	const onSubmit = jest.fn();
-
 	// eslint-disable-next-line no-shadow
 	const setup = fullMount => {
 		const props = {

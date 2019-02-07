@@ -4,15 +4,16 @@ import { $grey } from '../../assets/styledVars';
 import { Button } from '../Shared/Forms/Form.styled';
 
 export const TopText = styled.div`
-	font-size: 1rem;
+	font-size: 1.1rem;
 	margin: 2rem 0 1rem;
+	text-align: center;
 
 	small {
 		font-size: 0.8rem;
 		color: ${lighten(0.2, $grey)};
 		display: inline-block;
 		width: 100%;
-		margin-bottom: 2rem;
+		margin: 1rem 0 2rem;
 
 		a {
 			color: ${lighten(0.2, $grey)};

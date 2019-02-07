@@ -28,6 +28,7 @@ export const StyledFormGroup = styled.div`
 	}
 `;
 
+// TODO: Refactor this with a global customisable button component
 export const Button = styled.button`
 	${({ secondary }) =>
 		secondary
@@ -114,6 +115,7 @@ export const StyledDropdown = styled(Dropdown)`
 `;
 
 export const Label = styled.label`
+	color: ${darken(0.2, $grey)};
 	display: inline-block;
 	margin: 0.5rem 0;
 `;
@@ -200,4 +202,10 @@ export const ErrorText = styled.div`
 	font-size: 0.7rem;
 	position: absolute;
 	bottom: -1.3rem;
+`;
+
+export const InputDescription = styled.div`
+	color: ${lighten(0.2, $grey)};
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
 `;
