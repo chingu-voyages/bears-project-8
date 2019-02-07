@@ -16,17 +16,23 @@ export const $black = '#000';
 export const $item = '#45304e';
 
 // Lightest to darkest grey colors
-export const $greyLightest = '#f0f0f0';
+export const $greyLightest = '#f8f8f8';
 export const $greyLighter = '#e8e8e8';
 export const $greyLight = '#c4c4c4';
 export const $greyDark = '#757575';
 export const $greyDarker = '#2b2f30';
 export const $greyDarkest = '#111';
 
+// Need a better colour system... 😁
+export const $ash = '#5e5e5e';
+
 // Hightlights
-export const $elfGreen = '#5cbc9a';
+export const $mintLight = '#d5f1e7';
+export const $mint = '#5cbc9a';
+export const $mintDark = '#477d6a';
 export const $tomato = '#df5146';
 export const $dangerRed = '#d20f0f';
+export const $purpleLight = '#e7d8ef';
 
 // Screen sizes
 export const $desktopWidth = '1280px';
@@ -34,5 +40,5 @@ export const $desktopWidth = '1280px';
 export const $animDuration = '0.2s';
 
 // fonts
-export const $bodyFont = 'Open Sans, sans-serif';
-export const $titleFont = 'Montserrat, sans-serif';
+export const $bodyFont = 'Roboto, sans-serif';
+export const $titleFont = 'Roboto, Montserrat, sans-serif';
