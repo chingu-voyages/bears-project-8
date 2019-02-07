@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { $greyLightest, $greyLight, $greyDark, $ash } from '../../../assets/styledVars';
+import { darken, lighten } from 'polished';
+import { $grey } from '../../../assets/styledVars';
 import { LargeTitle, LargeSubtitle, SmallLink, FlexRow } from '../Home.styled';
 
 export const StyledMiddleScreen = styled.div`
@@ -10,7 +11,7 @@ export const StyledMiddleScreen = styled.div`
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
-	background: ${$greyLightest};
+	background: ${lighten(0.6, $grey)};
 	padding: 5rem 2rem 0;
 
 	${LargeTitle} {
@@ -25,7 +26,7 @@ export const StyledMiddleScreen = styled.div`
 	${SmallLink} {
 		display: inline-block;
 		margin: 1rem 0;
-		color: ${$greyLight};
+		color: ${lighten(0.2, $grey)};
 	}
 
 	#circle__one {
@@ -59,14 +60,14 @@ export const HabitStages = styled(FlexRow)`
 export const HabitStage = styled.div`
 	width: 170px;
 	h3 {
-		color: ${$ash};
+		color: ${darken(0.2, $grey)};
 		font-weight: 400;
 		text-align: center;
 		padding: 1.5rem 0;
 	}
 	p {
 		font-size: 0.9rem;
-		color: ${$greyDark};
+		color: ${darken(0.2, $grey)};
 		line-height: 1.75;
 	}
 	svg {

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $midGray, $gray } from '../../../assets/styledVars';
+import { $grey } from '../../../assets/styledVars';
 
 export const Wrapper = styled.div`
 	user-select: none;
@@ -16,7 +17,7 @@ export const Header = styled.div`
 	justify-content: flex-end;
 	cursor: default;
 	position: relative;
-	background-color: ${$midGray};
+	background-color: ${lighten(0.5, $grey)};
 	/* border: 1px solid black; */
 
 	& span {
@@ -34,11 +35,11 @@ export const List = styled.ul`
 	position: absolute;
 	width: 100%;
 	/* margin: 0; */
-	border: 1px solid ${$gray};
+	border: 1px solid ${lighten(0.2, $grey)};
 	border-top: none;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	background-color: ${$midGray};
+	background-color: ${lighten(0.5, $grey)};
 	padding: 15px 0;
 	max-height: 215px;
 	overflow-y: scroll;
@@ -56,11 +57,11 @@ export const ListItem = styled.li`
 
 	&.selected {
 		color: #fff;
-		background-color: ${$gray};
+		background-color: ${lighten(0.2, $grey)};
 	}
 
 	&:hover {
 		color: #fff;
-		background-color: ${$gray};
+		background-color: ${lighten(0.2, $grey)};
 	}
 `;

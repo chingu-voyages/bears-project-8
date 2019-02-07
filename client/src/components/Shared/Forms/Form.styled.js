@@ -1,16 +1,7 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 import Dropdown from 'react-dropdown';
-import {
-	$animDuration,
-	$greyLightest,
-	$greyLighter,
-	$greyLight,
-	$greyDark,
-	$greyDarker,
-	$dangerRed,
-	$elfGreen,
-	$tomato,
-} from '../../../assets/styledVars';
+import { $animDuration, $grey, $dangerRed, $elfGreen, $tomato } from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
 	width: 270px;
@@ -40,10 +31,16 @@ export const StyledFormGroup = styled.div`
 export const Button = styled.button`
 	${({ secondary }) =>
 		secondary
-			? `background: #fff; color: ${$greyLight}; border: 1px solid ${$greyLight};
-				&:hover { background: ${$greyLighter}; border: 1px solid ${$greyLighter}; }`
-			: `background: ${$greyLighter}; color: ${$greyDark}; border: 1px solid ${$greyLighter};
-				&:hover { background: ${$greyLight}; }`}
+			? `background: #fff; color: ${lighten(0.2, $grey)}; border: 1px solid ${lighten(
+					0.2,
+					$grey
+			  )};
+				&:hover { background: ${lighten(0.2, $grey)}; border: 1px solid ${lighten(0.4, $grey)}; }`
+			: `background: ${lighten(0.4, $grey)}; color: ${darken(
+					0.2,
+					$grey
+			  )}; border: 1px solid ${lighten(0.4, $grey)};
+				&:hover { background: ${lighten(0.2, $grey)}; }`}
 	${({ width }) => width && `width: ${width};`}
 	min-width: 125px;
 	border-radius: 3px;
@@ -57,17 +54,17 @@ export const Button = styled.button`
 `;
 
 export const generalInputStyles = `
-	background: ${$greyLightest};
+	background: ${lighten(0.6, $grey)};
 	border: none;
 	border-radius: 3px;
 	font-size: 1rem;
 	padding: 0.6rem 1rem;
-	color: ${$greyDark};
+	color: ${darken(0.2, $grey)};
 	display: inline-block;
 	width: 100%;
 
 	&::placeholder {
-		color: ${$greyLight};
+		color: ${lighten(0.2, $grey)};
 	}
 `;
 
@@ -88,7 +85,8 @@ export const StyledDropdown = styled(Dropdown)`
 	}
 
 	.Dropdown-placeholder {
-		${({ value }) => (value === '' ? `color: ${$greyLight};` : `color: ${$greyDark}`)}
+		${({ value }) =>
+			value === '' ? `color: ${lighten(0.2, $grey)};` : `color: ${darken(0.2, $grey)}`}
 	}
 
 	.Dropdown-menu {
@@ -102,7 +100,7 @@ export const StyledDropdown = styled(Dropdown)`
 		padding: 0.5rem 1rem;
 		&:hover {
 			cursor: pointer;
-			background: ${$greyLight};
+			background: ${lighten(0.2, $grey)};
 		}
 	}
 
@@ -133,13 +131,13 @@ export const StyledTagInput = styled.div`
 	}
 	.ReactTags__tagInputField {
 		width: 100%;
-		background: ${$greyLightest};
+		background: ${lighten(0.6, $grey)};
 		border: none;
 		inner-shadow: none;
 		font-size: 1rem;
-		color: ${$greyDark};
+		color: ${darken(0.2, $grey)};
 		&::placeholder {
-			color: ${$greyLight};
+			color: ${lighten(0.2, $grey)};
 		}
 
 		&:focus {
@@ -152,9 +150,9 @@ export const StyledTagInput = styled.div`
 			margin: 0 0.2rem 0.2rem 0;
 			padding: 0.1rem 0.5rem;
 			border-radius: 3px;
-			border: 1px solid ${$greyLight};
+			border: 1px solid ${lighten(0.2, $grey)};
 			background: #fff;
-			color: ${$greyDark};
+			color: ${darken(0.2, $grey)};
 		}
 		.ReactTags__remove {
 			padding-left: 0.5rem;
@@ -169,9 +167,9 @@ export const StyledTagInput = styled.div`
 	.ReactTags__suggestions {
 		position: absolute;
 		width: 100%;
-		background: ${$greyLighter};
+		background: ${lighten(0.4, $grey)};
 		border-radius: 0 0 3px 3px;
-		border: 1px solid ${$greyLight};
+		border: 1px solid ${lighten(0.2, $grey)};
 
 		ul {
 			list-style: none;
@@ -190,8 +188,8 @@ export const StyledTagInput = styled.div`
 		}
 
 		li.ReactTags__activeSuggestion {
-			background: ${$greyLight};
-			color: ${$greyDarker};
+			background: ${lighten(0.2, $grey)};
+			color: ${darken(0.4, $grey)};
 			border-radius: 0 0 3px 3px;
 		}
 	}

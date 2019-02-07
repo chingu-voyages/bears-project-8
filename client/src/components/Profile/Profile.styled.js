@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $gray, $white } from '../../assets/styledVars';
+import { $grey, $white } from '../../assets/styledVars';
 
 import { ButtonWrapper } from '../Shared/Button/Button.styled';
 
@@ -22,7 +23,7 @@ export const Breadcrumbs = styled.h1`
 
 	& span {
 		cursor: pointer;
-		color: ${$gray};
+		color: ${lighten(0.2, $grey)};
 	}
 `;
 
@@ -73,7 +74,7 @@ export const UserInfo = styled.div`
 `;
 
 export const Label = styled.span`
-	background-color: ${$gray};
+	background-color: ${lighten(0.2, $grey)};
 	color: ${$white};
 	border-radius: 5px;
 	height: 20px;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 import { LargeTitle, LargeSubtitle, RegisterButton, FlexRow } from '../Home.styled';
-import { $greyDark, $greyLighter, $ash } from '../../../assets/styledVars';
+import { $grey } from '../../../assets/styledVars';
 
 export const LastPage = styled.div`
 	z-index: 0;
@@ -10,7 +11,7 @@ export const LastPage = styled.div`
 	position: relative;
 	min-height: 200vh;
 	overflow: hidden;
-	background: linear-gradient(${$greyLighter}, #fff 43%);
+	background: linear-gradient(${lighten(0.4, $grey)}, #fff 43%);
 	padding: 0 2rem;
 
 	${LargeTitle} {
@@ -19,7 +20,7 @@ export const LastPage = styled.div`
 	${LargeSubtitle} {
 		display: inline-block;
 		font-size: 2.125rem;
-		color: ${$ash};
+		color: ${darken(0.2, $grey)};
 		max-width: 800px;
 		margin: 16rem auto 10rem;
 		z-index: 1;
@@ -88,14 +89,14 @@ export const AppFeature = styled.div`
 	}
 	h3 {
 		display: inline-block;
-		color: ${$ash};
+		color: ${darken(0.2, $grey)};
 		font-size: 1.5rem;
 		font-weight: 400;
 		padding-left: 2rem;
 	}
 	p {
 		margin-top: 2rem;
-		color: ${$greyDark};
+		color: ${darken(0.2, $grey)};
 		font-size: 1.125rem;
 		line-height: 1.5;
 	}
@@ -115,9 +116,9 @@ export const StyledScreenshot = styled.img`
 
 export const FooterSmall = styled.p`
 	font-size: 0.75rem;
-	color: ${$greyDark};
+	color: ${darken(0.2, $grey)};
 	padding: 3rem 0;
 	a {
-		color: ${$greyDark};
+		color: ${darken(0.2, $grey)};
 	}
 `;

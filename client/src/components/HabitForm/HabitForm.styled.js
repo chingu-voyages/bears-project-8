@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { $greyLighter } from '../../assets/styledVars';
+import { lighten } from 'polished';
+import { $grey } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	position: relative;
@@ -17,7 +18,7 @@ export const Header = styled.h2`
 	text-align: center;
 	width: 100%;
 	font-weight: 400;
-	border-bottom: 2px solid ${$greyLighter};
+	border-bottom: 2px solid ${lighten(0.4, $grey)};
 	padding: 2rem;
 `;
 
