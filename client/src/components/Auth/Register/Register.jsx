@@ -63,47 +63,51 @@ class Register extends Component {
 					<TopText>
 						All fields are required.
 						<small>
-							Already registered? Head to the <Link to="/auth/login">login page</Link>
-							.
+							Already registered? Head to the
+							<Link to="/auth/login">login page</Link>.
 						</small>
 					</TopText>
 					<form onSubmit={this.handleSubmit} noValidate>
 						<FormGroup
 							title="Name"
+							description="Your real name or an alias — this will be public"
 							name="name"
 							value={name}
 							onChange={this.handleChange}
-							placeholder="John Smith"
+							placeholder="E.g. John Smith"
 							type="text"
 							size={4}
 							errors={errors.name}
 						/>
 						<FormGroup
 							title="Email"
+							description="We can remind you when your habits are coming up"
 							name="email"
 							value={email}
 							onChange={this.handleChange}
-							placeholder="john@email.com"
+							placeholder="E.g. john@email.com"
 							type="email"
 							size={4}
 							errors={errors.email}
 						/>
 						<FormGroup
 							title="Password"
+							description="Try to choose something no one could guess"
 							name="password"
 							value={password}
 							onChange={this.handleChange}
-							placeholder="Enter a password..."
+							placeholder="E.g. e8a10c04d72b2f135dabe360c4bdd534"
 							type="password"
 							size={4}
 							errors={errors.password}
 						/>
 						<FormGroup
 							title="Confirm Password"
+							description="Your password is important — enter it again to be sure"
 							name="password2"
 							value={password2}
 							onChange={this.handleChange}
-							placeholder="Enter it again (just to be sure)..."
+							placeholder="E.g. e8a10c04d72b2f135dabe360c4bdd534"
 							type="password"
 							size={4}
 							errors={errors.password2}

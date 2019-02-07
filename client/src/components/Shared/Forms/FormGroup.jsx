@@ -10,6 +10,7 @@ import {
 	StyledDropdown,
 	StyledTagInput,
 	ErrorText,
+	InputDescription,
 } from './Form.styled';
 import { $dangerRed } from '../../../assets/styledVars';
 import defaultTags from '../../../assets/defaultTags';
@@ -28,6 +29,7 @@ const FormGroup = props => {
 		onTagAdd,
 		onTagDrag,
 		errors,
+		description,
 	} = props;
 	const width = size < 4 ? `${size * 25 - 2}%` : `100%`;
 	let component;
@@ -83,6 +85,7 @@ const FormGroup = props => {
 			<Label htmlFor={name}>
 				{title} {required && <span style={{ color: $dangerRed }}>*</span>}
 			</Label>
+			{description && <InputDescription>{description}</InputDescription>}
 			{component}
 			<ErrorText>{errors}</ErrorText>
 		</StyledFormGroup>
@@ -98,6 +101,7 @@ FormGroup.propTypes = {
 	type: PropTypes.string,
 	size: PropTypes.oneOf([1, 2, 4]),
 	required: PropTypes.bool,
+	description: PropTypes.string,
 };
 
 FormGroup.defaultProps = {
@@ -107,6 +111,7 @@ FormGroup.defaultProps = {
 	size: 4,
 	required: false,
 	onChange: () => null,
+	description: '',
 };
 
 export default FormGroup;
