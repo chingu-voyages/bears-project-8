@@ -36,12 +36,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 				} else {
 					return res.status(400).json({ message: 'Bad image URL' });
 				}
+			};
+			if (req.body.about) {
+				user.about = req.body.about;
 			}
-
-			// if(req.user.about){
-			// 	user.about = req.user.about;
-			// }
-
+	
 			return user
 				.save()
 				.then(savedUser =>
@@ -53,7 +52,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 );
 /** 
     User- goals route
-  user should be update goal to  his profile 
+    user should be able to update goals to  his profile 
    @route   GOALS user/:id/goals 
  * @desc    Update user (goals)
  * @access  Private
@@ -67,8 +66,8 @@ router.put('/:id/goals', passport.authenticate('jwt', { session: false }), (req,
 			if (user._id.toHexString() !== req.user._id.toHexString()) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
-			if (req.user.goals) {
-				user.goals = req.user.goals;
+			if (req.body.goals) {
+				user.goals = req.body.goals;
 			}
 			return user
 				.save()
