@@ -37,11 +37,13 @@ export default class AuthDropdown extends Component {
 			<StyledDropdown>
 				<Top onClick={this.onToggle}>
 					<ProfPic profPic={`https://${user.avatar}`} />
-					<TopArrow />
+					<TopArrow open={open} />
 				</Top>
 				{open && (
 					<Bottom>
-						<CurrentUser>Logged in as {user.name}</CurrentUser>
+						<CurrentUser>
+							Logged in as <strong>{user.name}</strong>
+						</CurrentUser>
 						<AuthLink>
 							<Link to="/dashboard" onClick={this.onToggle}>
 								Dashboard

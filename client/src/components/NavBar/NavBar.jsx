@@ -25,8 +25,12 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 		</NavItem>
 	) : (
 		<Fragment>
-			<NavItem onClick={() => history.push('/auth/register')}>Register</NavItem>
-			<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
+			<NavItem link onClick={() => history.push('/auth/register')}>
+				Register
+			</NavItem>
+			<NavItem link onClick={() => history.push('/auth/login')}>
+				Login
+			</NavItem>
 		</Fragment>
 	);
 
