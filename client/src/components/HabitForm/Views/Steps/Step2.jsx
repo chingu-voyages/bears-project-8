@@ -8,6 +8,7 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 		<Row>
 			<FormGroup
 				title="Difficulty"
+				description="How difficult is this for you personally?"
 				name="difficulty"
 				value={difficulty}
 				onChange={onChange}
@@ -18,6 +19,7 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 			/>
 			<FormGroup
 				title="Habit Type"
+				description="Starting a fresh habit or stopping an old habit"
 				name="habitType"
 				value={habitType}
 				onChange={onChange}
@@ -29,6 +31,7 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 		</Row>
 		<FormGroup
 			title="When will you start this habit?"
+			description="This is the date your reminders will start"
 			name="habitStart"
 			value={habitStart}
 			onChange={onChange}

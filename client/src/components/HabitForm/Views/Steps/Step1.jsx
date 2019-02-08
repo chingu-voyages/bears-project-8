@@ -8,6 +8,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 		<Row>
 			<FormGroup
 				title="How often do you want to complete this habit?"
+				description="Once, twice, three times?"
 				name="times"
 				value={times}
 				onChange={onChange}
@@ -18,6 +19,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 			/>
 			<FormGroup
 				title="&nbsp;"
+				description="Every week? Every month?"
 				name="period"
 				value={period}
 				onChange={onChange}
@@ -30,6 +32,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 		<Row>
 			<FormGroup
 				title="How often do you want to be reminded?"
+				description="Keep your habits fresh with a cue"
 				name="reminderEvery"
 				value={reminderEvery}
 				onChange={onChange}
@@ -40,6 +43,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 			/>
 			<FormGroup
 				title="How do you want to be reminded?"
+				description="This can always be changed later"
 				name="reminderTypes"
 				placeholder="Select how you would like to be reminded..."
 				size={2}
