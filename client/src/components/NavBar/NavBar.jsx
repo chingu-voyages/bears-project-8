@@ -38,10 +38,10 @@ export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 						</NavItem>
 					) : (
 						<Fragment>
-							<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
 							<NavItem onClick={() => history.push('/auth/register')}>
 								Register
 							</NavItem>
+							<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
 						</Fragment>
 					)}
 				</NavMenu>

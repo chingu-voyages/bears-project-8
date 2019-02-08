@@ -9,6 +9,7 @@ export const Container = styled.div`
 	align-items: center;
 	height: 80px;
 	background-color: ${lighten(0.5, $grey)};
+	box-shadow: 0 4px 32px ${lighten(0.4, $grey)};
 `;
 
 export const NavContent = styled.div`
@@ -16,25 +17,26 @@ export const NavContent = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	max-width: 1024px;
+	max-width: 1200px;
+	padding: 0 2rem;
 `;
 
 export const NavMenu = styled.div`
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	justify-content: flex-end;
-	width: 50%;
+	width: 180px;
 `;
 
 export const NavItem = styled.span`
 	display: flex;
 	align-items: center;
-	margin-left: 20px;
 	color: ${darken(0.2, $grey)};
 	cursor: pointer;
+	padding: 1rem;
 
-	&:last-of-type {
-		margin-right: 20px;
+	&:hover {
+		color: ${darken(0.4, $grey)};
 	}
 `;
 

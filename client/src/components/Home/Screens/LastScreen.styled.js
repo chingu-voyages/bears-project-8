@@ -114,7 +114,7 @@ export const StyledScreenshot = styled.img`
 	max-width: 873px;
 `;
 
-export const FooterSmall = styled.p`
+export const FooterSmall = styled.div`
 	font-size: 0.75rem;
 	color: ${darken(0.2, $grey)};
 	padding: 3rem 0;
