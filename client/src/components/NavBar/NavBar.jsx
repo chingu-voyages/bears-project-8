@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
-
 import { logoutUser } from '../../actions/authActions';
-
 import Dropdown from '../Shared/Dropdown/Dropdown';
+import Icon from '../Shared/Icon/Icon';
+import { Container, NavContent, NavItem, NavMenu, Logo } from './NavBar.styled';
 
 export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 	const userDropdownOpts = [
@@ -25,21 +24,28 @@ export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 
 	return (
 		<Container>
-			<NavItem onClick={() => history.push('/dashboard')}>
-				<Logo>H</Logo> Habit Tracker
-			</NavItem>
-			<NavMenu>
-				{isAuthenticated ? (
-					<NavItem>
-						<Dropdown title="Profile" options={userDropdownOpts} />
-					</NavItem>
-				) : (
-					<Fragment>
-						<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
-						<NavItem onClick={() => history.push('/auth/register')}>Register</NavItem>
-					</Fragment>
-				)}
-			</NavMenu>
+			<NavContent>
+				<NavItem onClick={() => history.push('/dashboard')}>
+					<Logo>
+						<Icon name="logo" />
+						Habit Tracker
+					</Logo>
+				</NavItem>
+				<NavMenu>
+					{isAuthenticated ? (
+						<NavItem>
+							<Dropdown title="Profile" options={userDropdownOpts} />
+						</NavItem>
+					) : (
+						<Fragment>
+							<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
+							<NavItem onClick={() => history.push('/auth/register')}>
+								Register
+							</NavItem>
+						</Fragment>
+					)}
+				</NavMenu>
+			</NavContent>
 		</Container>
 	);
 };

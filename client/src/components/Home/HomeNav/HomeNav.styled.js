@@ -28,7 +28,6 @@ export const NavContent = styled.div`
 `;
 
 export const Logo = styled.div`
-	font-size: 24;
 	color: ${darken(0.4, $grey)};
 	font-size: 1.5rem;
 	display: flex;
