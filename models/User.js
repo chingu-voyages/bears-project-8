@@ -9,7 +9,7 @@ const userSchema = new Schema({
 	password: { type: String, required: true },
 	avatar: { type: String, required: true },
 	dateJoined: { type: Date, default: Date.now },
-	about: { type: String },
+	about: { type: String, required: true },
 	goals: [
 		{
 			title: { type: String, required: true },
