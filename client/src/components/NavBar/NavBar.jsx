@@ -22,29 +22,29 @@ export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 		},
 	];
 
+	const logoLink = isAuthenticated ? '/dashboard' : '/';
+
+	const menuContent = isAuthenticated ? (
+		<NavItem>
+			<Dropdown title="Profile" options={userDropdownOpts} />
+		</NavItem>
+	) : (
+		<Fragment>
+			<NavItem onClick={() => history.push('/auth/register')}>Register</NavItem>
+			<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
+		</Fragment>
+	);
+
 	return (
 		<Container>
 			<NavContent>
-				<NavItem onClick={() => history.push('/dashboard')}>
+				<NavItem onClick={() => history.push(logoLink)}>
 					<Logo>
 						<Icon name="logo" />
 						Habit Tracker
 					</Logo>
 				</NavItem>
-				<NavMenu>
-					{isAuthenticated ? (
-						<NavItem>
-							<Dropdown title="Profile" options={userDropdownOpts} />
-						</NavItem>
-					) : (
-						<Fragment>
-							<NavItem onClick={() => history.push('/auth/register')}>
-								Register
-							</NavItem>
-							<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
-						</Fragment>
-					)}
-				</NavMenu>
+				<NavMenu>{menuContent}</NavMenu>
 			</NavContent>
 		</Container>
 	);

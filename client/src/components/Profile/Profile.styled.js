@@ -22,7 +22,7 @@ export const ProfileSection = styled.section`
 export const Sidebar = styled.aside`
 	display: flex;
 	flex-direction: column;
-	background-color: ${lighten(0.5, $grey)};
+	background-color: ${lighten(0.45, $grey)};
 	border-radius: 6px 0 0 6px;
 `;
 
