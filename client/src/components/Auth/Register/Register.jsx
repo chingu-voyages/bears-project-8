@@ -36,7 +36,7 @@ class Register extends Component {
 		return null;
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		const { auth, history } = this.props;
 		if (auth.isAuthenticated) history.replace('/dashboard');
 	}

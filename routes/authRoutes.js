@@ -51,11 +51,12 @@ router.post('/register', (req, res) => {
 			return bcrypt.genSalt(saltRounds, (error, salt) => {
 				if (error) throw error;
 
-				bcrypt.hash(newUser.password, salt, (err, hash) => {
+				return bcrypt.hash(newUser.password, salt, (err, hash) => {
 					if (err) throw err;
 
 					newUser.password = hash;
-					newUser
+
+					return newUser
 						.save()
 						.then(savedUser => res.json(savedUser))
 						.catch(e => res.status(400).json(e));
