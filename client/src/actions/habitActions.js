@@ -6,7 +6,7 @@ const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } =
 // Get the user's habits
 export const getHabits = () => dispatch =>
 	axios
-		.get('/api/user/habits')
+		.get('/api/habit/habits')
 		.then(res => {
 			dispatch({
 				type: UPDATE_HABIT_LIST,

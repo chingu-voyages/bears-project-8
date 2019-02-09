@@ -21,10 +21,7 @@ const DB_URI =
 mongoose.Promise = global.Promise;
 // And connect mongoose to Mlab instance of MongoDB
 mongoose
-	.connect(
-		DB_URI,
-		{ useNewUrlParser: true }
-	)
+	.connect(DB_URI, { useNewUrlParser: true })
 	.then(() => console.info('Connected to MongoDB'))
 	.catch(err => console.error('Connection to MongoDB failed:', err));
 
