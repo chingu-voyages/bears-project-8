@@ -9,6 +9,7 @@ const passport = require('passport');
 
 const authRoutes = require('./routes/authRoutes');
 const habitRoutes = require('./routes/habitRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
@@ -21,10 +22,7 @@ const DB_URI =
 mongoose.Promise = global.Promise;
 // And connect mongoose to Mlab instance of MongoDB
 mongoose
-	.connect(
-		DB_URI,
-		{ useNewUrlParser: true }
-	)
+	.connect(DB_URI, { useNewUrlParser: true })
 	.then(() => console.info('Connected to MongoDB'))
 	.catch(err => console.error('Connection to MongoDB failed:', err));
 
@@ -45,6 +43,7 @@ app.use(morgan('dev'));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/habit', habitRoutes);
+app.use('/api/user', userRoutes);
 
 app.get('/', (req, res) => {
 	res.send('Hello World');
