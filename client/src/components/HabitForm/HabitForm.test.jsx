@@ -6,10 +6,12 @@ import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import { Button } from '../Shared/Forms/Form.styled';
 
 describe('HabitForm', () => {
+	const historyMock = { push: jest.fn() };
 	// eslint-disable-next-line no-shadow
 	const setup = fullMount => {
 		const props = {
 			addHabit: jest.fn(),
+			history: historyMock,
 		};
 		let component;
 		if (fullMount) {

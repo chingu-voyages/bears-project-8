@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { addHabit } from '../../actions/habitActions';
 
@@ -43,7 +44,8 @@ export class _HabitForm extends Component {
 		const { steps, ...habit } = this.state;
 		habit.tags = habit.tags.map(t => t.text);
 
-		return this.props.addHabit(habit);
+		this.props.addHabit(habit);
+		this.props.history.push('/dashboard');
 	};
 
 	setStep = step => {
@@ -106,7 +108,9 @@ export class _HabitForm extends Component {
 	}
 }
 
-export default connect(
-	null,
-	{ addHabit }
-)(_HabitForm);
+export default withRouter(
+	connect(
+		null,
+		{ addHabit }
+	)(_HabitForm)
+);

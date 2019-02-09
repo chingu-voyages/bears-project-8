@@ -25,7 +25,7 @@ export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
 
 	return (
 		<Container>
-			<NavItem onClick={() => history.push('/dashboard')}>
+			<NavItem onClick={() => history.push(`${isAuthenticated ? '/dashboard' : '/'}`)}>
 				<Logo>H</Logo> Habit Tracker
 			</NavItem>
 			<NavMenu>
