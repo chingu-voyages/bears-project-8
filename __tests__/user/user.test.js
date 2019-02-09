@@ -6,7 +6,6 @@ const request = require('supertest').agent(app);
 const createToken = require('../../utils/createToken');
 
 const userData = {
-	id: '5c4e0f3cf936ff053883c599',
 	name: 'Tester',
 	email: 'test@test.cc',
 	password: 'pass1234',
