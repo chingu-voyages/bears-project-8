@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { $white, $elfGreen, $greyLavender, $tomato } from '../../assets/styledVars';
 import { Container, FullHabit, FlexContainer, Description } from './Habit.styled';
 
 import Button from '../Shared/Button/Button';
@@ -69,22 +70,22 @@ class Habit extends Component {
 								clickHandler={this.handleLogHabit}
 								type="filled"
 								size="small"
-								bgColor="#5cbc9a"
-								color="#fff"
+								bgColor={$elfGreen}
+								color={$white}
 							>
 								Log Habit
 							</Button>
 							<Button
-								bgColor="#baafbe"
-								color="#fff"
+								bgColor={$greyLavender}
+								color={$white}
 								clickHandler={this.handleEditHabit}
 								size="icon"
 							>
 								✎
 							</Button>
 							<Button
-								bgColor="#df5146"
-								color="#fff"
+								bgColor={$tomato}
+								color={$white}
 								clickHandler={this.handleDeleteHabit}
 								size="icon"
 							>
