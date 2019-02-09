@@ -66,7 +66,7 @@ const Routes = ({ isAuthenticated }) => (
 						component: Dashboard,
 						isLazy: true,
 						hasNav: true,
-						withAuth: false,
+						withAuth: true,
 						isAuthenticated,
 					})
 				}

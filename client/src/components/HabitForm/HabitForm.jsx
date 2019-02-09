@@ -1,11 +1,16 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { addHabit } from '../../actions/habitActions';
+
 import { Container, Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
 
-export default class HabitForm extends Component {
+export class _HabitForm extends Component {
 	state = {
 		step: 0,
 
@@ -26,12 +31,19 @@ export default class HabitForm extends Component {
 	};
 
 	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
+		addHabit: PropTypes.func.isRequired,
 	};
 
 	handleChange = ({ target }) => {
 		const { name, value } = target;
 		this.setState({ [name]: value });
+	};
+
+	handleSubmit = () => {
+		const { steps, ...habit } = this.state;
+		habit.tags = habit.tags.map(t => t.text);
+
+		return this.props.addHabit(habit);
 	};
 
 	setStep = step => {
@@ -45,7 +57,6 @@ export default class HabitForm extends Component {
 	};
 
 	// Tag input functions
-
 	handleTagDelete = i => {
 		this.setState(prevState => ({
 			tags: prevState.tags.filter((tag, index) => index !== i),
@@ -68,7 +79,7 @@ export default class HabitForm extends Component {
 
 	render() {
 		const { step } = this.state;
-		const { onSubmit } = this.props;
+
 		return (
 			<Container>
 				<Header>Add a New Habit</Header>
@@ -87,10 +98,15 @@ export default class HabitForm extends Component {
 						step={step}
 						totalSteps={3}
 						setStep={this.setStep}
-						onSubmit={onSubmit}
+						onSubmit={this.handleSubmit}
 					/>
 				</Footer>
 			</Container>
 		);
 	}
 }
+
+export default connect(
+	null,
+	{ addHabit }
+)(_HabitForm);
