@@ -36,7 +36,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 				} else {
 					return res.status(400).json({ message: 'Bad image URL' });
 				}
-			};
+			}
 			if (req.body.about) {
 				user.about = req.body.about;
 			}

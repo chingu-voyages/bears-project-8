@@ -4,14 +4,17 @@ import { shallow } from 'enzyme';
 import { _NavBar as NavBar } from './NavBar';
 
 import { NavItem, NavMenu } from './NavBar.styled';
-import { _Dropdown as Dropdown } from '../Shared/Dropdown/Dropdown';
+// import { _Dropdown as Dropdown } from '../Shared/Dropdown/Dropdown';
+import AuthDropdown from './AuthDropdown/AuthDropdown';
 
 describe('NavBar', () => {
 	const setup = fullMount => {
 		const props = {
-			isAuthenticated: false,
+			auth: {
+				isAuthenticated: false,
+				user: { name: '', avatar: '' },
+			},
 			logoutUser: jest.fn(),
-			user: {},
 		};
 		let component;
 		if (fullMount) {
@@ -36,7 +39,7 @@ describe('NavBar', () => {
 
 		it("shouldn't show Profile Dropdown", () => {
 			const { component } = setup();
-			const dropDown = component.find(Dropdown);
+			const dropDown = component.find(AuthDropdown);
 			expect(dropDown).toHaveLength(0);
 		});
 	});
@@ -44,7 +47,12 @@ describe('NavBar', () => {
 	describe('when user is authenticated', () => {
 		it("shouldn't show login and Register buttons", () => {
 			const { component } = setup();
-			component.setProps({ isAuthenticated: true });
+			component.setProps({
+				auth: {
+					isAuthenticated: true,
+					user: { name: '', avatar: '' },
+				},
+			});
 			const navMenu = component.find(NavMenu);
 			expect(navMenu).toHaveLength(1);
 			expect(navMenu.find(NavItem)).toHaveLength(1);
@@ -52,9 +60,14 @@ describe('NavBar', () => {
 
 		it('should show Profile Dropdown', () => {
 			const { component } = setup();
-			component.setProps({ isAuthenticated: true });
-			const dropDown = component.find(Dropdown);
-			expect(dropDown).toHaveLength(1);
+			component.setProps({
+				auth: {
+					isAuthenticated: true,
+					user: { name: '', avatar: '' },
+				},
+			});
+			const dropdown = component.find(AuthDropdown);
+			expect(dropdown).toHaveLength(1);
 		});
 	});
 });

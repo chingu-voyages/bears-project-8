@@ -19,7 +19,7 @@ body {
     font-family: ${$bodyFont};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${lighten(0.4, $grey)};
+    background-color: ${lighten(0.45, $grey)};
     color: ${darken(0.2, $grey)};
 }
 

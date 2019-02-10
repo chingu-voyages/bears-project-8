@@ -3,54 +3,63 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Container, NavItem, NavMenu, Logo } from './NavBar.styled';
-
 import { logoutUser } from '../../actions/authActions';
+import Icon from '../Shared/Icon/Icon';
+import AuthDropdown from './AuthDropdown/AuthDropdown';
+import { Container, NavContent, NavItem, NavMenu, Logo } from './NavBar.styled';
 
-import Dropdown from '../Shared/Dropdown/Dropdown';
+export const _NavBar = ({ auth, logoutUser: logout, history }) => {
+	const { isAuthenticated, user } = auth;
 
-export const _NavBar = ({ isAuthenticated, logoutUser: logout, history }) => {
-	const userDropdownOpts = [
-		{
-			id: 0,
-			title: 'Profile',
-			onClick: () => history.push(`/profile`),
-		},
-		{
-			id: 1,
-			title: 'Logout',
-			onClick: () => logout(),
-		},
-	];
+	const logoLink = isAuthenticated ? '/dashboard' : '/';
+
+	const menuContent = isAuthenticated ? (
+		<NavItem>
+			{/* <Dropdown title="Profile" options={userDropdownOpts} /> */}
+			<AuthDropdown
+				profPic={`https://${user.avatar}`}
+				user={user}
+				logout={logout}
+				history={history}
+			/>
+		</NavItem>
+	) : (
+		<Fragment>
+			<NavItem link onClick={() => history.push('/auth/register')}>
+				Register
+			</NavItem>
+			<NavItem link onClick={() => history.push('/auth/login')}>
+				Login
+			</NavItem>
+		</Fragment>
+	);
 
 	return (
 		<Container>
-			<NavItem onClick={() => history.push('/dashboard')}>
-				<Logo>H</Logo> Habit Tracker
-			</NavItem>
-			<NavMenu>
-				{isAuthenticated ? (
-					<NavItem>
-						<Dropdown title="Profile" options={userDropdownOpts} />
-					</NavItem>
-				) : (
-					<Fragment>
-						<NavItem onClick={() => history.push('/auth/login')}>Login</NavItem>
-						<NavItem onClick={() => history.push('/auth/register')}>Register</NavItem>
-					</Fragment>
-				)}
-			</NavMenu>
+			<NavContent>
+				<NavItem onClick={() => history.push(logoLink)}>
+					<Logo>
+						<Icon name="logo" />
+						Habit Tracker
+					</Logo>
+				</NavItem>
+				<NavMenu>{menuContent}</NavMenu>
+			</NavContent>
 		</Container>
 	);
 };
 
 _NavBar.propTypes = {
-	isAuthenticated: PropTypes.bool.isRequired,
+	// isAuthenticated: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
+	auth: PropTypes.shape({
+		isAuthenticated: PropTypes.bool.isRequired,
+		user: PropTypes.object.isRequired,
+	}).isRequired,
 };
 
 const mapStateToProps = ({ auth }) => ({
-	isAuthenticated: auth.isAuthenticated,
+	auth,
 });
 
 export default withRouter(

@@ -184,7 +184,7 @@ export const StyledTagInput = styled.div`
 			margin: 0;
 
 			mark {
-				font-weight: 600;
+				font-weight: 500;
 				background: ${$elfGreen};
 			}
 		}

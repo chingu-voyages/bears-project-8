@@ -26,7 +26,6 @@ export const Subtitle = styled.figcaption`
 
 export const Image = styled.img`
 	background-color: ${lighten(0.2, $grey)};
-	border: 1px solid ${lighten(0.2, $grey)};
 	border-radius: 50%;
 	cursor: pointer;
 
