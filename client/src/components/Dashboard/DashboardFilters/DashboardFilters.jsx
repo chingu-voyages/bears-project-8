@@ -1,22 +1,22 @@
 import React, { Fragment } from 'react';
 // import PropTypes from 'prop-types';
 
-import { $greyLight, $white } from '../../../assets/styledVars.js';
+import { $grey, $white } from '../../../assets/styledVars';
 import { FilterByTags, FilterByDifficulty, FilterByType } from '../Dashboard.styled';
 
 import Label from '../../Shared/Label/Label';
 
-const DashboardFilters = props => (
+const DashboardFilters = () => (
 	<Fragment>
 		<FilterByTags>
 			<span>Tags:</span> {/* Map through actual user tags here */}
-			<Label bgColor={$white} color={$greyLight}>
+			<Label bgColor={$white} color={$grey}>
 				Health
 			</Label>
-			<Label bgColor={$white} color={$greyLight}>
+			<Label bgColor={$white} color={$grey}>
 				Web Development
 			</Label>
-			<Label bgColor={$white} color={$greyLight}>
+			<Label bgColor={$white} color={$grey}>
 				Meditation
 			</Label>
 		</FilterByTags>
