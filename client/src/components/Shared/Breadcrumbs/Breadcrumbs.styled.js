@@ -1,16 +1,31 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
+import { $grey, $animDuration } from '../../../assets/styledVars';
 
-import { $gray } from '../../../assets/styledVars';
-
-export default styled.h1`
+export const Container = styled.div`
 	padding: 1.5rem;
-	font-weight: 400;
-	font-size: 18px;
-	border: none;
-	margin: 0;
+	font-size: 1.2rem;
+`;
 
-	& span {
-		cursor: pointer;
-		color: ${$gray};
+export const CrumbLink = styled.span`
+	cursor: pointer;
+	color: ${lighten(0.2, $grey)};
+	margin-right: 2rem;
+	position: relative;
+	transition: ${$animDuration};
+
+	&:after {
+		color: ${lighten(0.2, $grey)};
+		position: absolute;
+		right: -1rem;
+		content: '»';
 	}
+
+	&:hover {
+		color: ${darken(0.2, $grey)};
+	}
+`;
+
+export const CurrentCrumb = styled.span`
+	color: ${$grey};
 `;

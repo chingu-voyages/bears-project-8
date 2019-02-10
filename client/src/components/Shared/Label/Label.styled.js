@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $gray, $white, $greyLighter } from '../../../assets/styledVars';
+import { $grey, $white } from '../../../assets/styledVars';
 
 export default styled.span`
 	background-color: ${({ bgColor }) => bgColor || $white};
-	color: ${({ color }) => color || $gray};
+	color: ${({ color }) => color || $grey};
 	border: none;
 	border-radius: 5px;
 	height: 20px;
@@ -19,6 +20,6 @@ export default styled.span`
 	transition: all 200ms;
 
 	&:hover {
-		background-color: ${$greyLighter};
+		background-color: ${lighten(0.2, $grey)};
 	}
 `;

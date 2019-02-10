@@ -4,7 +4,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../../actions/authActions';
-import { Container, Header, TopText, ContentArea, Footer } from '../Auth.styled';
+import PageContainer from '../../Shared/PageContainer/PageContainer';
+import { TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
@@ -52,9 +53,16 @@ class Login extends Component {
 
 	render() {
 		const { email, password, errors } = this.state;
+		const { history } = this.props;
 		return (
-			<Container>
-				<Header>Login</Header>
+			<PageContainer
+				size="small"
+				breadCrumbs={{
+					crumbHistory: [{ name: 'Home', link: '/' }],
+					current: 'Login',
+				}}
+				history={history}
+			>
 				<ContentArea>
 					<TopText>
 						All fields are required.
@@ -91,7 +99,7 @@ class Login extends Component {
 						</Footer>
 					</form>
 				</ContentArea>
-			</Container>
+			</PageContainer>
 		);
 	}
 }

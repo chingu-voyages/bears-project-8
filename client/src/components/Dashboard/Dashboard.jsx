@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Container, Section, Dashboard } from './Dashboard.styled';
+import PageContainer from '../Shared/PageContainer/PageContainer';
+import { Section, Dashboard } from './Dashboard.styled';
 
-import Breadcrumbs from '../Shared/Breadcrumbs/Breadcrumbs';
 import HabitList from '../HabitList/HabitList';
 
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar';
@@ -28,18 +28,13 @@ export class _Dashboard extends Component {
 		const uniqueTagsArr = [...new Set(allTags)];
 
 		return (
-			<Container>
-				<Breadcrumbs>
-					<span
-						role="link"
-						tabIndex="-1"
-						onClick={() => history.push('/dashboard')}
-						onKeyDown={() => history.push('/dashboard')}
-					>
-						Dashboard
-					</span>
-				</Breadcrumbs>
-
+			<PageContainer
+				breadCrumbs={{
+					crumbHistory: [],
+					current: 'Dashboard',
+				}}
+				history={history}
+			>
 				<Section>
 					<DashboardSidebar habitsLength={habits.length} />
 
@@ -49,7 +44,7 @@ export class _Dashboard extends Component {
 						<HabitList habits={habits} />
 					</Dashboard>
 				</Section>
-			</Container>
+			</PageContainer>
 		);
 	}
 }

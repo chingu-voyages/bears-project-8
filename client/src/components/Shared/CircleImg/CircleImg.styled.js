@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
-import { $gray, $greyDark, $white } from '../../../assets/styledVars';
+import { $grey, $white } from '../../../assets/styledVars';
 
 export const Wrapper = styled.figure`
 	display: flex;
@@ -20,12 +21,12 @@ export const Subtitle = styled.figcaption`
 	font-size: 14px;
 	text-align: center;
 	padding: 1rem 0;
-	color: ${$greyDark};
+	color: ${darken(0.2, $grey)};
 `;
 
 export const Image = styled.img`
-	background-color: ${$gray};
-	border: 1px solid ${$gray};
+	background-color: ${lighten(0.2, $grey)};
+	border: 1px solid ${lighten(0.2, $grey)};
 	border-radius: 50%;
 	cursor: pointer;
 

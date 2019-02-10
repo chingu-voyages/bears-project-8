@@ -1,4 +1,5 @@
 import React from 'react';
+import { lighten } from 'polished';
 import {
 	LastPage,
 	AppFeatures,
@@ -7,7 +8,7 @@ import {
 	StyledScreenshot,
 } from './LastScreen.styled';
 import { LargeTitle, LargeSubtitle, RegisterButton } from '../Home.styled';
-import { $mintLight, $purpleLight, $elfGreen, $greyLighter } from '../../../assets/styledVars';
+import { $violet, $elfGreen, $grey } from '../../../assets/styledVars';
 import Icon from '../../Shared/Icon/Icon';
 import AppScreenshot from '../../../assets/images/appScreenshot.png';
 
@@ -33,7 +34,7 @@ export default () => (
 		</AppFeatures>
 		<StyledScreenshot src={AppScreenshot} alt="Screenshot of the app" />
 		<LargeSubtitle>
-			<Icon name="rocket" color={$greyLighter} />
+			<Icon name="rocket" color={lighten(0.4, $grey)} />
 			The first step to staying on top of your habits is to define your first habit.
 		</LargeSubtitle>
 		<RegisterButton to="/auth/register">Get Started</RegisterButton>
@@ -58,9 +59,33 @@ export default () => (
 				</a>
 			</div>
 		</FooterSmall>
-		<Icon name="circle" width={180} height={180} color={$purpleLight} id="circle__four" />
-		<Icon name="circle" width={280} height={280} color={$mintLight} id="circle__five" />
-		<Icon name="circle" width={180} height={180} color={$purpleLight} id="circle__six" />
-		<Icon name="circle" width={290} height={290} color={$mintLight} id="circle__seven" />
+		<Icon
+			name="circle"
+			width={180}
+			height={180}
+			color={lighten(0.3, $violet)}
+			id="circle__four"
+		/>
+		<Icon
+			name="circle"
+			width={280}
+			height={280}
+			color={lighten(0.2, $elfGreen)}
+			id="circle__five"
+		/>
+		<Icon
+			name="circle"
+			width={180}
+			height={180}
+			color={lighten(0.3, $violet)}
+			id="circle__six"
+		/>
+		<Icon
+			name="circle"
+			width={290}
+			height={290}
+			color={lighten(0.2, $elfGreen)}
+			id="circle__seven"
+		/>
 	</LastPage>
 );

@@ -6,7 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import { addHabit } from '../../actions/habitActions';
 
-import { Container, Header, Footer } from './HabitForm.styled';
+import PageContainer from '../Shared/PageContainer/PageContainer';
+import { Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
@@ -81,9 +82,16 @@ export class _HabitForm extends Component {
 
 	render() {
 		const { step } = this.state;
+		const { history } = this.props;
 
 		return (
-			<Container>
+			<PageContainer
+				breadCrumbs={{
+					crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
+					current: 'Habit Form',
+				}}
+				history={history}
+			>
 				<Header>Add a New Habit</Header>
 				<Views
 					{...this.state}
@@ -103,7 +111,7 @@ export class _HabitForm extends Component {
 						onSubmit={this.handleSubmit}
 					/>
 				</Footer>
-			</Container>
+			</PageContainer>
 		);
 	}
 }

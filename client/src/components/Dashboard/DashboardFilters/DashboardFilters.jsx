@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { $greyLight, $white } from '../../../assets/styledVars';
+import { $grey, $white } from '../../../assets/styledVars';
 import { FilterByTags, FilterByDifficulty, FilterByType } from '../Dashboard.styled';
 
 import Label from '../../Shared/Label/Label';
@@ -14,7 +14,7 @@ const DashboardFilters = ({ tags }) => (
 		<FilterByTags>
 			<span>Tags:</span>
 			{tags.map(tag => (
-				<Label key={tag} bgColor={$white} color={$greyLight} onClick={() => null}>
+				<Label key={tag} bgColor={$white} color={$grey} onClick={() => null}>
 					{tag}
 				</Label>
 			))}

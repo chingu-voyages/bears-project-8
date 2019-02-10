@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 
@@ -32,6 +32,8 @@ const DashboardSidebar = ({ habitsLength }) => (
 	</Sidebar>
 );
 
-DashboardSidebar.propTypes = {};
+DashboardSidebar.propTypes = {
+	habitsLength: PropTypes.number.isRequired,
+};
 
 export default DashboardSidebar;
