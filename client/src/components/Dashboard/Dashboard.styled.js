@@ -3,17 +3,6 @@ import { lighten } from 'polished';
 
 import { $white, $grey } from '../../assets/styledVars';
 
-export const Container = styled.section`
-	height: 80vh;
-	padding: 0 2.5rem;
-	width: 100%;
-
-	@media (min-width: 1000px) {
-		width: 80%;
-		margin: 0 auto;
-	}
-`;
-
 export const Section = styled.section`
 	display: grid;
 	width: 100%;
@@ -26,6 +15,7 @@ export const Sidebar = styled.aside`
 	flex-direction: column;
 	background-color: ${lighten(0.5, $grey)};
 	padding: 3.5rem 2rem;
+	border-radius: 6px 0 0 6px;
 	/* justify-content: center; */
 	/* align-items: center; */
 `;
@@ -60,6 +50,7 @@ export const Dashboard = styled.div`
 	grid-template-rows: repeat(2, min-content) 1fr;
 	grid-template-columns: 65% 1fr;
 	background-color: ${$white};
+	border-radius: 0 6px 6px 0;
 `;
 
 export const FilterByTags = styled.div`
@@ -68,6 +59,7 @@ export const FilterByTags = styled.div`
 	background-color: ${lighten(0.5, $grey)};
 	padding: 1rem;
 	grid-column: 1/3;
+	border-radius: 0 6px 0 0;
 
 	& span {
 		font-size: 12px;
