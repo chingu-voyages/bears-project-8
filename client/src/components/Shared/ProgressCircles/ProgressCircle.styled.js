@@ -1,8 +1,12 @@
 import styled from 'styled-components';
-import { $animDuration, $greyLighter, $greyLight, $greyDark } from '../../../assets/styledVars';
+import { darken, lighten } from 'polished';
+import { $animDuration, $grey } from '../../../assets/styledVars';
 
 const ProgressCircle = styled.div`
-	${props => (props.current ? `background: ${$greyDark};` : `background: ${$greyLighter};`)}
+	${props =>
+		props.current
+			? `background: ${darken(0.2, $grey)};`
+			: `background: ${lighten(0.4, $grey)};`}
 	display: inline-block;
 	border-radius: 50%;
 	width: 25px;
@@ -12,7 +16,7 @@ const ProgressCircle = styled.div`
 
 	&:hover {
 		cursor: pointer;
-		background: ${$greyLight};
+		background: ${lighten(0.2, $grey)};
 	}
 
 	@media only screen and (max-width: 960px) {

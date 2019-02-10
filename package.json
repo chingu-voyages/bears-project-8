@@ -28,6 +28,7 @@
 		"node": "^11.6.0",
 		"passport": "^0.4.0",
 		"passport-jwt": "^4.0.0",
+		"polished": "^2.3.3",
 		"supertest": "^3.3.0",
 		"validator": "^10.9.0"
 	},

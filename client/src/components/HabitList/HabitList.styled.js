@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $greyLight } from '../../assets/styledVars';
+import { $grey } from '../../assets/styledVars';
 
 export const Container = styled.section`
 	grid-column: 1/3;
@@ -17,6 +18,6 @@ export const NoHabits = styled.div`
 	letter-spacing: 1px;
 	line-height: 160%;
 	font-size: 17px;
-	color: ${$greyLight};
+	color: ${lighten(0.2, $grey)};
 	text-align: center;
 `;

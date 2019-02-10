@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 import { Link } from 'react-router-dom';
-import { $greyDark, $greyDarker, $mintLight, $mintDark } from '../../../assets/styledVars';
+import { $grey, $elfGreen } from '../../../assets/styledVars';
 
 export const StyledHomeNav = styled.div`
 	z-index: 20;
@@ -28,7 +29,7 @@ export const NavContent = styled.div`
 
 export const Logo = styled.div`
 	font-size: 24;
-	color: ${$greyDarker};
+	color: ${darken(0.4, $grey)};
 	font-size: 1.5rem;
 	display: flex;
 	justify-content: center;
@@ -50,11 +51,15 @@ export const NavLink = styled(Link)`
 	text-decoration: none;
 	background: transparent;
 	${({ focused }) =>
-		focused && `border: 2px solid ${$mintLight}; &:hover{ background: ${$mintLight} }`};
-	color: ${$greyDark};
+		focused &&
+		`border: 2px solid ${lighten(0.3, $elfGreen)}; &:hover{ background: ${lighten(
+			0.3,
+			$elfGreen
+		)} }`};
+	color: ${darken(0.2, $grey)};
 	font-size: 1.125rem;
 	margin-left: 2rem;
 	&:hover {
-		color: ${$mintDark};
+		color: ${darken(0.2, $elfGreen)};
 	}
 `;

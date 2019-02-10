@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { $greyDark, $greyLightest, $animDuration } from '../../../../assets/styledVars';
+import { darken, lighten } from 'polished';
+import { $grey, $animDuration } from '../../../../assets/styledVars';
 import { generalInputStyles } from '../Form.styled';
 
 export const CheckboxContainer = styled.div`
@@ -12,7 +13,7 @@ export const CheckboxContainer = styled.div`
 export const StyledCheckbox = styled.div`
   ${generalInputStyles}
   transition: ${$animDuration};
-	${({ active }) => active && `background: ${$greyDark}; color: ${$greyLightest};`}
+	${({ active }) => active && `background: ${darken(0.2, $grey)}; color: ${lighten(0.5, $grey)};`}
 	text-align: center;
 	cursor: pointer;
 `;

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Header, Footer } from './HabitForm.styled';
+import { withRouter } from 'react-router-dom';
+import PageContainer from '../Shared/PageContainer/PageContainer';
+import { Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
 
-export default class HabitForm extends Component {
+export class _HabitForm extends Component {
 	state = {
 		step: 0,
 
@@ -68,9 +70,15 @@ export default class HabitForm extends Component {
 
 	render() {
 		const { step } = this.state;
-		const { onSubmit } = this.props;
+		const { onSubmit, history } = this.props;
 		return (
-			<Container>
+			<PageContainer
+				breadCrumbs={{
+					crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
+					current: 'Habit Form',
+				}}
+				history={history}
+			>
 				<Header>Add a New Habit</Header>
 				<Views
 					{...this.state}
@@ -90,7 +98,9 @@ export default class HabitForm extends Component {
 						onSubmit={onSubmit}
 					/>
 				</Footer>
-			</Container>
+			</PageContainer>
 		);
 	}
 }
+
+export default withRouter(_HabitForm);

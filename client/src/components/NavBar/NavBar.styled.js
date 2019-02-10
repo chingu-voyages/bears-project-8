@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $midGray, $elfGreen, $textDark } from '../../assets/styledVars';
+import { $grey, $elfGreen, $textDark } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	display: flex;
 	height: 60px;
-	background-color: ${$midGray};
+	background-color: ${lighten(0.5, $grey)};
 	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0px 13px 26px rgba(0, 0, 0, 0.1);

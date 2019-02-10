@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { $titleFont, $bodyFont, $greyLighter, $greyDark, $greyDarker } from './assets/styledVars';
+import { darken, lighten } from 'polished';
+import { $titleFont, $bodyFont, $grey } from './assets/styledVars';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -18,14 +19,14 @@ body {
     font-family: ${$bodyFont};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${$greyLighter};
-    color: ${$greyDark};
+    background-color: ${lighten(0.4, $grey)};
+    color: ${darken(0.2, $grey)};
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-family: ${$titleFont};
-    color: ${$greyDarker};
+    color: ${darken(0.4, $grey)};
 }
 
 p {
