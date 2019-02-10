@@ -45,8 +45,7 @@ export class _HabitForm extends Component {
 		const { steps, ...habit } = this.state;
 		habit.tags = habit.tags.map(t => t.text);
 
-		this.props.addHabit(habit);
-		this.props.history.push('/dashboard');
+		return this.props.addHabit(habit, this.props.history);
 	};
 
 	setStep = step => {

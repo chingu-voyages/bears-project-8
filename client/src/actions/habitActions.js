@@ -21,7 +21,7 @@ export const getHabits = () => dispatch =>
 		);
 
 // Add a new habit
-export const addHabit = habitData => dispatch =>
+export const addHabit = (habitData, history) => dispatch =>
 	axios
 		.post('/api/habit/create', habitData)
 		.then(res => {
@@ -29,6 +29,7 @@ export const addHabit = habitData => dispatch =>
 				type: ADD_HABIT,
 				payload: res.data.habit,
 			});
+			history.push('/dashboard');
 		})
 		.catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 
