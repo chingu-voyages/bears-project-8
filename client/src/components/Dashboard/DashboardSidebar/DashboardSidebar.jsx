@@ -1,14 +1,14 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 
-const DashboardSidebar = () => (
+const DashboardSidebar = ({ habitsLength }) => (
 	<Sidebar>
 		<SidebarSection>
 			<SidebarOption onClick={() => null}>
 				All Habits
-				<span>4</span>
+				<span>{habitsLength}</span>
 			</SidebarOption>
 			<SidebarOption onClick={() => null}>
 				Due Habits
@@ -32,6 +32,8 @@ const DashboardSidebar = () => (
 	</Sidebar>
 );
 
-DashboardSidebar.propTypes = {};
+DashboardSidebar.propTypes = {
+	habitsLength: PropTypes.number.isRequired,
+};
 
 export default DashboardSidebar;

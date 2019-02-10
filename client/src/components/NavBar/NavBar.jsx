@@ -15,7 +15,6 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 
 	const menuContent = isAuthenticated ? (
 		<NavItem>
-			{/* <Dropdown title="Profile" options={userDropdownOpts} /> */}
 			<AuthDropdown
 				profPic={`https://${user.avatar}`}
 				user={user}

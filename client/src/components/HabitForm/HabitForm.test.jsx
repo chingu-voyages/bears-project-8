@@ -6,12 +6,12 @@ import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import { Button } from '../Shared/Forms/Form.styled';
 
 describe('HabitForm', () => {
-	const onSubmit = jest.fn();
+	const historyMock = { push: jest.fn() };
 	// eslint-disable-next-line no-shadow
 	const setup = fullMount => {
 		const props = {
-			onSubmit,
-			onChange: () => null,
+			addHabit: jest.fn(),
+			history: historyMock,
 		};
 		let component;
 		if (fullMount) {
@@ -46,7 +46,7 @@ describe('HabitForm', () => {
 			// Skip button
 			const skipButton = rightButtons.find('[secondary]').first();
 			skipButton.simulate('click');
-			expect(onSubmit).toHaveBeenCalledTimes(1);
+			expect(component.props().addHabit).toHaveBeenCalledTimes(1);
 
 			// Done button
 			const doneButton = rightButtons
@@ -87,7 +87,7 @@ describe('HabitForm', () => {
 			const submitButton = rightButtons.find(Button);
 			expect(submitButton).toHaveLength(1);
 			submitButton.simulate('click');
-			expect(onSubmit).toHaveBeenCalledTimes(2);
+			expect(component.props().addHabit).toHaveBeenCalledTimes(1);
 		});
 	});
 });

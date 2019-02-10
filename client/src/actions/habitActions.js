@@ -6,7 +6,7 @@ const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } =
 // Get the user's habits
 export const getHabits = () => dispatch =>
 	axios
-		.get('/api/user/habits')
+		.get('/api/habit/habits')
 		.then(res => {
 			dispatch({
 				type: UPDATE_HABIT_LIST,
@@ -21,7 +21,7 @@ export const getHabits = () => dispatch =>
 		);
 
 // Add a new habit
-export const addHabit = habitData => dispatch =>
+export const addHabit = (habitData, history) => dispatch =>
 	axios
 		.post('/api/habit/create', habitData)
 		.then(res => {
@@ -29,6 +29,7 @@ export const addHabit = habitData => dispatch =>
 				type: ADD_HABIT,
 				payload: res.data.habit,
 			});
+			history.push('/dashboard');
 		})
 		.catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 

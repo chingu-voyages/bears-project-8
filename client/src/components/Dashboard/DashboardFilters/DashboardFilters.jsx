@@ -1,41 +1,45 @@
 import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { $grey, $white } from '../../../assets/styledVars';
 import { FilterByTags, FilterByDifficulty, FilterByType } from '../Dashboard.styled';
 
 import Label from '../../Shared/Label/Label';
 
-const DashboardFilters = () => (
+const DIFFICULTIES = ['Trivial', 'Easy', 'Medium', 'Hard', 'Epic'];
+const TYPES = ['Active', 'Passive'];
+
+const DashboardFilters = ({ tags }) => (
 	<Fragment>
 		<FilterByTags>
-			<span>Tags:</span> {/* Map through actual user tags here */}
-			<Label bgColor={$white} color={$grey}>
-				Health
-			</Label>
-			<Label bgColor={$white} color={$grey}>
-				Web Development
-			</Label>
-			<Label bgColor={$white} color={$grey}>
-				Meditation
-			</Label>
+			<span>Tags:</span>
+			{tags.map(tag => (
+				<Label key={tag} bgColor={$white} color={$grey} onClick={() => null}>
+					{tag}
+				</Label>
+			))}
 		</FilterByTags>
 		<FilterByDifficulty>
 			<span>Difficulty:</span>
-			<Label>Trivial</Label>
-			<Label>Easy</Label>
-			<Label>Medium</Label>
-			<Label>Hard</Label>
-			<Label>Epic</Label>
+			{DIFFICULTIES.map(diff => (
+				<Label key={diff} onClick={() => null}>
+					{diff}
+				</Label>
+			))}
 		</FilterByDifficulty>
 		<FilterByType>
 			<span>Type:</span>
-			<Label>Active</Label>
-			<Label>Passive</Label>
+			{TYPES.map(type => (
+				<Label key={type} onClick={() => null}>
+					{type}
+				</Label>
+			))}
 		</FilterByType>
 	</Fragment>
 );
 
-DashboardFilters.propTypes = {};
+DashboardFilters.propTypes = {
+	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default DashboardFilters;

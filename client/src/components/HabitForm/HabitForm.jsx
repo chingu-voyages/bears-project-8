@@ -1,6 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
+import { addHabit } from '../../actions/habitActions';
+
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import { Header, Footer } from './HabitForm.styled';
 import Views from './Views/Views';
@@ -28,12 +33,19 @@ export class _HabitForm extends Component {
 	};
 
 	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
+		addHabit: PropTypes.func.isRequired,
 	};
 
 	handleChange = ({ target }) => {
 		const { name, value } = target;
 		this.setState({ [name]: value });
+	};
+
+	handleSubmit = () => {
+		const { steps, ...habit } = this.state;
+		habit.tags = habit.tags.map(t => t.text);
+
+		return this.props.addHabit(habit, this.props.history);
 	};
 
 	setStep = step => {
@@ -47,7 +59,6 @@ export class _HabitForm extends Component {
 	};
 
 	// Tag input functions
-
 	handleTagDelete = i => {
 		this.setState(prevState => ({
 			tags: prevState.tags.filter((tag, index) => index !== i),
@@ -70,7 +81,8 @@ export class _HabitForm extends Component {
 
 	render() {
 		const { step } = this.state;
-		const { onSubmit, history } = this.props;
+		const { history } = this.props;
+
 		return (
 			<PageContainer
 				breadCrumbs={{
@@ -95,7 +107,7 @@ export class _HabitForm extends Component {
 						step={step}
 						totalSteps={3}
 						setStep={this.setStep}
-						onSubmit={onSubmit}
+						onSubmit={this.handleSubmit}
 					/>
 				</Footer>
 			</PageContainer>
@@ -103,4 +115,9 @@ export class _HabitForm extends Component {
 	}
 }
 
-export default withRouter(_HabitForm);
+export default withRouter(
+	connect(
+		null,
+		{ addHabit }
+	)(_HabitForm)
+);

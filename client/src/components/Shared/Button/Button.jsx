@@ -13,7 +13,7 @@ Button.propTypes = {
 	color: PropTypes.string,
 	bgColor: PropTypes.string,
 	type: PropTypes.oneOf(['simple', 'filled']).isRequired,
-	size: PropTypes.oneOf(['small', 'regular', 'large']),
+	size: PropTypes.oneOf(['icon', 'small', 'regular', 'large']),
 	clickHandler: PropTypes.func.isRequired,
 };
 

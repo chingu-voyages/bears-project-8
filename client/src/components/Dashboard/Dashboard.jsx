@@ -24,6 +24,8 @@ export class _Dashboard extends Component {
 
 	render() {
 		const { history, habits } = this.props;
+		const allTags = habits.reduce((tagArr, habit) => tagArr.concat(habit.tags), []);
+		const uniqueTagsArr = [...new Set(allTags)];
 
 		return (
 			<PageContainer
@@ -34,10 +36,10 @@ export class _Dashboard extends Component {
 				history={history}
 			>
 				<Section>
-					<DashboardSidebar />
+					<DashboardSidebar habitsLength={habits.length} />
 
 					<Dashboard>
-						<DashboardFilters />
+						<DashboardFilters tags={uniqueTagsArr} />
 
 						<HabitList habits={habits} />
 					</Dashboard>
@@ -47,6 +49,8 @@ export class _Dashboard extends Component {
 	}
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ habits }) => ({
+	habits: habits.habits,
+});
 
 export default withRouter(connect(mapStateToProps)(_Dashboard));
