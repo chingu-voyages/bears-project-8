@@ -3,12 +3,12 @@ import React from 'react';
 
 import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 
-const DashboardSidebar = props => (
+const DashboardSidebar = ({ habitsLength }) => (
 	<Sidebar>
 		<SidebarSection>
 			<SidebarOption onClick={() => null}>
 				All Habits
-				<span>4</span>
+				<span>{habitsLength}</span>
 			</SidebarOption>
 			<SidebarOption onClick={() => null}>
 				Due Habits

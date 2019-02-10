@@ -24,6 +24,8 @@ export class _Dashboard extends Component {
 
 	render() {
 		const { history, habits } = this.props;
+		const allTags = habits.reduce((tagArr, habit) => tagArr.concat(habit.tags), []);
+		const uniqueTagsArr = [...new Set(allTags)];
 
 		return (
 			<Container>
@@ -39,10 +41,10 @@ export class _Dashboard extends Component {
 				</Breadcrumbs>
 
 				<Section>
-					<DashboardSidebar />
+					<DashboardSidebar habitsLength={habits.length} />
 
 					<Dashboard>
-						<DashboardFilters />
+						<DashboardFilters tags={uniqueTagsArr} />
 
 						<HabitList habits={habits} />
 					</Dashboard>

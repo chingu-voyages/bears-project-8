@@ -42,7 +42,7 @@ export const loginUser = (userData, history) => dispatch =>
 			// Get user's habits
 			dispatch(getHabits());
 		})
-		.then(() => history.push('/dashboard'))
+		// .then(() => history.push('/dashboard'))
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,
