@@ -11,7 +11,9 @@ class Habit extends Component {
 	static propTypes = {
 		habit: PropTypes.shape({
 			name: PropTypes.string.isRequired,
-			frequency: PropTypes.string.isRequired,
+			frequency: PropTypes.shape({
+				period: PropTypes.string,
+			}),
 		}).isRequired,
 	};
 
@@ -44,7 +46,9 @@ class Habit extends Component {
 						<p>
 							<strong>{habit.name}</strong> <br /> <em>{habit.frequency.period}</em>{' '}
 						</p>
-						<Button size="small">{habit.status || ''}</Button>
+						<Button type="simple" clickHandler={() => null} size="small">
+							{habit.status || ''}
+						</Button>
 					</Fragment>
 				) : (
 					<FullHabit>
@@ -58,7 +62,9 @@ class Habit extends Component {
 									</Label>
 								))}
 						</FlexContainer>
-						<Button size="small">{habit.status || ''}</Button>
+						<Button type="simple" size="small">
+							{habit.status || ''}
+						</Button>
 						<Description>{habit.description}</Description>
 						<small>{habit.frequency.period}</small>
 						<FlexContainer>
