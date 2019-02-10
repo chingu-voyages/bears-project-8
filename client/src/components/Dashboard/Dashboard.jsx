@@ -52,6 +52,8 @@ export class _Dashboard extends Component {
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ habits }) => ({
+	habits: habits.habits,
+});
 
 export default withRouter(connect(mapStateToProps)(_Dashboard));

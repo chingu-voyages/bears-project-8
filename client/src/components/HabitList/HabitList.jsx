@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Container, NoHabits } from './HabitList.styled';
 
 import Habit from '../Habit/Habit';
 
-const habits = [
+const habitsTest = [
 	{
 		title: 'Test habit',
 		frequency: 'Once every day',
@@ -52,17 +52,18 @@ const habits = [
 
 class HabitList extends Component {
 	static propTypes = {
-		// habits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+		habits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	};
 
 	state = {};
 
 	render() {
-		// const { habits } = this.props;
+		const { habits } = this.props;
+
 		return (
 			<Container>
 				{habits ? (
-					habits.map(habit => <Habit key={habit.id} habit={habit} />)
+					habits.map(habit => <Habit key={habit._id} habit={habit} />)
 				) : (
 					<NoHabits>
 						Nothing to see here. <br /> Add some habits.

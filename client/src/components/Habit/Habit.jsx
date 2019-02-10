@@ -10,7 +10,7 @@ import Label from '../Shared/Label/Label';
 class Habit extends Component {
 	static propTypes = {
 		habit: PropTypes.shape({
-			title: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
 			frequency: PropTypes.string.isRequired,
 		}).isRequired,
 	};
@@ -42,13 +42,13 @@ class Habit extends Component {
 				{isCollapsed ? (
 					<Fragment>
 						<p>
-							<strong>{habit.title}</strong> <br /> <em>{habit.frequency}</em>{' '}
+							<strong>{habit.name}</strong> <br /> <em>{habit.frequency.period}</em>{' '}
 						</p>
-						<Button size="small">{habit.status}</Button>
+						<Button size="small">{habit.status || ''}</Button>
 					</Fragment>
 				) : (
 					<FullHabit>
-						<strong>{habit.title}</strong>
+						<strong>{habit.name}</strong>
 						<FlexContainer>
 							{habit.tags &&
 								habit.tags.length > 0 &&
@@ -58,9 +58,9 @@ class Habit extends Component {
 									</Label>
 								))}
 						</FlexContainer>
-						<Button size="small">{habit.status}</Button>
+						<Button size="small">{habit.status || ''}</Button>
 						<Description>{habit.description}</Description>
-						<small>{habit.frequency}</small>
+						<small>{habit.frequency.period}</small>
 						<FlexContainer>
 							<Label>{habit.difficulty}</Label>
 							<Label>{habit.type}</Label>
