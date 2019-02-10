@@ -55,8 +55,12 @@ const Profile = ({ user, history }) => (
 				</UserInfo>
 				{/* User actions */}
 				<UserActions>
-					<Button>Edit Profile</Button>
-					<Button>Delete Profile</Button>
+					<Button type="simple" clickHandler={() => {}}>
+						Edit Profile
+					</Button>
+					<Button type="simple" clickHandler={() => {}}>
+						Delete Profile
+					</Button>
 				</UserActions>
 			</Sidebar>
 			<Dashboard>

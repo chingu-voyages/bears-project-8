@@ -17,7 +17,7 @@ const CircleImg = ({ type, size, imgUrl, title, subtitle, clickHandler }) => (
 );
 
 CircleImg.propTypes = {
-	type: PropTypes.oneOf(['wPlus']).isRequired,
+	type: PropTypes.oneOf(['wPlus', 'avatar']).isRequired,
 	imgUrl: PropTypes.string,
 	title: PropTypes.string,
 	subtitle: PropTypes.string,
