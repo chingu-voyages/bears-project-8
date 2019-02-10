@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 
-const DashboardSidebar = props => (
+const DashboardSidebar = () => (
 	<Sidebar>
 		<SidebarSection>
 			<SidebarOption onClick={() => null}>

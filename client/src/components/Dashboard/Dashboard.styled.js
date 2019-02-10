@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
-import { $white, $greyLighter } from '../../assets/styledVars';
+import { $white, $grey } from '../../assets/styledVars';
 
 export const Container = styled.section`
 	height: 80vh;
@@ -23,7 +24,7 @@ export const Section = styled.section`
 export const Sidebar = styled.aside`
 	display: flex;
 	flex-direction: column;
-	background-color: #f8f8f8;
+	background-color: ${lighten(0.5, $grey)};
 	padding: 3.5rem 2rem;
 	/* justify-content: center; */
 	/* align-items: center; */
@@ -45,11 +46,12 @@ export const SidebarOption = styled.div`
 	transition: all 200ms;
 
 	&:hover {
-		background-color: ${$greyLighter};
+		background-color: ${lighten(0.4, $grey)};
 	}
 
 	& span {
 		font-weight: 300;
+		color: ${lighten(0.2, $grey)};
 	}
 `;
 
@@ -63,7 +65,7 @@ export const Dashboard = styled.div`
 export const FilterByTags = styled.div`
 	display: flex;
 	align-items: center;
-	background-color: #f8f8f8;
+	background-color: ${lighten(0.5, $grey)};
 	padding: 1rem;
 	grid-column: 1/3;
 
