@@ -13,8 +13,6 @@ import store from './store/store';
 import { logoutUser, setCurrentUser } from './actions/authActions';
 import { getHabits } from './actions/habitActions';
 
-let isAuthenticated = false;
-
 const history = createHistory({
 	hashType: 'noslash',
 });
@@ -34,7 +32,6 @@ if (localStorage.jwtToken) {
 		// Redirect to login
 		history.push('/auth/login');
 	} else {
-		isAuthenticated = true;
 		// Set user and isAuthenticated
 		store.dispatch(setCurrentUser(decoded));
 		// Get user's habits
@@ -45,7 +42,7 @@ if (localStorage.jwtToken) {
 const Root = () => (
 	<Provider store={store}>
 		<GlobalStyle />
-		<Routes isAuthenticated={isAuthenticated} />
+		<Routes />
 	</Provider>
 );
 
