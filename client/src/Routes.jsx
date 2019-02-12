@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
@@ -112,4 +113,8 @@ Routes.propTypes = {
 	isAuthenticated: PropTypes.bool.isRequired,
 };
 
-export default Routes;
+const mapStateToProps = ({ auth }) => ({
+	isAuthenticated: auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Routes);
