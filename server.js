@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
+const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const habitRoutes = require('./routes/habitRoutes');
@@ -48,9 +49,15 @@ app.use('/api/auth', authRoutes);
 app.use('/api/habit', habitRoutes);
 app.use('/api/user', userRoutes);
 
-app.get('/', (req, res) => {
-	res.send('Hello World');
-});
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+	// Static folder
+	app.use(express.static('client/build'));
+
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
 
 if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'ci') {
 	app.listen(PORT, () => {
