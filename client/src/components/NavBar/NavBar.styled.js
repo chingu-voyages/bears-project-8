@@ -24,8 +24,9 @@ export const NavContent = styled.div`
 
 export const NavMenu = styled.div`
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
+	width: 180px;
 `;
 
 export const NavItem = styled.span`
@@ -52,10 +53,18 @@ export const Logo = styled.div`
 `;
 
 export const AddHabitLink = styled(Link)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1.2rem;
+	font-weight: 500;
+	height: 30px;
+	width: 30px;
 	color: ${darken(0.3, $grey)};
 	text-decoration: none;
 	border: 1px solid ${lighten(0.3, $grey)};
-	border-radius: 3px;
+	border-radius: 50%;
 	padding: 0.4rem 0.5rem;
 	margin-right: 3rem;
 `;

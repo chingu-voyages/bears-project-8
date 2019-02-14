@@ -15,6 +15,7 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 
 	const menuContent = isAuthenticated ? (
 		<NavItem>
+			<AddHabitLink to="/addhabit">+</AddHabitLink>
 			<AuthDropdown
 				profPic={`https://${user.avatar}`}
 				user={user}
@@ -42,10 +43,7 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 						Habit Tracker
 					</Logo>
 				</NavItem>
-				<NavItem>
-					<AddHabitLink to="/habitform">Add Habit</AddHabitLink>
-					<NavMenu>{menuContent}</NavMenu>
-				</NavItem>
+				<NavMenu>{menuContent}</NavMenu>
 			</NavContent>
 		</Container>
 	);

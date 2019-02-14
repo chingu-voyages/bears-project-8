@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
-import HabitForm from './components/HabitForm/HabitForm';
+import AddHabit from './components/AddHabit/AddHabit';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -90,8 +90,8 @@ const Routes = ({ isAuthenticated }) => (
 			{/* Rendering component here to develop */}
 			<Route
 				exact
-				path="/habitform"
-				render={() => withContainer({ component: HabitForm, isLazy: true, hasNav: true })}
+				path="/addhabit"
+				render={() => withContainer({ component: AddHabit, isLazy: true, hasNav: true })}
 			/>
 
 			<Route

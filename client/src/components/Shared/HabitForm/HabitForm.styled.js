@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import { $grey } from '../../assets/styledVars';
+import { $grey } from '../../../assets/styledVars';
 
 export const Container = styled.div`
 	position: relative;
