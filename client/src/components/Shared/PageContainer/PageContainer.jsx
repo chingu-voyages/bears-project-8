@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import { Container, PageBox } from './PageContainer.styled';
 
@@ -17,4 +18,4 @@ PageContainer.defaultProps = {
 	size: 'regular',
 };
 
-export default PageContainer;
+export default withRouter(PageContainer);
