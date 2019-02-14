@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -24,14 +24,14 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 			/>
 		</NavItem>
 	) : (
-		<Fragment>
+		<>
 			<NavItem link onClick={() => history.push('/auth/register')}>
 				Register
 			</NavItem>
 			<NavItem link onClick={() => history.push('/auth/login')}>
 				Login
 			</NavItem>
-		</Fragment>
+		</>
 	);
 
 	return (

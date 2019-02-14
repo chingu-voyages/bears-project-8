@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { addHabit } from '../../../actions/habitActions';
 
-import { Header, Footer } from './HabitForm.styled';
+import { Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../ProgressCircles/ProgressCircles';
@@ -33,7 +33,31 @@ export class _HabitForm extends Component {
 
 	static propTypes = {
 		addHabit: PropTypes.func.isRequired,
+		habitDetails: PropTypes.shape({
+			name: PropTypes.string,
+			tags: PropTypes.arrayOf(PropTypes.string),
+			description: PropTypes.string,
+			times: PropTypes.string,
+			period: PropTypes.string,
+			reminderEvery: PropTypes.string,
+			reminderTypes: PropTypes.object,
+			difficulty: PropTypes.string,
+			habitType: PropTypes.string,
+			habitStart: PropTypes.string,
+		}),
 	};
+
+	static defaultProps = {
+		habitDetails: null,
+	};
+
+	static getDerivedStateFromProps(nextProps) {
+		if (nextProps.habitDetails) {
+			const tagsFormatted = nextProps.habitDetails.tags.map(tag => ({ id: tag, text: tag }));
+			return { ...nextProps.habitDetails, tags: tagsFormatted };
+		}
+		return null;
+	}
 
 	handleChange = ({ target }) => {
 		const { name, value } = target;
@@ -83,7 +107,6 @@ export class _HabitForm extends Component {
 
 		return (
 			<>
-				<Header>Add a New Habit</Header>
 				<Views
 					{...this.state}
 					onChange={this.handleChange}
