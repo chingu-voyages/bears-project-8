@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 import Icon from '../Shared/Icon/Icon';
 import AuthDropdown from './AuthDropdown/AuthDropdown';
-import { Container, NavContent, NavItem, NavMenu, Logo } from './NavBar.styled';
+import { Container, NavContent, NavItem, NavMenu, Logo, AddHabitLink } from './NavBar.styled';
 
 export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 	const { isAuthenticated, user } = auth;
@@ -42,7 +42,10 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 						Habit Tracker
 					</Logo>
 				</NavItem>
-				<NavMenu>{menuContent}</NavMenu>
+				<NavItem>
+					<AddHabitLink to="/habitform">Add Habit</AddHabitLink>
+					<NavMenu>{menuContent}</NavMenu>
+				</NavItem>
 			</NavContent>
 		</Container>
 	);
