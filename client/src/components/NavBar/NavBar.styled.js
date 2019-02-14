@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 import { Link } from 'react-router-dom';
 
-import { $grey } from '../../assets/styledVars';
+import { $grey, $elfGreen, $white } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	display: flex;
@@ -26,7 +26,7 @@ export const NavMenu = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 180px;
+	width: 230px;
 `;
 
 export const NavItem = styled.span`
@@ -57,14 +57,31 @@ export const AddHabitLink = styled(Link)`
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	font-size: 1.2rem;
-	font-weight: 500;
-	height: 30px;
-	width: 30px;
-	color: ${darken(0.3, $grey)};
 	text-decoration: none;
-	border: 1px solid ${lighten(0.3, $grey)};
-	border-radius: 50%;
-	padding: 0.4rem 0.5rem;
-	margin-right: 3rem;
+	padding: 0.4rem 0.9rem 0.4rem 2.2rem;
+	position: relative;
+	color: ${$grey};
+	background: ${$white};
+	font-size: 0.8rem;
+	border-radius: 3px;
+
+	&:hover {
+		color: ${darken(0.3, $grey)};
+	}
+
+	&:before {
+		content: '+';
+		background: ${$elfGreen};
+		color: ${$white};
+		font-weight: 500;
+		position: absolute;
+		left: 0;
+		font-size: 1.2rem;
+		height: 100%;
+		width: 1.7rem;
+		border-radius: 3px 0 0 3px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `;

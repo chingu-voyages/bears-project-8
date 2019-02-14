@@ -14,15 +14,15 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 	const logoLink = isAuthenticated ? '/dashboard' : '/';
 
 	const menuContent = isAuthenticated ? (
-		<NavItem>
-			<AddHabitLink to="/addhabit">+</AddHabitLink>
+		<>
+			<AddHabitLink to="/addhabit">Add habit</AddHabitLink>
 			<AuthDropdown
 				profPic={`https://${user.avatar}`}
 				user={user}
 				logout={logout}
 				history={history}
 			/>
-		</NavItem>
+		</>
 	) : (
 		<>
 			<NavItem link onClick={() => history.push('/auth/register')}>
