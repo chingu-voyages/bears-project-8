@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import { Section, Dashboard } from './Dashboard.styled';
 
+import { filterHabits } from '../../actions/habitActions';
 import HabitList from '../HabitList/HabitList';
 
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar';
@@ -14,13 +15,14 @@ import DashboardFilters from './DashboardFilters/DashboardFilters';
 export class _Dashboard extends Component {
 	static propTypes = {
 		habits: PropTypes.arrayOf(PropTypes.shape({})),
+		filterHabits: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
 		habits: [],
 	};
 
-	state = {};
+	filterHabitsBy = (target, criteria) => this.props.filterHabits({ target, criteria });
 
 	render() {
 		const { history, habits } = this.props;
@@ -36,10 +38,13 @@ export class _Dashboard extends Component {
 				history={history}
 			>
 				<Section>
-					<DashboardSidebar habitsLength={habits.length} />
+					<DashboardSidebar
+						filterHabits={this.filterHabitsBy}
+						habitsLength={habits.length}
+					/>
 
 					<Dashboard>
-						<DashboardFilters tags={uniqueTagsArr} />
+						<DashboardFilters filterHabits={this.filterHabitsBy} tags={uniqueTagsArr} />
 
 						<HabitList habits={habits} />
 					</Dashboard>
@@ -50,7 +55,12 @@ export class _Dashboard extends Component {
 }
 
 const mapStateToProps = ({ habits }) => ({
-	habits: habits.habits,
+	habits,
 });
 
-export default withRouter(connect(mapStateToProps)(_Dashboard));
+export default withRouter(
+	connect(
+		mapStateToProps,
+		{ filterHabits }
+	)(_Dashboard)
+);

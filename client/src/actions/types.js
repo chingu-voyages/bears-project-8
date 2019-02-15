@@ -7,4 +7,5 @@ export default keyMirror({
 	ADD_HABIT: null,
 	DELETE_HABIT: null,
 	UPDATE_HABIT: null,
+	FILTER_HABIT_LIST: null,
 });
