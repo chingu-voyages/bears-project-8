@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 import Icon from '../Shared/Icon/Icon';
 import AuthDropdown from './AuthDropdown/AuthDropdown';
-import { Container, NavContent, NavItem, NavMenu, Logo } from './NavBar.styled';
+import { Container, NavContent, NavItem, NavMenu, Logo, AddHabitLink } from './NavBar.styled';
 
 export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 	const { isAuthenticated, user } = auth;
@@ -14,23 +14,24 @@ export const _NavBar = ({ auth, logoutUser: logout, history }) => {
 	const logoLink = isAuthenticated ? '/dashboard' : '/';
 
 	const menuContent = isAuthenticated ? (
-		<NavItem>
+		<>
+			<AddHabitLink to="/addhabit">Add habit</AddHabitLink>
 			<AuthDropdown
 				profPic={`https://${user.avatar}`}
 				user={user}
 				logout={logout}
 				history={history}
 			/>
-		</NavItem>
+		</>
 	) : (
-		<Fragment>
+		<>
 			<NavItem link onClick={() => history.push('/auth/register')}>
 				Register
 			</NavItem>
 			<NavItem link onClick={() => history.push('/auth/login')}>
 				Login
 			</NavItem>
-		</Fragment>
+		</>
 	);
 
 	return (

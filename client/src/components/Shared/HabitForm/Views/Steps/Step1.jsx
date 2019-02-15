@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
-import FormGroup from '../../../Shared/Forms/FormGroup';
+import FormGroup from '../../../Forms/FormGroup';
 
 const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setReminderType }) => (
 	<Fragment>

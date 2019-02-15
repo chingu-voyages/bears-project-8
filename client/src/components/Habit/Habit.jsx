@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import { $white, $elfGreen, $greyLavender, $tomato } from '../../assets/styledVars';
 import { Container, FullHabit, FlexContainer, Description } from './Habit.styled';
@@ -29,6 +30,8 @@ class Habit extends Component {
 
 	handleEditHabit = e => {
 		e.stopPropagation();
+		const { habit, history } = this.props;
+		history.push(`/edithabit/${habit._id}`);
 	};
 
 	handleDeleteHabit = e => {
@@ -105,4 +108,4 @@ class Habit extends Component {
 	}
 }
 
-export default Habit;
+export default withRouter(Habit);

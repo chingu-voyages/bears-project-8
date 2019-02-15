@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
-import HabitForm from './components/HabitForm/HabitForm';
+import AddHabit from './components/AddHabit/AddHabit';
+import EditHabit from './components/EditHabit/EditHabit';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -23,16 +24,23 @@ const Login = lazy(() =>
 	import(/* webpackChunkName: "login" */ /* webpackPrefetch: true */ './components/Auth/Login/Login')
 );
 
-const withContainer = ({ component: Component, isLazy, hasNav, withAuth, isAuthenticated }) =>
+const withContainer = ({
+	component: Component,
+	isLazy,
+	hasNav,
+	withAuth,
+	isAuthenticated,
+	props,
+}) =>
 	isLazy ? (
 		<AppContainer hasNav={hasNav}>
 			<Suspense fallback={<Loader centerAll />}>
-				{withAuth ? withAuthHOC(Component, isAuthenticated) : <Component />}
+				{withAuth ? withAuthHOC(Component, isAuthenticated) : <Component {...props} />}
 			</Suspense>
 		</AppContainer>
 	) : (
 		<AppContainer hasNav={hasNav}>
-			{withAuth ? withAuthHOC(Component, isAuthenticated) : <Component />}
+			{withAuth ? withAuthHOC(Component, isAuthenticated) : <Component {...props} />}
 		</AppContainer>
 	);
 
@@ -87,11 +95,18 @@ const Routes = ({ isAuthenticated }) => (
 				}
 			/>
 
-			{/* Rendering component here to develop */}
 			<Route
 				exact
-				path="/habitform"
-				render={() => withContainer({ component: HabitForm, isLazy: true, hasNav: true })}
+				path="/addhabit"
+				render={() => withContainer({ component: AddHabit, isLazy: true, hasNav: true })}
+			/>
+
+			<Route
+				exact
+				path="/edithabit/:id"
+				render={props =>
+					withContainer({ component: EditHabit, isLazy: true, hasNav: true, props })
+				}
 			/>
 
 			<Route
