@@ -35,12 +35,14 @@ export const FlexContainer = styled.div`
 	${({ alignCenter }) => alignCenter && `align-items: center;`}
 `;
 
-export const Title = styled.p`
+export const Title = styled.span`
+	display: block;
 	font-size: 16px;
 	font-weight: 500;
 `;
 
-export const RepeatPeriod = styled.p`
+export const RepeatPeriod = styled.span`
+	display: block;
 	font-size: 14px;
 	font-weight: 300;
 	font-style: italic;
