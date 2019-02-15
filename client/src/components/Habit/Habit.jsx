@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import endOfWeek from 'date-fns/end_of_week';
-import endOfDay from 'date-fns/end_of_day';
-import endOfMonth from 'date-fns/end_of_month';
-import differenceInHours from 'date-fns/difference_in_hours';
-import differenceInDays from 'date-fns/difference_in_calendar_days';
+
+import calculateDueDate from '../../utils/calculateDueDate';
 
 import { $white, $elfGreen, $greyLavender, $tomato } from '../../assets/styledVars';
 import {
@@ -19,29 +16,6 @@ import {
 
 import Button from '../Shared/Button/Button';
 import Label from '../Shared/Label/Label';
-
-const calculateDueDate = frequency => {
-	const today = new Date();
-
-	switch (frequency) {
-		case 'Daily': {
-			const diff = differenceInHours(endOfDay(today), Date.now());
-			return `Due in ${diff} ${diff > 1 ? 'hours' : 'hour'}`;
-		}
-		case 'Weekly': {
-			const diff = differenceInDays(endOfWeek(today), Date.now());
-			// TODO: Handle case when the date is the last day due and difference should be calculated in hours instead of days
-			return `Due in ${diff} ${diff > 1 ? 'days' : 'day'}`;
-		}
-		case 'Monthly': {
-			const diff = differenceInDays(endOfMonth(today), Date.now());
-			// TODO: Handle case when the date is the last day due and difference should be calculated in hours instead of days
-			return `Due in ${diff} ${diff > 1 ? 'days' : 'day'}`;
-		}
-		default:
-			return '';
-	}
-};
 
 class Habit extends Component {
 	static propTypes = {
@@ -85,7 +59,12 @@ class Habit extends Component {
 							<Title>{habit.name}</Title> <br />{' '}
 							<RepeatPeriod>{habit.frequency.period}</RepeatPeriod>{' '}
 						</p>
-						<Button type="simple" clickHandler={() => null} size="small">
+						<Button
+							color={$tomato}
+							type="simple"
+							clickHandler={() => null}
+							size="small"
+						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
 					</Fragment>
@@ -101,7 +80,12 @@ class Habit extends Component {
 									</Label>
 								))}
 						</FlexContainer>
-						<Button type="simple" size="small" clickHandler={() => null}>
+						<Button
+							color={$tomato}
+							type="simple"
+							size="small"
+							clickHandler={() => null}
+						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
 						<Description>{habit.description}</Description>
