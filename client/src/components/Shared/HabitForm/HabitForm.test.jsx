@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { _HabitForm as HabitForm } from './HabitForm';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
-import { Button } from '../Shared/Forms/Form.styled';
+import { Button } from '../Forms/Form.styled';
 
 describe('HabitForm', () => {
 	const historyMock = { push: jest.fn() };

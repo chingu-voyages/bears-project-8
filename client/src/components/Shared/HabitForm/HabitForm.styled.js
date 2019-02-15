@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
-import { $grey } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	position: relative;
@@ -12,14 +10,6 @@ export const Container = styled.div`
 	@media only screen and (max-width: 1100px) {
 		width: 90%;
 	}
-`;
-
-export const Header = styled.h2`
-	text-align: center;
-	width: 100%;
-	font-weight: 400;
-	border-bottom: 2px solid ${lighten(0.4, $grey)};
-	padding: 2rem;
 `;
 
 export const ContentArea = styled.div`

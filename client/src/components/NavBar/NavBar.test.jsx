@@ -55,7 +55,7 @@ describe('NavBar', () => {
 			});
 			const navMenu = component.find(NavMenu);
 			expect(navMenu).toHaveLength(1);
-			expect(navMenu.find(NavItem)).toHaveLength(1);
+			expect(navMenu.find(NavItem)).toHaveLength(0);
 		});
 
 		it('should show Profile Dropdown', () => {
