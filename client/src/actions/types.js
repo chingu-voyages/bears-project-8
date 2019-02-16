@@ -5,6 +5,7 @@ export default keyMirror({
 	GET_ERRORS: null,
 	UPDATE_HABIT_LIST: null,
 	ADD_HABIT: null,
+	EDIT_HABIT: null,
 	DELETE_HABIT: null,
 	UPDATE_HABIT: null,
 });

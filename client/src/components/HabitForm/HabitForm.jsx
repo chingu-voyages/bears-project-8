@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { addHabit } from '../../actions/habitActions';
+import { addHabit, editHabit } from '../../actions/habitActions';
 
 import { Footer } from './HabitForm.styled';
 import Views from './Views/Views';
@@ -54,9 +54,13 @@ export class _HabitForm extends Component {
 		habitDetails: null,
 	};
 
-	static getDerivedStateFromProps(nextProps) {
+	static getDerivedStateFromProps(nextProps, prevState) {
 		// If the user is editing a habit
-		if (nextProps.match && Object.keys(nextProps.match.params).length) {
+		if (
+			nextProps.match &&
+			Object.keys(nextProps.match.params).length &&
+			prevState._id !== nextProps.match.params.id
+		) {
 			const { habits, match } = nextProps;
 			const { id } = match.params;
 			const targetHabit = habits.filter(habit => habit._id === id)[0];
@@ -73,10 +77,13 @@ export class _HabitForm extends Component {
 	};
 
 	handleSubmit = () => {
-		const { step, ...habit } = this.state;
+		// eslint-disable-next-line no-shadow
+		const { addHabit, editHabit, history } = this.props;
+		const { step, isEditing, ...habit } = this.state;
 		habit.tags = habit.tags.map(t => t.text);
 
-		return this.props.addHabit(habit, this.props.history);
+		if (isEditing) return editHabit(habit, history);
+		return addHabit(habit, history);
 	};
 
 	setStep = step => {
@@ -112,6 +119,7 @@ export class _HabitForm extends Component {
 
 	render() {
 		const { step, isEditing } = this.state;
+		console.log(isEditing);
 		const { history } = this.props;
 		const breadCrumbs = isEditing
 			? {
@@ -155,6 +163,6 @@ const mapStateToProps = state => ({
 export default withRouter(
 	connect(
 		mapStateToProps,
-		{ addHabit }
+		{ addHabit, editHabit }
 	)(_HabitForm)
 );

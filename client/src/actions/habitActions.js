@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Types from './types';
 
-const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } = Types;
+const { UPDATE_HABIT_LIST, ADD_HABIT, EDIT_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } = Types;
 
 // Get the user's habits
 export const getHabits = () => dispatch =>
@@ -27,6 +27,19 @@ export const addHabit = (habitData, history) => dispatch =>
 		.then(res => {
 			dispatch({
 				type: ADD_HABIT,
+				payload: res.data.habit,
+			});
+			history.push('/dashboard');
+		})
+		.catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+
+// Edit an existing habit
+export const editHabit = (updatedHabit, history) => dispatch =>
+	axios
+		.put(`/api/habit/${updatedHabit._id}`, updatedHabit)
+		.then(res => {
+			dispatch({
+				type: EDIT_HABIT,
 				payload: res.data.habit,
 			});
 			history.push('/dashboard');
