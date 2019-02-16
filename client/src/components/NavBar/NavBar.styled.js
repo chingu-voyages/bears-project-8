@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 import { Link } from 'react-router-dom';
 
-import { $grey, $elfGreen, $white } from '../../assets/styledVars';
+import { $grey, $elfGreen, $white, $animDuration } from '../../assets/styledVars';
 
 export const Container = styled.div`
 	display: flex;
@@ -62,26 +62,31 @@ export const AddHabitLink = styled(Link)`
 	position: relative;
 	color: ${$grey};
 	background: ${$white};
-	font-size: 0.8rem;
-	border-radius: 3px;
-
-	&:hover {
-		color: ${darken(0.3, $grey)};
-	}
+	font-size: 0.9rem;
+	font-weight: 400;
+	border-radius: 15px;
+	transition: ${$animDuration};
 
 	&:before {
 		content: '+';
-		background: ${$elfGreen};
-		color: ${$white};
+		transition: ${$animDuration};
+		background: transparent;
+		color: ${lighten(0.1, $elfGreen)};
 		font-weight: 500;
 		position: absolute;
-		left: 0;
-		font-size: 1.2rem;
-		height: 100%;
+		border-radius: 50%;
+		left: 0.2rem;
+		font-size: 1.7rem;
 		width: 1.7rem;
-		border-radius: 3px 0 0 3px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	&:hover {
+		color: ${darken(0.3, $grey)};
+		&:before {
+			color: ${$elfGreen};
+		}
 	}
 `;
