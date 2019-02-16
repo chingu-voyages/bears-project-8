@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { addHabit } from '../../../actions/habitActions';
+import { addHabit } from '../../actions/habitActions';
 
 import { Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
-import ProgressCircles from '../ProgressCircles/ProgressCircles';
+import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
+import PageContainer from '../Shared/PageContainer/PageContainer';
 
 export class _HabitForm extends Component {
 	state = {
+		isEditing: false,
 		step: 0,
 
 		name: '',
@@ -33,6 +35,7 @@ export class _HabitForm extends Component {
 
 	static propTypes = {
 		addHabit: PropTypes.func.isRequired,
+		// TODO: editHabit function
 		habitDetails: PropTypes.shape({
 			name: PropTypes.string,
 			tags: PropTypes.arrayOf(PropTypes.string),
@@ -52,9 +55,14 @@ export class _HabitForm extends Component {
 	};
 
 	static getDerivedStateFromProps(nextProps) {
-		if (nextProps.habitDetails) {
-			const tagsFormatted = nextProps.habitDetails.tags.map(tag => ({ id: tag, text: tag }));
-			return { ...nextProps.habitDetails, tags: tagsFormatted };
+		// If the user is editing a habit
+		if (nextProps.match && Object.keys(nextProps.match.params).length) {
+			const { habits, match } = nextProps;
+			const { id } = match.params;
+			const targetHabit = habits.filter(habit => habit._id === id)[0];
+			const tagsFormatted =
+				targetHabit && targetHabit.tags.map(tag => ({ id: tag, text: tag }));
+			return { ...targetHabit, tags: tagsFormatted, isEditing: true };
 		}
 		return null;
 	}
@@ -103,10 +111,20 @@ export class _HabitForm extends Component {
 	};
 
 	render() {
-		const { step } = this.state;
+		const { step, isEditing } = this.state;
+		const { history } = this.props;
+		const breadCrumbs = isEditing
+			? {
+					crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
+					current: `Edit Habit`,
+			  }
+			: {
+					crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
+					current: `Add Habit`,
+			  };
 
 		return (
-			<>
+			<PageContainer breadCrumbs={breadCrumbs} history={history}>
 				<Views
 					{...this.state}
 					onChange={this.handleChange}
@@ -125,14 +143,18 @@ export class _HabitForm extends Component {
 						onSubmit={this.handleSubmit}
 					/>
 				</Footer>
-			</>
+			</PageContainer>
 		);
 	}
 }
 
+const mapStateToProps = state => ({
+	habits: state.habits.habits,
+});
+
 export default withRouter(
 	connect(
-		null,
+		mapStateToProps,
 		{ addHabit }
 	)(_HabitForm)
 );

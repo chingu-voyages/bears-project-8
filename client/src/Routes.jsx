@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
-import AddHabit from './components/AddHabit/AddHabit';
-import EditHabit from './components/EditHabit/EditHabit';
+import HabitForm from './components/HabitForm/HabitForm';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -98,14 +97,14 @@ const Routes = ({ isAuthenticated }) => (
 			<Route
 				exact
 				path="/addhabit"
-				render={() => withContainer({ component: AddHabit, isLazy: true, hasNav: true })}
+				render={() => withContainer({ component: HabitForm, isLazy: true, hasNav: true })}
 			/>
 
 			<Route
 				exact
 				path="/edithabit/:id"
 				render={props =>
-					withContainer({ component: EditHabit, isLazy: true, hasNav: true, props })
+					withContainer({ component: HabitForm, isLazy: true, hasNav: true, props })
 				}
 			/>
 
