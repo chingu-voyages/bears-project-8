@@ -1,20 +1,7 @@
 import axios from 'axios';
 import Types from './types';
 
-const {
-	UPDATE_HABIT_LIST,
-	ADD_HABIT,
-	DELETE_HABIT,
-	GET_ERRORS,
-	UPDATE_HABIT,
-	FILTER_HABIT_LIST,
-} = Types;
-
-export const filterHabits = ({ target, criteria }) => ({
-	type: FILTER_HABIT_LIST,
-	target,
-	criteria,
-});
+const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, GET_ERRORS, UPDATE_HABIT } = Types;
 
 // Get the user's habits
 export const getHabits = () => dispatch =>

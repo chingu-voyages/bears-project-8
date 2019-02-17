@@ -6,7 +6,8 @@ import { $white, $grey } from '../../assets/styledVars';
 export const Section = styled.section`
 	display: grid;
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
+	height: 620px; // TODO: media queries here to normalize size across devices
 	grid-template-columns: 30% 1fr;
 `;
 

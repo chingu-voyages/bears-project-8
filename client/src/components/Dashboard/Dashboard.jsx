@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import { Section, Dashboard } from './Dashboard.styled';
 
-import { filterHabits } from '../../actions/habitActions';
 import HabitList from '../HabitList/HabitList';
 
 import DashboardSidebar from './DashboardSidebar/DashboardSidebar';
@@ -22,10 +21,16 @@ export class _Dashboard extends Component {
 		habits: [],
 	};
 
-	filterHabitsBy = (target, criteria) => this.props.filterHabits({ target, criteria });
+	state = {
+		target: '',
+		criteria: '',
+	};
+
+	filterHabitsBy = (target, criteria) => this.setState({ target, criteria });
 
 	render() {
 		const { history, habits } = this.props;
+		const { target, criteria } = this.state;
 		const allTags = habits.reduce((tagArr, habit) => tagArr.concat(habit.tags), []);
 		const uniqueTagsArr = [...new Set(allTags)];
 
@@ -46,7 +51,7 @@ export class _Dashboard extends Component {
 					<Dashboard>
 						<DashboardFilters filterHabits={this.filterHabitsBy} tags={uniqueTagsArr} />
 
-						<HabitList habits={habits} />
+						<HabitList habits={habits} target={target} criteria={criteria} />
 					</Dashboard>
 				</Section>
 			</PageContainer>
@@ -58,9 +63,4 @@ const mapStateToProps = ({ habits }) => ({
 	habits,
 });
 
-export default withRouter(
-	connect(
-		mapStateToProps,
-		{ filterHabits }
-	)(_Dashboard)
-);
+export default withRouter(connect(mapStateToProps)(_Dashboard));

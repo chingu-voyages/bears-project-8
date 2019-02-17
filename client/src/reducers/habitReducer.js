@@ -1,8 +1,8 @@
 import Types from '../actions/types';
 
-const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT, FILTER_HABIT_LIST } = Types;
+const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
 
-const filterState = (state, target, criteria) => {
+export const filterHabitsSelector = (state, { target, criteria }) => {
 	if (!target) return state;
 
 	let filteredState = [];
@@ -20,8 +20,6 @@ export default (state = [], action) => {
 	switch (action.type) {
 		case UPDATE_HABIT_LIST:
 			return action.payload;
-		case FILTER_HABIT_LIST:
-			return filterState(state, action.target, action.criteria);
 		case ADD_HABIT:
 			return [action.payload, ...state];
 		case DELETE_HABIT:
