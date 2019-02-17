@@ -9,15 +9,15 @@ import Label from '../../Shared/Label/Label';
 const DIFFICULTIES = ['Trivial', 'Easy', 'Medium', 'Hard', 'Epic'];
 const TYPES = ['Active', 'Passive'];
 
-const DashboardFilters = ({ tags, filterHabits }) => (
+const DashboardFilters = ({ tags, filterHabits, criteria }) => (
 	<Fragment>
 		<FilterByTags>
 			<span>Tags:</span>
 			{tags.map(tag => (
 				<Label
 					key={tag}
-					bgColor={$white}
-					color={$grey}
+					bgColor={criteria === tag ? $grey : $white}
+					color={criteria === tag ? $white : $grey}
 					onClick={() => filterHabits('tags', tag)}
 				>
 					{tag}
@@ -27,7 +27,12 @@ const DashboardFilters = ({ tags, filterHabits }) => (
 		<FilterByDifficulty>
 			<span>Difficulty:</span>
 			{DIFFICULTIES.map(diff => (
-				<Label key={diff} onClick={() => filterHabits('difficulty', diff)}>
+				<Label
+					bgColor={criteria === diff ? $grey : $white}
+					color={criteria === diff ? $white : $grey}
+					key={diff}
+					onClick={() => filterHabits('difficulty', diff)}
+				>
 					{diff}
 				</Label>
 			))}
@@ -35,7 +40,12 @@ const DashboardFilters = ({ tags, filterHabits }) => (
 		<FilterByType>
 			<span>Type:</span>
 			{TYPES.map(type => (
-				<Label key={type} onClick={() => filterHabits('type', type)}>
+				<Label
+					bgColor={criteria === type ? $grey : $white}
+					color={criteria === type ? $white : $grey}
+					key={type}
+					onClick={() => filterHabits('type', type)}
+				>
 					{type}
 				</Label>
 			))}
@@ -46,6 +56,11 @@ const DashboardFilters = ({ tags, filterHabits }) => (
 DashboardFilters.propTypes = {
 	tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 	filterHabits: PropTypes.func.isRequired,
+	criteria: PropTypes.string,
+};
+
+DashboardFilters.defaultProps = {
+	criteria: '',
 };
 
 export default DashboardFilters;

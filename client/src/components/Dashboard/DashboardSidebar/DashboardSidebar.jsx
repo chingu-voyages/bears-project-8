@@ -6,7 +6,7 @@ import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 const DashboardSidebar = ({ habitsLength, filterHabits }) => (
 	<Sidebar>
 		<SidebarSection>
-			<SidebarOption onClick={() => filterHabits(null)}>
+			<SidebarOption onClick={() => filterHabits()}>
 				All Habits
 				<span>{habitsLength}</span>
 			</SidebarOption>
