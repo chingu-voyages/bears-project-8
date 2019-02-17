@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import { Sidebar, SidebarSection, SidebarOption } from '../Dashboard.styled';
 
-const DashboardSidebar = ({ habitsLength, filterHabits }) => (
+const DashboardSidebar = ({ habitsLength, filterHabits, target }) => (
 	<Sidebar>
 		<SidebarSection>
-			<SidebarOption onClick={() => filterHabits()}>
+			<SidebarOption active={target === 'all'} onClick={() => filterHabits('all')}>
 				All Habits
 				<span>{habitsLength}</span>
 			</SidebarOption>
@@ -35,6 +35,11 @@ const DashboardSidebar = ({ habitsLength, filterHabits }) => (
 DashboardSidebar.propTypes = {
 	habitsLength: PropTypes.number.isRequired,
 	filterHabits: PropTypes.func.isRequired,
+	target: PropTypes.string,
+};
+
+DashboardSidebar.defaultProps = {
+	target: '',
 };
 
 export default DashboardSidebar;

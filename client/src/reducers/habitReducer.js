@@ -3,7 +3,7 @@ import Types from '../actions/types';
 const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
 
 export const filterHabitsSelector = (state, { target, criteria }) => {
-	if (!target) return state;
+	if (!target || target === 'all') return state;
 
 	let filteredState = [];
 

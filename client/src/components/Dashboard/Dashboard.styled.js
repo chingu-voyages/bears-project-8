@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 
 import { $white, $grey } from '../../assets/styledVars';
@@ -35,6 +35,8 @@ export const SidebarOption = styled.div`
 	cursor: pointer;
 	border-radius: 6px;
 	transition: all 200ms;
+
+	${({ active }) => active && css`{background-color: ${lighten(0.4, $grey)}`}
 
 	&:hover {
 		background-color: ${lighten(0.4, $grey)};

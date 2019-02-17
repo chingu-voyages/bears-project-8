@@ -21,7 +21,7 @@ export class _Dashboard extends Component {
 	};
 
 	state = {
-		target: '',
+		target: 'all',
 		criteria: '',
 	};
 
