@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { Button, ButtonGroup } from '../../Shared/Forms/Form.styled';
 
 export const LeftButtons = ({ step, setStep }) => {
-	if (step > 0) return <Button onClick={() => setStep(step - 1)}>Back</Button>;
+	if (step > 0)
+		return (
+			<Button secondary onClick={() => setStep(step - 1)}>
+				Back
+			</Button>
+		);
 	// empty div to push over right buttons
 	return <div />;
 };

@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const ContentArea = styled.div`
 	width: 100%;
 	height: 310px;
-	padding: 2rem 4rem;
+	padding: 3rem 4rem;
 
 	@media only screen and (max-width: 650px) {
 		height: auto;

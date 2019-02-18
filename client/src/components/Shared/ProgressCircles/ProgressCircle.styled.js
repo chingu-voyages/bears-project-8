@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
-import { $animDuration, $grey } from '../../../assets/styledVars';
+import { $animDuration, $grey, $elfGreen } from '../../../assets/styledVars';
 
 const ProgressCircle = styled.div`
 	${props =>
@@ -16,7 +16,7 @@ const ProgressCircle = styled.div`
 
 	&:hover {
 		cursor: pointer;
-		background: ${lighten(0.2, $grey)};
+		background: ${$elfGreen};
 	}
 
 	@media only screen and (max-width: 960px) {
