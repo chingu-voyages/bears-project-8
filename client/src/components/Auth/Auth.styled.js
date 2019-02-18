@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import { $grey, $elfGreen, $violet } from '../../assets/styledVars';
+import { $grey, $elfGreen } from '../../assets/styledVars';
 import { Button } from '../Shared/Forms/Form.styled';
 
 export const TopText = styled.div`
