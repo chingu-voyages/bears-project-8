@@ -6,7 +6,8 @@ import { $white, $grey } from '../../assets/styledVars';
 export const Section = styled.section`
 	display: grid;
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
+	height: 620px; // TODO: media queries here to normalize size across devices
 	grid-template-columns: 30% 1fr;
 `;
 
@@ -35,6 +36,8 @@ export const SidebarOption = styled.div`
 	border-radius: 6px;
 	transition: all 200ms;
 
+	${({ active }) => active && `background-color: ${lighten(0.4, $grey)}`};
+
 	&:hover {
 		background-color: ${lighten(0.4, $grey)};
 	}
@@ -55,6 +58,8 @@ export const Dashboard = styled.div`
 
 export const FilterByTags = styled.div`
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	align-items: center;
 	background-color: ${lighten(0.5, $grey)};
 	padding: 1rem;
@@ -70,6 +75,7 @@ export const FilterByDifficulty = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 1rem;
+	border-bottom: 0.5px solid ${lighten(0.5, $grey)};
 
 	justify-content: space-around;
 
@@ -83,6 +89,7 @@ export const FilterByType = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 1rem;
+	border-bottom: 0.5px solid ${lighten(0.5, $grey)};
 
 	justify-content: flex-end;
 

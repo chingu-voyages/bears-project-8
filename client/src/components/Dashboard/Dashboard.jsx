@@ -20,7 +20,12 @@ export class _Dashboard extends Component {
 		habits: [],
 	};
 
-	state = {};
+	state = {
+		target: 'all',
+		criteria: '',
+	};
+
+	filterHabitsBy = (target = '', criteria = '') => this.setState({ target, criteria });
 
 	render() {
 		const { history, habits } = this.props;
@@ -36,12 +41,20 @@ export class _Dashboard extends Component {
 				history={history}
 			>
 				<Section>
-					<DashboardSidebar habitsLength={habits.length} />
+					<DashboardSidebar
+						filterHabits={this.filterHabitsBy}
+						habitsLength={habits.length}
+						{...this.state}
+					/>
 
 					<Dashboard>
-						<DashboardFilters tags={uniqueTagsArr} />
+						<DashboardFilters
+							filterHabits={this.filterHabitsBy}
+							tags={uniqueTagsArr}
+							{...this.state}
+						/>
 
-						<HabitList habits={habits} />
+						<HabitList habits={habits} {...this.state} />
 					</Dashboard>
 				</Section>
 			</PageContainer>
@@ -50,7 +63,7 @@ export class _Dashboard extends Component {
 }
 
 const mapStateToProps = ({ habits }) => ({
-	habits: habits.habits,
+	habits,
 });
 
 export default withRouter(connect(mapStateToProps)(_Dashboard));

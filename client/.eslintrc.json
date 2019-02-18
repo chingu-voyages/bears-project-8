@@ -26,6 +26,7 @@
 			"ignore": ["location", "history", "children", "match"]
 		}],
 		"react/require-default-props": 2,
+		"react/destructuring-assignment": 0,
 		"import/no-unresolved": [2, {
 			"ignore": ["assets"]
 		}]
