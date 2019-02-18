@@ -71,8 +71,8 @@ class Register extends Component {
 					<TopText>
 						All fields are required.
 						<small>
-							Already registered? Head to the
-							<Link to="/auth/login">login page</Link>.
+							Already registered? Head to the <Link to="/auth/login">login page</Link>
+							.
 						</small>
 					</TopText>
 					<form onSubmit={this.handleSubmit} noValidate>
