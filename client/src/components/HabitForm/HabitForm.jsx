@@ -12,26 +12,28 @@ import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
 import PageContainer from '../Shared/PageContainer/PageContainer';
 
-export class _HabitForm extends Component {
-	state = {
-		isEditing: false,
-		step: 0,
+const initialState = () => ({
+	isEditing: false,
+	step: 0,
 
-		name: '',
-		tags: [],
-		description: '',
-		times: '',
-		period: '',
-		reminderEvery: '',
-		reminderTypes: {
-			email: false,
-			inApp: false,
-			push: false,
-		},
-		difficulty: '',
-		type: '',
-		startDate: '',
-	};
+	name: '',
+	tags: [],
+	description: '',
+	times: '',
+	period: '',
+	reminderEvery: '',
+	reminderTypes: {
+		email: false,
+		inApp: false,
+		push: false,
+	},
+	difficulty: '',
+	type: '',
+	startDate: '',
+});
+
+export class _HabitForm extends Component {
+	state = initialState();
 
 	static propTypes = {
 		addHabit: PropTypes.func.isRequired,
@@ -85,10 +87,12 @@ export class _HabitForm extends Component {
 					period: targetHabit.frequency.period,
 					isEditing: true,
 				};
+				if (Object.keys(updatedHabit).length > 1) {
+					return updatedHabit;
+				}
 			}
-			if (updatedHabit) {
-				return updatedHabit;
-			}
+		} else if (nextProps.match && !nextProps.match.params.id && prevState._id) {
+			return initialState();
 		}
 		return null;
 	}

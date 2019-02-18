@@ -11,6 +11,7 @@ describe('HabitForm', () => {
 	const setup = fullMount => {
 		const props = {
 			addHabit: jest.fn(),
+			editHabit: jest.fn(),
 			history: historyMock,
 		};
 		let component;
