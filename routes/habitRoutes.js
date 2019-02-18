@@ -32,7 +32,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { user, name, description, type, difficulty, tags, frequency } = req.body;
+	const { user, name, description, type, difficulty, tags, frequency, startDate } = req.body;
 
 	return new Habit({
 		user,
@@ -42,6 +42,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 		tags,
 		difficulty,
 		frequency,
+		startDate,
 	})
 		.save()
 		.then(habit => res.json({ success: true, habit }))

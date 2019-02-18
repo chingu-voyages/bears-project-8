@@ -21,7 +21,7 @@ const habitSchema = new Schema({
 	// Difficulty of the habit: Trivial, Easy, Medium, Hard, Epic
 	difficulty: { type: String, default: 'Medium' },
 	// Positive or negative  type of habit
-	type: { type: String, default: 'Negative' },
+	type: { type: String, default: 'Active' },
 
 	// How often they would like to do this habit (1 time, 2 times... daily, weekly, monthly...)
 	frequency: {
@@ -29,7 +29,7 @@ const habitSchema = new Schema({
 		period: { type: String, default: 'Daily' },
 	},
 	// When the habit is to start, the habit is forecast from this date according to frequency
-	startDate: { type: Date, default: Date.now },
+	startDate: { type: String, default: Date.now },
 	// An array of when the habit has been logged (marked as completed) through time
 	log: { type: [Date], default: [] },
 });

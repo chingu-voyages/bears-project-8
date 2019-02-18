@@ -29,15 +29,15 @@ export class _HabitForm extends Component {
 			push: false,
 		},
 		difficulty: '',
-		habitType: '',
-		habitStart: '',
+		type: '',
+		startDate: '',
 	};
 
 	static propTypes = {
 		addHabit: PropTypes.func.isRequired,
-		// TODO: editHabit function
+		editHabit: PropTypes.func.isRequired,
 		habitDetails: PropTypes.shape({
-			name: PropTypes.string,
+			name: PropTypes.string.isRequired,
 			tags: PropTypes.arrayOf(PropTypes.string),
 			description: PropTypes.string,
 			times: PropTypes.string,
@@ -45,8 +45,8 @@ export class _HabitForm extends Component {
 			reminderEvery: PropTypes.string,
 			reminderTypes: PropTypes.object,
 			difficulty: PropTypes.string,
-			habitType: PropTypes.string,
-			habitStart: PropTypes.string,
+			type: PropTypes.string,
+			startDate: PropTypes.string,
 		}),
 	};
 
@@ -66,7 +66,29 @@ export class _HabitForm extends Component {
 			const targetHabit = habits.filter(habit => habit._id === id)[0];
 			const tagsFormatted =
 				targetHabit && targetHabit.tags.map(tag => ({ id: tag, text: tag }));
-			return { ...targetHabit, tags: tagsFormatted, isEditing: true };
+
+			let updatedHabit;
+			if (targetHabit) {
+				updatedHabit = {
+					...targetHabit,
+					tags: tagsFormatted,
+					times: (() => {
+						switch (targetHabit.frequency.times) {
+							case 1:
+								return 'Once';
+							case 2:
+								return 'Twice';
+							default:
+								return `${targetHabit.frequency.times} times`;
+						}
+					})(),
+					period: targetHabit.frequency.period,
+					isEditing: true,
+				};
+			}
+			if (updatedHabit) {
+				return updatedHabit;
+			}
 		}
 		return null;
 	}
@@ -119,7 +141,6 @@ export class _HabitForm extends Component {
 
 	render() {
 		const { step, isEditing } = this.state;
-		console.log(isEditing);
 		const { history } = this.props;
 		const breadCrumbs = isEditing
 			? {

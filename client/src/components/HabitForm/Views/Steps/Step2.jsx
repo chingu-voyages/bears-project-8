@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
+const Step2 = ({ difficulty, type, startDate, onChange }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -20,8 +20,8 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 			<FormGroup
 				title="Habit Type"
 				description="Starting a fresh habit or stopping an old habit"
-				name="habitType"
-				value={habitType}
+				name="type"
+				value={type}
 				onChange={onChange}
 				placeholder="Active, Passive..."
 				size={2}
@@ -32,8 +32,8 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 		<FormGroup
 			title="When will you start this habit?"
 			description="This is the date your reminders will start"
-			name="habitStart"
-			value={habitStart}
+			name="startDate"
+			value={startDate}
 			onChange={onChange}
 			type="date"
 			placeholder="Choose the date you would like to start this habit, or leave it blank to start today"
@@ -45,8 +45,8 @@ const Step2 = ({ difficulty, habitType, habitStart, onChange }) => (
 Step2.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	difficulty: PropTypes.string.isRequired,
-	habitType: PropTypes.string.isRequired,
-	habitStart: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
+	startDate: PropTypes.string.isRequired,
 };
 
 export default Step2;
