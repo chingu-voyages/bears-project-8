@@ -2,50 +2,36 @@ import Types from '../actions/types';
 
 const { UPDATE_HABIT_LIST, ADD_HABIT, EDIT_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
 
-const initialState = {
-	habits: [],
+export const filterHabitsSelector = (state, { target, criteria }) => {
+	if (!target || target === 'all') return state;
+
+	let filteredState = [];
+
+	if (target === 'tags') {
+		filteredState = state.filter(item => item[target].includes(criteria));
+	} else {
+		filteredState = state.filter(item => item[target] === criteria);
+	}
+
+	return filteredState;
 };
 
-export default (state = initialState, action) => {
+export default (state = [], action) => {
 	switch (action.type) {
 		case UPDATE_HABIT_LIST:
-			return {
-				...state,
-				habits: action.payload,
-			};
+			return action.payload;
 		case ADD_HABIT:
-			return {
-				...state,
-				habits: [action.payload, ...state.habits],
-			};
+			return [action.payload, ...state];
 		case EDIT_HABIT:
-			return {
-				habits: [
-					...state.habits.map(habit =>
-						habit._id === action.payload._id ? action.payload : habit
-					),
-				],
-			};
+			return [
+				...state.habits.map(habit =>
+					habit._id === action.payload._id ? action.payload : habit
+				),
+			];
 		case DELETE_HABIT:
-			return {
-				...state,
-				habits: [
-					...state.habits.map(habit => {
-						if (habit._id !== action.payload._id) return habit;
-						return null;
-					}),
-				],
-			};
+			return state.filter(habit => habit._id !== action.payload._id);
 		case UPDATE_HABIT:
-			return {
-				...state,
-				habits: [
-					...state.habits.map(habit => {
-						if (habit._id === action.payload._id) return action.payload;
-						return habit;
-					}),
-				],
-			};
+			return state.map(habit => (habit._id === action.payload._id ? action.payload : habit));
 		default:
 			return state;
 	}

@@ -2,8 +2,17 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+import calculateDueDate from '../../utils/calculateDueDate';
+
 import { $white, $elfGreen, $greyLavender, $tomato } from '../../assets/styledVars';
-import { Container, FullHabit, FlexContainer, Description } from './Habit.styled';
+import {
+	Container,
+	FullHabit,
+	FlexContainer,
+	Description,
+	Title,
+	RepeatPeriod,
+} from './Habit.styled';
 
 import Button from '../Shared/Button/Button';
 import Label from '../Shared/Label/Label';
@@ -47,15 +56,21 @@ class Habit extends Component {
 				{isCollapsed ? (
 					<Fragment>
 						<p>
-							<strong>{habit.name}</strong> <br /> <em>{habit.frequency.period}</em>{' '}
+							<Title>{habit.name}</Title> <br />{' '}
+							<RepeatPeriod>{habit.frequency.period}</RepeatPeriod>{' '}
 						</p>
-						<Button type="simple" clickHandler={() => null} size="small">
-							{habit.status || ''}
+						<Button
+							color={$tomato}
+							type="simple"
+							clickHandler={() => null}
+							size="small"
+						>
+							{calculateDueDate(habit.frequency.period)}
 						</Button>
 					</Fragment>
 				) : (
 					<FullHabit>
-						<strong>{habit.name}</strong>
+						<Title>{habit.name}</Title>
 						<FlexContainer>
 							{habit.tags &&
 								habit.tags.length > 0 &&
@@ -65,14 +80,19 @@ class Habit extends Component {
 									</Label>
 								))}
 						</FlexContainer>
-						<Button type="simple" size="small">
-							{habit.status || ''}
+						<Button
+							color={$tomato}
+							type="simple"
+							size="small"
+							clickHandler={() => null}
+						>
+							{calculateDueDate(habit.frequency.period)}
 						</Button>
 						<Description>{habit.description}</Description>
-						<small>{habit.frequency.period}</small>
+						<RepeatPeriod>{habit.frequency.period}</RepeatPeriod>
 						<FlexContainer>
-							<Label>{habit.difficulty}</Label>
-							<Label>{habit.type}</Label>
+							<Label onClick={() => null}>{habit.difficulty}</Label>
+							<Label onClick={() => null}>{habit.type}</Label>
 						</FlexContainer>
 						<FlexContainer alignCenter>
 							<Button
@@ -89,6 +109,7 @@ class Habit extends Component {
 								color={$white}
 								clickHandler={this.handleEditHabit}
 								size="icon"
+								type="filled"
 							>
 								✎
 							</Button>
@@ -97,6 +118,7 @@ class Habit extends Component {
 								color={$white}
 								clickHandler={this.handleDeleteHabit}
 								size="icon"
+								type="filled"
 							>
 								&times;
 							</Button>

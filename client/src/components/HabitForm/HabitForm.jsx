@@ -181,9 +181,7 @@ export class _HabitForm extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	habits: state.habits.habits,
-});
+const mapStateToProps = ({ habits }) => ({ habits });
 
 export default withRouter(
 	connect(
