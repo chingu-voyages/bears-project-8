@@ -32,16 +32,20 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { user, name, description, type, difficulty, tags, frequency, startDate } = req.body;
+	const { user, name, description, type, difficulty, tags, times, period, startDate } = req.body;
+	let formattedTags;
+	if (tags) formattedTags = [...tags.map(tag => tag.text)];
+	let formattedFrequency;
+	if (times && period) formattedFrequency = { times: Number(times), period };
 
 	return new Habit({
 		user,
 		name,
 		type,
 		description,
-		tags,
+		tags: formattedTags,
 		difficulty,
-		frequency,
+		frequency: formattedFrequency,
 		startDate,
 	})
 		.save()
