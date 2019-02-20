@@ -176,7 +176,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
-		.catch(() => res.status(404).json({ message: `Couldn't find habit` }));
+		.catch(() => res.status(404).json({ message: `Habit not found` }));
 });
 
 module.exports = router;
