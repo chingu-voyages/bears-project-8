@@ -35,8 +35,16 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	const { user, name, description, type, difficulty, tags, times, period, startDate } = req.body;
 	let formattedTags;
 	if (tags) formattedTags = [...tags.map(tag => tag.text)];
+	let timesNumber;
+	if (times === 'Once') {
+		timesNumber = 1;
+	} else if (times === 'Twice') {
+		timesNumber = 2;
+	} else {
+		timesNumber = Number(times);
+	}
 	let formattedFrequency;
-	if (times && period) formattedFrequency = { times: Number(times), period };
+	if (timesNumber && period) formattedFrequency = { times: timesNumber, period };
 
 	return new Habit({
 		user,
@@ -133,7 +141,19 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { name, description, type, difficulty, tags, frequency } = req.body;
+	const { name, description, type, difficulty, tags, times, period, startDate } = req.body;
+	let formattedTags;
+	if (tags) formattedTags = [...tags.map(tag => tag.text)];
+	let formattedFrequency;
+	let timesNumber;
+	if (times === 'Once') {
+		timesNumber = 1;
+	} else if (times === 'Twice') {
+		timesNumber = 2;
+	} else {
+		timesNumber = Number(times);
+	}
+	if (timesNumber && period) formattedFrequency = { times: timesNumber, period };
 
 	return Habit.findById(req.params.id)
 		.then(habit => {
@@ -144,18 +164,19 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			}
 			/* eslint-disable no-param-reassign */
 			habit.name = name;
-			habit.description = description;
 			habit.type = type;
+			habit.description = description;
+			habit.tags = formattedTags;
 			habit.difficulty = difficulty;
-			habit.tags = tags;
-			habit.frequency = frequency;
+			habit.frequency = formattedFrequency || habit.frequency;
+			habit.startDate = startDate;
 
 			/* eslint-enable */
 			return habit
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
-		.catch(() => res.status(404).json({ message: 'Habit not found' }));
+		.catch(() => res.status(404).json({ message: `Couldn't find habit` }));
 });
 
 module.exports = router;

@@ -24,9 +24,7 @@ export default (state = [], action) => {
 			return [action.payload, ...state];
 		case EDIT_HABIT:
 			return [
-				...state.habits.map(habit =>
-					habit._id === action.payload._id ? action.payload : habit
-				),
+				...state.map(habit => (habit._id === action.payload._id ? action.payload : habit)),
 			];
 		case DELETE_HABIT:
 			return state.filter(habit => habit._id !== action.payload._id);

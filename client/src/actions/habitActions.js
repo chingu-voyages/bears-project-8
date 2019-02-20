@@ -44,7 +44,10 @@ export const editHabit = (updatedHabit, history) => dispatch =>
 			});
 			history.push('/dashboard');
 		})
-		.catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+		.catch(err => {
+			console.log(err);
+			dispatch({ type: GET_ERRORS, payload: err.response.data });
+		});
 
 // Delete a habit
 export const deleteHabit = habitID => dispatch =>
