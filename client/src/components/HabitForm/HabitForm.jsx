@@ -108,6 +108,26 @@ export class _HabitForm extends Component {
 		const { step, isEditing, ...habit } = this.state;
 		habit.tags = habit.tags.map(t => t.text);
 
+		const formatFrequency = (times, period) => {
+			switch (habit.times) {
+				case 'Once':
+					return { times: 1, period };
+				case 'Twice':
+					return { times: 2, period };
+				case '':
+					return { times: 1, period };
+				default:
+					return { times: Number(times), period };
+			}
+		};
+		if (habit.period) {
+			habit.frequency = formatFrequency(habit.times, habit.period);
+		} else {
+			habit.frequency = { times: 1, period: 'Daily' };
+		}
+		delete habit.times;
+		delete habit.period;
+
 		if (isEditing) return editHabit(habit, history);
 		return addHabit(habit, history);
 	};

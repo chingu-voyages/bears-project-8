@@ -7,9 +7,6 @@ const Habit = require('../models/Habit');
 // Load input validation
 const validateHabitsInput = require('../utils/validators').createHabit;
 
-// Formatting habits
-const { formatTags, formatFrequency } = require('../utils/formatHabit');
-
 const router = express.Router();
 
 /**
@@ -34,14 +31,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { tags, times, period } = req.body;
-	const changes = { user: req.user._id };
-	if (times && period) changes.frequency = formatFrequency(times, period);
-	if (tags) changes.tags = formatTags(tags);
-	delete req.body.times;
-	delete req.body.period;
-
-	return new Habit(Object.assign(req.body, changes))
+	return new Habit(Object.assign(req.body, { user: req.user._id.toHexString() }))
 		.save()
 		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
@@ -127,21 +117,12 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { tags, times, period } = req.body;
-	const changes = { user: req.user._id };
-	if (times && period) changes.frequency = formatFrequency(times, period);
-	if (tags) changes.tags = formatTags(tags);
-	delete req.body.times;
-	delete req.body.period;
-
 	return Habit.findById(req.params.id)
 		.then(habit => {
 			// Check whether habit belongs to current authenticated user
-			// toHexString - 24 byte hex string representation of MongoDB ObjectID
-			if (habit.user.toHexString() !== req.user.id) {
+			if (habit.user.toHexString() !== req.user.id)
 				return res.status(401).json({ message: 'Unauthorized' });
-			}
-			return Object.assign(habit, req.body, changes)
+			return Object.assign(habit, req.body)
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})

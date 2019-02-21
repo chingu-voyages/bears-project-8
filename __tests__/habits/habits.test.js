@@ -15,14 +15,12 @@ const userData = {
 const habit = {
 	name: 'Test habit',
 	user: 'this should be populated below',
-	tags: [
-		{ text: 'office', id: 'office' },
-		{ text: 'work', id: 'work' },
-		{ text: 'omg', id: 'omg' },
-	],
+	tags: ['office', 'work', 'omg'],
 	description: 'This is a habit',
-	times: 2,
-	period: 'Daily',
+	frequency: {
+		times: 2,
+		period: 'Daily',
+	},
 	difficulty: 'Epic',
 	type: 'Passive',
 	startDate: '2019-02-19',
