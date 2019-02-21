@@ -15,7 +15,11 @@ const userData = {
 const habit = {
 	name: 'Test habit',
 	user: 'this should be populated below',
-	tags: ['office', 'work', 'omg'],
+	tags: [
+		{ text: 'office', id: 'office' },
+		{ text: 'work', id: 'work' },
+		{ text: 'omg', id: 'omg' },
+	],
 	description: 'This is a habit',
 	times: 2,
 	period: 'Daily',

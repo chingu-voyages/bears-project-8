@@ -7,6 +7,9 @@ const Habit = require('../models/Habit');
 // Load input validation
 const validateHabitsInput = require('../utils/validators').createHabit;
 
+// Formatting habits
+const { formatTags, formatFrequency } = require('../utils/formatHabit');
+
 const router = express.Router();
 
 /**
@@ -27,35 +30,18 @@ router.get('/habits', passport.authenticate('jwt', { session: false }), (req, re
  * @access  Private
  */
 router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
-	req.body.user = req.user._id.toString();
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { user, name, description, type, difficulty, tags, times, period, startDate } = req.body;
-	let formattedTags;
-	if (tags) formattedTags = [...tags.map(tag => tag.text)];
-	let timesNumber;
-	if (times === 'Once') {
-		timesNumber = 1;
-	} else if (times === 'Twice') {
-		timesNumber = 2;
-	} else {
-		timesNumber = Number(times);
-	}
-	let formattedFrequency;
-	if (timesNumber && period) formattedFrequency = { times: timesNumber, period };
+	const { tags, times, period } = req.body;
+	const changes = { user: req.user._id };
+	if (times && period) changes.frequency = formatFrequency(times, period);
+	if (tags) changes.tags = formatTags(tags);
+	delete req.body.times;
+	delete req.body.period;
 
-	return new Habit({
-		user,
-		name,
-		type,
-		description,
-		tags: formattedTags,
-		difficulty,
-		frequency: formattedFrequency,
-		startDate,
-	})
+	return new Habit(Object.assign(req.body, changes))
 		.save()
 		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
@@ -141,19 +127,12 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { name, description, type, difficulty, tags, times, period, startDate } = req.body;
-	let formattedTags;
-	if (tags) formattedTags = [...tags.map(tag => tag.text)];
-	let formattedFrequency;
-	let timesNumber;
-	if (times === 'Once') {
-		timesNumber = 1;
-	} else if (times === 'Twice') {
-		timesNumber = 2;
-	} else {
-		timesNumber = Number(times);
-	}
-	if (timesNumber && period) formattedFrequency = { times: timesNumber, period };
+	const { tags, times, period } = req.body;
+	const changes = { user: req.user._id };
+	if (times && period) changes.frequency = formatFrequency(times, period);
+	if (tags) changes.tags = formatTags(tags);
+	delete req.body.times;
+	delete req.body.period;
 
 	return Habit.findById(req.params.id)
 		.then(habit => {
@@ -162,17 +141,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (habit.user.toHexString() !== req.user.id) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
-			/* eslint-disable no-param-reassign */
-			habit.name = name;
-			habit.type = type;
-			habit.description = description;
-			habit.tags = formattedTags;
-			habit.difficulty = difficulty;
-			habit.frequency = formattedFrequency || habit.frequency;
-			habit.startDate = startDate;
-
-			/* eslint-enable */
-			return habit
+			return Object.assign(habit, req.body, changes)
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
