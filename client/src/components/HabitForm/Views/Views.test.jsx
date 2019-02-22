@@ -26,7 +26,7 @@ describe('HabitForm', () => {
 				push: false,
 			},
 			difficulty: '',
-			habitType: '',
+			type: '',
 			habitStart: '',
 
 			onChange: () => null,

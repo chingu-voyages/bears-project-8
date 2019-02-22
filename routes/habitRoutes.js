@@ -27,22 +27,11 @@ router.get('/habits', passport.authenticate('jwt', { session: false }), (req, re
  * @access  Private
  */
 router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
-	req.body.user = req.user._id.toString();
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { user, name, description, type, difficulty, tags, frequency } = req.body;
-
-	return new Habit({
-		user,
-		name,
-		type,
-		description,
-		tags,
-		difficulty,
-		frequency,
-	})
+	return new Habit({ ...req.body, user: req.user._id.toHexString() })
 		.save()
 		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
@@ -128,29 +117,16 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
 
-	const { name, description, type, difficulty, tags, frequency } = req.body;
-
 	return Habit.findById(req.params.id)
 		.then(habit => {
 			// Check whether habit belongs to current authenticated user
-			// toHexString - 24 byte hex string representation of MongoDB ObjectID
-			if (habit.user.toHexString() !== req.user.id) {
+			if (habit.user.toHexString() !== req.user.id)
 				return res.status(401).json({ message: 'Unauthorized' });
-			}
-			/* eslint-disable no-param-reassign */
-			habit.name = name;
-			habit.description = description;
-			habit.type = type;
-			habit.difficulty = difficulty;
-			habit.tags = tags;
-			habit.frequency = frequency;
-
-			/* eslint-enable */
-			return habit
+			return Object.assign(habit, req.body)
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
-		.catch(() => res.status(404).json({ message: 'Habit not found' }));
+		.catch(() => res.status(404).json({ message: `Habit not found` }));
 });
 
 module.exports = router;

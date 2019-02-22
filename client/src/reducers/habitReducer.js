@@ -1,6 +1,6 @@
 import Types from '../actions/types';
 
-const { UPDATE_HABIT_LIST, ADD_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
+const { UPDATE_HABIT_LIST, ADD_HABIT, EDIT_HABIT, DELETE_HABIT, UPDATE_HABIT } = Types;
 
 export const filterHabitsSelector = (state, { target, criteria }) => {
 	if (!target || target === 'all') return state;
@@ -22,6 +22,10 @@ export default (state = [], action) => {
 			return action.payload;
 		case ADD_HABIT:
 			return [action.payload, ...state];
+		case EDIT_HABIT:
+			return [
+				...state.map(habit => (habit._id === action.payload._id ? action.payload : habit)),
+			];
 		case DELETE_HABIT:
 			return state.filter(habit => habit._id !== action.payload._id);
 		case UPDATE_HABIT:

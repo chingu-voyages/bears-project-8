@@ -20,8 +20,8 @@ const habitSchema = new Schema({
 	tags: { type: [String] },
 	// Difficulty of the habit: Trivial, Easy, Medium, Hard, Epic
 	difficulty: { type: String, default: 'Medium' },
-	// Positive or negative  type of habit
-	type: { type: String, default: 'Negative' },
+	// Active or passive type of habit
+	type: { type: String, default: 'Active' },
 
 	// How often they would like to do this habit (1 time, 2 times... daily, weekly, monthly...)
 	frequency: {

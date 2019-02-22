@@ -32,7 +32,7 @@ module.exports.register = ({ name, email, password, password2 }) => {
 
 module.exports.createHabit = ({ user, name, description, type, difficulty, tags, frequency }) => {
 	const errors = {};
-	const types = ['Positive', 'Negative'];
+	const types = ['Active', 'Passive'];
 	const diffs = ['Trivial', 'Easy', 'Medium', 'Hard', 'Epic'];
 	const periods = ['Daily', 'Weekly', 'Monthly'];
 
@@ -46,7 +46,7 @@ module.exports.createHabit = ({ user, name, description, type, difficulty, tags,
 		errors.name = 'Habit name must be between 2 and 30 characters!';
 	if (validator.isEmpty(name)) errors.name = 'Habit name field is required';
 	if (tags && tags.length > 4) errors.tags = "Habit can't have more than 4 tags";
-	if (type && !validator.isIn(type, types)) errors.type = 'Habit must be Positive or Negative';
+	if (type && !validator.isIn(type, types)) errors.type = 'Habit must be Active or Positive';
 	if (description && !validator.isLength(description, { min: 5, max: 120 }))
 		errors.description = 'Habit description must be between 5 and 120 characters!';
 	if (frequency && !validator.isIn(frequency.period, periods))

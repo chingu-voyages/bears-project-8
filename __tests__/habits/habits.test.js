@@ -14,15 +14,16 @@ const userData = {
 
 const habit = {
 	name: 'Test habit',
-	user: '5c1bffbe6f455d6c270d8193',
-	description: 'This is a habit',
+	user: 'this should be populated below',
 	tags: ['office', 'work', 'omg'],
-	type: 'Positive',
+	description: 'This is a habit',
 	frequency: {
 		times: 2,
 		period: 'Daily',
 	},
 	difficulty: 'Epic',
+	type: 'Passive',
+	startDate: '2019-02-19',
 };
 
 describe('API - Habit', () => {
@@ -90,7 +91,7 @@ describe('API - Habit', () => {
 					expect(res.status).toBe(200);
 					expect(res.body.habit.name).toBe('Habit');
 					expect(res.body.habit.difficulty).toBe('Medium');
-					expect(res.body.habit.type).toBe('Negative');
+					expect(res.body.habit.type).toBe('Active');
 					expect(res.body.habit.frequency.times).toBe(1);
 					expect(res.body.habit.frequency.period).toBe('Daily');
 					expect(res.body.habit._id).toBeTruthy();
@@ -109,7 +110,7 @@ describe('API - Habit', () => {
 					expect(res.status).toBe(200);
 					expect(res.body.habit.name).toBe('Test habit');
 					expect(res.body.habit.description).toBe('This is a habit');
-					expect(res.body.habit.type).toBe('Positive');
+					expect(res.body.habit.type).toBe('Passive');
 					expect(res.body.habit.frequency.times).toBe(2);
 					expect(res.body.habit.frequency.period).toBe('Daily');
 					expect(res.body.habit._id).toBeTruthy();
@@ -186,9 +187,9 @@ describe('API - Habit', () => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
 					expect(res.body.habit.log.length).toBe(1);
-					// Expect the latest logged time to be within 10 seconds of the current time
-					expect(Math.round(Date.parse(res.body.habit.log[0]) / 10000)).toBe(
-						Math.round(Date.now() / 10000)
+					// Expect the latest logged time to be within 15 seconds of the current time
+					expect(Math.round(Date.parse(res.body.habit.log[0]) / 15000)).toBe(
+						Math.round(Date.now() / 15000)
 					);
 					done();
 				}));

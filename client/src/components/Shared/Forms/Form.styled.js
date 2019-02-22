@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
 import Dropdown from 'react-dropdown';
-import { $animDuration, $grey, $dangerRed, $elfGreen, $tomato } from '../../../assets/styledVars';
+import {
+	$animDuration,
+	$grey,
+	$dangerRed,
+	$elfGreen,
+	$tomato,
+	$white,
+} from '../../../assets/styledVars';
 
 export const ButtonGroup = styled.div`
 	width: 270px;
@@ -32,16 +39,10 @@ export const StyledFormGroup = styled.div`
 export const Button = styled.button`
 	${({ secondary }) =>
 		secondary
-			? `background: #fff; color: ${lighten(0.2, $grey)}; border: 1px solid ${lighten(
-					0.2,
-					$grey
-			  )};
-				&:hover { background: ${lighten(0.2, $grey)}; border: 1px solid ${lighten(0.4, $grey)}; }`
-			: `background: ${lighten(0.4, $grey)}; color: ${darken(
-					0.2,
-					$grey
-			  )}; border: 1px solid ${lighten(0.4, $grey)};
-				&:hover { background: ${lighten(0.2, $grey)}; }`}
+			? `background: #fff; color: ${$grey}; border: 1px solid ${lighten(0.2, $elfGreen)};
+				&:hover { color ${darken(0.2, $grey)}; }`
+			: `background: ${$elfGreen}; color: ${$white}; border: 1px solid ${$elfGreen};
+				&:hover { background: ${darken(0.1, $elfGreen)}; }`}
 	${({ width }) => width && `width: ${width};`}
 	min-width: 125px;
 	border-radius: 3px;
