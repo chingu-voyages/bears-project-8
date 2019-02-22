@@ -65,7 +65,7 @@ export class _HabitForm extends Component {
 		) {
 			const { habits, match } = nextProps;
 			const { id } = match.params;
-			const targetHabit = habits.filter(habit => habit._id === id)[0];
+			const targetHabit = habits.find(habit => habit._id === id);
 			const tagsFormatted =
 				targetHabit && targetHabit.tags.map(tag => ({ id: tag, text: tag }));
 
