@@ -187,9 +187,9 @@ describe('API - Habit', () => {
 					if (err) throw err;
 					expect(res.status).toBe(200);
 					expect(res.body.habit.log.length).toBe(1);
-					// Expect the latest logged time to be within 10 seconds of the current time
-					expect(Math.round(Date.parse(res.body.habit.log[0]) / 10000)).toBe(
-						Math.round(Date.now() / 10000)
+					// Expect the latest logged time to be within 15 seconds of the current time
+					expect(Math.round(Date.parse(res.body.habit.log[0]) / 15000)).toBe(
+						Math.round(Date.now() / 15000)
 					);
 					done();
 				}));
