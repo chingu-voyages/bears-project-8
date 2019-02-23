@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { editProfile } from '../../actions/authActions';
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 
-import { ContentArea, Row, Footer } from './ProfileForm.styled.js';
+import { ContentArea, Row, Footer } from './ProfileForm.styled';
 
-export default class ProfileForm extends Component {
+class ProfileForm extends Component {
 	state = {
 		name: '',
 		imgUrl: '',
@@ -16,14 +17,31 @@ export default class ProfileForm extends Component {
 		goals: [],
 	};
 
+	static propTypes = {
+		user: PropTypes.shape({
+			name: PropTypes.string.isRequired,
+			id: PropTypes.string.isRequired,
+			about: PropTypes.string,
+			goals: PropTypes.arrayOf(PropTypes.object),
+		}).isRequired,
+		editProfile: PropTypes.func.isRequired,
+	};
+
 	handleChange = ({ target }) => {
 		const { name, value } = target;
 		this.setState({ [name]: value });
 	};
 
+	handleSubmit = () => {
+		console.log('submitting');
+		const { history, user, editProfile } = this.props;
+		const { goals, ...profileData } = this.state;
+		editProfile(user, profileData, history);
+	};
+
 	render() {
 		const { history } = this.props;
-		const { name, imgUrl, about, goals } = this.state;
+		const { name, imgUrl, about } = this.state;
 
 		return (
 			<PageContainer
@@ -79,9 +97,20 @@ export default class ProfileForm extends Component {
 					/>
 				</ContentArea>
 				<Footer>
-					<Button onClick={() => console.log('Submit!')}>Save</Button>
+					<Button type="submit" onClick={this.handleSubmit}>
+						Save
+					</Button>
 				</Footer>
 			</PageContainer>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	user: state.auth.user,
+});
+
+export default connect(
+	mapStateToProps,
+	{ editProfile }
+)(withRouter(ProfileForm));

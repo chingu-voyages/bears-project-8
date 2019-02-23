@@ -40,7 +40,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (req.body.about) {
 				user.about = req.body.about;
 			}
-			if (req.body.goals) {
+			if (req.body.goals && req.body.goals.length) {
 				user.goals = req.body.goals;
 			}
 			return user
