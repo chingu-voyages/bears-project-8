@@ -7,6 +7,7 @@ import AppContainer from './components/AppContainer';
 import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
 import HabitForm from './components/HabitForm/HabitForm';
+import ProfileForm from './components/ProfileForm/ProfileForm';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -86,6 +87,20 @@ const Routes = ({ isAuthenticated }) => (
 				render={() =>
 					withContainer({
 						component: Profile,
+						isLazy: true,
+						hasNav: true,
+						withAuth: true,
+						isAuthenticated,
+					})
+				}
+			/>
+
+			<Route
+				exact
+				path="/profile/edit"
+				render={() =>
+					withContainer({
+						component: ProfileForm,
 						isLazy: true,
 						hasNav: true,
 						withAuth: true,

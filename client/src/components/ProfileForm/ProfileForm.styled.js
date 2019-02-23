@@ -1,12 +1,11 @@
 import styled from 'styled-components';
+import { Button } from '../Shared/Forms/Form.styled';
 
 export const ContentArea = styled.div`
-	width: 100%;
-	height: 310px;
 	padding: 3rem 4rem;
 
 	@media only screen and (max-width: 650px) {
-		height: auto;
+		padding: 3rem 2rem;
 	}
 `;
 
@@ -25,13 +24,15 @@ export const Row = styled.div`
 	}
 `;
 
-export const Footer = styled(ContentArea)`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: auto;
+export const Footer = styled.div`
+	padding: 0 4rem 3rem;
+	text-align: center;
 
-	@media only screen and (max-width: 960px) {
-		padding: 1rem 4rem 6rem;
+	@media (max-width: 650px) {
+		${Button} {
+			width: 100%;
+		}
+
+		padding: 0 2rem 3rem;
 	}
 `;

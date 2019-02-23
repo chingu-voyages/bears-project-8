@@ -55,7 +55,7 @@ const Profile = ({ user, history }) => (
 				</UserInfo>
 				{/* User actions */}
 				<UserActions>
-					<Button type="simple" clickHandler={() => {}}>
+					<Button type="simple" clickHandler={() => history.push('/profile/edit')}>
 						Edit Profile
 					</Button>
 					<Button type="simple" clickHandler={() => {}}>
