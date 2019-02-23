@@ -17,6 +17,18 @@ class ProfileForm extends Component {
 		goals: [],
 	};
 
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.user && !prevState.name) {
+			return {
+				name: nextProps.user.name,
+				imgUrl: nextProps.user.avatar || '',
+				about: nextProps.user.about || '',
+				goals: nextProps.user.goals || [],
+			};
+		}
+		return null;
+	}
+
 	static propTypes = {
 		user: PropTypes.shape({
 			name: PropTypes.string.isRequired,
@@ -33,7 +45,7 @@ class ProfileForm extends Component {
 	};
 
 	handleSubmit = () => {
-		console.log('submitting');
+		// eslint-disable-next-line no-shadow
 		const { history, user, editProfile } = this.props;
 		const { goals, ...profileData } = this.state;
 		editProfile(user, profileData, history);

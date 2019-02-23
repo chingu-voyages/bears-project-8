@@ -32,11 +32,13 @@ const Profile = ({ user, history }) => (
 			<Sidebar>
 				<CircleImg
 					clickHandler={() => null}
-					imgUrl={`https:${user.avatar}`}
+					imgUrl={user.avatar}
 					size="large"
 					type="avatar"
 					title={user.name}
-					subtitle="A short bio here that the user could edit, otherwise it has some dummy text"
+					subtitle={
+						user.about || 'Edit your profile and add something about yourself here!'
+					}
 				/>
 				<UserInfo>
 					<div>
@@ -120,7 +122,7 @@ const mapStateToProps = ({ auth }) => ({
 
 Profile.propTypes = {
 	user: PropTypes.shape({
-		name: PropTypes.string,
+		name: PropTypes.string.isRequired,
 		avatar: PropTypes.string,
 		goals: PropTypes.arrayOf(PropTypes.shape({})),
 		friends: PropTypes.arrayOf(PropTypes.shape({})),

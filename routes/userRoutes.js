@@ -7,7 +7,7 @@ const User = require('../models/User');
 
 /**
  * @route   PUT user/:id
- * @desc    update  User (name+avatar)
+ * @desc    update User (name+avatar)
  * @access  Private
  */
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) =>

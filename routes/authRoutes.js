@@ -34,12 +34,11 @@ router.post('/register', (req, res) => {
 			}
 
 			const { name, email, password } = req.body;
-			// NOTE: This will generate avatar URL without protocol
-			const avatar = gravatar.url(email, {
+			const avatar = `https://${gravatar.url(email, {
 				s: '200', // Size
 				r: 'pg', // Rating
 				d: 'mp', // Default
-			});
+			})}`;
 			const newUser = new User({
 				name,
 				email,
