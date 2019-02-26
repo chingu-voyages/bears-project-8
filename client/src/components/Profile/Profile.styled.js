@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 
 import { $grey, $white } from '../../assets/styledVars';
 
@@ -19,11 +19,20 @@ export const ProfileSection = styled.section`
 	grid-template-columns: 30% 1fr;
 `;
 
+export const UserName = styled.h2`
+	font-size: 1.2rem;
+	padding: 1.5rem 0 0rem;
+	font-weight: 400;
+	text-align: center;
+	color: ${darken(0.1, $grey)};
+`;
+
 export const Sidebar = styled.aside`
 	display: flex;
 	flex-direction: column;
 	background-color: ${lighten(0.5, $grey)};
 	border-radius: 6px 0 0 6px;
+	padding: 1.5rem;
 `;
 
 export const UserInfo = styled.div`
@@ -37,11 +46,13 @@ export const UserInfo = styled.div`
 	& .user__tags {
 		display: flex;
 		flex-wrap: wrap;
+		margin-bottom: 3rem;
 	}
 
 	& .user__info {
 		text-align: center;
 		font-size: 14px;
+		margin-bottom: 3rem;
 
 		& em {
 			font-weight: 300;
@@ -72,7 +83,7 @@ export const UserActions = styled.div`
 	padding-top: 0;
 
 	${ButtonWrapper} {
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
 	}
 `;
 

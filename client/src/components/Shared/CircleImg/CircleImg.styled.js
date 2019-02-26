@@ -22,6 +22,7 @@ export const Subtitle = styled.figcaption`
 	text-align: center;
 	padding: 1rem 0;
 	color: ${darken(0.2, $grey)};
+	line-height: 1.5;
 `;
 
 export const Image = styled.img`

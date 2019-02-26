@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import {
 	ProfileSection,
+	UserName,
 	Sidebar,
 	Dashboard,
 	UserInfo,
@@ -30,12 +31,12 @@ const Profile = ({ user, history }) => (
 	>
 		<ProfileSection>
 			<Sidebar>
+				<UserName>{user.name}</UserName>
 				<CircleImg
 					clickHandler={() => null}
 					imgUrl={user.avatar}
 					size="large"
 					type="avatar"
-					title={user.name}
 					subtitle={
 						user.about || 'Edit your profile and add something about yourself here!'
 					}
