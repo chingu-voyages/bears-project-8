@@ -23,7 +23,6 @@ class ProfileForm extends Component {
 				name: nextProps.user.name,
 				imgUrl: nextProps.user.avatar || '',
 				about: nextProps.user.about || '',
-				goals: nextProps.user.goals || [],
 			};
 		}
 		return null;
@@ -34,7 +33,6 @@ class ProfileForm extends Component {
 			name: PropTypes.string.isRequired,
 			id: PropTypes.string.isRequired,
 			about: PropTypes.string,
-			goals: PropTypes.arrayOf(PropTypes.object),
 		}).isRequired,
 		editProfile: PropTypes.func.isRequired,
 	};
@@ -90,21 +88,13 @@ class ProfileForm extends Component {
 					</Row>
 
 					<FormGroup
+						type="textarea"
 						title="About"
 						description="Something short and punchy to let people know who you are"
 						name="about"
 						value={about}
 						onChange={this.handleChange}
 						placeholder="E.g. I started habit tracking after an interdimensional rift rearranged my neurons"
-						size={4}
-					/>
-
-					<FormGroup
-						title="Habits"
-						description="Goals can help keep our habits in perspective"
-						name="goals"
-						onChange={this.handleChange}
-						placeholder="E.g. Run a half marathon by the end of this year"
 						size={4}
 					/>
 				</ContentArea>

@@ -81,5 +81,5 @@ export const editProfile = (user, profileData, history) => dispatch =>
 
 /*
 	The problem above is that if the user changes their profile and then refreshes the app, the old info from the JWT token will be loaded.
-	Perhaps a get user info route is needed, so that only the user id is pulled from the JWT token
+	TODO: Perhaps a get user info route is needed, so that only the user id is pulled from the JWT token and other up-to-date details are retrieved.
 */

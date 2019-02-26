@@ -76,6 +76,7 @@ export const Input = styled.input`
 
 export const Textarea = styled.textarea`
 	${generalInputStyles}
+	resize: vertical;
 `;
 
 export const StyledDropdown = styled(Dropdown)`
