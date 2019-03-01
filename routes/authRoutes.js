@@ -7,6 +7,7 @@ const User = require('../models/User');
 // Load input validation
 const validateRegisterInput = require('../utils/validators').register;
 const validateLoginInput = require('../utils/validators').login;
+
 const createToken = require('../utils/createToken');
 
 const router = express.Router();
@@ -34,12 +35,11 @@ router.post('/register', (req, res) => {
 			}
 
 			const { name, email, password } = req.body;
-			// NOTE: This will generate avatar URL without protocol
-			const avatar = gravatar.url(email, {
+			const avatar = `https://${gravatar.url(email, {
 				s: '200', // Size
 				r: 'pg', // Rating
 				d: 'mp', // Default
-			});
+			})}`;
 			const newUser = new User({
 				name,
 				email,
@@ -90,6 +90,8 @@ router.post('/login', (req, res) => {
 				name: user.name,
 				email: user.email,
 				avatar: user.avatar,
+				about: !!user.about && user.about,
+				goals: !!user.goals && user.goals,
 			};
 			return bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err || !result) {

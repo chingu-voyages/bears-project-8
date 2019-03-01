@@ -6,11 +6,11 @@ import { withRouter } from 'react-router-dom';
 
 import { addHabit, editHabit } from '../../actions/habitActions';
 
+import PageContainer from '../Shared/PageContainer/PageContainer';
 import { Footer } from './HabitForm.styled';
 import Views from './Views/Views';
 import { LeftButtons, RightButtons } from './Buttons/Buttons';
 import ProgressCircles from '../Shared/ProgressCircles/ProgressCircles';
-import PageContainer from '../Shared/PageContainer/PageContainer';
 
 const initialState = () => ({
 	isEditing: false,

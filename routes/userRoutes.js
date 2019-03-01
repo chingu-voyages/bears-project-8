@@ -4,10 +4,11 @@ const validator = require('validator');
 
 const router = express.Router();
 const User = require('../models/User');
+const createToken = require('../utils/createToken');
 
 /**
  * @route   PUT user/:id
- * @desc    update  User (name+avatar)
+ * @desc    update User (name+avatar)
  * @access  Private
  */
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) =>
@@ -19,11 +20,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (user._id.toHexString() !== req.user._id.toHexString()) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
-
-			if (req.body.name) {
-				// Run validation for name
-				user.name = req.body.name;
-			}
+			// TODO: Run validation for name
 			// image URL validation
 			if (req.body.imgUrl) {
 				const validUrl = validator.isURL(req.body.imgUrl, {
@@ -31,19 +28,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 					require_protocol: true,
 					require_tld: true,
 				});
-				if (validUrl) {
-					user.avatar = req.body.imgUrl;
-				} else {
-					return res.status(400).json({ message: 'Bad image URL' });
-				}
+				if (!validUrl)
+					return res.status(400).json({ imgUrl: 'Please enter a valid image URL' });
 			}
-			if (req.body.about) {
-				user.about = req.body.about;
-			}
-			if (req.body.goals) {
-				user.goals = req.body.goals;
-			}
-			return user
+
+			return Object.assign(user, req.body)
 				.save()
 				.then(savedUser =>
 					res.status(200).json({ message: 'User updated successfully', user: savedUser })
@@ -53,13 +42,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 		.catch(err => res.status(400).json({ message: 'Bad request', err }))
 );
 
-/** 
-    User- delete route
-  user should be able to delete his profile 
-   @route   DELETE user/:id 
+/**
+ * @route   DELETE user/:id
  * @desc    delete User
  * @access  Private
-*/
+ */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	User.findById(req.params.id)
 		.then(user => {
@@ -71,6 +58,29 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 				.then(() => res.status(200).json({ message: 'User deleted successfully' }));
 		})
 		.catch(() => res.status(404).json({ message: 'User not found' }));
+});
+
+/**
+ * @route   GET user/token
+ * @desc    Returns a new token for localStorage
+ * @access  Private
+ */
+router.get('/token', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const { user } = req;
+	const payload = {
+		id: user._id,
+		name: user.name,
+		email: user.email,
+		avatar: user.avatar,
+		about: !!user.about && user.about,
+		goals: !!user.goals && user.goals,
+	};
+	const token = createToken(payload, process.env.JWT_SECRET, '1h');
+
+	return res.status(200).json({
+		message: 'Auth successful',
+		token,
+	});
 });
 
 module.exports = router;

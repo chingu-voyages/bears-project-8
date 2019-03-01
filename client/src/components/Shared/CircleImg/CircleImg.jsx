@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Title, Subtitle, Image, PlusCircle } from './CircleImg.styled';
+import { Wrapper, Subtitle, Image, PlusCircle } from './CircleImg.styled';
 
-const CircleImg = ({ type, size, imgUrl, title, subtitle, clickHandler }) => (
+const CircleImg = ({ type, size, imgUrl, subtitle, clickHandler }) => (
 	<Wrapper>
-		{title && <Title>{title}</Title>}
 		{type !== 'wPlus' ? (
 			<Image type={type} size={size} onClick={clickHandler} src={imgUrl} />
 		) : (
@@ -19,7 +18,6 @@ const CircleImg = ({ type, size, imgUrl, title, subtitle, clickHandler }) => (
 CircleImg.propTypes = {
 	type: PropTypes.oneOf(['wPlus', 'avatar']).isRequired,
 	imgUrl: PropTypes.string,
-	title: PropTypes.string,
 	subtitle: PropTypes.string,
 	clickHandler: PropTypes.func.isRequired,
 	size: PropTypes.string,
@@ -27,7 +25,6 @@ CircleImg.propTypes = {
 
 CircleImg.defaultProps = {
 	imgUrl: '',
-	title: '',
 	subtitle: '',
 	size: 'small',
 };

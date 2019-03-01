@@ -5,7 +5,7 @@ import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
 
-const { SET_CURRENT_USER, GET_ERRORS } = Types;
+const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE } = Types;
 
 // Register user
 export const registerUser = (userData, history) => dispatch =>
@@ -60,4 +60,33 @@ export const logoutUser = () => dispatch => {
 	dispatch(setCurrentUser({}));
 };
 
-// TODO: Add edit user
+// Set a new auth token
+const refreshToken = () => {
+	axios.get('api/user/token').then(res => {
+		// Save to localStorage
+		const { token } = res.data;
+		localStorage.setItem('jwtToken', token);
+		// Set token to auth header
+		setAuthToken(token);
+	});
+};
+
+// Edit profile
+export const editProfile = (user, profileData, history) => dispatch =>
+	axios
+		.put(`api/user/${user.id}`, profileData)
+		.then(res => {
+			// Edit current user profile
+			dispatch({
+				type: EDIT_PROFILE,
+				payload: res.data.user,
+			});
+			refreshToken();
+		})
+		.then(() => history.push('/profile'))
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
+			})
+		);
