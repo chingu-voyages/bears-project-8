@@ -56,7 +56,8 @@ export const UserInfo = styled.div`
 
 		& em {
 			font-weight: 300;
-			margin-bottom: 1rem;
+			display: block;
+			margin-bottom: 0.75rem;
 		}
 	}
 `;

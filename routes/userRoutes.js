@@ -20,11 +20,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			if (user._id.toHexString() !== req.user._id.toHexString()) {
 				return res.status(401).json({ message: 'Unauthorized' });
 			}
-
-			if (req.body.name) {
-				// Run validation for name
-				user.name = req.body.name;
-			}
+			// TODO: Run validation for name
 			// image URL validation
 			if (req.body.imgUrl) {
 				const validUrl = validator.isURL(req.body.imgUrl, {
@@ -32,19 +28,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 					require_protocol: true,
 					require_tld: true,
 				});
-				if (validUrl) {
-					user.avatar = req.body.imgUrl;
-				} else {
-					return res.status(400).json({ message: 'Bad image URL' });
-				}
+				if (!validUrl)
+					return res.status(400).json({ imgUrl: 'Please enter a valid image URL' });
 			}
-			if (req.body.about) {
-				user.about = req.body.about;
-			}
-			if (req.body.goals && req.body.goals.length) {
-				user.goals = req.body.goals;
-			}
-			return user
+
+			return Object.assign(user, req.body)
 				.save()
 				.then(savedUser =>
 					res.status(200).json({ message: 'User updated successfully', user: savedUser })

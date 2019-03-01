@@ -14,7 +14,14 @@ class ProfileForm extends Component {
 		name: '',
 		imgUrl: '',
 		about: '',
-		goals: [],
+	};
+
+	static propTypes = {
+		errors: PropTypes.shape({
+			name: PropTypes.string,
+			imgUrl: PropTypes.string,
+			about: PropTypes.string,
+		}).isRequired,
 	};
 
 	static getDerivedStateFromProps(nextProps, prevState) {
@@ -45,12 +52,12 @@ class ProfileForm extends Component {
 	handleSubmit = () => {
 		// eslint-disable-next-line no-shadow
 		const { history, user, editProfile } = this.props;
-		const { goals, ...profileData } = this.state;
+		const { ...profileData } = this.state;
 		editProfile(user, profileData, history);
 	};
 
 	render() {
-		const { history } = this.props;
+		const { history, errors } = this.props;
 		const { name, imgUrl, about } = this.state;
 
 		return (
@@ -68,6 +75,7 @@ class ProfileForm extends Component {
 					<Row>
 						<FormGroup
 							title="Name"
+							errors={errors.name}
 							description="Your real name or an alias — this will be public"
 							name="name"
 							value={name}
@@ -78,6 +86,7 @@ class ProfileForm extends Component {
 						/>
 						<FormGroup
 							title="Profile Picture"
+							errors={errors.imgUrl}
 							description="Customize it with an image URL"
 							name="imgUrl"
 							value={imgUrl}
@@ -89,6 +98,7 @@ class ProfileForm extends Component {
 
 					<FormGroup
 						type="textarea"
+						errors={errors.about}
 						title="About"
 						description="Something short and punchy to let people know who you are"
 						name="about"
@@ -110,6 +120,7 @@ class ProfileForm extends Component {
 
 const mapStateToProps = state => ({
 	user: state.auth.user,
+	errors: state.errors,
 });
 
 export default connect(
