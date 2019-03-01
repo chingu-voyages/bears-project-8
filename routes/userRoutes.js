@@ -4,6 +4,7 @@ const validator = require('validator');
 
 const router = express.Router();
 const User = require('../models/User');
+const createToken = require('../utils/createToken');
 
 /**
  * @route   PUT user/:id
@@ -53,13 +54,11 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 		.catch(err => res.status(400).json({ message: 'Bad request', err }))
 );
 
-/** 
-    User- delete route
-  user should be able to delete his profile 
-   @route   DELETE user/:id 
+/**
+ * @route   DELETE user/:id
  * @desc    delete User
  * @access  Private
-*/
+ */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 	User.findById(req.params.id)
 		.then(user => {
@@ -71,6 +70,27 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 				.then(() => res.status(200).json({ message: 'User deleted successfully' }));
 		})
 		.catch(() => res.status(404).json({ message: 'User not found' }));
+});
+
+/**
+ * @route   GET user/token
+ * @desc    Returns a new token for localStorage
+ * @access  Private
+ */
+router.get('/token', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const { user } = req;
+	const payload = {
+		id: user._id,
+		name: user.name,
+		email: user.email,
+		avatar: user.avatar,
+	};
+	const token = createToken(payload, process.env.JWT_SECRET, '1h');
+
+	return res.status(200).json({
+		message: 'Auth successful',
+		token,
+	});
 });
 
 module.exports = router;

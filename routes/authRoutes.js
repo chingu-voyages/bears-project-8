@@ -7,6 +7,7 @@ const User = require('../models/User');
 // Load input validation
 const validateRegisterInput = require('../utils/validators').register;
 const validateLoginInput = require('../utils/validators').login;
+
 const createToken = require('../utils/createToken');
 
 const router = express.Router();

@@ -60,6 +60,17 @@ export const logoutUser = () => dispatch => {
 	dispatch(setCurrentUser({}));
 };
 
+// Set a new auth token
+const refreshToken = () => {
+	axios.get('api/user/token').then(res => {
+		// Save to localStorage
+		const { token } = res.data;
+		localStorage.setItem('jwtToken', token);
+		// Set token to auth header
+		setAuthToken(token);
+	});
+};
+
 // Edit profile
 export const editProfile = (user, profileData, history) => dispatch =>
 	axios
@@ -70,6 +81,7 @@ export const editProfile = (user, profileData, history) => dispatch =>
 				type: EDIT_PROFILE,
 				payload: res.data.user,
 			});
+			refreshToken();
 		})
 		.then(() => history.push('/profile'))
 		.catch(err =>
@@ -78,8 +90,3 @@ export const editProfile = (user, profileData, history) => dispatch =>
 				payload: err.response.data,
 			})
 		);
-
-/*
-	The problem above is that if the user changes their profile and then refreshes the app, the old info from the JWT token will be loaded.
-	TODO: Perhaps a get user info route is needed, so that only the user id is pulled from the JWT token and other up-to-date details are retrieved.
-*/
