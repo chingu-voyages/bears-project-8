@@ -90,6 +90,8 @@ router.post('/login', (req, res) => {
 				name: user.name,
 				email: user.email,
 				avatar: user.avatar,
+				about: !!user.about && user.about,
+				goals: !!user.goals && user.goals,
 			};
 			return bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err || !result) {

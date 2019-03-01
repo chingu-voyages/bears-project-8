@@ -84,6 +84,8 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
 		name: user.name,
 		email: user.email,
 		avatar: user.avatar,
+		about: !!user.about && user.about,
+		goals: !!user.goals && user.goals,
 	};
 	const token = createToken(payload, process.env.JWT_SECRET, '1h');
 
