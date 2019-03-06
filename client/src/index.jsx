@@ -5,6 +5,9 @@ import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createHashHistory';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import GlobalStyle from './globalStyle.styled';
 import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
@@ -43,6 +46,7 @@ const Root = () => (
 	<Provider store={store}>
 		<GlobalStyle />
 		<Routes />
+		<ToastContainer autoclose={8000} />
 	</Provider>
 );
 
