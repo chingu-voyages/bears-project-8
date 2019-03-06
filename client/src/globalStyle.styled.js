@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { darken, lighten } from 'polished';
-import { $titleFont, $bodyFont, $grey } from './assets/styledVars';
+import { $titleFont, $bodyFont, $grey, $tomato, $elfGreen } from './assets/styledVars';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -36,6 +36,20 @@ p {
 #root {
 	width: 100%;
 	height: 100%;
+}
+
+.toastify--main {
+    .Toastify__toast--error {
+        background: ${$tomato};
+    }
+    .Toastify__toast--success {
+        background: ${$elfGreen};
+    }
+}
+
+.toastify--content {
+    border-radius: 6px;
+    padding: 0.5rem;
 }
 `;
 

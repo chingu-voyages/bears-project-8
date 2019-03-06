@@ -14,10 +14,14 @@ export const registerUser = (userData, history) => dispatch =>
 		.post('api/auth/register', userData)
 		.then(() => {
 			history.push('/auth/login');
-			toast.success('Successfully registered!');
+			toast.success('Successfully registered!', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 		})
 		.catch(err => {
-			toast.error('Oops! There was a problem registering...');
+			toast.error('Oops! There was a problem registering...', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
@@ -47,11 +51,15 @@ export const loginUser = (userData, history) => dispatch =>
 			// Get user's habits
 			dispatch(getHabits());
 			// Display success message
-			toast.success('Successfully logged in!');
+			toast.success('Successfully logged in!', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 		})
 		.then(() => history.push('/dashboard'))
 		.catch(err => {
-			toast.error('Oops! There was a problem logging in...');
+			toast.error('Oops! There was a problem logging in...', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
@@ -67,7 +75,9 @@ export const logoutUser = () => dispatch => {
 	// Set current user to {} - this set isAuthenticated to false
 	dispatch(setCurrentUser({}));
 	// Success toast message
-	toast.success('Successfully logged out!');
+	toast.success('Successfully logged out!', {
+		position: toast.POSITION.BOTTOM_RIGHT,
+	});
 };
 
 // Set a new auth token
@@ -93,12 +103,16 @@ export const editProfile = (user, profileData, history) => dispatch =>
 			});
 			refreshToken();
 			history.push('/profile');
-			toast.success('You successfully updated your profile!');
+			toast.success('You successfully updated your profile!', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 		})
 		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
 			});
-			toast.error('Oops! There was a problem editing your profile...');
+			toast.error('Oops! There was a problem editing your profile...', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			});
 		});

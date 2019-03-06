@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createHashHistory';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import GlobalStyle from './globalStyle.styled';
@@ -46,7 +46,14 @@ const Root = () => (
 	<Provider store={store}>
 		<GlobalStyle />
 		<Routes />
-		<ToastContainer autoclose={8000} />
+		{/* Setting autoclose to false for testing */}
+		<ToastContainer
+			autoClose={false}
+			newestOnTop
+			className="toastify--main"
+			toastClassName="toastify--content"
+			progressClassName="toastify--progress"
+		/>
 	</Provider>
 );
 
