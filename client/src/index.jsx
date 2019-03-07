@@ -52,6 +52,7 @@ const Root = () => (
 			className="toastify--main"
 			toastClassName="toastify--content"
 			progressClassName="toastify--progress"
+			position="bottom-right"
 		/>
 	</Provider>
 );
