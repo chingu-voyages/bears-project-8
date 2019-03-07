@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setReminderType }) => (
+const Step1 = ({
+	errors,
+	times,
+	period,
+	reminderEvery,
+	reminderTypes,
+	onChange,
+	setReminderType,
+}) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -16,6 +24,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 				size={2}
 				type="dropdown"
 				options={['Once', 'Twice', '3 times', '4 times']}
+				errors={errors && errors.times}
 			/>
 			<FormGroup
 				title="&nbsp;"
@@ -27,6 +36,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 				size={2}
 				type="dropdown"
 				options={['Daily', 'Weekly', 'Monthly', 'Biannually', 'Yearly']}
+				errors={errors && errors.period}
 			/>
 		</Row>
 		<Row>
@@ -40,6 +50,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 				size={2}
 				type="dropdown"
 				options={['Daily', 'Weekly', 'Monthly', 'Biannually', 'Yearly']}
+				errors={errors && errors.reminderEvery}
 			/>
 			<FormGroup
 				title="How do you want to be reminded?"
@@ -51,6 +62,7 @@ const Step1 = ({ times, period, reminderEvery, reminderTypes, onChange, setRemin
 				onCheck={setReminderType}
 				optionState={reminderTypes}
 				options={['Email', 'In-App', 'Push']}
+				errors={errors && errors.reminderTypes}
 			/>
 		</Row>
 	</Fragment>
@@ -65,6 +77,12 @@ Step1.propTypes = {
 		email: PropTypes.bool.isRequired,
 		inApp: PropTypes.bool.isRequired,
 		push: PropTypes.bool.isRequired,
+	}).isRequired,
+	errors: PropTypes.shape({
+		times: PropTypes.string,
+		period: PropTypes.string,
+		reminderEvery: PropTypes.string,
+		reminderTypes: PropTypes.string,
 	}).isRequired,
 	setReminderType: PropTypes.func.isRequired,
 };

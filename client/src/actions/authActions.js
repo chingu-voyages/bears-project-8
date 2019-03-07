@@ -1,6 +1,7 @@
 import axios from 'axios';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import { toast } from 'react-toastify';
 import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
@@ -11,13 +12,17 @@ const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE } = Types;
 export const registerUser = (userData, history) => dispatch =>
 	axios
 		.post('api/auth/register', userData)
-		.then(() => history.push('/auth/login'))
-		.catch(err =>
+		.then(() => {
+			history.push('/auth/login');
+			toast.success('Successfully registered, go ahead and log in!');
+		})
+		.catch(err => {
+			toast.error('Oops! There was a problem registering...');
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			})
-		);
+			});
+		});
 
 // Set logged in user
 export const setCurrentUser = decoded => ({
@@ -41,14 +46,17 @@ export const loginUser = (userData, history) => dispatch =>
 			dispatch(setCurrentUser(decoded));
 			// Get user's habits
 			dispatch(getHabits());
+			// Display success message
+			toast.success('Successfully logged in!');
 		})
 		.then(() => history.push('/dashboard'))
-		.catch(err =>
+		.catch(err => {
+			toast.error('Oops! There was a problem logging in...');
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			})
-		);
+			});
+		});
 
 // Log the user out
 export const logoutUser = () => dispatch => {
@@ -58,6 +66,8 @@ export const logoutUser = () => dispatch => {
 	setAuthToken(null);
 	// Set current user to {} - this set isAuthenticated to false
 	dispatch(setCurrentUser({}));
+	// Success toast message
+	toast.success('Successfully logged out!');
 };
 
 // Set a new auth token
@@ -82,11 +92,13 @@ export const editProfile = (user, profileData, history) => dispatch =>
 				payload: res.data.user,
 			});
 			refreshToken();
+			history.push('/profile');
+			toast.success('You successfully updated your profile!');
 		})
-		.then(() => history.push('/profile'))
-		.catch(err =>
+		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			})
-		);
+			});
+			toast.error('Oops! There was a problem editing your profile...');
+		});
