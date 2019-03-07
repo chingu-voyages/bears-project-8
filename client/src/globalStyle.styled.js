@@ -39,6 +39,7 @@ p {
 }
 
 .toastify--main {
+    
     .Toastify__toast--error {
         background: ${$tomato};
     }
@@ -48,8 +49,15 @@ p {
 }
 
 .toastify--content {
+    font-family: ${$bodyFont};
     border-radius: 6px;
     padding: 0.5rem;
+    
+    .Toastify__close-button {
+        font-family: ${$bodyFont};
+        font-weight: 400;
+        font-size: 1rem;
+    }
 }
 `;
 

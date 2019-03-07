@@ -14,7 +14,7 @@ export const registerUser = (userData, history) => dispatch =>
 		.post('api/auth/register', userData)
 		.then(() => {
 			history.push('/auth/login');
-			toast.success('Successfully registered!', {
+			toast.success('Successfully registered, go ahead and log in!', {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			});
 		})

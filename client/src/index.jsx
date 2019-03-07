@@ -46,9 +46,8 @@ const Root = () => (
 	<Provider store={store}>
 		<GlobalStyle />
 		<Routes />
-		{/* Setting autoclose to false for testing */}
 		<ToastContainer
-			autoClose={false}
+			autoClose={3500}
 			newestOnTop
 			className="toastify--main"
 			toastClassName="toastify--content"
