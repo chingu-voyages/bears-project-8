@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTagDrag }) => (
+const Step0 = ({ errors, name, tags, description, onChange, onTagDelete, onTagAdd, onTagDrag }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -14,6 +14,7 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 				onChange={onChange}
 				placeholder="E.g. Running, Workout, Drink water, Floss..."
 				size={2}
+				errors={errors && errors.name}
 				required
 			/>
 			<FormGroup
@@ -29,6 +30,7 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 				onTagDelete={onTagDelete}
 				onTagAdd={onTagAdd}
 				onTagDrag={onTagDrag}
+				errors={errors && errors.tags}
 			/>
 		</Row>
 		<FormGroup
@@ -40,6 +42,7 @@ const Step0 = ({ name, tags, description, onChange, onTagDelete, onTagAdd, onTag
 			type="textarea"
 			placeholder="E.g. Waking up at 7.15 to run for half an hour..."
 			size={4}
+			errors={errors && errors.description}
 		/>
 	</Fragment>
 );
@@ -54,6 +57,11 @@ Step0.propTypes = {
 		})
 	).isRequired,
 	description: PropTypes.string.isRequired,
+	errors: PropTypes.shape({
+		name: PropTypes.string,
+		tags: PropTypes.string,
+		description: PropTypes.string,
+	}).isRequired,
 	onTagDelete: PropTypes.func.isRequired,
 	onTagAdd: PropTypes.func.isRequired,
 	onTagDrag: PropTypes.func.isRequired,

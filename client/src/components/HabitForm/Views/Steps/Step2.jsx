@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from '../../HabitForm.styled';
 import FormGroup from '../../../Shared/Forms/FormGroup';
 
-const Step2 = ({ difficulty, type, startDate, onChange }) => (
+const Step2 = ({ errors, difficulty, type, startDate, onChange }) => (
 	<Fragment>
 		<Row>
 			<FormGroup
@@ -16,6 +16,7 @@ const Step2 = ({ difficulty, type, startDate, onChange }) => (
 				size={2}
 				type="dropdown"
 				options={['Trivial', 'Easy', 'Medium', 'Hard', 'Epic']}
+				errors={errors && errors.difficulty}
 			/>
 			<FormGroup
 				title="Habit Type"
@@ -27,6 +28,7 @@ const Step2 = ({ difficulty, type, startDate, onChange }) => (
 				size={2}
 				type="dropdown"
 				options={['Active', 'Passive']}
+				errors={errors && errors.type}
 			/>
 		</Row>
 		<FormGroup
@@ -38,6 +40,7 @@ const Step2 = ({ difficulty, type, startDate, onChange }) => (
 			type="date"
 			placeholder="Choose the date you would like to start this habit, or leave it blank to start today"
 			size={2}
+			errors={errors && errors.startDate}
 		/>
 	</Fragment>
 );
@@ -47,6 +50,11 @@ Step2.propTypes = {
 	difficulty: PropTypes.string.isRequired,
 	type: PropTypes.string.isRequired,
 	startDate: PropTypes.string.isRequired,
+	errors: PropTypes.shape({
+		difficulty: PropTypes.string,
+		type: PropTypes.string,
+		startDate: PropTypes.string,
+	}).isRequired,
 };
 
 export default Step2;

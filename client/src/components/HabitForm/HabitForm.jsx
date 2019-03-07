@@ -16,6 +16,7 @@ const initialState = () => ({
 	isEditing: false,
 	step: 0,
 
+	errors: {},
 	name: '',
 	tags: [],
 	description: '',
@@ -63,6 +64,7 @@ export class _HabitForm extends Component {
 			Object.keys(nextProps.match.params).length &&
 			prevState._id !== nextProps.match.params.id
 		) {
+			// Format and pre-populate from existing habit
 			const { habits, match } = nextProps;
 			const { id } = match.params;
 			const targetHabit = habits.find(habit => habit._id === id);
@@ -91,9 +93,13 @@ export class _HabitForm extends Component {
 					return updatedHabit;
 				}
 			}
+
+			// If the user is creating a new habit
 		} else if (nextProps.match && !nextProps.match.params.id && prevState._id) {
 			return initialState();
 		}
+		// Return error state;
+		if (nextProps.errors) return { errors: nextProps.errors };
 		return null;
 	}
 
@@ -105,7 +111,7 @@ export class _HabitForm extends Component {
 	handleSubmit = () => {
 		// eslint-disable-next-line no-shadow
 		const { addHabit, editHabit, history } = this.props;
-		const { step, isEditing, ...habit } = this.state;
+		const { step, isEditing, errors, ...habit } = this.state;
 		habit.tags = habit.tags.map(t => t.text);
 
 		const formatFrequency = (times, period) => {
@@ -201,7 +207,10 @@ export class _HabitForm extends Component {
 	}
 }
 
-const mapStateToProps = ({ habits }) => ({ habits });
+const mapStateToProps = state => ({
+	habits: state.habits,
+	errors: state.errors,
+});
 
 export default withRouter(
 	connect(
