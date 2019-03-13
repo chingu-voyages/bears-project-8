@@ -16,11 +16,6 @@ const userSchema = new Schema({
 			description: { type: String },
 		},
 	],
-	// habits assigned to this user
-	habits: {
-		type: [mongoose.Schema.Types.ObjectId],
-		ref: 'Habit',
-	},
 });
 
 module.exports = mongoose.model('User', userSchema);
