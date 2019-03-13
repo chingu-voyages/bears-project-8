@@ -121,7 +121,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			// Check whether habit belongs to current authenticated user
 			if (habit.user.toHexString() !== req.user.id)
 				return res.status(401).json({ message: 'Unauthorized' });
-			return { ...habit, ...req.body }
+			return Object.assign(habit, req.body)
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
