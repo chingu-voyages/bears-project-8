@@ -32,7 +32,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 					return res.status(400).json({ imgUrl: 'Please enter a valid image URL' });
 			}
 
-			return Object.assign(user, req.body)
+			return { ...user, ...req.body }
 				.save()
 				.then(savedUser =>
 					res.status(200).json({ message: 'User updated successfully', user: savedUser })

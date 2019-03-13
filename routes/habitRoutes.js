@@ -30,7 +30,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
-	return new Habit(Object.assign(req.body, { user: req.user._id.toHexString() }))
+	return new Habit({ ...req.body, user: req.user._id.toHexString() })
 		.save()
 		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
@@ -121,7 +121,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 			// Check whether habit belongs to current authenticated user
 			if (habit.user.toHexString() !== req.user.id)
 				return res.status(401).json({ message: 'Unauthorized' });
-			return Object.assign(habit, req.body)
+			return { ...habit, ...req.body }
 				.save()
 				.then(updated => res.status(200).json({ success: true, habit: updated }));
 		})
