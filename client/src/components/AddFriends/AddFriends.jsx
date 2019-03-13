@@ -7,6 +7,7 @@ import PageContainer from '../Shared/PageContainer/PageContainer';
 import { TopText, ContentArea, Footer } from './AddFriend.styled';
 import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
+import { addFriend } from '../../actions/authActions';
 
 class AddFriends extends Component {
 	state = {
@@ -22,6 +23,7 @@ class AddFriends extends Component {
 			isAuthenticated: PropTypes.bool.isRequired,
 			user: PropTypes.object.isRequired,
 		}).isRequired,
+		addFriend: PropTypes.func.isRequired,
 	};
 
 	static getDerivedStateFromProps(nextProps) {
@@ -30,7 +32,7 @@ class AddFriends extends Component {
 	}
 
 	componentDidMount = () => {
-		console.log('well its mounting...');
+		console.log('add friends forms is mounting');
 	};
 
 	handleChange = e => {
@@ -41,8 +43,10 @@ class AddFriends extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		// eslint-disable-next-line no-shadow
-		const { errors } = this.state;
-		console.log(errors);
+		const { addFriend, history } = this.props;
+		const { email } = this.state;
+		addFriend(email, history);
+		console.log(`just ran addFriend(${email}, ${history})`);
 	};
 
 	render() {
@@ -52,7 +56,7 @@ class AddFriends extends Component {
 			<PageContainer
 				size="small"
 				breadCrumbs={{
-					crumbHistory: [{ name: 'Portfolio', link: '/portfolio' }],
+					crumbHistory: [{ name: 'Profile', link: '/profile' }],
 					current: 'Add Friends',
 				}}
 				history={history}
@@ -68,7 +72,7 @@ class AddFriends extends Component {
 					<form onSubmit={this.handleSubmit} noValidate>
 						<FormGroup
 							title="Email"
-							description="Enter an email to search for"
+							description="Enter an email to add them as a friend"
 							name="email"
 							value={email}
 							onChange={this.handleChange}
@@ -78,7 +82,7 @@ class AddFriends extends Component {
 							errors={errors.email}
 						/>
 						<Footer>
-							<Button type="submit">Search</Button>
+							<Button type="submit">Add friend</Button>
 						</Footer>
 					</form>
 				</ContentArea>
@@ -92,4 +96,7 @@ const mapStateToProps = state => ({
 	errors: state.errors,
 });
 
-export default connect(mapStateToProps)(withRouter(AddFriends));
+export default connect(
+	mapStateToProps,
+	{ addFriend }
+)(withRouter(AddFriends));

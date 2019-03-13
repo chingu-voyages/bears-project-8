@@ -90,7 +90,6 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
  */
 router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req, res) => {
 	let friend;
-
 	// Find the friend contact
 	User.findOne({ email: req.body.email })
 		.then(foundUser => {
@@ -118,7 +117,10 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 			return foundUser
 				.save()
 				.then(savedUser => {
-					res.status(200).json({ message: 'Friend added successfully', user: savedUser });
+					res.status(200).json({
+						message: 'Friend added successfully',
+						friends: savedUser.friends,
+					});
 				})
 				.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
 		})

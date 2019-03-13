@@ -1,7 +1,7 @@
 import Types from '../actions/types';
 import isEmpty from '../utils/isEmpty';
 
-const { SET_CURRENT_USER, EDIT_PROFILE } = Types;
+const { SET_CURRENT_USER, EDIT_PROFILE, ADD_FRIEND } = Types;
 
 const initialState = {
 	isAuthenticated: false,
@@ -21,6 +21,14 @@ export default (state = initialState, action) => {
 				user: {
 					...state.user,
 					...action.payload,
+				},
+			};
+		case ADD_FRIEND:
+			return {
+				...state,
+				user: {
+					...state,
+					friends: action.payload,
 				},
 			};
 		default:
