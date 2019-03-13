@@ -30,8 +30,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 	const { errors, isValid } = validateHabitsInput(req.body);
 	// Validate request body
 	if (!isValid) return res.status(400).json(errors);
-
-	return new Habit({ ...req.body, user: req.user._id.toHexString() })
+	return new Habit(Object.assign(req.body, { user: req.user._id.toHexString() }))
 		.save()
 		.then(habit => res.json({ success: true, habit }))
 		.catch(err => res.status(401).json({ err }));
