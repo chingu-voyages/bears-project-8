@@ -83,4 +83,49 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
 	});
 });
 
+/**
+ * @route   POST user/addfriend
+ * @desc    Adds a friend connection to the user's profile
+ * @access  Private
+ */
+router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req, res) => {
+	let friend;
+
+	// Find the friend contact
+	User.findOne({ email: req.body.email })
+		.then(foundUser => {
+			if (!foundUser) {
+				return res.status(404).json({ message: 'User not found' });
+			}
+			friend = foundUser;
+			return null;
+		})
+		.catch(err => res.status(400).json(err));
+
+	// Access current user
+	User.findById(req.user._id)
+		.then(foundUser => {
+			if (!foundUser) {
+				return res.status(404).json({ message: 'Logged in user not found' });
+			}
+			if (foundUser.friends && foundUser.friends.includes(friend)) {
+				return res.status(400).json({ message: 'Friend already added!' });
+			}
+
+			// this doesn't really check if it includes the id already - why not? Could check it with a mongo query instead...
+			// TODO: revisit this
+			if (foundUser.friends.includes(friend.id))
+				return res.status(400).json({ message: 'Friend already added.' });
+
+			foundUser.friends.push(friend.id);
+			return foundUser
+				.save()
+				.then(savedUser => {
+					res.status(200).json({ message: 'Friend added successfully', user: savedUser });
+				})
+				.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
+		})
+		.catch(err => res.status(400).json({ message: 'there was an error!', err }));
+});
+
 module.exports = router;
