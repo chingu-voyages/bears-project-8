@@ -88,7 +88,7 @@ const Profile = ({ user, history }) => (
 							clickHandler={() => null}
 							size="small"
 							type="wPlus"
-							subtitle="Invite Friends"
+							subtitle="Add Friends"
 						/>
 					</div>
 				</Connections>

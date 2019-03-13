@@ -108,14 +108,11 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 			if (!foundUser) {
 				return res.status(404).json({ message: 'Logged in user not found' });
 			}
-			if (foundUser.friends && foundUser.friends.includes(friend)) {
-				return res.status(400).json({ message: 'Friend already added!' });
-			}
 
 			// this doesn't really check if it includes the id already - why not? Could check it with a mongo query instead...
 			// TODO: revisit this
 			if (foundUser.friends.includes(friend.id))
-				return res.status(400).json({ message: 'Friend already added.' });
+				return res.status(400).json({ email: 'Friend already added.' });
 
 			foundUser.friends.push(friend.id);
 			return foundUser
@@ -125,7 +122,7 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 				})
 				.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
 		})
-		.catch(err => res.status(400).json({ message: 'there was an error!', err }));
+		.catch(error => res.status(400).json({ message: 'There was an error!', error }));
 });
 
 module.exports = router;
