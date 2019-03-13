@@ -18,7 +18,7 @@ const userSchema = new Schema({
 	],
 	// friends list of the user -- latest allowed details can be fetched
 	friends: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: 'User',
 	},
 });
