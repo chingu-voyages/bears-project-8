@@ -17,10 +17,12 @@ const userSchema = new Schema({
 		},
 	],
 	// friends list of the user -- latest allowed details can be fetched
-	friends: {
-		type: Schema.Types.ObjectId,
-		ref: 'User',
-	},
+	friends: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		},
+	],
 });
 
 module.exports = mongoose.model('User', userSchema);
