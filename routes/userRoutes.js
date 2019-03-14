@@ -98,7 +98,9 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
  * @access  Private
  */
 router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req, res) => {
-	// Find the friend contact
+	// TODO: email validation
+
+	// Find the friend
 	User.findOne({ email: req.body.email })
 		.then(friend => {
 			if (!friend) {
@@ -106,17 +108,17 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 					.status(404)
 					.json({ email: `We couldn't find a user with email ${req.body.email}` });
 			}
-			// Friend found? Continue!
 
 			// Access current user
 			return User.findById(req.user._id).then(user => {
-				// this doesn't really check if it includes the id already - why not? Could check it with a mongo query instead...
-				// TODO: revisit this
-				if (user.friends.includes(friend.id))
+				// Check if friend is already in friends list
+				const friendsStrings = user.friends.map(fr => fr.toHexString());
+				if (friendsStrings.includes(friend._id.toHexString()))
 					return res.status(400).json({ email: 'Friend already added.' });
 
+				// Add friend to friends list
 				user.friends.push(friend.id);
-				return user.save().then(savedUser => {
+				return user.save().then(savedUser =>
 					User.populate(savedUser, { path: 'friends' }).then(populatedUser => {
 						const friends = populatedUser.friends.map(fr => ({
 							id: fr.id,
@@ -127,8 +129,8 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 							message: 'Friend added successfully',
 							friends,
 						});
-					});
-				});
+					})
+				);
 			});
 		})
 		.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
