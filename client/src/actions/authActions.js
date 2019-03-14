@@ -108,14 +108,14 @@ export const editProfile = (user, profileData, history) => dispatch =>
 // Add friend
 export const addFriend = (email, history) => dispatch =>
 	axios
-		.post('api/user/addfriend', email)
+		.post('api/user/addfriend', { email })
 		.then(res => {
 			// Add friend
 			dispatch({
 				type: ADD_FRIEND,
 				payload: res.data.friends,
 			});
-			toast.success('You successfully updated your profile!');
+			toast.success(`You successfully added your friend!`);
 			history.push('/profile');
 		})
 		.catch(err => {
@@ -123,5 +123,5 @@ export const addFriend = (email, history) => dispatch =>
 				type: GET_ERRORS,
 				payload: err.response.data,
 			});
-			toast.error('Oops! There was a problem editing your profile...');
+			toast.error('Oops! There was a problem adding a friend...');
 		});

@@ -89,42 +89,33 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
  * @access  Private
  */
 router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req, res) => {
-	let friend;
 	// Find the friend contact
 	User.findOne({ email: req.body.email })
-		.then(foundUser => {
-			if (!foundUser) {
-				return res.status(404).json({ message: 'User not found' });
+		.then(friend => {
+			if (!friend) {
+				return res
+					.status(404)
+					.json({ email: `We couldn't find a user with email ${req.body.email}` });
 			}
-			friend = foundUser;
-			return null;
-		})
-		.catch(err => res.status(400).json(err));
+			// Friend found? Continue!
 
-	// Access current user
-	User.findById(req.user._id)
-		.then(foundUser => {
-			if (!foundUser) {
-				return res.status(404).json({ message: 'Logged in user not found' });
-			}
+			// Access current user
+			return User.findById(req.user._id).then(user => {
+				// this doesn't really check if it includes the id already - why not? Could check it with a mongo query instead...
+				// TODO: revisit this
+				if (user.friends.includes(friend.id))
+					return res.status(400).json({ email: 'Friend already added.' });
 
-			// this doesn't really check if it includes the id already - why not? Could check it with a mongo query instead...
-			// TODO: revisit this
-			if (foundUser.friends.includes(friend.id))
-				return res.status(400).json({ email: 'Friend already added.' });
-
-			foundUser.friends.push(friend.id);
-			return foundUser
-				.save()
-				.then(savedUser => {
+				user.friends.push(friend.id);
+				return user.save().then(savedUser => {
 					res.status(200).json({
 						message: 'Friend added successfully',
 						friends: savedUser.friends,
 					});
-				})
-				.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
+				});
+			});
 		})
-		.catch(error => res.status(400).json({ message: 'There was an error!', error }));
+		.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
 });
 
 module.exports = router;
