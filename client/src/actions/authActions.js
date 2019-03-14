@@ -115,6 +115,7 @@ export const addFriend = (email, history) => dispatch =>
 				type: ADD_FRIEND,
 				payload: res.data.friends,
 			});
+			refreshToken();
 			toast.success(`You successfully added your friend!`);
 			history.push('/profile');
 		})
