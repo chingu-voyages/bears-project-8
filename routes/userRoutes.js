@@ -32,7 +32,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 					return res.status(400).json({ imgUrl: 'Please enter a valid image URL' });
 			}
 
-			return Object.assign(user, req.body)
+			return { ...user, ...req.body }
 				.save()
 				.then(savedUser =>
 					res.status(200).json({ message: 'User updated successfully', user: savedUser })
@@ -66,21 +66,74 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
  * @access  Private
  */
 router.get('/token', passport.authenticate('jwt', { session: false }), (req, res) => {
-	const { user } = req;
-	const payload = {
-		id: user._id,
-		name: user.name,
-		email: user.email,
-		avatar: user.avatar,
-		about: !!user.about && user.about,
-		goals: !!user.goals && user.goals,
-	};
-	const token = createToken(payload, process.env.JWT_SECRET, '1h');
+	User.findById(req.user._id)
+		.populate('friends')
+		.then(user => {
+			const friendsDetails = user.friends.map(friend => ({
+				id: friend.id,
+				name: friend.name,
+				avatar: friend.avatar,
+			}));
+			const payload = {
+				id: user._id,
+				name: user.name,
+				email: user.email,
+				avatar: user.avatar,
+				about: !!user.about && user.about,
+				goals: !!user.goals && user.goals,
+				friends: friendsDetails,
+			};
+			const token = createToken(payload, process.env.JWT_SECRET, '1h');
 
-	return res.status(200).json({
-		message: 'Auth successful',
-		token,
-	});
+			return res.status(200).json({
+				message: 'Auth successful',
+				token,
+			});
+		});
+});
+
+/**
+ * @route   POST user/addfriend
+ * @desc    Adds a friend connection to the user's profile
+ * @access  Private
+ */
+router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req, res) => {
+	// TODO: email validation
+
+	// Find the friend
+	User.findOne({ email: req.body.email })
+		.then(friend => {
+			if (!friend) {
+				return res
+					.status(404)
+					.json({ email: `We couldn't find a user with email ${req.body.email}` });
+			}
+
+			// Access current user
+			return User.findById(req.user._id).then(user => {
+				// Check if friend is already in friends list
+				const friendsStrings = user.friends.map(fr => fr.toHexString());
+				if (friendsStrings.includes(friend._id.toHexString()))
+					return res.status(400).json({ email: 'Friend already added.' });
+
+				// Add friend to friends list
+				user.friends.push(friend.id);
+				return user.save().then(savedUser =>
+					User.populate(savedUser, { path: 'friends' }).then(populatedUser => {
+						const friends = populatedUser.friends.map(fr => ({
+							id: fr.id,
+							name: fr.name,
+							avatar: fr.avatar,
+						}));
+						res.status(200).json({
+							message: 'Friend added successfully',
+							friends,
+						});
+					})
+				);
+			});
+		})
+		.catch(err => res.status(400).json({ message: 'Friend was not added', err }));
 });
 
 module.exports = router;

@@ -61,7 +61,7 @@ const Profile = ({ user, history }) => (
 					<Button type="simple" clickHandler={() => history.push('/profile/edit')}>
 						Edit Profile
 					</Button>
-					<Button type="simple" clickHandler={() => {}}>
+					<Button type="simple" clickHandler={() => null}>
 						Delete Profile
 					</Button>
 				</UserActions>
@@ -76,19 +76,20 @@ const Profile = ({ user, history }) => (
 					<div className="dashboard__friends">
 						{user.friends &&
 							user.friends.length > 0 &&
-							user.friends.map(fr => (
+							user.friends.map(friend => (
 								<CircleImg
-									imgUrl={fr.avatar}
-									subtitle={fr.name}
+									key={friend.id}
+									imgUrl={friend.avatar}
+									subtitle={friend.name}
 									clickHandler={() => null}
 									size="small"
 								/>
 							))}
 						<CircleImg
-							clickHandler={() => null}
+							clickHandler={() => history.push('/profile/addfriends')}
 							size="small"
 							type="wPlus"
-							subtitle="Invite Friends"
+							subtitle="Add Friends"
 						/>
 					</div>
 				</Connections>

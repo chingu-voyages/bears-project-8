@@ -6,7 +6,7 @@ import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
 
-const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE } = Types;
+const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE, ADD_FRIEND } = Types;
 
 // Register user
 export const registerUser = (userData, history) => dispatch =>
@@ -101,4 +101,28 @@ export const editProfile = (user, profileData, history) => dispatch =>
 				payload: err.response.data,
 			});
 			toast.error('Oops! There was a problem editing your profile...');
+		});
+
+// TODO: Some of these actions can be split into a separate userActions file
+
+// Add friend
+export const addFriend = (email, history) => dispatch =>
+	axios
+		.post('api/user/addfriend', { email })
+		.then(res => {
+			// Add friend
+			dispatch({
+				type: ADD_FRIEND,
+				payload: res.data.friends,
+			});
+			refreshToken();
+			toast.success(`You successfully added your friend!`);
+			history.push('/profile');
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
+			});
+			toast.error('Oops! There was a problem adding a friend...');
 		});

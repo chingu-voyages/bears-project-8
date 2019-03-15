@@ -80,11 +80,17 @@ router.post('/login', (req, res) => {
 	return User.findOne({
 		email: req.body.email,
 	})
+		.populate('friends')
 		.then(user => {
 			if (!user) {
 				errors.email = 'A user with that email does not exist';
 				return res.status(404).json(errors);
 			}
+			const friendsDetails = user.friends.map(friend => ({
+				id: friend.id,
+				name: friend.name,
+				avatar: friend.avatar,
+			}));
 			const payload = {
 				id: user._id,
 				name: user.name,
@@ -92,6 +98,7 @@ router.post('/login', (req, res) => {
 				avatar: user.avatar,
 				about: !!user.about && user.about,
 				goals: !!user.goals && user.goals,
+				friends: friendsDetails,
 			};
 			return bcrypt.compare(req.body.password, user.password, (err, result) => {
 				if (err || !result) {

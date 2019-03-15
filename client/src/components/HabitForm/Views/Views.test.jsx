@@ -27,7 +27,8 @@ describe('HabitForm', () => {
 			},
 			difficulty: '',
 			type: '',
-			habitStart: '',
+			errors: {},
+			startDate: '',
 
 			onChange: () => null,
 			setReminderType: () => null,

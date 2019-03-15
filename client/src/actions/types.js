@@ -3,6 +3,7 @@ import keyMirror from 'keymirror';
 export default keyMirror({
 	SET_CURRENT_USER: null,
 	EDIT_PROFILE: null,
+	ADD_FRIEND: null,
 	GET_ERRORS: null,
 	UPDATE_HABIT_LIST: null,
 	ADD_HABIT: null,
