@@ -15,7 +15,6 @@ const userData = {
 describe('API - User', () => {
 	let token;
 	let user;
-	let userId;
 
 	beforeAll(done => {
 		request
@@ -52,10 +51,10 @@ describe('API - User', () => {
 			request
 				.put(`/api/user/${user.id}`)
 				.set('Authorization', token)
+				.expect(400)
 				.end((err, res) => {
 					if (err) throw err;
 
-					expect(res.status).toBe(400);
 					expect(res.body.message).toBe('No values to update');
 					done();
 				});
@@ -65,11 +64,11 @@ describe('API - User', () => {
 			request
 				.put(`/api/user/${mongoose.Types.ObjectId()}`)
 				.set('Authorization', token)
+				.expect(404)
 				.end((err, res) => {
 					if (err) throw err;
 
 					expect(res.body.message).toBe('User not found');
-					expect(res.status).toBe(404);
 					done();
 				}));
 
@@ -84,6 +83,20 @@ describe('API - User', () => {
 
 					expect(res.body.message).toBe('User updated successfully');
 					expect(res.body.user.avatar).toBe('https://test-img-url.jpg');
+					done();
+				});
+		});
+	});
+
+	describe('User - Get profile', () => {
+		test('should return user data when valid :id is provided', done => {
+			request
+				.get(`/api/user/${user.id}`)
+				.expect(200)
+				.end((err, res) => {
+					if (err) throw err;
+
+					expect(res.body.user.id).toEqual(user.id);
 					done();
 				});
 		});
