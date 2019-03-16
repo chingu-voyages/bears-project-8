@@ -93,6 +93,41 @@ router.get('/token', passport.authenticate('jwt', { session: false }), (req, res
 });
 
 /**
+ * @route   GET user/:id
+ * @desc    Returns user data
+ * @access  Public
+ */
+router.get('/:id', (req, res) =>
+	User.findById(req.params.id)
+		.populate('friends')
+		.then(user => {
+			if (!user) {
+				return res.status(404).json({ error: "We couldn't find that user" });
+			}
+			let friendsDetails = {};
+			if (user.friends && user.friends.length > 0) {
+				friendsDetails = user.friends.map(friend => ({
+					id: friend.id,
+					name: friend.name,
+					avatar: friend.avatar,
+				}));
+			}
+
+			const payload = {
+				id: user._id,
+				name: user.name,
+				email: user.email,
+				avatar: user.avatar,
+				about: !!user.about && user.about,
+				goals: !!user.goals && user.goals,
+				friends: friendsDetails,
+			};
+
+			return res.status(200).json({ payload });
+		})
+);
+
+/**
  * @route   POST user/addfriend
  * @desc    Adds a friend connection to the user's profile
  * @access  Private
