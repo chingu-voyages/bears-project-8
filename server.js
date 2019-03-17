@@ -23,10 +23,7 @@ const DB_URI =
 mongoose.Promise = global.Promise;
 // And connect mongoose to Mlab instance of MongoDB
 mongoose
-	.connect(
-		DB_URI,
-		{ useNewUrlParser: true }
-	)
+	.connect(DB_URI, { useNewUrlParser: true })
 	.then(() => console.info('Connected to MongoDB'))
 	.catch(err => console.error('Connection to MongoDB failed:', err));
 
@@ -38,8 +35,8 @@ app.use(passport.initialize());
 require('./services/passport')(passport);
 
 // Takes the raw requests and turns them into usable properties on req.body
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //  HTTP request logger middleware - will log all requests to STDOUT (command line)
 app.use(morgan('dev'));
