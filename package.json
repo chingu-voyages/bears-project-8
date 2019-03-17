@@ -1,7 +1,7 @@
 {
 	"name": "bears-project-8",
 	"description": "Chingu Voyage Project",
-	"version": "1.0.74",
+	"version": "1.0.75",
 	"main": "server.js",
 	"repository": {
 		"type": "git",
