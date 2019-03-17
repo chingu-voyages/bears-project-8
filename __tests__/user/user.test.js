@@ -47,15 +47,15 @@ describe('API - User', () => {
 	describe('User - Update', () => {
 		test('It should require authorization', () => request.put('/api/user/:id').expect(401));
 
-		test('If no data is passed a 400 status should be returned with error', done => {
+		test('If no data is passed a 200 status should be returned with warning message', done => {
 			request
 				.put(`/api/user/${user.id}`)
 				.set('Authorization', token)
-				.expect(400)
+				.expect(200)
 				.end((err, res) => {
 					if (err) throw err;
 
-					expect(res.body.message).toBe('No values to update');
+					expect(res.body.message).toBe('No update targets provided');
 					done();
 				});
 		});

@@ -19,10 +19,9 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 		if (user._id.toHexString() !== req.user._id.toHexString()) {
 			return res.status(401).json({ message: 'Unauthorized' });
 		}
-		// DT TODO: Discuss how to handle no values provided on update request
-		// Should we just return existent user object or throw err?
+
 		if (!Object.keys(req.body).length > 0) {
-			return res.status(400).json({ message: 'No values to update' });
+			return res.status(200).json({ message: 'No update targets provided' });
 		}
 
 		// TODO: Run validation for name
