@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { logHabit, deleteHabit } from '../../actions/habitActions';
 import calculateDueDate from '../../utils/calculateDueDate';
 
 import { $white, $elfGreen, $greyLavender, $tomato } from '../../assets/styledVars';
@@ -25,6 +27,8 @@ class Habit extends Component {
 				period: PropTypes.string,
 			}),
 		}).isRequired,
+		logHabit: PropTypes.func.isRequired,
+		deleteHabit: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -35,6 +39,7 @@ class Habit extends Component {
 
 	handleLogHabit = e => {
 		e.stopPropagation();
+		this.props.logHabit();
 	};
 
 	handleEditHabit = e => {
@@ -45,6 +50,7 @@ class Habit extends Component {
 
 	handleDeleteHabit = e => {
 		e.stopPropagation();
+		this.props.deleteHabit();
 	};
 
 	render() {
@@ -130,4 +136,7 @@ class Habit extends Component {
 	}
 }
 
-export default withRouter(Habit);
+export default connect(
+	null,
+	{ logHabit, deleteHabit }
+)(withRouter(Habit));
