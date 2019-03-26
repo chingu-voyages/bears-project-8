@@ -39,7 +39,8 @@ class Habit extends Component {
 
 	handleLogHabit = e => {
 		e.stopPropagation();
-		this.props.logHabit();
+		const { habit } = this.props;
+		this.props.logHabit(habit._id);
 	};
 
 	handleEditHabit = e => {
@@ -50,12 +51,14 @@ class Habit extends Component {
 
 	handleDeleteHabit = e => {
 		e.stopPropagation();
-		this.props.deleteHabit();
+		const { habit } = this.props;
+		this.props.deleteHabit(habit._id);
 	};
 
 	render() {
 		const { habit } = this.props;
 		const { isCollapsed } = this.state;
+		console.log(habit);
 
 		return (
 			<Container isCollapsed={isCollapsed} onClick={this.toggleCollapse}>

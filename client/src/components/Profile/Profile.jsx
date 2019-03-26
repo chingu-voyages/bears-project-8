@@ -20,7 +20,7 @@ import {
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
 import Button from '../Shared/Button/Button';
-import { deleteUser as _deleteUser } from '../../actions/authActions';
+import { deleteUser } from '../../actions/authActions';
 
 const Profile = ({ user, history, deleteUser }) => (
 	<PageContainer
@@ -138,6 +138,6 @@ Profile.propTypes = {
 export default withRouter(
 	connect(
 		mapStateToProps,
-		{ deleteUser: _deleteUser }
+		{ deleteUser }
 	)(Profile)
 );
