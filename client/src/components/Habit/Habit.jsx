@@ -58,7 +58,6 @@ class Habit extends Component {
 	render() {
 		const { habit } = this.props;
 		const { isCollapsed } = this.state;
-		console.log(habit);
 
 		return (
 			<Container isCollapsed={isCollapsed} onClick={this.toggleCollapse}>
