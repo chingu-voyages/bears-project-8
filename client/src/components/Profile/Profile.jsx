@@ -62,7 +62,7 @@ const Profile = ({ user, history, deleteUser }) => (
 					<Button type="simple" clickHandler={() => history.push('/profile/edit')}>
 						Edit Profile
 					</Button>
-					<Button type="simple" clickHandler={() => deleteUser()}>
+					<Button type="simple" clickHandler={() => deleteUser(user.id, history)}>
 						Delete Profile
 					</Button>
 				</UserActions>

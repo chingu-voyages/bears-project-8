@@ -59,13 +59,15 @@ export const loginUser = (userData, history) => dispatch =>
 		});
 
 // Log the user out
-export const logoutUser = () => dispatch => {
+export const logoutUser = history => dispatch => {
 	// Remove token from localStorage
 	localStorage.removeItem('jwtToken');
 	// Remove auth header for future requests
 	setAuthToken(null);
 	// Set current user to {} - this sets isAuthenticated to false
 	dispatch(setCurrentUser({}));
+	// Redirect to homepage
+	history.push('/');
 	// Success toast message
 	toast.success('Successfully logged out!');
 };
@@ -82,11 +84,12 @@ const refreshToken = () => {
 };
 
 // Delete the user account
-export const deleteUser = userID => dispatch => {
+export const deleteUser = (userID, history) => dispatch => {
 	axios
 		.delete(`api/user/${userID}`)
 		.then(res => {
-			dispatch(logoutUser);
+			// Log user out (and redirect to home page)
+			dispatch(logoutUser(history));
 			// Success toast message
 			toast.success(res.data.message);
 		})
