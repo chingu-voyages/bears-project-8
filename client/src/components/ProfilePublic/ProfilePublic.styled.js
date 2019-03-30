@@ -17,6 +17,13 @@ export const Header = styled.div`
 	background-color: ${lighten(0.5, $grey)};
 	border-radius: 6px 0 0 6px;
 	padding: 1rem 10rem 0;
+	position: relative;
+
+	& .badge__wrapper {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
 `;
 
 export const ProfileName = styled(UserName)`

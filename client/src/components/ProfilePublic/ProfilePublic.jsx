@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import CircleImg from '../Shared/CircleImg/CircleImg';
+import Badge from '../Shared/Badge/Badge';
 
 import { ProfileSection, Header, About, ProfileName } from './ProfilePublic.styled';
 
@@ -19,6 +20,9 @@ const ProfilePublic = ({ history, user }) => (
 		<ProfileSection>
 			<Header>
 				{/* Add friend badge somewhere here */}
+				<div className="badge__wrapper">
+					<Badge text="Add friend" clickHandler={() => null} />
+				</div>
 				<ProfileName>{user.name}</ProfileName>
 				<CircleImg
 					clickHandler={() => null}
