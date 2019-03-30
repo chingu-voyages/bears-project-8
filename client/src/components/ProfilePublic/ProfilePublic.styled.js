@@ -37,6 +37,10 @@ export const About = styled(Dashboard)`
 		display: flex;
 		justify-content: center;
 		padding-bottom: 0;
+		font-size: 14px;
+		font-weight: 300;
+		align-items: center;
+		min-height: 130px;
 	}
 
 	& .about__goals {
