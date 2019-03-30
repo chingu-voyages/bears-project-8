@@ -77,7 +77,10 @@ class ProfilePublic extends Component {
 									))
 								) : (
 									<p>
-										{user.name} have no friends :( <a href="#">Connect?</a>
+										{user.name} have no friends :({' '}
+										<span className="link" clickHandler={() => null}>
+											Connect?
+										</span>
 									</p>
 								)}
 							</div>

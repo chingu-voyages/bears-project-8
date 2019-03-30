@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 
-import { $grey } from '../../assets/styledVars';
+import { $grey, $violet } from '../../assets/styledVars';
 
 import { UserName, Dashboard } from '../Profile/Profile.styled';
 
@@ -58,5 +58,12 @@ export const About = styled(Dashboard)`
 		font-size: 16px;
 		margin-bottom: 10px;
 		text-align: center;
+	}
+
+	& .link {
+		color: ${$violet};
+		cursor: pointer;
+		border-bottom: 1px solid ${$violet};
+		margin-left: 0.5rem;
 	}
 `;
