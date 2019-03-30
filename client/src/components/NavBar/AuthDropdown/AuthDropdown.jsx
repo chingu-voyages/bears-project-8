@@ -56,8 +56,7 @@ export default class AuthDropdown extends Component {
 						</AuthLink>
 						<AuthLink
 							onClick={() => {
-								logout();
-								history.push('/');
+								logout(history);
 							}}
 						>
 							Logout

@@ -20,8 +20,9 @@ import {
 
 import CircleImg from '../Shared/CircleImg/CircleImg';
 import Button from '../Shared/Button/Button';
+import { deleteUser } from '../../actions/authActions';
 
-const Profile = ({ user, history }) => (
+const Profile = ({ user, history, deleteUser }) => (
 	<PageContainer
 		breadCrumbs={{
 			crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
@@ -61,7 +62,7 @@ const Profile = ({ user, history }) => (
 					<Button type="simple" clickHandler={() => history.push('/profile/edit')}>
 						Edit Profile
 					</Button>
-					<Button type="simple" clickHandler={() => null}>
+					<Button type="simple" clickHandler={() => deleteUser(user.id, history)}>
 						Delete Profile
 					</Button>
 				</UserActions>
@@ -131,6 +132,12 @@ Profile.propTypes = {
 		dateCreated: PropTypes.string,
 	}).isRequired,
 	// habitsLogged: PropTypes.number,
+	deleteUser: PropTypes.func.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps)(Profile));
+export default withRouter(
+	connect(
+		mapStateToProps,
+		{ deleteUser }
+	)(Profile)
+);
