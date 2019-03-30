@@ -15,6 +15,9 @@ import withAuthHOC from './utils/withAuth';
 const Profile = lazy(() =>
 	import(/* webpackChunkName: "profile" */ /* webpackPrefetch: true */ './components/Profile/Profile')
 );
+const ProfilePublic = lazy(() =>
+	import(/* webpackChunkName: "profile-public" */ /* webpackPrefetch: true */ './components/ProfilePublic/ProfilePublic')
+);
 const Dashboard = lazy(() =>
 	import(/* webpackChunkName: "dashboard" */ /* webpackPrefetch: true */ './components/Dashboard/Dashboard')
 );
@@ -88,6 +91,20 @@ const Routes = ({ isAuthenticated }) => (
 				render={() =>
 					withContainer({
 						component: Profile,
+						isLazy: true,
+						hasNav: true,
+						withAuth: true,
+						isAuthenticated,
+					})
+				}
+			/>
+
+			<Route
+				exact
+				path="/profile/:id"
+				render={() =>
+					withContainer({
+						component: ProfilePublic,
 						isLazy: true,
 						hasNav: true,
 						withAuth: true,
