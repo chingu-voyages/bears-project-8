@@ -28,6 +28,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "cross-env jest",
+		"test:watch": "cross-env jest --watch",
 		"eject": "react-scripts eject"
 	},
 	"husky": {
