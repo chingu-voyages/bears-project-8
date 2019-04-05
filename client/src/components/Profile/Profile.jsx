@@ -22,6 +22,7 @@ import CircleImg from '../Shared/CircleImg/CircleImg';
 import Button from '../Shared/Button/Button';
 import { deleteUser } from '../../actions/authActions';
 
+// eslint-disable-next-line no-shadow
 const Profile = ({ user, history, deleteUser }) => (
 	<PageContainer
 		breadCrumbs={{
@@ -87,7 +88,7 @@ const Profile = ({ user, history, deleteUser }) => (
 								/>
 							))}
 						<CircleImg
-							clickHandler={() => history.push('/profile/addfriends')}
+							clickHandler={() => history.push('/profile/addfriend')}
 							size="small"
 							type="wPlus"
 							subtitle="Add Friends"

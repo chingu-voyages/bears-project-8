@@ -9,7 +9,7 @@ import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 import { addFriend } from '../../actions/authActions';
 
-class AddFriends extends Component {
+export class AddFriend extends Component {
 	state = {
 		email: '',
 		errors: {},
@@ -19,7 +19,7 @@ class AddFriends extends Component {
 		errors: PropTypes.shape({
 			email: PropTypes.string,
 		}).isRequired,
-		user: PropTypes.shape({
+		auth: PropTypes.shape({
 			isAuthenticated: PropTypes.bool.isRequired,
 			user: PropTypes.object.isRequired,
 		}).isRequired,
@@ -30,10 +30,6 @@ class AddFriends extends Component {
 		if (nextProps.errors) return { errors: nextProps.errors };
 		return null;
 	}
-
-	componentDidMount = () => {
-		console.log('add friends forms is mounting');
-	};
 
 	handleChange = e => {
 		const { name, value } = e.target;
@@ -46,7 +42,6 @@ class AddFriends extends Component {
 		const { addFriend, history } = this.props;
 		const { email } = this.state;
 		addFriend(email, history);
-		console.log(`just ran addFriend(${email}, ${history})`);
 	};
 
 	render() {
@@ -57,7 +52,7 @@ class AddFriends extends Component {
 				size="small"
 				breadCrumbs={{
 					crumbHistory: [{ name: 'Profile', link: '/profile' }],
-					current: 'Add Friends',
+					current: 'Add Friend',
 				}}
 				history={history}
 			>
@@ -92,11 +87,11 @@ class AddFriends extends Component {
 }
 
 const mapStateToProps = state => ({
-	user: state.auth,
+	auth: state.auth,
 	errors: state.errors,
 });
 
 export default connect(
 	mapStateToProps,
 	{ addFriend }
-)(withRouter(AddFriends));
+)(withRouter(AddFriend));

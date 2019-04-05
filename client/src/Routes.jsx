@@ -8,7 +8,7 @@ import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
 import HabitForm from './components/HabitForm/HabitForm';
 import ProfileForm from './components/ProfileForm/ProfileForm';
-import AddFriends from './components/AddFriends/AddFriends';
+import AddFriend from './component/AddFriend/AddFriend';
 
 import withAuthHOC from './utils/withAuth';
 
@@ -112,10 +112,10 @@ const Routes = ({ isAuthenticated }) => (
 
 			<Route
 				exact
-				path="/profile/addfriends"
+				path="/profile/addfriend"
 				render={() =>
 					withContainer({
-						component: AddFriends,
+						component: AddFriend,
 						isLazy: true,
 						hasNav: true,
 						withAuth: true,
