@@ -9,7 +9,7 @@ import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 import { addFriend } from '../../actions/authActions';
 
-export class AddFriend extends Component {
+export class _AddFriend extends Component {
 	state = {
 		email: '',
 		errors: {},
@@ -18,10 +18,6 @@ export class AddFriend extends Component {
 	static propTypes = {
 		errors: PropTypes.shape({
 			email: PropTypes.string,
-		}).isRequired,
-		auth: PropTypes.shape({
-			isAuthenticated: PropTypes.bool.isRequired,
-			user: PropTypes.object.isRequired,
 		}).isRequired,
 		addFriend: PropTypes.func.isRequired,
 	};
@@ -77,7 +73,9 @@ export class AddFriend extends Component {
 							errors={errors.email}
 						/>
 						<Footer>
-							<Button type="submit">Add friend</Button>
+							<Button data-test="submit-button" type="submit">
+								Add friend
+							</Button>
 						</Footer>
 					</form>
 				</ContentArea>
@@ -87,11 +85,10 @@ export class AddFriend extends Component {
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth,
 	errors: state.errors,
 });
 
 export default connect(
 	mapStateToProps,
 	{ addFriend }
-)(withRouter(AddFriend));
+)(withRouter(_AddFriend));

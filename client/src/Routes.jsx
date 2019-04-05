@@ -8,7 +8,7 @@ import Loader from './components/Shared/Loader/Loader';
 import Home from './components/Home/Home';
 import HabitForm from './components/HabitForm/HabitForm';
 import ProfileForm from './components/ProfileForm/ProfileForm';
-import AddFriend from './component/AddFriend/AddFriend';
+import AddFriend from './components/AddFriend/AddFriend';
 
 import withAuthHOC from './utils/withAuth';
 
