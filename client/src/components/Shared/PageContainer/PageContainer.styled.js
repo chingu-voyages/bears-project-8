@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	position: relative;
-	margin: 2rem auto 6rem;
+	margin: 0 auto 6rem;
+
 	${({ size }) => {
 		switch (size) {
 			case 'small':

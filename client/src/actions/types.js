@@ -10,4 +10,6 @@ export default keyMirror({
 	EDIT_HABIT: null,
 	DELETE_HABIT: null,
 	UPDATE_HABIT: null,
+	FETCH_USER: null,
+	CLEAR_USER: null,
 });
