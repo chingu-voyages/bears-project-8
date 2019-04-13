@@ -6,12 +6,7 @@ import { Wrapper, Subtitle, Image, PlusCircle } from './CircleImg.styled';
 const CircleImg = ({ type, size, imgUrl, subtitle, clickHandler }) => (
 	<Wrapper>
 		{type !== 'wPlus' ? (
-			<Image
-				type={type}
-				size={size}
-				onClick={clickHandler}
-				src={type === 'avatar' ? `https://${imgUrl}` : imgUrl}
-			/>
+			<Image type={type} size={size} onClick={clickHandler} src={imgUrl} />
 		) : (
 			<PlusCircle size={size} onClick={clickHandler}>
 				+

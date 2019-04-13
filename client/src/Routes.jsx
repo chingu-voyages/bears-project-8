@@ -101,20 +101,6 @@ const Routes = ({ isAuthenticated }) => (
 
 			<Route
 				exact
-				path="/profile/:id"
-				render={() =>
-					withContainer({
-						component: ProfilePublic,
-						isLazy: true,
-						hasNav: true,
-						withAuth: true,
-						isAuthenticated,
-					})
-				}
-			/>
-
-			<Route
-				exact
 				path="/profile/edit"
 				render={() =>
 					withContainer({
@@ -133,6 +119,19 @@ const Routes = ({ isAuthenticated }) => (
 				render={() =>
 					withContainer({
 						component: AddFriends,
+						isLazy: true,
+						hasNav: true,
+						withAuth: true,
+						isAuthenticated,
+					})
+				}
+			/>
+
+			<Route
+				path="/profile/:id"
+				render={() =>
+					withContainer({
+						component: ProfilePublic,
 						isLazy: true,
 						hasNav: true,
 						withAuth: true,

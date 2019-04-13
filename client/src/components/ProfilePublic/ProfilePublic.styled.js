@@ -15,7 +15,7 @@ export const ProfileSection = styled.section`
 
 export const Header = styled.div`
 	background-color: ${lighten(0.5, $grey)};
-	border-radius: 6px 0 0 6px;
+	border-radius: 6px 6px 0 0;
 	padding: 1rem 10rem 0;
 	position: relative;
 

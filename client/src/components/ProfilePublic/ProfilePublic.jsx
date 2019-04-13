@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { fetchUser, clearUser } from '../../actions/userActions';
+import { fetchUser, clearUser } from '../../actions/profileActions';
 
 import PageContainer from '../Shared/PageContainer/PageContainer';
 import CircleImg from '../Shared/CircleImg/CircleImg';
@@ -13,7 +13,6 @@ import { ProfileSection, Header, About, ProfileName } from './ProfilePublic.styl
 
 class ProfilePublic extends Component {
 	componentDidMount() {
-		console.log('MOUNTED');
 		if (!this.props.isMainUser) {
 			// fetch another users' profile
 			this.props.fetchUser(this.props.match.params.id);
@@ -33,13 +32,11 @@ class ProfilePublic extends Component {
 	render() {
 		const { history, user } = this.props;
 
-		console.log('USER', user);
-
 		return (
 			<PageContainer
 				breadCrumbs={{
 					crumbHistory: [{ name: 'Dashboard', link: '/dashboard' }],
-					current: 'Profile',
+					current: `${user.name}'s Profile`,
 				}}
 				history={history}
 			>
