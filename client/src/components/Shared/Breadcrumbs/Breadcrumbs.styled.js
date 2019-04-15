@@ -4,6 +4,7 @@ import { $grey, $animDuration } from '../../../assets/styledVars';
 
 export const Container = styled.div`
 	padding: 1.5rem;
+	padding-left: 0;
 	font-size: 1.2rem;
 `;
 

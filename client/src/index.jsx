@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import { Provider } from 'react-redux';
-import createHistory from 'history/createHashHistory';
+import { createHashHistory } from 'history';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +15,7 @@ import store from './store/store';
 import { logoutUser, setCurrentUser } from './actions/authActions';
 import { getHabits } from './actions/habitActions';
 
-const history = createHistory({
+const history = createHashHistory({
 	hashType: 'noslash',
 });
 
@@ -25,15 +24,13 @@ if (localStorage.jwtToken) {
 	// Set auth token to header
 	setAuthToken(localStorage.jwtToken);
 	// Decode token and store user info
-	const decoded = jwt_decode(localStorage.jwtToken);
+	const decoded = jwtDecode(localStorage.jwtToken);
 
 	// Check for expired token
 	const currentTime = Date.now() / 1000;
 	if (decoded.exp < currentTime) {
 		// Log user out
-		store.dispatch(logoutUser());
-		// Redirect to login
-		history.push('/auth/login');
+		store.dispatch(logoutUser(history));
 	} else {
 		// Set user and isAuthenticated
 		store.dispatch(setCurrentUser(decoded));

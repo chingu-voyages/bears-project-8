@@ -83,8 +83,9 @@ const Profile = ({ user, history, deleteUser }) => (
 									key={friend.id}
 									imgUrl={friend.avatar}
 									subtitle={friend.name}
-									clickHandler={() => null}
+									clickHandler={() => history.push(`/profile/${friend.id}`)}
 									size="small"
+									type="avatar"
 								/>
 							))}
 						<CircleImg

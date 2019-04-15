@@ -20,7 +20,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${lighten(0.45, $grey)};
-    color: ${darken(0.2, $grey)};
+	color: ${darken(0.2, $grey)};
 }
 
 h1, h2, h3, h4, h5, h6 {
