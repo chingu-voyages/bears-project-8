@@ -161,14 +161,14 @@ router.post('/addfriend', passport.authenticate('jwt', { session: false }), (req
 				user.friends.push(friend.id);
 				return user.save().then(savedUser =>
 					User.populate(savedUser, { path: 'friends' }).then(populatedUser => {
-						const friends = populatedUser.friends.map(fr => ({
-							id: fr.id,
-							name: fr.name,
-							avatar: fr.avatar,
-						}));
+						const newFriend = populatedUser.friends.find(fr => fr.id === friend.id);
 						res.status(200).json({
 							message: 'Friend added successfully',
-							friends,
+							friend: {
+								id: newFriend.id,
+								name: newFriend.name,
+								avatar: newFriend.avatar,
+							},
 						});
 					})
 				);

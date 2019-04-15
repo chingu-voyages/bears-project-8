@@ -130,7 +130,7 @@ export const addFriend = (email, history) => dispatch =>
 			// Add friend
 			dispatch({
 				type: ADD_FRIEND,
-				payload: res.data.friends,
+				payload: res.data.friend,
 			});
 			refreshToken();
 			toast.success(`You successfully added your friend!`);
