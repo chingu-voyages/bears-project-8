@@ -1,34 +1,57 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
+import { shallow } from 'enzyme';
 
-import { createTestStore } from '../../utils/testUtils';
 import { _AddFriend as AddFriend } from './AddFriend';
 
-const addFriend = jest.fn(() => null);
+const setup = (mountFn, initialProps = {}) => {
+	const props = { errors: {}, addFriend: () => null, ...initialProps };
 
-const setup = (mountFn, initialState = {}) => {
-	const storeState = { errors: {}, ...initialState };
-	const store = createTestStore(storeState);
-
-	const props = {
-		addFriend,
-	};
-
-	const wrapper = mountFn(
-		<Provider store={store}>
-			<AddFriend {...props} />
-		</Provider>
-	);
+	const wrapper = mountFn(<AddFriend {...props} />);
 	return wrapper;
 };
 
 describe('AddFriend with default state (no errors)', () => {
 	let wrapper;
+	const addFriend = jest.fn(email => email);
+
 	beforeEach(() => {
-		wrapper = setup(mount);
+		wrapper = setup(shallow, { addFriend });
 	});
+
 	it('renders without error', () => {
 		expect(wrapper).toBeTruthy();
+	});
+	it('calls addFriend on form submit', () => {
+		const form = wrapper.find('form');
+		expect(form).toBeTruthy();
+		form.prop('onSubmit')();
+		expect(addFriend).toHaveBeenCalled();
+	});
+	it('passes input state to addFriend fn', () => {
+		const form = wrapper.find('form');
+		const newState = { email: 'tester@test.com', errors: {} };
+		wrapper.setState(newState);
+		expect(wrapper.state('email')).toBe(newState.email);
+		form.prop('onSubmit')();
+		expect(addFriend).toHaveBeenCalledWith(wrapper.state('email'), undefined);
+	});
+});
+
+describe('AddFriend with errors', () => {
+	let wrapper;
+	const error = { email: "We couldn't find a user with email tester@test.com" };
+
+	beforeEach(() => {
+		wrapper = setup(shallow, {
+			errors: error,
+		});
+	});
+
+	it('sends the error to the email FormGroup component', () => {
+		const emailFormGroup = wrapper
+			.find('FormGroup')
+			.filterWhere(group => group.prop('name') === 'email');
+		expect(emailFormGroup.length).toBe(1);
+		expect(emailFormGroup.prop('errors')).toEqual(error.email);
 	});
 });

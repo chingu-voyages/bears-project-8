@@ -33,7 +33,7 @@ export class _AddFriend extends Component {
 	};
 
 	handleSubmit = e => {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { addFriend, history } = this.props;
 		const { email } = this.state;
