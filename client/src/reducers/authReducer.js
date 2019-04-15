@@ -5,7 +5,7 @@ const { SET_CURRENT_USER, EDIT_PROFILE, ADD_FRIEND } = Types;
 
 const initialState = {
 	isAuthenticated: false,
-	user: {},
+	user: { friends: [] },
 };
 
 export default (state = initialState, action) => {

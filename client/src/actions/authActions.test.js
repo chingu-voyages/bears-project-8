@@ -11,5 +11,29 @@ describe('addFriend action creator', () => {
 	afterEach(() => {
 		moxios.uninstall();
 	});
-	it('adds friend to friends list on success', () => {});
+	it('adds friend to friends list on success', () => {
+		const store = createTestStore();
+		const mockFriend = {
+			id: 1,
+			name: 'tester',
+			avatar: 'https://avatar.com/avatar.gif',
+		};
+		const historyMock = { push: () => null };
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 200,
+				response: {
+					message: 'Friend added successfully',
+					friend: mockFriend,
+				},
+			});
+		});
+
+		return store.dispatch(addFriend('', historyMock)).then(() => {
+			const newState = store.getState();
+			expect(newState.auth.user.friends[0]).toEqual(mockFriend);
+		});
+	});
 });
