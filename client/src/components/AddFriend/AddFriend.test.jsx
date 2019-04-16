@@ -3,10 +3,10 @@ import { shallow } from 'enzyme';
 
 import { _AddFriend as AddFriend } from './AddFriend';
 
-const setup = (mountFn, initialProps = {}) => {
-	const props = { errors: {}, addFriend: () => null, ...initialProps };
+const setup = (mountFn, customProps = {}) => {
+	const initialProps = { errors: {}, addFriend: () => null };
 
-	const wrapper = mountFn(<AddFriend {...props} />);
+	const wrapper = mountFn(<AddFriend {...initialProps} {...customProps} />);
 	return wrapper;
 };
 
