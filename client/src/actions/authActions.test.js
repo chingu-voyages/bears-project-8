@@ -3,9 +3,30 @@ import moxios from 'moxios';
 import { createTestStore } from '../utils/testUtils';
 import { addFriend } from './authActions';
 
+describe('registerUser action creator', () => {
+	beforeEach(() => {
+		moxios.install();
+	});
+	afterEach(() => {
+		moxios.uninstall();
+	});
+
+	it('registers user on success', () => {});
+});
+
+describe('loginUser action creator', () => {
+	beforeEach(() => {
+		moxios.install();
+	});
+	afterEach(() => {
+		moxios.uninstall();
+	});
+
+	it('logs user in on success', () => {});
+});
+
 describe('addFriend action creator', () => {
 	beforeEach(() => {
-		// moxios will intercept requests during the test
 		moxios.install();
 	});
 	afterEach(() => {
