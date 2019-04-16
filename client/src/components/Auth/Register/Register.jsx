@@ -9,7 +9,7 @@ import { TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
-class Register extends Component {
+export class _Register extends Component {
 	state = {
 		name: '',
 		email: '',
@@ -48,7 +48,7 @@ class Register extends Component {
 	};
 
 	handleSubmit = e => {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { registerUser, history } = this.props;
 		const { errors, ...newUser } = this.state;
@@ -140,4 +140,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ registerUser }
-)(withRouter(Register));
+)(withRouter(_Register));
