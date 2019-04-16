@@ -89,7 +89,7 @@ const Profile = ({ user, history, deleteUser }) => (
 								/>
 							))}
 						<CircleImg
-							clickHandler={() => history.push('/profile/addfriends')}
+							clickHandler={() => history.push('/profile/addfriend')}
 							size="small"
 							type="wPlus"
 							subtitle="Add Friends"

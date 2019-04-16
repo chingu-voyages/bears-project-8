@@ -12,28 +12,50 @@
 			"jsx": true
 		}
 	},
-	"extends": ["airbnb", "prettier", "prettier/react"],
+	"extends": [
+		"airbnb",
+		"prettier",
+		"prettier/react"
+	],
 	"rules": {
 		"arrow-parens": 0,
 		"linebreak-style": 0,
 		"no-underscore-dangle": 0,
 		"no-console": 1,
 		"no-debugger": 1,
-		"import/no-extraneous-dependencies": [2, {
-			"devDependencies": true
-		}],
-		"react/prop-types": [2, {
-			"ignore": ["location", "history", "children", "match"]
-		}],
+		"import/no-extraneous-dependencies": [
+			2,
+			{
+				"devDependencies": true
+			}
+		],
+		"react/prop-types": [
+			2,
+			{
+				"ignore": [
+					"location",
+					"history",
+					"children",
+					"match"
+				]
+			}
+		],
 		"react/require-default-props": 2,
 		"react/destructuring-assignment": 0,
-		"import/no-unresolved": [2, {
-			"ignore": ["assets"]
-		}]
+		"import/no-unresolved": [
+			2,
+			{
+				"ignore": [
+					"assets"
+				]
+			}
+		]
 	},
 	"globals": {
 		"expect": true,
 		"test": true,
-		"it": true
+		"it": true,
+		"beforeEach": true,
+		"afterEach": true
 	}
 }

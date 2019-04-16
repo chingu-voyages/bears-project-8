@@ -9,7 +9,7 @@ import FormGroup from '../Shared/Forms/FormGroup';
 import { Button } from '../Shared/Forms/Form.styled';
 import { addFriend } from '../../actions/authActions';
 
-class AddFriends extends Component {
+export class _AddFriend extends Component {
 	state = {
 		email: '',
 		errors: {},
@@ -19,10 +19,6 @@ class AddFriends extends Component {
 		errors: PropTypes.shape({
 			email: PropTypes.string,
 		}).isRequired,
-		user: PropTypes.shape({
-			isAuthenticated: PropTypes.bool.isRequired,
-			user: PropTypes.object.isRequired,
-		}).isRequired,
 		addFriend: PropTypes.func.isRequired,
 	};
 
@@ -31,22 +27,17 @@ class AddFriends extends Component {
 		return null;
 	}
 
-	componentDidMount = () => {
-		console.log('add friends forms is mounting');
-	};
-
 	handleChange = e => {
 		const { name, value } = e.target;
 		this.setState({ [name]: value });
 	};
 
 	handleSubmit = e => {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { addFriend, history } = this.props;
 		const { email } = this.state;
 		addFriend(email, history);
-		console.log(`just ran addFriend(${email}, ${history})`);
 	};
 
 	render() {
@@ -57,7 +48,7 @@ class AddFriends extends Component {
 				size="small"
 				breadCrumbs={{
 					crumbHistory: [{ name: 'Profile', link: '/profile' }],
-					current: 'Add Friends',
+					current: 'Add Friend',
 				}}
 				history={history}
 			>
@@ -82,7 +73,9 @@ class AddFriends extends Component {
 							errors={errors.email}
 						/>
 						<Footer>
-							<Button type="submit">Add friend</Button>
+							<Button data-test="submit-button" type="submit">
+								Add friend
+							</Button>
 						</Footer>
 					</form>
 				</ContentArea>
@@ -92,11 +85,10 @@ class AddFriends extends Component {
 }
 
 const mapStateToProps = state => ({
-	user: state.auth,
 	errors: state.errors,
 });
 
 export default connect(
 	mapStateToProps,
 	{ addFriend }
-)(withRouter(AddFriends));
+)(withRouter(_AddFriend));
