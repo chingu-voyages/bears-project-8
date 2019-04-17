@@ -1,7 +1,7 @@
 import moxios from 'moxios';
 
 import { createTestStore } from '../utils/testUtils';
-import { addFriend } from './authActions';
+import { loginUser, registerUser, addFriend } from './authActions';
 
 describe('registerUser action creator', () => {
 	beforeEach(() => {
@@ -11,7 +11,65 @@ describe('registerUser action creator', () => {
 		moxios.uninstall();
 	});
 
-	it('registers user on success', () => {});
+	const historyMock = { push: () => null };
+
+	it('registers user and logs in on success', () => {
+		const store = createTestStore();
+		const mockUser = {
+			name: 'Tester',
+			email: 'test@test.com',
+			avatar: 'https://avatar.com/avatar.gif',
+			password: 'password',
+		};
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 200,
+				response: mockUser,
+			});
+		});
+
+		return (
+			store
+				.dispatch(registerUser(mockUser, historyMock))
+				// return the register async thunk
+				.then(() => {
+					store
+						.dispatch(loginUser({ email: mockUser.email, password: mockUser.password }))
+						// return the login async thunk
+						.then(() => {
+							const newState = store.getState();
+							expect(newState.auth.user.email).toEqual(mockUser.email);
+						});
+				})
+		);
+	});
+	it('returns an error on failure', () => {
+		const store = createTestStore();
+		const mockUser = {
+			name: 'Tester',
+			email: 'test@test.com',
+			avatar: 'https://avatar.com/avatar.gif',
+			password: 'password',
+		};
+		const mockErrors = {
+			email: 'Email is already in use',
+		};
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 400,
+				response: mockErrors,
+			});
+		});
+
+		return store.dispatch(registerUser(mockUser, historyMock)).then(() => {
+			const newState = store.getState();
+			expect(newState.errors).toEqual(mockErrors);
+		});
+	});
 });
 
 describe('loginUser action creator', () => {
