@@ -1,6 +1,6 @@
 import moxios from 'moxios';
 
-import { createTestStore } from '../utils/testUtils';
+import { createMockStore, createTestStore } from '../utils/testUtils';
 import { loginUser, registerUser, addFriend } from './authActions';
 
 describe('registerUser action creator', () => {
@@ -13,8 +13,32 @@ describe('registerUser action creator', () => {
 
 	const historyMock = { push: () => null };
 
-	it('registers user and logs in on success', () => {
+	it('returns an error on failure', () => {
 		const store = createTestStore();
+		const mockUser = {
+			name: 'Tester',
+			email: 'test@test.com',
+			avatar: 'https://avatar.com/avatar.gif',
+			password: 'password',
+		};
+		const mockError = {
+			email: 'Email is already in use',
+		};
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 400,
+				response: mockError,
+			});
+		});
+		return store.dispatch(registerUser(mockUser, historyMock)).then(() => {
+			const newState = store.getState();
+			expect(newState.errors).toEqual(mockError);
+		});
+	});
+	it('registers user and returns no action (directly)', () => {
+		const store = createMockStore();
 		const mockUser = {
 			name: 'Tester',
 			email: 'test@test.com',
@@ -30,44 +54,9 @@ describe('registerUser action creator', () => {
 			});
 		});
 
-		return (
-			store
-				.dispatch(registerUser(mockUser, historyMock))
-				// return the register async thunk
-				.then(() => {
-					store
-						.dispatch(loginUser({ email: mockUser.email, password: mockUser.password }))
-						// return the login async thunk
-						.then(() => {
-							const newState = store.getState();
-							expect(newState.auth.user.email).toEqual(mockUser.email);
-						});
-				})
-		);
-	});
-	it('returns an error on failure', () => {
-		const store = createTestStore();
-		const mockUser = {
-			name: 'Tester',
-			email: 'test@test.com',
-			avatar: 'https://avatar.com/avatar.gif',
-			password: 'password',
-		};
-		const mockErrors = {
-			email: 'Email is already in use',
-		};
-
-		moxios.wait(() => {
-			const request = moxios.requests.mostRecent();
-			request.respondWith({
-				status: 400,
-				response: mockErrors,
-			});
-		});
-
 		return store.dispatch(registerUser(mockUser, historyMock)).then(() => {
-			const newState = store.getState();
-			expect(newState.errors).toEqual(mockErrors);
+			const actions = store.getActions();
+			expect(actions).toEqual([]);
 		});
 	});
 });
@@ -80,7 +69,57 @@ describe('loginUser action creator', () => {
 		moxios.uninstall();
 	});
 
-	it('logs user in on success', () => {});
+	const historyMock = { push: () => null };
+
+	it('returns an error on failure', () => {
+		const store = createTestStore();
+		const mockUser = {
+			email: 'test@test.com',
+			password: 'password',
+		};
+		const mockError = {
+			email: 'A user with that email does not exist',
+		};
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 404,
+				response: mockError,
+			});
+		});
+
+		return store.dispatch(loginUser(mockUser, historyMock)).then(() => {
+			const newState = store.getState();
+			expect(newState.errors).toEqual(mockError);
+		});
+	});
+	it('logs user in on success', () => {
+		const store = createMockStore();
+		const mockUser = {
+			email: 'test@test.com',
+			password: 'password',
+		};
+		const mockToken =
+			'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYjc0MjQ2OWRhMjNhOWUzOWFiYzE1YyIsIm5hbWUiOiJ0ZXN0ZXIiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJhdmF0YXIiOiJodHRwczovLy8vd3d3LmdyYXZhdGFyLmNvbS9hdmF0YXIvYjY0MmI0MjE3YjM0YjFlOGQzYmQ5MTVmYzY1YzQ0NTI_cz0yMDAmcj1wZyZkPW1wIiwiYWJvdXQiOmZhbHNlLCJnb2FscyI6W10sImZyaWVuZHMiOltdLCJpYXQiOjE1NTU1MTM5MzUsImV4cCI6MTU1NTUxNzUzNX0.cIJjHzRYhguJmE9TrDn56o0ctKFH7IZYNIcpRBbim1Y';
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 200,
+				response: {
+					message: 'Auth successful',
+					token: mockToken,
+				},
+			});
+		});
+
+		return store.dispatch(loginUser(mockUser, historyMock)).then(() => {
+			// check that the set current user action gets called
+			const actions = store.getActions();
+			expect(actions[0].type).toBe('SET_CURRENT_USER');
+		});
+	});
 });
 
 describe('addFriend action creator', () => {
