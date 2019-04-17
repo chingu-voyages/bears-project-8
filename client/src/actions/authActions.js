@@ -8,22 +8,6 @@ import setAuthToken from '../utils/setAuthToken';
 
 const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE, ADD_FRIEND } = Types;
 
-// Register user
-export const registerUser = (userData, history) => dispatch =>
-	axios
-		.post('api/auth/register', userData)
-		.then(() => {
-			history.push('/auth/login');
-			toast.success('Successfully registered, go ahead and log in!');
-		})
-		.catch(err => {
-			toast.error('Oops! There was a problem registering...');
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data,
-			});
-		});
-
 // Set logged in user
 export const setCurrentUser = decoded => ({
 	type: SET_CURRENT_USER,
@@ -52,6 +36,22 @@ export const loginUser = (userData, history) => dispatch =>
 		.then(() => history.push('/dashboard'))
 		.catch(err => {
 			toast.error('Oops! There was a problem logging in...');
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
+			});
+		});
+
+// Register user
+export const registerUser = (userData, history) => dispatch =>
+	axios
+		.post('api/auth/register', userData)
+		.then(() => {
+			toast.success('Successfully registered!');
+			dispatch(loginUser(userData, history));
+		})
+		.catch(err => {
+			toast.error('Oops! There was a problem registering...');
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
