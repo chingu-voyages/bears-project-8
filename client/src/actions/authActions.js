@@ -1,18 +1,11 @@
 import axios from 'axios';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
 
 const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE, ADD_FRIEND } = Types;
-
-// Set logged in user
-export const setCurrentUser = decoded => ({
-	type: SET_CURRENT_USER,
-	payload: decoded,
-});
 
 // Login - get user token
 export const loginUser = (userData, history) => dispatch =>
@@ -25,9 +18,12 @@ export const loginUser = (userData, history) => dispatch =>
 			// Set token to auth header
 			setAuthToken(token);
 			// Decode token for user data
-			const decoded = jwt_decode(token);
+			const decoded = jwtDecode(token);
 			// Set current user
-			dispatch(setCurrentUser(decoded));
+			dispatch({
+				type: SET_CURRENT_USER,
+				payload: decoded,
+			});
 			// Get user's habits
 			dispatch(getHabits());
 			// Display success message
@@ -65,7 +61,10 @@ export const logoutUser = history => dispatch => {
 	// Remove auth header for future requests
 	setAuthToken(null);
 	// Set current user to {} - this sets isAuthenticated to false
-	dispatch(setCurrentUser({}));
+	dispatch({
+		type: SET_CURRENT_USER,
+		payload: {},
+	});
 	// Redirect to homepage
 	history.push('/');
 	// Success toast message
