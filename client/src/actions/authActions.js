@@ -7,6 +7,12 @@ import setAuthToken from '../utils/setAuthToken';
 
 const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE, ADD_FRIEND } = Types;
 
+// Set logged in user
+export const setCurrentUser = decoded => ({
+	type: SET_CURRENT_USER,
+	payload: decoded,
+});
+
 // Login - get user token
 export const loginUser = (userData, history) => dispatch =>
 	axios
