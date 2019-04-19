@@ -1,28 +1,11 @@
 import axios from 'axios';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import Types from './types';
 import { getHabits } from './habitActions';
 import setAuthToken from '../utils/setAuthToken';
 
 const { SET_CURRENT_USER, GET_ERRORS, EDIT_PROFILE, ADD_FRIEND } = Types;
-
-// Register user
-export const registerUser = (userData, history) => dispatch =>
-	axios
-		.post('api/auth/register', userData)
-		.then(() => {
-			history.push('/auth/login');
-			toast.success('Successfully registered, go ahead and log in!');
-		})
-		.catch(err => {
-			toast.error('Oops! There was a problem registering...');
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data,
-			});
-		});
 
 // Set logged in user
 export const setCurrentUser = decoded => ({
@@ -41,9 +24,12 @@ export const loginUser = (userData, history) => dispatch =>
 			// Set token to auth header
 			setAuthToken(token);
 			// Decode token for user data
-			const decoded = jwt_decode(token);
+			const decoded = jwtDecode(token);
 			// Set current user
-			dispatch(setCurrentUser(decoded));
+			dispatch({
+				type: SET_CURRENT_USER,
+				payload: decoded,
+			});
 			// Get user's habits
 			dispatch(getHabits());
 			// Display success message
@@ -58,6 +44,22 @@ export const loginUser = (userData, history) => dispatch =>
 			});
 		});
 
+// Register user
+export const registerUser = (userData, history) => dispatch =>
+	axios
+		.post('api/auth/register', userData)
+		.then(() => {
+			toast.success('Successfully registered!');
+			dispatch(loginUser(userData, history));
+		})
+		.catch(err => {
+			toast.error('Oops! There was a problem registering...');
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
+			});
+		});
+
 // Log the user out
 export const logoutUser = history => dispatch => {
 	// Remove token from localStorage
@@ -65,7 +67,10 @@ export const logoutUser = history => dispatch => {
 	// Remove auth header for future requests
 	setAuthToken(null);
 	// Set current user to {} - this sets isAuthenticated to false
-	dispatch(setCurrentUser({}));
+	dispatch({
+		type: SET_CURRENT_USER,
+		payload: {},
+	});
 	// Redirect to homepage
 	history.push('/');
 	// Success toast message

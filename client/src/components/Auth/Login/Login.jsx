@@ -9,7 +9,7 @@ import { TopText, ContentArea, Footer } from '../Auth.styled';
 import FormGroup from '../../Shared/Forms/FormGroup';
 import { Button } from '../../Shared/Forms/Form.styled';
 
-class Login extends Component {
+export class _Login extends Component {
 	state = {
 		email: '',
 		password: '',
@@ -44,7 +44,7 @@ class Login extends Component {
 	};
 
 	handleSubmit = e => {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		// eslint-disable-next-line no-shadow
 		const { loginUser, history } = this.props;
 		const { errors, ...newUser } = this.state;
@@ -112,4 +112,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ loginUser }
-)(withRouter(Login));
+)(withRouter(_Login));
