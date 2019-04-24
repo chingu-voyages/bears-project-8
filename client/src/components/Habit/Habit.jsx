@@ -19,13 +19,13 @@ import {
 import Button from '../Shared/Button/Button';
 import Label from '../Shared/Label/Label';
 
-class Habit extends Component {
+export class _Habit extends Component {
 	static propTypes = {
 		habit: PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			frequency: PropTypes.shape({
-				period: PropTypes.string,
-			}),
+				period: PropTypes.string.isRequired,
+			}).isRequired,
 		}).isRequired,
 		logHabit: PropTypes.func.isRequired,
 		deleteHabit: PropTypes.func.isRequired,
@@ -38,19 +38,19 @@ class Habit extends Component {
 	toggleCollapse = () => this.setState(state => ({ isCollapsed: !state.isCollapsed }));
 
 	handleLogHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit } = this.props;
 		this.props.logHabit(habit._id);
 	};
 
 	handleEditHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit, history } = this.props;
 		history.push(`/edithabit/${habit._id}`);
 	};
 
 	handleDeleteHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit } = this.props;
 		this.props.deleteHabit(habit._id);
 	};
@@ -141,4 +141,4 @@ class Habit extends Component {
 export default connect(
 	null,
 	{ logHabit, deleteHabit }
-)(withRouter(Habit));
+)(withRouter(_Habit));

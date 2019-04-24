@@ -1,28 +1,32 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Habit from './Habit';
+import { _Habit as Habit } from './Habit';
+import { Title } from './Habit.styled';
 
-describe('Habit', () => {
-	const setup = fullMount => {
-		const props = {
-			options: [{ id: 0, title: 'Test', onClick: () => jest.fn() }],
-			title: 'Dropdown',
-		};
-		let component;
-		if (fullMount) {
-			component = fullMount(<Habit {...props} />);
-		} else {
-			component = shallow(<Habit {...props} />);
-		}
-
-		return {
-			props,
-			component,
-		};
+const setup = (mountFn, customProps = {}) => {
+	const requiredProps = {
+		habit: {
+			name: 'habit',
+			frequency: {
+				period: 'daily',
+			},
+		},
 	};
+	const wrapper = mountFn(<Habit {...requiredProps} {...customProps} />);
+	return wrapper;
+};
 
-	test('it does math', () => {
-		expect(2 + 2).toBe(4);
+describe('Minimal habit', () => {
+	let wrapper;
+	const logHabit = jest.fn();
+	const deleteHabit = jest.fn();
+
+	beforeEach(() => {
+		wrapper = setup(shallow, { logHabit, deleteHabit });
+	});
+
+	it('renders without error', () => {
+		expect(wrapper).toBeTruthy();
 	});
 });
