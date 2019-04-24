@@ -26,6 +26,7 @@ export class _Habit extends Component {
 			frequency: PropTypes.shape({
 				period: PropTypes.string.isRequired,
 			}).isRequired,
+			_id: PropTypes.string.isRequired,
 		}).isRequired,
 		logHabit: PropTypes.func.isRequired,
 		deleteHabit: PropTypes.func.isRequired,
@@ -72,6 +73,7 @@ export class _Habit extends Component {
 							type="simple"
 							clickHandler={() => null}
 							size="small"
+							data-test="habit-due-counter"
 						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
@@ -93,6 +95,7 @@ export class _Habit extends Component {
 							type="simple"
 							size="small"
 							clickHandler={() => null}
+							data-test="habit-due-counter"
 						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
@@ -109,6 +112,7 @@ export class _Habit extends Component {
 								size="small"
 								bgColor={$elfGreen}
 								color={$white}
+								data-test="log-habit-button"
 							>
 								Log Habit
 							</Button>
@@ -118,6 +122,7 @@ export class _Habit extends Component {
 								clickHandler={this.handleEditHabit}
 								size="icon"
 								type="filled"
+								data-test="edit-habit-button"
 							>
 								✎
 							</Button>
@@ -127,6 +132,7 @@ export class _Habit extends Component {
 								clickHandler={this.handleDeleteHabit}
 								size="icon"
 								type="filled"
+								data-test="delete-habit-button"
 							>
 								&times;
 							</Button>
