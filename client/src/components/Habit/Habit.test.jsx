@@ -32,9 +32,10 @@ describe('Minimal habit', () => {
 		const title = wrapper.find(Title);
 		expect(title.text()).toBe(habit.name);
 	});
-	it("renders the habit's due date", () => {
+	it("renders text for the habit's due date", () => {
 		const habitDueCounter = wrapper.find('[data-test="habit-due-counter"]');
 		expect(habitDueCounter.length).toBe(1);
+		expect(habitDueCounter.text().length).not.toBe(0);
 	});
 	it('changes isCollapsed state when clicked', () => {
 		expect(wrapper.state('isCollapsed')).toBeTruthy();
@@ -73,5 +74,38 @@ describe('Minimal habit', () => {
 		expect(deleteHabitButton.length).toBe(1);
 		deleteHabitButton.prop('clickHandler')();
 		expect(deleteHabit).toHaveBeenCalledTimes(1);
+	});
+});
+
+describe('maximal habit', () => {
+	let wrapper;
+	const logHabit = jest.fn();
+	const deleteHabit = jest.fn();
+	const habit = {
+		_id: '3',
+		dateCreated: Date.now,
+		name: 'habit',
+		description: 'habit description',
+		tags: ['t', 'ta', 'tag'],
+		difficulty: 'Medium',
+		type: 'Active',
+		frequency: {
+			times: 1,
+			period: 'Daily',
+		},
+		startDate: Date.now,
+		log: [],
+	};
+
+	beforeEach(() => {
+		wrapper = setup(shallow, { logHabit, deleteHabit, habit });
+	});
+
+	it('renders without error', () => {
+		expect(wrapper).toBeTruthy();
+	});
+	it("renders the habit's name", () => {
+		const title = wrapper.find(Title);
+		expect(title.text()).toBe(habit.name);
 	});
 });
