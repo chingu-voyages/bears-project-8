@@ -83,7 +83,6 @@ describe('maximal habit', () => {
 	const deleteHabit = jest.fn();
 	const habit = {
 		_id: '3',
-		dateCreated: Date.now,
 		name: 'habit',
 		description: 'habit description',
 		tags: ['t', 'ta', 'tag'],
@@ -93,8 +92,6 @@ describe('maximal habit', () => {
 			times: 1,
 			period: 'Daily',
 		},
-		startDate: Date.now,
-		log: [],
 	};
 
 	beforeEach(() => {
@@ -107,5 +104,32 @@ describe('maximal habit', () => {
 	it("renders the habit's name", () => {
 		const title = wrapper.find(Title);
 		expect(title.text()).toBe(habit.name);
+	});
+	it("renders the habit's description when expanded", () => {
+		wrapper.setState({ isCollapsed: false });
+		const description = wrapper.find(Description);
+		expect(description.text()).toBe(habit.description);
+	});
+	it("renders the habit's tags when expanded", () => {
+		wrapper.setState({ isCollapsed: false });
+		const tags = wrapper.find('[data-test="habit-tags"]');
+		expect(tags.children().length).toBe(habit.tags.length);
+		expect(
+			tags
+				.children()
+				.first()
+				.render()
+				.text()
+		).toBe(habit.tags[0]);
+	});
+	it("renders the habit's difficulty when expanded", () => {
+		wrapper.setState({ isCollapsed: false });
+		const difficulty = wrapper.findWhere(node => node.text() === habit.difficulty);
+		expect(difficulty.length).toBe(1);
+	});
+	it("renders the habit's type when expanded", () => {
+		wrapper.setState({ isCollapsed: false });
+		const type = wrapper.findWhere(node => node.text() === habit.type);
+		expect(type.length).toBe(1);
 	});
 });

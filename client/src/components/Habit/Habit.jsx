@@ -81,7 +81,7 @@ export class _Habit extends Component {
 				) : (
 					<FullHabit>
 						<Title>{habit.name}</Title>
-						<FlexContainer>
+						<FlexContainer data-test="habit-tags">
 							{habit.tags &&
 								habit.tags.length > 0 &&
 								habit.tags.map(tag => (
