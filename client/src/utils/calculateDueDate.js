@@ -20,7 +20,7 @@ export default frequency => {
 			let timeWord;
 			if (diff <= 1) {
 				diff = differenceInHours(endOfWeek(today), Date.now());
-				timeWord = diff > 1 ? 'hours' : 'hour';
+				timeWord = diff > 1 ? `in ${diff} hours` : 'an hour';
 			} else {
 				timeWord = diff === 1 ? 'tomorrow' : diff === 0 ? 'today' : `in ${diff} days`;
 			}
@@ -31,7 +31,7 @@ export default frequency => {
 			let timeWord;
 			if (diff <= 1) {
 				diff = differenceInHours(endOfMonth(today), Date.now());
-				timeWord = diff > 1 ? 'hours' : 'hour';
+				timeWord = diff > 1 ? `in ${diff} hours` : 'an hour';
 			} else {
 				timeWord = diff === 1 ? 'tomorrow' : diff === 0 ? 'today' : `in ${diff} days`;
 			}
