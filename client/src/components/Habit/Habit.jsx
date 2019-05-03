@@ -19,13 +19,14 @@ import {
 import Button from '../Shared/Button/Button';
 import Label from '../Shared/Label/Label';
 
-class Habit extends Component {
+export class _Habit extends Component {
 	static propTypes = {
 		habit: PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			frequency: PropTypes.shape({
-				period: PropTypes.string,
-			}),
+				period: PropTypes.string.isRequired,
+			}).isRequired,
+			_id: PropTypes.string.isRequired,
 		}).isRequired,
 		logHabit: PropTypes.func.isRequired,
 		deleteHabit: PropTypes.func.isRequired,
@@ -38,19 +39,19 @@ class Habit extends Component {
 	toggleCollapse = () => this.setState(state => ({ isCollapsed: !state.isCollapsed }));
 
 	handleLogHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit } = this.props;
 		this.props.logHabit(habit._id);
 	};
 
 	handleEditHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit, history } = this.props;
 		history.push(`/edithabit/${habit._id}`);
 	};
 
 	handleDeleteHabit = e => {
-		e.stopPropagation();
+		if (e) e.stopPropagation();
 		const { habit } = this.props;
 		this.props.deleteHabit(habit._id);
 	};
@@ -72,6 +73,7 @@ class Habit extends Component {
 							type="simple"
 							clickHandler={() => null}
 							size="small"
+							data-test="habit-due-counter"
 						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
@@ -79,7 +81,7 @@ class Habit extends Component {
 				) : (
 					<FullHabit>
 						<Title>{habit.name}</Title>
-						<FlexContainer>
+						<FlexContainer data-test="habit-tags">
 							{habit.tags &&
 								habit.tags.length > 0 &&
 								habit.tags.map(tag => (
@@ -93,6 +95,7 @@ class Habit extends Component {
 							type="simple"
 							size="small"
 							clickHandler={() => null}
+							data-test="habit-due-counter"
 						>
 							{calculateDueDate(habit.frequency.period)}
 						</Button>
@@ -109,6 +112,7 @@ class Habit extends Component {
 								size="small"
 								bgColor={$elfGreen}
 								color={$white}
+								data-test="log-habit-button"
 							>
 								Log Habit
 							</Button>
@@ -118,6 +122,7 @@ class Habit extends Component {
 								clickHandler={this.handleEditHabit}
 								size="icon"
 								type="filled"
+								data-test="edit-habit-button"
 							>
 								✎
 							</Button>
@@ -127,6 +132,7 @@ class Habit extends Component {
 								clickHandler={this.handleDeleteHabit}
 								size="icon"
 								type="filled"
+								data-test="delete-habit-button"
 							>
 								&times;
 							</Button>
@@ -141,4 +147,4 @@ class Habit extends Component {
 export default connect(
 	null,
 	{ logHabit, deleteHabit }
-)(withRouter(Habit));
+)(withRouter(_Habit));
